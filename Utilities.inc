@@ -1,4 +1,4 @@
-Utilities           CLASS,MODULE('Utilities')
-MaxVal                  PROCEDURE(LONG X,LONG Y)
-MinVal                  PROCEDURE(LONG X,LONG Y)
+Utilities           CLASS,TYPE,MODULE('Utilities.clw'),LINK('Utilities.clw')
+MaxVal                  PROCEDURE(LONG X,LONG Y),LONG
+MinVal                  PROCEDURE(LONG X,LONG Y),LONG
                     END

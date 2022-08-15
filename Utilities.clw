@@ -1,4 +1,8 @@
-Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)
+MEMBER
+
+INCLUDE('Utilities.inc'),ONCE
+
+Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
     IF X > Y
         RETURN X
@@ -6,7 +10,7 @@ Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)
         RETURN Y
     END
 
-Utilities.MinVal    PROCEDURE(LONG X,LONG Y)
+Utilities.MinVal    PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
     IF X < Y
         RETURN X
