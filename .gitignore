@@ -6,8 +6,11 @@
 *.dc~
 *.dll
 *.exe
+*.exp
 *.sln.cache
+*.tps
 map/
 obj/
 CoolBox/*.clw
 CoolBox/*.inc
+CoolBox/CoolBox.INI
