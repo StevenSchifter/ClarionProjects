@@ -15,8 +15,8 @@ OMIT('***')
   
   INCLUDE('Utilities.inc'),ONCE
   
-!  Util    Utilities
+Util    Utilities
 
   CODE
   MESSAGE('Hello World')
-!  MESSAGE(Util.MaxVal(6,3))
+  MESSAGE(Util.MaxVal(6,3))
