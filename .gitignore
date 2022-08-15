@@ -1,3 +1,5 @@
+*.app
+*.dct
 *.dll
 *.exe
 *.sln.cache
