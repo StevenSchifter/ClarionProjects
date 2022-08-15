@@ -5,3 +5,5 @@
 *.sln.cache
 map/
 obj/
+CoolBox/*.clw
+CoolBox/*.inc
