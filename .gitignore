@@ -1,5 +1,7 @@
 *.app
 *.ap~
+*.bct
+*.bpp
 *.dct
 *.dc~
 *.dll
