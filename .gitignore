@@ -13,4 +13,7 @@ map/
 obj/
 CoolBox/*.clw
 CoolBox/*.inc
-CoolBox/CoolBox.INI
+CoolBox/*.ini
+LegacyPeople/*.clw
+LegacyPeople/*.inc
+LegacyPeople/*.ini
