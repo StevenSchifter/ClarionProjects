@@ -1,0 +1,45 @@
+[DICTIONARY]
+VERSION '1.0'
+CREATED '15 AUG 2022' '11:41:15PM'
+MODIFIED '16 AUG 2022' '12:26:14AM'
+
+[FILES]
+
+People FILE,DRIVER('TOPSPEED'),PRE(PEO),CREATE,THREAD
+!!> IDENT(1),USAGE(File)
+LastNameKey KEY(PEO:LastName,PEO:FirstName,PEO:MI),NOCASE,OPT,PRIMARY
+!!> IDENT(1)
+FirstNameKey KEY(PEO:FirstName,PEO:LastName,PEO:MI),DUP,NOCASE,OPT
+!!> IDENT(2)
+Record                   RECORD
+[SCREENCONTROLS]
+! PROMPT('First Name:'),USE(?PEO:FirstName:Prompt)
+! ENTRY(@s32),USE(PEO:FirstName),REQ
+[REPORTCONTROLS]
+! STRING(@s32),USE(PEO:FirstName)
+FirstName                  CSTRING(33)
+!!> IDENT(1),VALID(NONZERO),PROMPT('First Name:'),HEADER('First Name'),PICTURE(@s32)
+[SCREENCONTROLS]
+! PROMPT('MI:'),USE(?PEO:MI:Prompt)
+! ENTRY(@s1),USE(PEO:MI),MSG('Middle Initial'),TIP('Middle Initial')
+[REPORTCONTROLS]
+! STRING(@s1),USE(PEO:MI)
+MI                         STRING(1) !Middle Initial
+!!> IDENT(2),PROMPT('MI:'),HEADER('MI'),MESSAGE('Middle Initial'),TOOLTIP('Middle Initial'),PICTURE(@s1)
+[SCREENCONTROLS]
+! PROMPT('Last Name:'),USE(?PEO:LastName:Prompt)
+! ENTRY(@s32),USE(PEO:LastName)
+[REPORTCONTROLS]
+! STRING(@s32),USE(PEO:LastName)
+LastName                   CSTRING(33)
+!!> IDENT(3),PROMPT('Last Name:'),HEADER('Last Name'),PICTURE(@s32)
+[SCREENCONTROLS]
+! PROMPT('Gender:'),USE(?PEO:Gender:Prompt)
+! ENTRY(@s1),USE(PEO:Gender)
+[REPORTCONTROLS]
+! STRING(@s1),USE(PEO:Gender)
+Gender                     STRING(1)
+!!> IDENT(5),PROMPT('Gender:'),HEADER('Gender'),PICTURE(@s1)
+                         END
+                       END
+
