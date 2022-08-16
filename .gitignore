@@ -8,6 +8,7 @@
 *.exe
 *.exp
 *.sln.cache
+*.scn
 *.tps
 map/
 obj/
