@@ -3,12 +3,14 @@
     <ProjectGuid>{4984BFE3-8EEE-41C1-B00F-36215B71D8AA}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>CoolBox</RootNamespace>
     <AssemblyName>CoolBox</AssemblyName>
     <OutputName>CoolBox</OutputName>
     <CWOutputType>Exe</CWOutputType>
     <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+    <ApplicationIcon>CoolBox.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>True</DebugSymbols>

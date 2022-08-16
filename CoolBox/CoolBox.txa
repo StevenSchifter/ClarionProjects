@@ -5,7 +5,7 @@ DICTIONARY 'CoolBox.dct'
 PROCEDURE Main
 [COMMON]
 FROM ABC
-MODIFIED '2022/08/15' '18:56:03'
+MODIFIED '2022/08/16' '14:42:51'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('ErrorManager', 'ErrorStatusManager', 'FileManager:CapeSoftAccessories', |
   'FuzzyMatcher', 'INIManager', 'RelationManager:CapeSoftAccessories', 'Translator')
@@ -29,8 +29,8 @@ WHEN  ('Translator') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
-%ProgramAuthor DEFAULT  ('')
-%ProgramIcon DEFAULT  ('')
+%ProgramAuthor DEFAULT  ('Steven Schifter')
+%ProgramIcon DEFAULT  ('CoolBox.ico')
 %MessageDescription LONG  (1)
 %GlobalExternal LONG  (0)
 %ExternalSource DEFAULT  ('Dynamic Link Library (DLL)')
@@ -189,8 +189,7 @@ WHEN  ('Translator') ('')
 %DataPathOtherDirectoryCreate LONG  (0)
 %OverrideGenerate DEPEND %File LONG TIMES 0
 
-%OverrideRILogout DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideRILogout DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
 %GlobalObject DEPEND %ClassItem DEFAULT TIMES 7
@@ -309,16 +308,13 @@ WHEN  ('RelationManager:CapeSoftAccessories')TIMES 0
 
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%OverrideThreaded DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideThreaded DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideCreate DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideCreate DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideExternal DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideExternal DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
 %OverrideLocalExternal DEPEND %File LONG TIMES 0
@@ -329,44 +325,35 @@ WHEN  ('CapeSoftAccessories') ('Use Default')
 
 %OverrideExport DEPEND %File LONG TIMES 0
 
-%FileDeclarationMode DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use User Options')
+%FileDeclarationMode DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use User Options')
 
-%FileDeclarationType DEPEND %File LONG TIMES 2
-WHEN  ('') (0)
+%FileDeclarationType DEPEND %File LONG TIMES 1
 WHEN  ('CapeSoftAccessories') (0)
 
-%FileDeclarationThread DEPEND %File LONG TIMES 2
-WHEN  ('') (0)
+%FileDeclarationThread DEPEND %File LONG TIMES 1
 WHEN  ('CapeSoftAccessories') (1)
 
-%FileDeclarationBindable DEPEND %File LONG TIMES 2
-WHEN  ('') (1)
+%FileDeclarationBindable DEPEND %File LONG TIMES 1
 WHEN  ('CapeSoftAccessories') (1)
 
 %FileDeclarationName DEPEND %File DEFAULT TIMES 0
 
 %FileDeclarationOver DEPEND %File DEFAULT TIMES 0
 
-%OverrideOpenMode DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideOpenMode DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideUserAccess DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideUserAccess DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideOtherAccess DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideOtherAccess DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideLazyOpen DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideLazyOpen DEPEND %File DEFAULT TIMES 1
 WHEN  ('CapeSoftAccessories') ('Use Default')
 
-%OverrideDoNotAssertOnCloseMisuse DEPEND %File LONG TIMES 2
-WHEN  ('') (0)
+%OverrideDoNotAssertOnCloseMisuse DEPEND %File LONG TIMES 1
 WHEN  ('CapeSoftAccessories') (0)
 
 %StandardExternalModule DEPEND %Module LONG TIMES 2
@@ -488,11 +475,19 @@ WHEN  ('CoolBox001.clw') ('1')
 %LastApplicationDebug DEFAULT  ('1')
 %LastApplicationLocalLibrary DEFAULT  ('')
 [PROJECT]
+-- NAMESPACE CoolBox
+-- OUTPUTPATH C:\Users\Steven\ClarionProjects\CoolBox
 #system win32 exe
 #model clarion dll
+#pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
+#compile "CoolBox_BC0.CLW" -- GENERATED
+#compile "COOLBOX_BC.CLW" -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
@@ -508,7 +503,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Wizard Application for C:\Users\Steven\ClarionProjects\CoolBox\CoolBox.dct'
 FROM ABC Frame
-MODIFIED '2022/08/15' '19:02:45'
+MODIFIED '2022/08/16' '14:51:30'
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 13
 WHEN  ('?Arrange') ('No Special Action')
@@ -600,7 +595,8 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeNotify {13}PROCEDURE(UNSIGNED NotifyCode,SIGNED Thread,LONG Parameter),BYTE,PROC,DERIVED')
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeNotify {13}PROCEDURE(UNSIGNED NotifyCode,SIGNED Thread,LONG Parameter),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -784,45 +780,53 @@ WHEN  ('WindowToolbar')TIMES 0
 %PreserveVarsLoc MULTI LONG  ()
 %PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
 
-%SplashProcedure PROCEDURE  ()
+%SplashProcedure PROCEDURE  (CoolBoxSplash)
 %ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') ('Default')
+WHEN  ('?HelpOnHelp') ('Default')
 WHEN  ('?SetCSAIPath') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') ('Off')
+WHEN  ('?HelpOnHelp') ('Off')
 WHEN  ('?SetCSAIPath') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') ('')
+WHEN  ('?HelpOnHelp') ('')
 WHEN  ('?SetCSAIPath') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (-1)
+WHEN  ('?HelpOnHelp') (-1)
 WHEN  ('?SetCSAIPath') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (-1)
+WHEN  ('?HelpOnHelp') (-1)
 WHEN  ('?SetCSAIPath') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
@@ -841,8 +845,9 @@ WHEN  ('?SetCSAIPath') ()
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (1)
+WHEN  ('?HelpOnHelp') (1)
 WHEN  ('?SetCSAIPath') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -861,16 +866,18 @@ WHEN  ('?SetCSAIPath') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -883,46 +890,53 @@ WHEN  ('?SetCSAIPath')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?HelpOnHelp')TIMES 0
 WHEN  ('?SetCSAIPath')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') ('AIBtn13')
+WHEN  ('?HelpOnHelp') ('AIBtn21')
 WHEN  ('?SetCSAIPath') ('AIBtn11')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (1)
+WHEN  ('?HelpOnHelp') (1)
 WHEN  ('?SetCSAIPath') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') ('?Menubar')
+WHEN  ('?HelpOnHelp') ('?Menubar')
 WHEN  ('?SetCSAIPath') ('?Menubar')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -931,32 +945,36 @@ WHEN  ('?SetCSAIPath') ('?Menubar')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?HelpOnHelp') (0)
 WHEN  ('?SetCSAIPath') (0)
 
 [ADDITION]
@@ -966,7 +984,7 @@ INSTANCE 1
 OWNER 1
 [WINDOW]
 AppFrame APPLICATION('CoolBox'),AT(,,505,318),FONT('Microsoft Sans Serif',8,,FONT:regular, |
-          CHARSET:DEFAULT),RESIZE,CENTER,ICON('WAFRAME.ICO'),MAX,STATUS(-1,80,120,45),SYSTEM
+          CHARSET:DEFAULT),RESIZE,CENTER,ICON('CoolBox.ico'),MAX,STATUS(-1,80,120,45),SYSTEM
           MENUBAR,USE(?Menubar),#ORDINAL(1)
             MENU('&File'),USE(?FileMenu),#ORDINAL(2)
               ITEM('&Print Setup ...'),USE(?PrintSetup),MSG('Setup printer'),STD(STD:PrintSetup), |
@@ -1010,7 +1028,7 @@ NAME BrowseCapeSoftAccessories
 DESCRIPTION 'Browse the CapeSoftAccessories file'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2022/08/15' '18:35:32'
+MODIFIED '2022/08/16' '14:43:23'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('bd899a76-238c-45f9-96ca-fd9607d398de')
@@ -1020,8 +1038,7 @@ CapeSoftAccessories
 [INSTANCE]
 1
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Change:3') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
 WHEN  ('?Delete:3') ('No Special Action')
@@ -1037,8 +1054,7 @@ WHEN  ('?View:2') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Change:3') ('25000')
 WHEN  ('?Close') ('25000')
 WHEN  ('?Delete:3') ('25000')
@@ -1048,8 +1064,7 @@ WHEN  ('?View:2') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?Change:3') ('None')
 WHEN  ('?Close') ('None')
 WHEN  ('?Delete:3') ('None')
@@ -1270,34 +1285,26 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?CurrentTab') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
 
@@ -1311,8 +1318,7 @@ WHEN  ('') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 0
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
 
@@ -1330,15 +1336,13 @@ WHEN  ('') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -1350,40 +1354,33 @@ WHEN  ('')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 0
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 0
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('?Browse:1')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 0
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -1391,29 +1388,25 @@ WHEN  ('') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
 
 [ADDITION]
 NAME ABC CleanCloseDownLocal
@@ -1654,37 +1647,27 @@ WHEN  ('Step0')TIMES 0
 %HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
 
 %UseSameColorForAll LONG  (0)
-%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
@@ -1693,74 +1676,50 @@ WHEN  ('CSA:InstallerName') (-1)
 
 %ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
 
-%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 0
 
-%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 0
 
-%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 0
 
-%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 0
 
-%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
@@ -1803,55 +1762,41 @@ WHEN  ('CSA:InstallerName') (-1)
 %ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
 
 %UseSameStyleForAll LONG  (0)
-%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Local List')
 WHEN  ('CSA:InstallerName') ('Local List')
 
-%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('')
 WHEN  ('CSA:InstallerName') ('')
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Local List')
 WHEN  ('CSA:InstallerName') ('Local List')
 
-%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('')
 WHEN  ('CSA:InstallerName') ('')
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Local List')
 WHEN  ('CSA:InstallerName') ('Local List')
 
-%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('')
 WHEN  ('CSA:InstallerName') ('')
@@ -1862,13 +1807,9 @@ WHEN  ('CSA:InstallerName') ('')
 
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
 
@@ -1912,23 +1853,17 @@ WHEN  ('')TIMES 0
 %EnableSortHeader LONG  (0)
 %ControlFieldSortHeaderSave LONG  (0)
 %ControlFieldSortHeaderMulti LONG  (1)
-%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
@@ -1937,13 +1872,9 @@ WHEN  ('CSA:InstallerName') (0)
 
 %ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
 
-%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 0
 
-%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 0
 
 %SortHeaderColumnsUseColor LONG  (0)
 %SortHeaderColorBkHdrAsc LONG  (10526303)
@@ -2123,60 +2054,44 @@ WHEN  ('EIP_CSA:IncludeInGeneratedBatchFile')TIMES 0
 
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
-%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (1)
 WHEN  ('CSA:InstallerName') (1)
 
-%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Entry')
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Entry')
 WHEN  ('CSA:InstallerName') ('Entry')
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Default')
 WHEN  ('CSA:InstallerName') ('Default')
 
-%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Fixed')
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Fixed')
 WHEN  ('CSA:InstallerName') ('Fixed')
@@ -2185,9 +2100,7 @@ WHEN  ('CSA:InstallerName') ('Fixed')
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
-%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
@@ -2195,9 +2108,7 @@ WHEN  ('')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
-%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
@@ -2206,39 +2117,29 @@ WHEN  ('CSA:InstallerName') (0)
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (1)
 WHEN  ('CSA:InstallerName') (1)
 
-%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Open')
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Open')
 WHEN  ('CSA:InstallerName') ('Open')
 
-%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('All Files')
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('All Files')
 WHEN  ('CSA:InstallerName') ('All Files')
 
-%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('*.*')
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('*.*')
 WHEN  ('CSA:InstallerName') ('*.*')
@@ -2249,30 +2150,22 @@ WHEN  ('CSA:InstallerName') ('*.*')
 
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
-%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
 
-%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (-1)
 WHEN  ('CSA:InstallerName') (-1)
@@ -2285,58 +2178,42 @@ WHEN  ('CSA:InstallerName') (-1)
 
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Default')
 WHEN  ('CSA:InstallerName') ('Default')
 
-%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
@@ -2349,9 +2226,7 @@ WHEN  ('CSA:InstallerName') (0)
 
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Default')
 WHEN  ('CSA:InstallerName') ('Default')
@@ -2364,44 +2239,32 @@ WHEN  ('CSA:InstallerName') ('Default')
 
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Default')
 WHEN  ('CSA:InstallerName') ('Default')
 
-%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('0')
 WHEN  ('CSA:InstallerName') ('0')
 
-%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') (0)
 WHEN  ('CSA:InstallerName') (0)
 
-%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Related Field')
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:IncludeInGeneratedBatchFile') ('Related Field')
 WHEN  ('CSA:InstallerName') ('Related Field')
@@ -2570,8 +2433,8 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 QuickWindow WINDOW('Browse the CapeSoftAccessories file'),AT(,,248,198),FONT('Microsoft ' & |
-          'Sans Serif',8,,FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('BrowseCape' & |
-          'SoftAccessories'),SYSTEM
+          'Sans Serif',8,,FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('CoolBox.ico'), |
+          GRAY,IMM,MDI,HLP('BrowseCapeSoftAccessories'),SYSTEM
           LIST,AT(8,30,232,124),USE(?Browse:1),HVSCROLL,FORMAT('180L(2)|M~Installer Nam' & |
             'e~@s64@36R(2)|M~In Batch?~@n3b@'),FROM(Queue:Browse:1),IMM,MSG('Browsing t' & |
             'he CapeSoftAccessories file'),#FIELDS(CSA:InstallerName,CSA:IncludeInGeneratedBatchFile), |
@@ -2603,7 +2466,7 @@ NAME UpdateCapeSoftAccessories
 DESCRIPTION 'Form CapeSoftAccessories'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2022/08/15' '18:37:44'
+MODIFIED '2022/08/16' '14:43:28'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('8e031fd3-1ec1-4d3a-b4d7-58d85e456437')
@@ -2615,8 +2478,7 @@ CapeSoftAccessories
 [INSTANCE]
 2
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
@@ -2629,16 +2491,14 @@ WHEN  ('?OK') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?Help') ('25000')
 WHEN  ('?OK') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?Cancel') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('None')
@@ -2857,33 +2717,25 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
 
@@ -2897,8 +2749,7 @@ WHEN  ('') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
 WHEN  ('?CSA:InstallerName') (1)
 WHEN  ('?CSA:InstallerPassword') (1)
 
@@ -2918,15 +2769,13 @@ WHEN  ('?CSA:InstallerPassword') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -2938,40 +2787,33 @@ WHEN  ('')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 0
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 0
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('?CSA:InstallerName:Prompt')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 0
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -2979,29 +2821,25 @@ WHEN  ('') ('?CSA:InstallerName:Prompt')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
 
 [ADDITION]
 NAME ABC CleanCloseDownLocal
@@ -3067,8 +2905,7 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 9
-WHEN  ('') ('None')
+%ViewAction DEPEND %Control DEFAULT TIMES 8
 WHEN  ('?CSA:IncludeInGeneratedBatchFile') ('None')
 WHEN  ('?CSA:InstallerName') ('ReadOnly')
 WHEN  ('?CSA:InstallerName:Prompt') ('None')
@@ -3217,8 +3054,8 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 QuickWindow WINDOW('Form CapeSoftAccessories'),AT(,,356,82),FONT('Microsoft Sans Serif',8, |
-          ,FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('UpdateCapeSoft' & |
-          'Accessories'),SYSTEM
+          ,FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('CoolBox.ico'),GRAY,IMM,MDI,HLP('UpdateCape' & |
+          'SoftAccessories'),SYSTEM
           PROMPT('Installer Name:'),AT(8,20),USE(?CSA:InstallerName:Prompt),TRN,#LINK(?CSA:InstallerName), |
             #ORIG(?CSA:InstallerName:Prompt),#ORDINAL(1)
           ENTRY(@s64),AT(88,20,260,10),USE(CSA:InstallerName),LEFT(2),REQ,#LINK(?CSA:InstallerName:Prompt), |
@@ -3241,8 +3078,9 @@ QuickWindow WINDOW('Form CapeSoftAccessories'),AT(,,356,82),FONT('Microsoft Sans
 [PROCEDURE]
 NAME SetCSAIPath
 [COMMON]
+DESCRIPTION 'Returns to original directory when done, ensuring the INI file is stored in the right place'
 FROM ABC Window
-MODIFIED '2022/08/15' '19:04:54'
+MODIFIED '2022/08/16' '14:54:11'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('&CapeSoft Accessories Installer Path:'),USE(?CSAIpath:Prompt)
@@ -3262,12 +3100,8 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
-  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Update {17}PROCEDURE(),DERIVED')
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3729,7 +3563,7 @@ WHEN  ('Default') ('')
 %DOSFileField FIELD  (CSAIpath)
 %DOSInitialDirectory DEFAULT  ('')
 %DOSInitialFilename DEFAULT  ('')
-%ReturnToOriginalDir LONG  (0)
+%ReturnToOriginalDir LONG  (1)
 %AllowLongFilenames LONG  (1)
 %DOSFileDialogType DEFAULT  ('Directory')
 %AllowNoError LONG  (0)
@@ -3830,7 +3664,7 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 Window  WINDOW('Set CapeSoft Accessories Installer Path'),AT(,,361,41),FONT('Segoe UI',9), |
-          RESIZE,GRAY,MDI,SYSTEM
+          RESIZE,CENTER,ICON('CoolBox.ico'),GRAY,MDI,SYSTEM
           BUTTON('&OK'),AT(257,21,47,14),USE(?OkButton),LEFT,ICON('WAOk.ico'),DEFAULT,#ORDINAL(1)
           BUTTON('&Cancel'),AT(310,21,47,14),USE(?CancelButton),LEFT,ICON('WACancel.ico'), |
             STD(STD:Close),#ORDINAL(2)
@@ -3838,6 +3672,370 @@ Window  WINDOW('Set CapeSoft Accessories Installer Path'),AT(,,361,41),FONT('Seg
           ENTRY(@s254),AT(114,5,242,10),USE(CSAIpath),LEFT(2),#ORDINAL(4)
           BUTTON('&Browse'),AT(5,21,47,14),USE(?LookupFile),LEFT,ICON(ICON:Pick),#ORIG(?LookupFile), |
             #SEQ(1),#ORDINAL(5)
+        END
+
+[PROCEDURE]
+NAME CoolBoxSplash
+[COMMON]
+FROM ABC Splash
+MODIFIED '2022/08/16' '14:54:04'
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (0)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%DisplayTime DEFAULT  ('')
+%CloseOnClick LONG  (1)
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 0
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
+
+%ButtonAction DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 0
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 0
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 0
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 0
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 0
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
+
+[WINDOW]
+Window  WINDOW,AT(,,180,128),FONT('Segoe UI',9),CENTERED,CENTER,COLOR(COLOR:White),GRAY,MDI, |
+          SYSTEM,WALLPAPER('CoolBoxSplash.bmp')
         END
 
 [END]
