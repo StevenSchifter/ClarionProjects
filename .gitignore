@@ -10,6 +10,8 @@
 *.sln.cache
 *.scn
 *.tps
+*.txa
+*.txd
 map/
 obj/
 CoolBox/*.clw
