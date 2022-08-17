@@ -1,6 +1,9 @@
-MEMBER
+        MEMBER
 
-INCLUDE('Utilities.inc'),ONCE
+        INCLUDE('Utilities.inc'),ONCE
+
+        MAP
+        END
 
 Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
