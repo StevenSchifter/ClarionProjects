@@ -5,7 +5,7 @@
         MAP
         END
 
-Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)!,LONG
+Utilities.MaxVal                PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
     IF X > Y
         RETURN X
@@ -13,7 +13,7 @@ Utilities.MaxVal    PROCEDURE(LONG X,LONG Y)!,LONG
         RETURN Y
     END
 
-Utilities.MinVal    PROCEDURE(LONG X,LONG Y)!,LONG
+Utilities.MinVal                PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
     IF X < Y
         RETURN X
@@ -21,8 +21,8 @@ Utilities.MinVal    PROCEDURE(LONG X,LONG Y)!,LONG
         RETURN Y
     END
 
-Utilities.TrailingBackslash    PROCEDURE(STRING MyPath)!,STRING
-IncomingPath    STRING(256)
+Utilities.TrailingBackslash     PROCEDURE(STRING MyPath)!,STRING
+IncomingPath    STRING(FILE:MaxFilePath)
     CODE
     IncomingPath = CLIP(MyPath)
     IF IncomingPath[LEN(CLIP(IncomingPath))] <> '\'
