@@ -56,6 +56,8 @@
     <Compile Include="ResCode.Clw">
       <Generated>true</Generated>
     </Compile>
+    <Library Include="SCANCEL.ICO" />
+    <Library Include="SOK.ICO" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
 </Project>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary Name="tmpPeople" Version="1" DctxFormat="4">
+	<DictionaryVersion Version="1" Description="Initial version"/>
+	<Table Guid="{a11716ef-9d60-4cf8-8f4c-127f9bac25d9}" Ident="1" Name="People" Prefix="PEO" Driver="TOPSPEED" Create="true" Thread="true">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:19:08PM" ModifiedVersionNumber="1"/>
+		<Field Guid="{2445aeae-bf19-4ef2-b73d-3f6434dc51fd}" Ident="1" Name="FirstName" DataType="CSTRING" Size="33" ScreenPicture="@s32" ScreenPrompt="First Name:" ReportHeading="First Name" ReportControl=" STRING(@s32),USE(PEO:FirstName)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;First Name:&apos;),USE(?PEO:FirstName:Prompt)"/>
+				<Line Text=" ENTRY(@s32),USE(PEO:FirstName),REQ"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NONZERO"/>
+		</Field>
+		<Field Guid="{9c677bec-9ceb-4ded-b054-2153bf30197a}" Ident="2" Name="MI" Description="Middle Initial" DataType="STRING" Size="1" ScreenPicture="@s1" ScreenPrompt="MI:" ReportHeading="MI" Message="Middle Initial" Tooltip="Middle Initial" ReportControl=" STRING(@s1),USE(PEO:MI)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;MI:&apos;),USE(?PEO:MI:Prompt)"/>
+				<Line Text=" ENTRY(@s1),USE(PEO:MI),MSG(&apos;Middle Initial&apos;),TIP(&apos;Middle Initial&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{a50dd8f2-3bdf-451c-9a4b-ede400e3406f}" Ident="3" Name="LastName" DataType="CSTRING" Size="33" ScreenPicture="@s32" ScreenPrompt="Last Name:" ReportHeading="Last Name" ReportControl=" STRING(@s32),USE(PEO:LastName)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Last Name:&apos;),USE(?PEO:LastName:Prompt)"/>
+				<Line Text=" ENTRY(@s32),USE(PEO:LastName)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{8a05973c-2a62-454b-b73b-297c16dd3498}" Ident="5" Name="Gender" Description="One letter (not limited to M or F)" DataType="STRING" Size="1" ScreenPicture="@s1" ScreenPrompt="Gender:" ReportHeading="Gender" Message="One letter (not limited to M or F)" Tooltip="One letter (not limited to M or F)" ReportControl=" STRING(@s1),USE(PEO:Gender)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Gender:&apos;),USE(?PEO:Gender:Prompt)"/>
+				<Line Text=" ENTRY(@s1),USE(PEO:Gender),MSG(&apos;One letter (not limited to M or F)&apos;),TIP(&apos;One letter (not limited to M or F)&apos;)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:19:08PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{d1deeb3b-206c-480d-82df-75d86b067fa8}" Ident="1" Order="1" Name="LastNameKey" KeyType="KEY" Unique="true" Primary="true" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			<Component Guid="{c504de24-d004-442d-919f-5a436f4eef0f}" FieldId="{a50dd8f2-3bdf-451c-9a4b-ede400e3406f}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+			<Component Guid="{bf7cc5b6-eb5b-488a-86af-6cbf61d7b88e}" FieldId="{2445aeae-bf19-4ef2-b73d-3f6434dc51fd}" Order="2" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+			<Component Guid="{01c113a3-8f6f-4e4c-a46b-9be077a2835e}" FieldId="{9c677bec-9ceb-4ded-b054-2153bf30197a}" Order="3" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+		<Key Guid="{2d2ac4f6-a527-4b43-a1c5-e0abf2b8d297}" Ident="2" Order="2" Name="FirstNameKey" KeyType="KEY" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			<Component Guid="{ead452a2-670e-4092-9459-0c9da1687b4c}" FieldId="{2445aeae-bf19-4ef2-b73d-3f6434dc51fd}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+			<Component Guid="{5ebe2373-a74b-431f-b22a-d86b5385f71e}" FieldId="{a50dd8f2-3bdf-451c-9a4b-ede400e3406f}" Order="2" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+			<Component Guid="{43a21e39-61cd-4aa9-9ef5-451b4f07b5da}" FieldId="{9c677bec-9ceb-4ded-b054-2153bf30197a}" Order="3" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime="11:41:15PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2022" ModifiedTime="12:26:14AM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+	</Table>
+</Dictionary>
+
