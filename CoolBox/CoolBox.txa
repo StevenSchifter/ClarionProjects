@@ -5876,7 +5876,22 @@ Window  WINDOW('Utilities Class Test Suite'),AT(,,328,207),FONT('Segoe UI',9),DO
 NAME GarbageInGarbageOut
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/16' '23:30:48'
+MODIFIED '2022/08/16' '23:56:52'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Garbage In:'),USE(?GarbageIn:Prompt)
+! ENTRY(@s64),USE(GarbageIn),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s64),USE(GarbageIn),LEFT(2)
+GarbageIn                STRING(64)
+!!> GUID('8d00eb08-c9eb-469c-b2ba-d1e6bc752549'),PROMPT('Garbage In:'),HEADER('Garbage In'),PICTURE(@s64),TYPEMODE(INS),JUSTIFY(LEFT,2)
+[SCREENCONTROLS]
+! PROMPT('Garbage Out:'),USE(?GarbageOut:Prompt)
+! ENTRY(@s64),USE(GarbageOut),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s64),USE(GarbageOut),LEFT(2)
+GarbageOut               STRING(64)
+!!> GUID('25749ca0-d0ad-490e-956d-57e71882dd5d'),PROMPT('Garbage Out:'),HEADER('Garbage Out'),PICTURE(@s64),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -5889,7 +5904,7 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -6075,27 +6090,36 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 0
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 0
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -6105,7 +6129,8 @@ WHEN  ('WindowToolbar') (0)
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 0
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -6113,7 +6138,8 @@ WHEN  ('WindowToolbar') (0)
 
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 0
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('None')
 
 %ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -6135,7 +6161,10 @@ WHEN  ('WindowToolbar') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 0
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
+WHEN  ('?GarbageButton') (1)
+WHEN  ('?GarbageIn') (1)
+WHEN  ('?GarbageOut') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
 
@@ -6155,13 +6184,15 @@ WHEN  ('WindowToolbar') (0)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -6173,33 +6204,40 @@ WHEN  ('WindowToolbar') (0)
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('?GarbageButton')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 0
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('AIBtn5')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 0
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 0
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GarbageButton') ('?GarbageIn:Prompt')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -6207,29 +6245,63 @@ WHEN  ('WindowToolbar') (0)
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?GarbageButton') (0)
 
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+Garbage              StringTheory
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?GarbageButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4499
+PROPERTY:END
+GarbageOut = Garbage.Random(64,st:Binary)
+DISPLAY(?GarbageOut)
+[END]
+[END]
+[END]
+[END]
 [WINDOW]
-Window  WINDOW('Garbage In, Garbage Out'),AT(,,185,92),FONT('Segoe UI',9),RESIZE,ICON('REFRESH.ICO'), |
+Window  WINDOW('Garbage In, Garbage Out'),AT(,,276,64),FONT('Segoe UI',9),RESIZE,ICON('REFRESH.ICO'), |
           GRAY,MDI,SYSTEM
+          PROMPT('Garbage In:'),AT(5,12,41),USE(?GarbageIn:Prompt),RIGHT,#ORDINAL(1)
+          ENTRY(@s64),AT(50,11,216,10),USE(GarbageIn),LEFT,#ORDINAL(2)
+          PROMPT('Garbage Out:'),AT(5,43),USE(?GarbageOut:Prompt),RIGHT,#ORDINAL(3)
+          ENTRY(@s64),AT(50,43,216,10),USE(GarbageOut),LEFT,#ORDINAL(4)
+          BUTTON('&Out with the garbage'),AT(97,25),USE(?GarbageButton),#ORDINAL(5)
         END
 
 [PROCEDURE]
