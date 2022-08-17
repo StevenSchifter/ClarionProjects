@@ -2,7 +2,7 @@
 <Dictionary Name="tmpCoolBox" Version="1" StructureChecked="1" DctxFormat="4">
 	<DictionaryVersion Version="1" Description="Initial version"/>
 	<Table Guid="{b66ee3c6-eba2-4abe-a2f0-1b3691117f07}" Name="CapeSoftAccessories" Description="CapeSoft Accessories" Prefix="CSA" Driver="TOPSPEED" Owner="w&amp;X6F6h6d#fkV*c7" Path="CapeSoftAccessories.tps" Create="true" Encrypt="true" Thread="true">
-		<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime=" 6:21:17PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:16:58PM" ModifiedVersionNumber="1"/>
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime=" 6:21:17PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:17:31PM" ModifiedVersionNumber="1"/>
 		<Field Guid="{bb5e60d4-3983-4193-aaf1-a326931fece2}" Name="InstallerName" Description="Name of the installer (without extension)" DataType="CSTRING" Size="65" ScreenPicture="@s64" ScreenPrompt="Installer Name:" ReportHeading="Installer Name" Justification="LEFT" Offset="2" Message="Name of the installer (without extension)" Tooltip="Name of the installer (without extension)" ReportControl=" STRING(@s64),USE(CSA:InstallerName),LEFT(2)">
 			<WindowControl>
 				<Line Text=" PROMPT(&apos;Installer Name:&apos;),USE(?CSA:InstallerName:Prompt)"/>
@@ -16,7 +16,7 @@
 				<Line Text=" PROMPT(&apos;Installer Password:&apos;),USE(?CSA:InstallerPassword:Prompt)"/>
 				<Line Text=" ENTRY(@s64),USE(CSA:InstallerPassword),LEFT(2),MSG(&apos;Password to unlock installer from SAF file&apos;),TIP(&apos;Password to unlock installer from SAF file&apos;),PASSWORD"/>
 			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime=" 6:22:39PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:16:58PM" ModifiedVersionNumber="1"/>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2022" CreateTime=" 6:22:39PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="17 AUG 2022" ModifiedTime=" 2:17:31PM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
 		<Field Guid="{7f578620-635b-48ce-a8f5-75df177be1df}" Name="IncludeInGeneratedBatchFile" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="Include In Generated Batch File" ReportHeading="Include In Generated Batch File" WindowControl=" CHECK(&apos;Include In Generated Batch File&apos;),USE(CSA:IncludeInGeneratedBatchFile)" ReportControl=" CHECK(&apos;Include In Generated Batch File&apos;),USE(CSA:IncludeInGeneratedBatchFile)">
