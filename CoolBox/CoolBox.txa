@@ -534,7 +534,7 @@ WHEN  (1) (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
   309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, |
   325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, |
   341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, |
-  357, 358, 359, 360, 361)
+  357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371)
 WHEN  (2) (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, |
   21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38)
 WHEN  (3) (1, 2, 3, 4)
@@ -542,7 +542,7 @@ WHEN  (4) (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
 WHEN  (5) (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
 %dMethods8C DEPEND %dMethods8Cx DEFAULT TIMES 5
-WHEN  (1)TIMES 361
+WHEN  (1)TIMES 371
 WHEN  (1) ('Construct {13}Procedure ()')
 WHEN  (2) ('Destruct {14}Procedure (),Virtual')
 WHEN  (3) ('Start {17}Procedure (long pForce=true),Virtual')
@@ -572,338 +572,348 @@ WHEN  (26) ('Cat {19}Procedure (*string newValue),virtual')
 WHEN  (27) ('Cat {19}Procedure (*string newValue, long pLen),virtual')
 WHEN  (28) ('CatAddr {15}Procedure (long pAddr, long pLen),virtual')
 WHEN  (29) ('SetValue {14}Procedure (StringTheory newValue), virtual')
-WHEN  (30) ('SetValue {14}Procedure (string newValue,long pClip=st:NoClip), virtual')
-WHEN  (31) ('SetValue {14}Procedure (*string newValue,long pClip=st:NoClip), virtual')
-WHEN  (32) ('SetValueByAddress     Procedure (long newValueAddress,long pLength), virtual')
-WHEN  (33) ('_EqualsUnicode        Procedure (*String otherValue, Long pOptions = st:UnicodeCompare),long, virtual')
-WHEN  (34) ('_EqualsUnicode        Procedure (StringTheory otherValue, Long pOptions = st:UnicodeCompare),long, virtual')
-WHEN  (35) ('Equals {16}Procedure (StringTheory otherValue, Long pOptions = ST:SimpleCompare),long, virtual')
-WHEN  (36) ('Equals {16}Procedure (String otherValue, Long pOptions = ST:SimpleCompare + ST:Clip),long, virtual')
-WHEN  (37) ('_GetNextBufferSize    Procedure (Long pLen),Long,Virtual')
-WHEN  (38) ('_SetValuePointer      Procedure (Long pPtr,Long pSize, Long pEnd, Long pDispose=1),Virtual')
-WHEN  (39) ('_StealValue {11}Procedure (stringTheory otherValue), virtual')
-WHEN  (40) ('Assign {16}Procedure (*string newValue), virtual')
-WHEN  (41) ('Assign {16}Procedure (string newValue), virtual')
-WHEN  (42) ('Abbreviate {12}Procedure (Long pPos,Long pRangeLeft = 15,Long pRangeRight = 15),Long,Proc,Virtual')
-WHEN  (43) ('GetValuePtr {11}Procedure (),*String,virtual')
-WHEN  (44) ('GetAddress {12}Procedure (),Long,Virtual')
-WHEN  (45) ('Base64Encode {10}Procedure (Long pOptions=0),bool, proc,Virtual')
-WHEN  (46) ('Base64Encode {10}Procedure (*string pText, *long pLen),bool, proc, virtual')
-WHEN  (47) ('Base64Decode {10}Procedure (),bool, proc, virtual')
-WHEN  (48) ('Base64Decode {10}Procedure (*string pText, *long pLen),bool, proc, virtual')
-WHEN  (49) ('Base85Encode {10}Procedure (Long pOptions=0),virtual')
-WHEN  (50) ('Base85Decode {10}Procedure (),Long,virtual')
-WHEN  (51) ('QuotedPrintableEncode Procedure (), virtual')
-WHEN  (52) ('QuotedPrintableDecode Procedure (), virtual')
-WHEN  (53) ('EncodedWordDecode     Procedure (), virtual')
-WHEN  (54) ('EncodedWordEncode     Procedure (<<String pCharset>,long pEncoding=2),virtual')
-WHEN  (55) ('JsonEncode {12}Procedure (Long pOptions=0), virtual')
-WHEN  (56) ('JsonDecode {12}Procedure (), virtual')
-WHEN  (57) ('XMLEncode {13}Procedure (Long pOptions=0), virtual')
-WHEN  (58) ('XMLDecode {13}Procedure (), virtual')
-WHEN  (59) ('ZeroXEncode {11}Procedure (),Virtual')
-WHEN  (60) ('ZeroXDecode {11}Procedure (),Virtual')
-WHEN  (61) ('Free {18}Procedure (Long pLines=False, Long pForce=false), virtual')
-WHEN  (62) ('FreeLines {13}Procedure (), virtual')
-WHEN  (63) ('ClipLen {15}Procedure (), long, virtual')
-WHEN  (64) ('ClipLength {12}Procedure (), long, virtual')
-WHEN  (65) ('Crop {18}Procedure (long pStart=1, long pEnd=0), Virtual')
-WHEN  (66) ('Instring {14}Procedure (string pSearchValue), long, virtual')
-WHEN  (67) ('Instring {14}Procedure (*string pSearchValue), long, virtual')
-WHEN  (68) ('Instring {14}Procedure (string pSearchValue, long pStep), long, virtual')
-WHEN  (69) ('Instring {14}Procedure (*string pSearchValue, long pStep), long, virtual')
-WHEN  (70) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart), long, virtual')
-WHEN  (71) ('Instring {14}Procedure (*string pSearchValue, long pStep=1, long pStart), long, virtual')
-WHEN  (72) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd), long, virtual')
-WHEN  (73) ('Instring {14}Procedure (*string pSearchValue, long pStep=1, long pStart=1, long pEnd), long, virtual')
-WHEN  (74) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase), long, virtual')
-WHEN  (75) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase=0, long pWholeWord), long, virtual')
-WHEN  (76) ('Match {17}Procedure (string pRegEx, Long pStart, Long pEnd, long pMode=Match:Regular, long pNoCase=0), long, virtual')
-WHEN  (77) ('FindMatch {13}Procedure (string pRegEx,*long pStart, *long pEnd, long pMode=Match:Regular, long pNoCase=0), String, virtual')
-WHEN  (78) ('FindMatchPosition     Procedure (string pRegEx,*long pStart, *long pEnd, long pMode=Match:Regular, long pNoCase=0), virtual')
-WHEN  (79) ('Count {17}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNoCase=0, bool softClip=true, long pOverlap=true), long, virtual')
-WHEN  (80) ('Capitalize {12}Procedure (long pCount=1, long pStartPos=1, long pEndPos=0,<<String pCharlist>), virtual')
-WHEN  (81) ('ErrorTrap {13}Procedure (string methodName, string errorMessage, byte forceLog=false), virtual')
-WHEN  (82) ('ExtensionOnly {9}Procedure (<<string fPath>),String, virtual')
-WHEN  (83) ('FormatMessage {9}Procedure (long err), string, virtual')
-WHEN  (84) ('GetValue {14}Procedure (), string, virtual')
-WHEN  (85) ('GetValue {14}Procedure (long maxLen), string, virtual')
-WHEN  (86) ('GetVal {16}Procedure (), string, virtual')
-WHEN  (87) ('GetLine {15}Procedure (long pLineNumber), string, virtual')
-WHEN  (88) ('GetBufferLength       Procedure (),long,Virtual')
-WHEN  (89) ('InLine {16}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase=0, long pWholeLine=0, long p_Where=0, long pClip=st:Clip),Long,virtual')
-WHEN  (90) ('SetLine {15}Procedure (long pLineNumber,String pValue),virtual')
-WHEN  (91) ('SetLine {15}Procedure (long pLineNumber,*String pValue),virtual')
-WHEN  (92) ('SetLine {15}Procedure (long pLineNumber,StringTheory pValue),virtual')
-WHEN  (93) ('AddLine {15}Procedure (long pLineNumber,String pValue),virtual')
-WHEN  (94) ('AddLine {15}Procedure (long pLineNumber,*String pValue),virtual')
-WHEN  (95) ('AddLine {15}Procedure (String pValue),virtual')
-WHEN  (96) ('AddLine {15}Procedure (*String pValue),virtual')
-WHEN  (97) ('DeleteLine {12}Procedure (long pLineNumber), long, proc, virtual')
-WHEN  (98) ('RemoveLines {11}Procedure (<<String pAlphabet>), long, proc, virtual')
-WHEN  (99) ('SerializeQueue        Procedure (*Queue pQueue,<<String pRecordBoundary>,<<string pFieldBoundary>,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),virtual')
-WHEN  (100) ('SerializeGroup        Procedure (*Group pGroup,<<string pBoundary>,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),long,proc,virtual')
-WHEN  (101) ('SerializeQueue        Procedure (*Queue pQueue,<<string pRecordBoundary>,*StringTheory pFieldBoundary,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),virtual')
-WHEN  (102) ('SerializeGroup        Procedure (*Group pGroup,*StringTheory pBoundary,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),long,proc,virtual')
-WHEN  (103) ('Join {18}Procedure (string pBoundary,<<string pQuotestart>,<<string pQuoteEnd>,long pAlwaysQuote=false),virtual')
-WHEN  (104) ('Length {16}Procedure (), long, virtual')
-WHEN  (105) ('LengthA {15}Procedure (), long, virtual  ')
-WHEN  (106) ('Len {19}Procedure (), long, virtual')
-WHEN  (107) ('Chars {17}Procedure (Long pEncoding=-1, <<String pStr>),Long,Virtual ')
-WHEN  (108) ('_Malloc {15}Procedure (Long strLen, Long pForce=false, Long pSilent=true), virtual')
-WHEN  (109) ('MD5 {19}Procedure (Long pFormat=st:EncHex ,<<*String pStr>,Long pLength=0), string, virtual')
-WHEN  (110) ('Prepend {15}Procedure (string newValue, long pClip), virtual')
-WHEN  (111) ('Prepend {15}Procedure (string newValue, long pClip=st:NoClip, string pSep), virtual')
-WHEN  (112) ('Prepend {15}Procedure (string newValue), virtual')
-WHEN  (113) ('Prepend {15}Procedure (*string newValue), virtual')
-WHEN  (114) ('Prepend {15}Procedure (stringtheory newValue, String pSep), virtual')
-WHEN  (115) ('Prepend {15}Procedure (stringtheory newValue), virtual')
-WHEN  (116) ('SeedRandom {12}Procedure (), virtual')
-WHEN  (117) ('Random {16}Procedure (long pLength=16, long pFlags=0, <<String pAlphabet>),String, Proc, virtual')
-WHEN  (118) ('SetRandom {13}Procedure (long pLength=16, long pFlags=0, <<String pAlphabet>),long, Proc, virtual')
-WHEN  (119) ('MakeGuid {14}Procedure (long pLength=16, long pFlags=st:Upper+st:Number),String, Proc, virtual')
-WHEN  (120) ('Records {15}Procedure (), long, virtual')
-WHEN  (121) ('Replace {15}Procedure (string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0, bool pRecursive), Long, Proc, virtual')
-WHEN  (122) ('Replace {15}Procedure (string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0), Long, Proc, virtual')
-WHEN  (123) ('ReplaceBetween        Procedure (string pLeft, <<string pRight>, string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0, long pReplaceAll=false), Long, Proc, virtual')
-WHEN  (124) ('ReplaceExceptBetween  Procedure (string pLeft, <<string pRight>, string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0), Long, Proc, virtual')
-WHEN  (125) ('ReplaceSingleChars    Procedure (string pOldChars, string pNewChars),long,proc, virtual')
-WHEN  (126) ('ReplaceSingleChars    Procedure (string pOldChars, string pNewChars, bool pOnceOnly),long,proc, virtual')
-WHEN  (127) ('RemoveHTML {12}Procedure (),Virtual')
-WHEN  (128) ('SetLength {13}Procedure (Long strLen, Long pForce=false), virtual')
-WHEN  (129) ('AdjustLength {10}Procedure (Long pLen), Long, Proc, virtual')
-WHEN  (130) ('Slice {17}Procedure (Long pStart=1, Long pEnd=0),String, virtual')
-WHEN  (131) ('Split {17}Procedure (string pSplitStr,<<string pQuotestart>,<<string pQuoteEnd>, bool removeQuotes = false, bool pClip=st:NoClip, bool pLeft=false, <<string pSeparator>,Long pNested=false), virtual')
-WHEN  (132) ('SplitEvery {12}Procedure (long numChars), virtual')
-WHEN  (133) ('SplitIntoWords        Procedure (long startPos = 1, long textType=ST:TEXT, <<String pCharlist>,Long pSmartWords=true)')
-WHEN  (134) ('SplitByMatch {10}Procedure (string pRegEx, long pNoCase=0), virtual')
-WHEN  (135) ('SplitBetween {10}Procedure (string pLeft, string pRight, long pNoCase=false, long pExclusive=true), virtual')
-WHEN  (136) ('Sort {18}Procedure (Long pSortType,string pSplitStr,<<string pQuotestart>,<<string pQuoteEnd>, bool pClip=st:NoClip, bool pLeft=false),Virtual')
-WHEN  (137) ('Sort {18}Procedure (Long pSortType),Virtual')
-WHEN  (138) ('Filter {16}Procedure (string pInclude, string pExclude, long pNoCase=st:NoCase, long pClip=st:Clip),virtual')
-WHEN  (139) ('Sub {19}Procedure (long pStart=1, long pLength=1), string, virtual')
-WHEN  (140) ('GetCodePageFromCharset Procedure(<<Long pCharSet>),Long, virtual')
-WHEN  (141) ('ToCstring {13}Procedure (), *cstring, virtual')
-WHEN  (142) ('Trace {17}Procedure (Queue pQueue), virtual')
-WHEN  (143) ('Trace {17}Procedure (<<string errMsg>), virtual')
-WHEN  (144) ('Upper {17}Procedure (<<String pQuote>, <<String pQuoteEnd>), virtual')
-WHEN  (145) ('Lower {17}Procedure (<<String pQuote>, <<String pQuoteEnd>), virtual')
-WHEN  (146) ('FileNameOnly {10}Procedure (<<string fPath>,Long pIncludeExtension=true), string, virtual')
-WHEN  (147) ('PathOnly {14}Procedure (<<string fPath>), string, proc, virtual')
-WHEN  (148) ('UrlProtocolOnly       Procedure (<<string pURL>), string, proc, virtual')
-WHEN  (149) ('UrlHostOnly {11}Procedure (<<string pURL>,Long pIncludePort=true), string, proc, virtual')
-WHEN  (150) ('UrlPortOnly {11}Procedure (<<string pURL>), long, proc, virtual')
-WHEN  (151) ('UrlPathOnly {11}Procedure (<<string pURL>, Long pIncludeFile=true), string, proc, virtual')
-WHEN  (152) ('UrlFileOnly {11}Procedure (<<string pURL>), string, proc, virtual')
-WHEN  (153) ('UrlParametersOnly     Procedure (<<string pURL>), string, proc, virtual')
-WHEN  (154) ('UrlParameter {10}Procedure (String pParameter,<<string pURL>), string, proc, virtual')
-WHEN  (155) ('LoadFile {14}Procedure (string fileName,Long pOffset=0, Long pLength=0, Long pRemoveBOM=false), long, proc, virtual')
-WHEN  (156) ('SaveFile {14}Procedure (string fileName, bool pAppendFlag=false), long, proc, virtual')
-WHEN  (157) ('SaveFile {14}Procedure (*string WriteString, string fileName, bool pAppendFlag, long dataLen=0), long, proc, virtual')
-WHEN  (158) ('SaveFileA {13}Procedure (string WriteString, string fileName, bool pAppendFlag=false), long, proc, virtual')
-WHEN  (159) ('SetEncodingFromBOM    Procedure (Long pRemoveBOM=true),Long,Proc,Virtual')
-WHEN  (160) ('AddBOM {16}Procedure (Long pEncoding=-1),Virtual')
-WHEN  (161) ('Before {16}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (162) ('BeforeLast {12}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (163) ('BeforeNth {13}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (164) ('SetBefore {13}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
-WHEN  (165) ('SetBeforeLast {9}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
-WHEN  (166) ('SetBeforeNth {10}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
-WHEN  (167) ('Between {15}Procedure (string pLeft, string pRight,long pStart=1, long pEnd=0, long pNoCase=0, long pExclusive=true), string, virtual')
-WHEN  (168) ('FindBetween {11}Procedure (string pLeft, string pRight, *long pStart, *long pEnd, bool pNoCase=false, long pExclusive=true), string, virtual')
-WHEN  (169) ('SetBetween {12}Procedure (string pLeft, string pRight, long pStart=1, long pEnd=0, long pNoCase=0, long pExclusive=true, long pClearIfNotFound=false),long, proc, virtual')
-WHEN  (170) ('FindBetweenPosition   Procedure (string pLeft, string pRight, *long pStart, *long pEnd, bool pNoCase=false, long pExclusive=true), virtual')
-WHEN  (171) ('After {17}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (172) ('AfterLast {13}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (173) ('AfterNth {14}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
-WHEN  (174) ('SetAfter {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
-WHEN  (175) ('SetAfterLast {10}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
-WHEN  (176) ('SetAfterNth {11}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
-WHEN  (177) ('ToBlob {16}Procedure (*blob blobField), long, proc, virtual')
-WHEN  (178) ('FromBlob {14}Procedure (*blob blobField), long, proc, virtual')
-WHEN  (179) ('ChangeBase {12}Procedure (Long pBaseFrom,Long pBaseTo),long,proc,virtual')
-WHEN  (180) ('LongDivision {10}Procedure(Long pDivisor, *Long rRemainder, Long pBase),long,proc,virtual')
-WHEN  (181) ('AnsiToUtf16 {11}Procedure (*string strAnsi, *long unicodeChars, ulong CodePage=st:CP_US_ASCII), *string, virtual')
-WHEN  (182) ('Utf16ToAnsi {11}Procedure (*string unicodeString, *long ansiLen, long unicodeChars=-1, ulong CodePage=st:CP_US_ASCII), *string, virtual')
-WHEN  (183) ('Utf8To16 {14}Procedure (*string strUtf8, *long unicodeChars), *string, virtual')
-WHEN  (184) ('Utf16To8 {14}Procedure (*string unicodeString, *long utf8Len, long unicodeChars=-1), *string, virtual')
-WHEN  (185) ('Utf8ToAnsi {12}Procedure (*string strUtf8, *long ansiLen, long pCodePage=st:CP_US_ASCII), *string, virtual')
-WHEN  (186) ('AnsiToUtf8 {12}Procedure (*string strAnsi, *long utf8Len, long pCodePage=st:CP_US_ASCII), *string, virtual')
-WHEN  (187) ('apiUtf8ToAnsi {9}Procedure (*string strUtf8, *long ansiLen), *string, virtual')
-WHEN  (188) ('apiAnsiToUtf8 {9}Procedure (*string strAnsi, *long utf8Len), *string, virtual')
-WHEN  (189) ('ToAnsi {16}Procedure (long encoding=0, long pCodePage=st:CP_US_ASCII), long, proc, virtual')
-WHEN  (190) ('ToAnsi {16}Procedure (long encoding=0, long pCodePage=st:CP_US_ASCII,Long pBlockSize), long, proc, virtual')
-WHEN  (191) ('ToUnicode {13}Procedure (long encoding=st:EncodeUtf8, long pCodePage=st:CP_US_ASCII), long, proc, virtual')
-WHEN  (192) ('DecodeHexInline       Procedure (long pCodePage=st:CP_US_ASCII),Virtual')
-WHEN  (193) ('DecodeHexInline       Procedure (string pId, Long pLength, long pCodePage=st:CP_US_ASCII),Virtual')
-WHEN  (194) ('Utf16ToUtf8Char       Procedure (String p_utf16Char,*Long rLen),String,Virtual')
-WHEN  (195) ('Normalize {13}Procedure (Long pForm=st:NFKD,Long pPreserveEncoding=true),Long,Proc,Virtual')
-WHEN  (196) ('DecToBase {13}Procedure (long num, long base=16, long lowerCase=1), string, virtual')
-WHEN  (197) ('BaseToDec {13}Procedure (string num, long base=16), long, virtual')
-WHEN  (198) ('ByteToHex {13}Procedure (byte pByte), string, virtual')
-WHEN  (199) ('HexToByte {13}Procedure (string hexVal), byte, virtual')
-WHEN  (200) ('LongToHex {13}Procedure (long pLong), string, virtual')
-WHEN  (201) ('StringToHex {11}Procedure (*string binData,Long pLen=0,Long pCase=0), *string, virtual')
-WHEN  (202) ('StringToHex {11}Procedure (string binData,Long pLen=0,Long pCase=0), *string, virtual')
-WHEN  (203) ('HexToString {11}Procedure (string hexData), *string, virtual')
-WHEN  (204) ('ToHex {17}Procedure (Long pCase=0,Long pSpacer=0), virtual     ')
-WHEN  (205) ('FromHex {15}Procedure (), virtual')
-WHEN  (206) ('WrapText {14}Procedure(long wrapAt=80, bool keepExistingBreaks=true, bool pleft=false), virtual')
-WHEN  (207) ('StrCpy {16}Procedure(*string pIn, *string pOut, bool pClip=st:Clip), long, proc, virtual')
-WHEN  (208) ('ToBytes {15}Procedure (*byte pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (209) ('ToBytes {15}Procedure (*short pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (210) ('ToBytes {15}Procedure (*ushort pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (211) ('ToBytes {15}Procedure (*long pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (212) ('ToBytes {15}Procedure (*ulong pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (213) ('ToBytes {15}Procedure (*sreal pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (214) ('ToBytes {15}Procedure (*real pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (215) ('ToBytes {15}Procedure (*decimal pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (216) ('ToBytes {15}Procedure (*cstring pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (217) ('ToBytes {15}Procedure (*pstring pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (218) ('ToBytes {15}Procedure (*string pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (219) ('FromBytes {13}Procedure (*string pSrc, *byte pDest, long pOffset=1), virtual')
-WHEN  (220) ('FromBytes {13}Procedure (*string pSrc, *short pDest, long pOffset=1), virtual')
-WHEN  (221) ('FromBytes {13}Procedure (*string pSrc, *ushort pDest, long pOffset=1), virtual')
-WHEN  (222) ('FromBytes {13}Procedure (*string pSrc, *long pDest, long pOffset=1), virtual')
-WHEN  (223) ('FromBytes {13}Procedure (*string pSrc, *ulong pDest, long pOffset=1), virtual')
-WHEN  (224) ('FromBytes {13}Procedure (*string pSrc, *sreal pDest, long pOffset=1), virtual')
-WHEN  (225) ('FromBytes {13}Procedure (*string pSrc, *real pDest, long pOffset=1), virtual')
-WHEN  (226) ('FromBytes {13}Procedure (*string pSrc, *decimal pDest, long pOffset=1), virtual')
-WHEN  (227) ('FromBytes {13}Procedure (*string pSrc, *cstring pDest, long pOffset=1), virtual')
-WHEN  (228) ('FromBytes {13}Procedure (*string pSrc, *string pDest, long pOffset=1), virtual')
-WHEN  (229) ('FromBytes {13}Procedure (*string pSrc, *pstring pDest, long pOffset=1), virtual')
-WHEN  (230) ('SetBytes {14}Procedure (*byte pSrc), virtual')
-WHEN  (231) ('SetBytes {14}Procedure (*short pSrc), virtual')
-WHEN  (232) ('SetBytes {14}Procedure (*ushort pSrc), virtual')
-WHEN  (233) ('SetBytes {14}Procedure (*long pSrc), virtual')
-WHEN  (234) ('SetBytes {14}Procedure (*ulong pSrc), virtual')
-WHEN  (235) ('SetBytes {14}Procedure (*sreal pSrc), virtual')
-WHEN  (236) ('SetBytes {14}Procedure (*real pSrc), virtual')
-WHEN  (237) ('SetBytes {14}Procedure (*decimal pSrc), virtual')
-WHEN  (238) ('SetBytes {14}Procedure (*cstring pSrc), virtual')
-WHEN  (239) ('SetBytes {14}Procedure (*string pSrc), virtual')
-WHEN  (240) ('SetBytes {14}Procedure (*pstring pSrc), virtual')
-WHEN  (241) ('GetBytes {14}Procedure (*byte pVal, long pOffset=1), virtual')
-WHEN  (242) ('GetBytes {14}Procedure (*short pVal, long pOffset=1), virtual')
-WHEN  (243) ('GetBytes {14}Procedure (*ushort pVal, long pOffset=1), virtual')
-WHEN  (244) ('GetBytes {14}Procedure (*long pVal, long pOffset=1), virtual')
-WHEN  (245) ('GetBytes {14}Procedure (*ulong pVal, long pOffset=1), virtual')
-WHEN  (246) ('GetBytes {14}Procedure (*sreal pVal, long pOffset=1), virtual')
-WHEN  (247) ('GetBytes {14}Procedure (*real pVal, long pOffset=1), virtual')
-WHEN  (248) ('GetBytes {14}Procedure (*decimal pVal, long pOffset=1), virtual')
-WHEN  (249) ('GetBytes {14}Procedure (*cstring pVal, long pOffset=1), virtual')
-WHEN  (250) ('GetBytes {14}Procedure (*string pVal, long pOffset=1), virtual')
-WHEN  (251) ('GetBytes {14}Procedure (*pstring pVal, long pOffset=1), virtual')
-WHEN  (252) ('SetBytes {14}Procedure (*? pVal, string pType, long pOffset=1), bool, proc, virtual')
-WHEN  (253) ('GetBytes {14}Procedure (*? pVal, string pType, long pOffset=1), bool, proc, virtual')
-WHEN  (254) ('FindWord {14}Procedure(long pWordNumber,long startPos = -1, long textType=ST:TEXT,*Long pStart, *Long pEnd,<<String pCharlist>,Long pSmartWords=true), string, virtual')
-WHEN  (255) ('GetWord {15}Procedure (long pWordNumber,long startPos = -1, long textType=ST:TEXT, <<String pCharlist>,Long pSmartWords=true), string, virtual')
-WHEN  (256) ('WordStart {13}Procedure (long pStartPos=1, long textType=ST:TEXT,Long pDir=st:Forwards,<<String pCharlist>), long, virtual')
-WHEN  (257) ('WordEnd {15}Procedure (long pStartPos=1, long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), long, virtual')
-WHEN  (258) ('CountWords {12}Procedure (long startPos = 1, long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), long, virtual')
-WHEN  (259) ('RemoveAttributes      Procedure (String pTag,Long pCount=0), virtual')
-WHEN  (260) ('RemoveXMLPrefixes     Procedure(), virtual')
-WHEN  (261) ('HtmlEntityToDec       Procedure(),virtual')
-WHEN  (262) ('DecEntityToChar       Procedure(),Long,Proc,Virtual')
-WHEN  (263) ('Remove {16}Procedure(string pLeft,<<string pRight>,long pNoCase=0,long pContentsOnly=0, long pCount=0), Long,Proc,virtual')
-WHEN  (264) ('RemoveFromPosition    Procedure(long pPosition, long pLength), Long,Proc,virtual')
-WHEN  (265) ('Top {19}Procedure(long pLength), Long,Proc,virtual')
-WHEN  (266) ('Tail {18}Procedure(long pLength), Long,Proc,virtual')
-WHEN  (267) ('Clip {18}Procedure (), virtual')
-WHEN  (268) ('Trim {18}Procedure (<<String pAlphabet>), virtual')
-WHEN  (269) ('Reverse {15}Procedure (String pString),String,Proc Virtual')
-WHEN  (270) ('Reverse {15}Procedure (),Virtual')
-WHEN  (271) ('Left {18}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>),String, virtual')
-WHEN  (272) ('SetLeft {15}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>), virtual')
-WHEN  (273) ('Right {17}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>),String, virtual')
-WHEN  (274) ('SetRight {14}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>), virtual')
-WHEN  (275) ('All {19}Procedure(Long pLength=255),String, virtual')
-WHEN  (276) ('SetAll {16}Procedure(Long pLength=255), virtual')
-WHEN  (277) ('Squeeze {15}Procedure (long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), virtual')
-WHEN  (278) ('ContainsADigit        Procedure (), bool, virtual')
-WHEN  (279) ('IsAllDigits {11}Procedure (), bool, virtual')
-WHEN  (280) ('ContainsA {13}Procedure (String pAlphabet, <<String pTestString>,Long pClip=st:Clip), bool, virtual')
-WHEN  (281) ('ContainsChar {10}Procedure (String pChar), bool, virtual')
-WHEN  (282) ('ContainsChar {10}Procedure (String pChar, *string pTestString), bool, virtual')
-WHEN  (283) ('ContainsChar {10}Procedure (String pChar, string pTestString), bool, virtual')
-WHEN  (284) ('IsAscii {15}Procedure (), bool, virtual')
-WHEN  (285) ('IsAll {17}Procedure (String pAlphabet, <<String pTestString>,Long pClip=st:Clip), bool, virtual')
-WHEN  (286) ('RemoveChars {11}Procedure (String pAlphabet), long, proc, virtual')
-WHEN  (287) ('KeepChars {13}Procedure (String pAlphabet, String pReplacementChar), long, proc, virtual')
-WHEN  (288) ('KeepChars {13}Procedure (String pAlphabet), long, proc, virtual')
-WHEN  (289) ('MatchBrackets {9}Procedure (String pLeftBracket, String pRightBracket, Long pStart=1),Long,virtual')
-WHEN  (290) ('_SwitchEndian {9}Procedure (), virtual')
-WHEN  (291) ('BigEndian {13}Procedure (), virtual')
-WHEN  (292) ('LittleEndian {10}Procedure (), virtual')
-WHEN  (293) ('SwitchEndian {10}Procedure (ulong x), long, virtual')
-WHEN  (294) ('BigEndian {13}Procedure (ulong x), long, virtual')
-WHEN  (295) ('LittleEndian {10}Procedure (ulong x), long, virtual')
-WHEN  (296) ('ReverseByteOrder      Procedure (), virtual')
-WHEN  (297) ('Str {19}Procedure (), string, virtual')
-WHEN  (298) ('Str {19}Procedure (string newValue),  string, proc, virtual')
-WHEN  (299) ('Str {19}Procedure (*string newValue), string, proc, virtual')
-WHEN  (300) ('SetSlice {14}Procedure (long pStart=1, long pEnd=0, string newValue), virtual')
-WHEN  (301) ('Insert {16}Procedure (long pStart, stringTheory insertValue), virtual')
-WHEN  (302) ('Insert {16}Procedure (long pStart, string insertValue), virtual')
-WHEN  (303) ('Insert {16}Procedure (long pStart, *string insertValue), virtual')
-WHEN  (304) ('Quote {17}Procedure (<<string pQuotestart>,<<string pQuoteEnd>), virtual')
-WHEN  (305) ('UnQuote {15}Procedure (<<string pQuotestart>,<<string pQuoteEnd>), virtual')
-WHEN  (306) ('FindChar {14}Procedure (string pSearchValue), long, virtual')
-WHEN  (307) ('FindChar {14}Procedure (string pSearchValue, long pStart), long, virtual')
-WHEN  (308) ('FindChar {14}Procedure (string pSearchValue, long pStart=1, long pEnd), long, virtual')
-WHEN  (309) ('FindChar {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, String p_Text), long, virtual')
-WHEN  (310) ('_memChrs {14}Procedure (*string pSearchValue, long pAddr, long pMaxStartAddr), long, virtual')
-WHEN  (311) ('_memiChrs {13}Procedure (*string pSearchValue, long pAddr, long pMaxStartAddr), long, virtual')
-WHEN  (312) ('_memiChr {14}Procedure (long buf, long c, unsigned count), long, virtual')
-WHEN  (313) ('FindEndOfString       Procedure (Long pEncoding, Long pStringAddress, Long pMaxLength=255),long ,virtual')
-WHEN  (314) ('FindCharsAddr {9}Procedure (*string pSearchValue, long pAddr, long pLen), long, virtual')
-WHEN  (315) ('FindChars {13}Procedure (*string pSearchValue),long, virtual')
-WHEN  (316) ('FindChars {13}Procedure (string pSearchValue), long, virtual')
-WHEN  (317) ('FindChars {13}Procedure (*string pSearchValue, long pStart), long, virtual')
-WHEN  (318) ('FindChars {13}Procedure (string pSearchValue,  long pStart), long, virtual')
-WHEN  (319) ('FindChars {13}Procedure (*string pSearchValue, long pStart=1, long pEnd), long, virtual')
-WHEN  (320) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd), long, virtual')
-WHEN  (321) ('FindChars {13}Procedure (*string pSearchValue, long pStart=1, long pEnd=0, *String p_Text), long, virtual')
-WHEN  (322) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd=0, *String p_Text), long, virtual')
-WHEN  (323) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd=0, String p_Text), long, virtual')
-WHEN  (324) ('FindNth {15}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNocase=0), long, virtual')
-WHEN  (325) ('ReplaceNth {12}Procedure (string pOldValue, string pNewValue, long pOccurrence, long pStart=1, long pEnd=0, long pNocase=0) , long, virtual')
-WHEN  (326) ('FindLast {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNocase=0), long, virtual')
-WHEN  (327) ('ReplaceLast {11}Procedure (string pOldValue, string pNewValue, long pStart=1, long pEnd=0, long pNocase=0) , long, virtual')
-WHEN  (328) ('ColorToHex {12}Procedure (string pColor, bool pAddHash=false), string, virtual')
-WHEN  (329) ('ColorFromHex {10}Procedure (String pColor),Long, virtual')
-WHEN  (330) ('ColorToLong {11}Procedure (String pColor),Long, virtual')
-WHEN  (331) ('_ColorToHex {11}Procedure (long pAddHash=false), virtual')
-WHEN  (332) ('_ColorFromHex {9}Procedure (string pColor),Long, virtual')
-WHEN  (333) ('_ColorFromCSL {9}Procedure (string pColor),Long, virtual')
-WHEN  (334) ('UrlEncode {13}Procedure (String p_Text, long flags, String pDelimiter,String pSpace,String pAlphabet), string, virtual')
-WHEN  (335) ('UrlEncode {13}Procedure (long flags =0,<<String pDelimiter>,<<String pSpace>,<<String pAlphabet>), virtual')
-WHEN  (336) ('UrlDecode {13}Procedure (<<String pDelimiter>,<<String pSpace>), virtual')
-WHEN  (337) ('CleanFileName {9}Procedure (<<string pFileName>, <<string pReplaceChar>), string, proc, virtual')
-WHEN  (338) ('PeekRam {15}Procedure(Long pFormat=st:Decimal),Virtual')
-WHEN  (339) ('PeekRam {15}Procedure(uLong pAdr,Long pLen, Long pFormat=st:Decimal),Virtual')
-WHEN  (340) ('PeekRam {15}Procedure(stringTheory pResult,uLong pAdr,Long pLen, Long pFormat=st:Decimal),Virtual')
-WHEN  (341) ('loadlibs {14}Procedure(),Long,Proc,Virtual')
-WHEN  (342) ('LoadNormalize {9}Procedure(),Long,Proc,Virtual')
-WHEN  (343) ('gzip {18}Procedure(Long pLevel=5),Long,Virtual,Proc')
-WHEN  (344) ('gunzip {16}Procedure(),Long,Virtual,Proc')
-WHEN  (345) ('MergeXml {14}Procedure(String pNew, Long pWhere),Virtual')
-WHEN  (346) ('LineEndings {11}Procedure(Long pEndings=st:windows,Long pFrom=0), Virtual')
-WHEN  (347) ('FormatTime {12}PROCEDURE (String pValue, String pFormat),String,Virtual')
-WHEN  (348) ('FormatTime {12}PROCEDURE (String pFormat),Virtual')
-WHEN  (349) ('DeformatTime {10}PROCEDURE (String pValue),String, Virtual')
-WHEN  (350) ('DeformatTime {10}PROCEDURE (),Virtual')
-WHEN  (351) ('IsTime {16}PROCEDURE (String pValue),Long, Virtual')
-WHEN  (352) ('IsTime {16}PROCEDURE (),Long, Virtual')
-WHEN  (353) ('StartsWith {12}Procedure (String pStr,Long pCase=True,Long pClip=st:Clip),Long,Virtual')
-WHEN  (354) ('EndsWith {14}Procedure (String pStr,Long pCase=True,Long pClip=st:Clip),Long,Virtual')
-WHEN  (355) ('ConvertOemToAnsi      Procedure(),Virtual')
-WHEN  (356) ('ConvertAnsiToOem      Procedure(),Virtual')
-WHEN  (357) ('AsnDecode {13}Procedure (*Long pPos,*StringTheory rASNValue,<<*String rASNType>),Long,Virtual')
-WHEN  (358) ('AsnEncode {13}Procedure (String pType,<<String pValue>),Virtual')
-WHEN  (359) ('AsnEncodeNumber       Procedure (String pType,Long pValue),Virtual')
-WHEN  (360) ('FormatHTML {12}procedure (),Virtual')
-WHEN  (361) ('_IANANameToNumber     Procedure (String pIANAName),Long,Virtual')
+WHEN  (30) ('SetValue {14}Procedure (StringTheory newValue,long pOptions), virtual')
+WHEN  (31) ('SetValue {14}Procedure (string newValue,long pClip=st:NoClip), virtual')
+WHEN  (32) ('SetValue {14}Procedure (*string newValue,long pClip=st:NoClip), virtual')
+WHEN  (33) ('SetValueByAddress     Procedure (long newValueAddress,long pLength), virtual')
+WHEN  (34) ('_EqualsUnicode        Procedure (*String otherValue, Long pOptions = st:UnicodeCompare),long, virtual')
+WHEN  (35) ('_EqualsUnicode        Procedure (StringTheory otherValue, Long pOptions = st:UnicodeCompare),long, virtual')
+WHEN  (36) ('Equals {16}Procedure (StringTheory otherValue, Long pOptions = ST:SimpleCompare),long, virtual')
+WHEN  (37) ('Equals {16}Procedure (String otherValue, Long pOptions = ST:SimpleCompare + ST:Clip),long, virtual')
+WHEN  (38) ('_GetNextBufferSize    Procedure (Long pLen),Long,Virtual')
+WHEN  (39) ('_SetValuePointer      Procedure (Long pPtr,Long pSize, Long pEnd, Long pDispose=1),Virtual')
+WHEN  (40) ('_StealValue {11}Procedure (stringTheory otherValue), virtual')
+WHEN  (41) ('Assign {16}Procedure (*string newValue), virtual')
+WHEN  (42) ('Assign {16}Procedure (string newValue), virtual')
+WHEN  (43) ('Abbreviate {12}Procedure (Long pPos,Long pRangeLeft = 15,Long pRangeRight = 15),Long,Proc,Virtual')
+WHEN  (44) ('GetValuePtr {11}Procedure (),*String,virtual')
+WHEN  (45) ('GetAddress {12}Procedure (),Long,Virtual')
+WHEN  (46) ('Base64Encode {10}Procedure (Long pOptions=0),bool, proc,Virtual')
+WHEN  (47) ('Base64Encode {10}Procedure (*string pText, *long pLen),bool, proc, virtual')
+WHEN  (48) ('Base64Decode {10}Procedure (),bool, proc, virtual')
+WHEN  (49) ('Base64Decode {10}Procedure (*string pText, *long pLen),bool, proc, virtual')
+WHEN  (50) ('Base85Encode {10}Procedure (Long pOptions=0),virtual')
+WHEN  (51) ('Base85Decode {10}Procedure (),Long,virtual')
+WHEN  (52) ('QuotedPrintableEncode Procedure (), virtual')
+WHEN  (53) ('QuotedPrintableDecode Procedure (), virtual')
+WHEN  (54) ('EncodedWordDecode     Procedure (), virtual')
+WHEN  (55) ('EncodedWordEncode     Procedure (<<String pCharset>,long pEncoding=2),virtual')
+WHEN  (56) ('JsonEncode {12}Procedure (Long pOptions=0), virtual')
+WHEN  (57) ('JsonDecode {12}Procedure (), virtual')
+WHEN  (58) ('XMLEncode {13}Procedure (Long pOptions=0), virtual')
+WHEN  (59) ('XMLDecode {13}Procedure (), virtual')
+WHEN  (60) ('ZeroXEncode {11}Procedure (),Virtual')
+WHEN  (61) ('ZeroXDecode {11}Procedure (),Virtual')
+WHEN  (62) ('Free {18}Procedure (Long pLines=False, Long pForce=false), virtual')
+WHEN  (63) ('FreeLines {13}Procedure (), virtual')
+WHEN  (64) ('ClipLen {15}Procedure (), long, virtual')
+WHEN  (65) ('ClipLength {12}Procedure (), long, virtual')
+WHEN  (66) ('Crop {18}Procedure (long pStart=1, long pEnd=0), Virtual')
+WHEN  (67) ('Instring {14}Procedure (string pSearchValue), long, virtual')
+WHEN  (68) ('Instring {14}Procedure (*string pSearchValue), long, virtual')
+WHEN  (69) ('Instring {14}Procedure (string pSearchValue, long pStep), long, virtual')
+WHEN  (70) ('Instring {14}Procedure (*string pSearchValue, long pStep), long, virtual')
+WHEN  (71) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart), long, virtual')
+WHEN  (72) ('Instring {14}Procedure (*string pSearchValue, long pStep=1, long pStart), long, virtual')
+WHEN  (73) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd), long, virtual')
+WHEN  (74) ('Instring {14}Procedure (*string pSearchValue, long pStep=1, long pStart=1, long pEnd), long, virtual')
+WHEN  (75) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase), long, virtual')
+WHEN  (76) ('Instring {14}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase=0, long pWholeWord), long, virtual')
+WHEN  (77) ('Match {17}Procedure (string pRegEx, Long pStart, Long pEnd, long pMode=Match:Regular, long pNoCase=0), long, virtual')
+WHEN  (78) ('FindMatch {13}Procedure (string pRegEx,*long pStart, *long pEnd, long pMode=Match:Regular, long pNoCase=0), String, virtual')
+WHEN  (79) ('FindMatchPosition     Procedure (string pRegEx,*long pStart, *long pEnd, long pMode=Match:Regular, long pNoCase=0), virtual')
+WHEN  (80) ('Count {17}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNoCase=0, bool softClip=true, long pOverlap=true), long, virtual')
+WHEN  (81) ('Capitalize {12}Procedure (long pCount=1, long pStartPos=1, long pEndPos=0,<<String pCharlist>), virtual')
+WHEN  (82) ('ErrorTrap {13}Procedure (string methodName, string errorMessage, byte forceLog=false), virtual')
+WHEN  (83) ('ExtensionOnly {9}Procedure (<<string fPath>),String, virtual')
+WHEN  (84) ('FormatMessage {9}Procedure (long err), string, virtual')
+WHEN  (85) ('GetValue {14}Procedure (), string, virtual')
+WHEN  (86) ('GetValue {14}Procedure (long maxLen), string, virtual')
+WHEN  (87) ('GetVal {16}Procedure (), string, virtual')
+WHEN  (88) ('GetLine {15}Procedure (long pLineNumber), string, virtual')
+WHEN  (89) ('GetBufferLength       Procedure (),long,Virtual')
+WHEN  (90) ('InLine {16}Procedure (string pSearchValue, long pStep=1, long pStart=1, long pEnd=0, long pNocase=0, long pWholeLine=0, long p_Where=0, long pClip=st:Clip),Long,virtual')
+WHEN  (91) ('SetLine {15}Procedure (long pLineNumber,String pValue),virtual')
+WHEN  (92) ('SetLine {15}Procedure (long pLineNumber,*String pValue),virtual')
+WHEN  (93) ('SetLine {15}Procedure (long pLineNumber,StringTheory pValue),virtual')
+WHEN  (94) ('AddLine {15}Procedure (long pLineNumber,String pValue),virtual')
+WHEN  (95) ('AddLine {15}Procedure (long pLineNumber,*String pValue),virtual')
+WHEN  (96) ('AddLine {15}Procedure (String pValue),virtual')
+WHEN  (97) ('AddLine {15}Procedure (*String pValue),virtual')
+WHEN  (98) ('DeleteLine {12}Procedure (long pLineNumber), long, proc, virtual')
+WHEN  (99) ('RemoveLines {11}Procedure (<<String pAlphabet>), long, proc, virtual')
+WHEN  (100) ('SerializeQueue        Procedure (*Queue pQueue,<<String pRecordBoundary>,<<string pFieldBoundary>,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),virtual')
+WHEN  (101) ('SerializeGroup        Procedure (*Group pGroup,<<string pBoundary>,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),long,proc,virtual')
+WHEN  (102) ('SerializeQueue        Procedure (*Queue pQueue,<<string pRecordBoundary>,*StringTheory pFieldBoundary,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),virtual')
+WHEN  (103) ('SerializeGroup        Procedure (*Group pGroup,*StringTheory pBoundary,<<string pQuotestart>,<<string pQuoteEnd>,Long pLevel=1,Long pFree=true),long,proc,virtual')
+WHEN  (104) ('Join {18}Procedure (string pBoundary,<<string pQuotestart>,<<string pQuoteEnd>,long pAlwaysQuote=false),virtual')
+WHEN  (105) ('Length {16}Procedure (), long, virtual')
+WHEN  (106) ('LengthA {15}Procedure (), long, virtual  ')
+WHEN  (107) ('Len {19}Procedure (), long, virtual')
+WHEN  (108) ('Chars {17}Procedure (Long pEncoding=-1, <<String pStr>),Long,Virtual ')
+WHEN  (109) ('_Malloc {15}Procedure (Long strLen, Long pForce=false, Long pSilent=true), virtual')
+WHEN  (110) ('MD5 {19}Procedure (Long pFormat=st:EncHex ,<<*String pStr>,Long pLength=0), string, virtual')
+WHEN  (111) ('Prepend {15}Procedure (string newValue, long pClip), virtual')
+WHEN  (112) ('Prepend {15}Procedure (string newValue, long pClip=st:NoClip, string pSep), virtual')
+WHEN  (113) ('Prepend {15}Procedure (string newValue), virtual')
+WHEN  (114) ('Prepend {15}Procedure (*string newValue), virtual')
+WHEN  (115) ('Prepend {15}Procedure (stringtheory newValue, String pSep), virtual')
+WHEN  (116) ('Prepend {15}Procedure (stringtheory newValue), virtual')
+WHEN  (117) ('SeedRandom {12}Procedure (), virtual')
+WHEN  (118) ('Random {16}Procedure (long pLength=16, long pFlags=0, <<String pAlphabet>),String, Proc, virtual')
+WHEN  (119) ('SetRandom {13}Procedure (long pLength=16, long pFlags=0, <<String pAlphabet>),long, Proc, virtual')
+WHEN  (120) ('MakeGuid {14}Procedure (long pLength=16, long pFlags=st:Upper+st:Number),String, Proc, virtual')
+WHEN  (121) ('Records {15}Procedure (), long, virtual')
+WHEN  (122) ('Replace {15}Procedure (string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0, bool pRecursive), Long, Proc, virtual')
+WHEN  (123) ('Replace {15}Procedure (string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0), Long, Proc, virtual')
+WHEN  (124) ('ReplaceBetween        Procedure (string pLeft, <<string pRight>, string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0, long pReplaceAll=false), Long, Proc, virtual')
+WHEN  (125) ('ReplaceExceptBetween  Procedure (string pLeft, <<string pRight>, string pOldValue, string pNewValue, long pCount=0, long pStart=1, long pEnd=0, long pNoCase=0), Long, Proc, virtual')
+WHEN  (126) ('ReplaceSingleChars    Procedure (string pOldChars, string pNewChars),long,proc, virtual')
+WHEN  (127) ('ReplaceSingleChars    Procedure (string pOldChars, string pNewChars, bool pOnceOnly),long,proc, virtual')
+WHEN  (128) ('RemoveHTML {12}Procedure (),Virtual')
+WHEN  (129) ('SetLength {13}Procedure (Long strLen, Long pForce=false), virtual')
+WHEN  (130) ('AdjustLength {10}Procedure (Long pLen), Long, Proc, virtual')
+WHEN  (131) ('Slice {17}Procedure (Long pStart=1, Long pEnd=0),String, virtual')
+WHEN  (132) ('Split {17}Procedure (string pSplitStr,<<string pQuotestart>,<<string pQuoteEnd>, bool removeQuotes = false, bool pClip=st:NoClip, bool pLeft=false, <<string pSeparator>,Long pNested=false), virtual')
+WHEN  (133) ('SplitEvery {12}Procedure (long numChars), virtual')
+WHEN  (134) ('SplitIntoWords        Procedure (long startPos = 1, long textType=ST:TEXT, <<String pCharlist>,Long pSmartWords=true)')
+WHEN  (135) ('SplitByMatch {10}Procedure (string pRegEx, long pNoCase=0), virtual')
+WHEN  (136) ('SplitBetween {10}Procedure (string pLeft, string pRight, long pNoCase=false, long pExclusive=true), virtual')
+WHEN  (137) ('Sort {18}Procedure (Long pSortType,string pSplitStr,<<string pQuotestart>,<<string pQuoteEnd>, bool pClip=st:NoClip, bool pLeft=false),Virtual')
+WHEN  (138) ('Sort {18}Procedure (Long pSortType),Virtual')
+WHEN  (139) ('Filter {16}Procedure (string pInclude, string pExclude, long pNoCase=st:NoCase, long pClip=st:Clip),virtual')
+WHEN  (140) ('Sub {19}Procedure (long pStart=1, long pLength=1), string, virtual')
+WHEN  (141) ('GetCodePageFromCharset Procedure(<<Long pCharSet>),Long, virtual')
+WHEN  (142) ('ToCstring {13}Procedure (), *cstring, virtual')
+WHEN  (143) ('Trace {17}Procedure (Queue pQueue), virtual')
+WHEN  (144) ('Trace {17}Procedure (<<string errMsg>), virtual')
+WHEN  (145) ('Upper {17}Procedure (<<String pQuote>, <<String pQuoteEnd>), virtual')
+WHEN  (146) ('Lower {17}Procedure (<<String pQuote>, <<String pQuoteEnd>), virtual')
+WHEN  (147) ('FileNameOnly {10}Procedure (<<string fPath>,Long pIncludeExtension=true), string, virtual')
+WHEN  (148) ('PathOnly {14}Procedure (<<string fPath>), string, proc, virtual')
+WHEN  (149) ('UrlProtocolOnly       Procedure (<<string pURL>), string, proc, virtual')
+WHEN  (150) ('UrlHostOnly {11}Procedure (<<string pURL>,Long pIncludePort=true), string, proc, virtual')
+WHEN  (151) ('UrlPortOnly {11}Procedure (<<string pURL>), long, proc, virtual')
+WHEN  (152) ('UrlPathOnly {11}Procedure (<<string pURL>, Long pIncludeFile=true), string, proc, virtual')
+WHEN  (153) ('UrlFileOnly {11}Procedure (<<string pURL>), string, proc, virtual')
+WHEN  (154) ('UrlParametersOnly     Procedure (<<string pURL>), string, proc, virtual')
+WHEN  (155) ('UrlParameter {10}Procedure (String pParameter,<<string pURL>), string, proc, virtual')
+WHEN  (156) ('LoadFile {14}Procedure (string fileName,Long pOffset=0, Long pLength=0, Long pRemoveBOM=false), long, proc, virtual')
+WHEN  (157) ('SaveFile {14}Procedure (string fileName, bool pAppendFlag=false), long, proc, virtual')
+WHEN  (158) ('SaveFile {14}Procedure (*string WriteString, string fileName, bool pAppendFlag, long dataLen=0), long, proc, virtual')
+WHEN  (159) ('SaveFileA {13}Procedure (string WriteString, string fileName, bool pAppendFlag=false), long, proc, virtual')
+WHEN  (160) ('SetEncodingFromBOM    Procedure (Long pRemoveBOM=true),Long,Proc,Virtual')
+WHEN  (161) ('AddBOM {16}Procedure (Long pEncoding=-1),Virtual')
+WHEN  (162) ('Before {16}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (163) ('BeforeLast {12}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (164) ('BeforeNth {13}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (165) ('SetBefore {13}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
+WHEN  (166) ('SetBeforeLast {9}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
+WHEN  (167) ('SetBeforeNth {10}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc, virtual')
+WHEN  (168) ('Between {15}Procedure (string pLeft, string pRight,long pStart=1, long pEnd=0, long pNoCase=0, long pExclusive=true), string, virtual')
+WHEN  (169) ('FindBetween {11}Procedure (string pLeft, string pRight, *long pStart, *long pEnd, bool pNoCase=false, long pExclusive=true), string, virtual')
+WHEN  (170) ('SetBetween {12}Procedure (string pLeft, string pRight, long pStart=1, long pEnd=0, long pNoCase=0, long pExclusive=true, long pClearIfNotFound=false),long, proc, virtual')
+WHEN  (171) ('FindBetweenPosition   Procedure (string pLeft, string pRight, *long pStart, *long pEnd, bool pNoCase=false, long pExclusive=true), virtual')
+WHEN  (172) ('After {17}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (173) ('AfterLast {13}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (174) ('AfterNth {14}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0), string, virtual')
+WHEN  (175) ('SetAfter {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
+WHEN  (176) ('SetAfterLast {10}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
+WHEN  (177) ('SetAfterNth {11}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNoCase=0, long pClearIfNotFound=false),long,proc virtual')
+WHEN  (178) ('ToBlob {16}Procedure (*blob blobField), long, proc, virtual')
+WHEN  (179) ('FromBlob {14}Procedure (*blob blobField), long, proc, virtual')
+WHEN  (180) ('ChangeBase {12}Procedure (Long pBaseFrom,Long pBaseTo),long,proc,virtual')
+WHEN  (181) ('LongDivision {10}Procedure(Long pDivisor, *Long rRemainder, Long pBase),long,proc,virtual')
+WHEN  (182) ('AnsiToUtf16 {11}Procedure (*string strAnsi, *long unicodeChars, ulong CodePage=st:CP_US_ASCII), *string, virtual')
+WHEN  (183) ('Utf16ToAnsi {11}Procedure (*string unicodeString, *long ansiLen, long unicodeChars=-1, ulong CodePage=st:CP_US_ASCII), *string, virtual')
+WHEN  (184) ('Utf8To16 {14}Procedure (*string strUtf8, *long unicodeChars), *string, virtual')
+WHEN  (185) ('Utf16To8 {14}Procedure (*string unicodeString, *long utf8Len, long unicodeChars=-1), *string, virtual')
+WHEN  (186) ('Utf8ToAnsi {12}Procedure (*string strUtf8, *long ansiLen, long pCodePage=st:CP_US_ASCII), *string, virtual')
+WHEN  (187) ('AnsiToUtf8 {12}Procedure (*string strAnsi, *long utf8Len, long pCodePage=st:CP_US_ASCII), *string, virtual')
+WHEN  (188) ('apiUtf8ToAnsi {9}Procedure (*string strUtf8, *long ansiLen), *string, virtual')
+WHEN  (189) ('apiAnsiToUtf8 {9}Procedure (*string strAnsi, *long utf8Len), *string, virtual')
+WHEN  (190) ('ToAnsi {16}Procedure (long encoding=0, long pCodePage=st:CP_US_ASCII), long, proc, virtual')
+WHEN  (191) ('ToAnsi {16}Procedure (long encoding=0, long pCodePage=st:CP_US_ASCII,Long pBlockSize), long, proc, virtual')
+WHEN  (192) ('ToUnicode {13}Procedure (long encoding=st:EncodeUtf8, long pCodePage=st:CP_US_ASCII), long, proc, virtual')
+WHEN  (193) ('DecodeHexInline       Procedure (long pCodePage=st:CP_US_ASCII),Virtual')
+WHEN  (194) ('DecodeHexInline       Procedure (string pId, Long pLength, long pCodePage=st:CP_US_ASCII),Virtual')
+WHEN  (195) ('Utf16ToUtf8Char       Procedure (String p_utf16Char,*Long rLen),String,Virtual')
+WHEN  (196) ('Normalize {13}Procedure (Long pForm=st:NFKD,Long pPreserveEncoding=true),Long,Proc,Virtual')
+WHEN  (197) ('DecToBase {13}Procedure (long num, long base=16, long lowerCase=1), string, virtual')
+WHEN  (198) ('BaseToDec {13}Procedure (string num, long base=16), long, virtual')
+WHEN  (199) ('ByteToHex {13}Procedure (byte pByte), string, virtual')
+WHEN  (200) ('HexToByte {13}Procedure (string hexVal), byte, virtual')
+WHEN  (201) ('LongToHex {13}Procedure (long pLong), string, virtual')
+WHEN  (202) ('StringToHex {11}Procedure (*string binData,Long pLen=0,Long pCase=0), *string, virtual')
+WHEN  (203) ('StringToHex {11}Procedure (string binData,Long pLen=0,Long pCase=0), *string, virtual')
+WHEN  (204) ('HexToString {11}Procedure (string hexData), *string, virtual')
+WHEN  (205) ('ToHex {17}Procedure (Long pCase=0,Long pSpacer=0), virtual     ')
+WHEN  (206) ('FromHex {15}Procedure (), virtual')
+WHEN  (207) ('WrapText {14}Procedure(long wrapAt=80, bool keepExistingBreaks=true, bool pleft=false), virtual')
+WHEN  (208) ('StrCpy {16}Procedure(*string pIn, *string pOut, bool pClip=st:Clip), long, proc, virtual')
+WHEN  (209) ('ToBytes {15}Procedure (*byte pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (210) ('ToBytes {15}Procedure (*short pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (211) ('ToBytes {15}Procedure (*ushort pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (212) ('ToBytes {15}Procedure (*long pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (213) ('ToBytes {15}Procedure (*ulong pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (214) ('ToBytes {15}Procedure (*sreal pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (215) ('ToBytes {15}Procedure (*real pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (216) ('ToBytes {15}Procedure (*decimal pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (217) ('ToBytes {15}Procedure (*cstring pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (218) ('ToBytes {15}Procedure (*pstring pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (219) ('ToBytes {15}Procedure (*string pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (220) ('FromBytes {13}Procedure (*string pSrc, *byte pDest, long pOffset=1), virtual')
+WHEN  (221) ('FromBytes {13}Procedure (*string pSrc, *short pDest, long pOffset=1), virtual')
+WHEN  (222) ('FromBytes {13}Procedure (*string pSrc, *ushort pDest, long pOffset=1), virtual')
+WHEN  (223) ('FromBytes {13}Procedure (*string pSrc, *long pDest, long pOffset=1), virtual')
+WHEN  (224) ('FromBytes {13}Procedure (*string pSrc, *ulong pDest, long pOffset=1), virtual')
+WHEN  (225) ('FromBytes {13}Procedure (*string pSrc, *sreal pDest, long pOffset=1), virtual')
+WHEN  (226) ('FromBytes {13}Procedure (*string pSrc, *real pDest, long pOffset=1), virtual')
+WHEN  (227) ('FromBytes {13}Procedure (*string pSrc, *decimal pDest, long pOffset=1), virtual')
+WHEN  (228) ('FromBytes {13}Procedure (*string pSrc, *cstring pDest, long pOffset=1), virtual')
+WHEN  (229) ('FromBytes {13}Procedure (*string pSrc, *string pDest, long pOffset=1), virtual')
+WHEN  (230) ('FromBytes {13}Procedure (*string pSrc, *pstring pDest, long pOffset=1), virtual')
+WHEN  (231) ('SetBytes {14}Procedure (*byte pSrc), virtual')
+WHEN  (232) ('SetBytes {14}Procedure (*short pSrc), virtual')
+WHEN  (233) ('SetBytes {14}Procedure (*ushort pSrc), virtual')
+WHEN  (234) ('SetBytes {14}Procedure (*long pSrc), virtual')
+WHEN  (235) ('SetBytes {14}Procedure (*ulong pSrc), virtual')
+WHEN  (236) ('SetBytes {14}Procedure (*sreal pSrc), virtual')
+WHEN  (237) ('SetBytes {14}Procedure (*real pSrc), virtual')
+WHEN  (238) ('SetBytes {14}Procedure (*decimal pSrc), virtual')
+WHEN  (239) ('SetBytes {14}Procedure (*cstring pSrc), virtual')
+WHEN  (240) ('SetBytes {14}Procedure (*string pSrc), virtual')
+WHEN  (241) ('SetBytes {14}Procedure (*pstring pSrc), virtual')
+WHEN  (242) ('GetBytes {14}Procedure (*byte pVal, long pOffset=1), virtual')
+WHEN  (243) ('GetBytes {14}Procedure (*short pVal, long pOffset=1), virtual')
+WHEN  (244) ('GetBytes {14}Procedure (*ushort pVal, long pOffset=1), virtual')
+WHEN  (245) ('GetBytes {14}Procedure (*long pVal, long pOffset=1), virtual')
+WHEN  (246) ('GetBytes {14}Procedure (*ulong pVal, long pOffset=1), virtual')
+WHEN  (247) ('GetBytes {14}Procedure (*sreal pVal, long pOffset=1), virtual')
+WHEN  (248) ('GetBytes {14}Procedure (*real pVal, long pOffset=1), virtual')
+WHEN  (249) ('GetBytes {14}Procedure (*decimal pVal, long pOffset=1), virtual')
+WHEN  (250) ('GetBytes {14}Procedure (*cstring pVal, long pOffset=1), virtual')
+WHEN  (251) ('GetBytes {14}Procedure (*string pVal, long pOffset=1), virtual')
+WHEN  (252) ('GetBytes {14}Procedure (*pstring pVal, long pOffset=1), virtual')
+WHEN  (253) ('SetBytes {14}Procedure (*? pVal, string pType, long pOffset=1), bool, proc, virtual')
+WHEN  (254) ('GetBytes {14}Procedure (*? pVal, string pType, long pOffset=1), bool, proc, virtual')
+WHEN  (255) ('FindWord {14}Procedure(long pWordNumber,long startPos = -1, long textType=ST:TEXT,*Long pStart, *Long pEnd,<<String pCharlist>,Long pSmartWords=true), string, virtual')
+WHEN  (256) ('GetWord {15}Procedure (long pWordNumber,long startPos = -1, long textType=ST:TEXT, <<String pCharlist>,Long pSmartWords=true), string, virtual')
+WHEN  (257) ('WordStart {13}Procedure (long pStartPos=1, long textType=ST:TEXT,Long pDir=st:Forwards,<<String pCharlist>), long, virtual')
+WHEN  (258) ('WordEnd {15}Procedure (long pStartPos=1, long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), long, virtual')
+WHEN  (259) ('CountWords {12}Procedure (long startPos = 1, long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), long, virtual')
+WHEN  (260) ('RemoveAttributes      Procedure (String pTag,Long pCount=0), virtual')
+WHEN  (261) ('RemoveXMLPrefixes     Procedure(), virtual')
+WHEN  (262) ('HtmlEntityToDec       Procedure(),virtual')
+WHEN  (263) ('DecEntityToChar       Procedure(),Long,Proc,Virtual')
+WHEN  (264) ('CharToDecEntity       Procedure(long pFrom=128, long pTo=255),Virtual')
+WHEN  (265) ('Remove {16}Procedure(string pLeft,<<string pRight>,long pNoCase=0,long pContentsOnly=0, long pCount=0), Long,Proc,virtual')
+WHEN  (266) ('RemoveFromPosition    Procedure(long pPosition, long pLength), Long,Proc,virtual')
+WHEN  (267) ('Top {19}Procedure(long pLength), Long,Proc,virtual')
+WHEN  (268) ('Tail {18}Procedure(long pLength), Long,Proc,virtual')
+WHEN  (269) ('Clip {18}Procedure (), virtual')
+WHEN  (270) ('Trim {18}Procedure (<<String pAlphabet>), virtual')
+WHEN  (271) ('Reverse {15}Procedure (String pString),String,Proc Virtual')
+WHEN  (272) ('Reverse {15}Procedure (),Virtual')
+WHEN  (273) ('Left {18}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>),String, virtual')
+WHEN  (274) ('SetLeft {15}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>), virtual')
+WHEN  (275) ('Right {17}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>),String, virtual')
+WHEN  (276) ('SetRight {14}Procedure(Long pLength=0,Long pwhat=st:spaces,<<String pPad>), virtual')
+WHEN  (277) ('All {19}Procedure(Long pLength=255),String, virtual')
+WHEN  (278) ('SetAll {16}Procedure(Long pLength=255), virtual')
+WHEN  (279) ('Squeeze {15}Procedure (long textType=ST:TEXT,<<String pCharlist>,Long pSmartWords=true), virtual')
+WHEN  (280) ('ContainsADigit        Procedure (), bool, virtual')
+WHEN  (281) ('IsAllDigits {11}Procedure (), bool, virtual')
+WHEN  (282) ('ContainsA {13}Procedure (String pAlphabet, <<String pTestString>,Long pClip=st:Clip), bool, virtual')
+WHEN  (283) ('ContainsChar {10}Procedure (String pChar), bool, virtual')
+WHEN  (284) ('ContainsChar {10}Procedure (String pChar, *string pTestString), bool, virtual')
+WHEN  (285) ('ContainsChar {10}Procedure (String pChar, string pTestString), bool, virtual')
+WHEN  (286) ('IsAscii {15}Procedure (), bool, virtual')
+WHEN  (287) ('IsAll {17}Procedure (String pAlphabet, <<String pTestString>,Long pClip=st:Clip), bool, virtual')
+WHEN  (288) ('RemoveChars {11}Procedure (String pAlphabet), long, proc, virtual')
+WHEN  (289) ('KeepChars {13}Procedure (String pAlphabet, String pReplacementChar), long, proc, virtual')
+WHEN  (290) ('KeepChars {13}Procedure (String pAlphabet), long, proc, virtual')
+WHEN  (291) ('MatchBrackets {9}Procedure (String pLeftBracket, String pRightBracket, Long pStart=1),Long,virtual')
+WHEN  (292) ('_SwitchEndian {9}Procedure (), virtual')
+WHEN  (293) ('BigEndian {13}Procedure (), virtual')
+WHEN  (294) ('LittleEndian {10}Procedure (), virtual')
+WHEN  (295) ('SwitchEndian {10}Procedure (ulong x), long, virtual')
+WHEN  (296) ('BigEndian {13}Procedure (ulong x), long, virtual')
+WHEN  (297) ('LittleEndian {10}Procedure (ulong x), long, virtual')
+WHEN  (298) ('ReverseByteOrder      Procedure (), virtual')
+WHEN  (299) ('Str {19}Procedure (), string, virtual')
+WHEN  (300) ('Str {19}Procedure (string newValue),  string, proc, virtual')
+WHEN  (301) ('Str {19}Procedure (*string newValue), string, proc, virtual')
+WHEN  (302) ('SetSlice {14}Procedure (long pStart=1, long pEnd=0, string newValue), virtual')
+WHEN  (303) ('Insert {16}Procedure (long pStart, stringTheory insertValue), virtual')
+WHEN  (304) ('Insert {16}Procedure (long pStart, string insertValue), virtual')
+WHEN  (305) ('Insert {16}Procedure (long pStart, *string insertValue), virtual')
+WHEN  (306) ('Quote {17}Procedure (<<string pQuotestart>,<<string pQuoteEnd>), virtual')
+WHEN  (307) ('UnQuote {15}Procedure (<<string pQuotestart>,<<string pQuoteEnd>), virtual')
+WHEN  (308) ('FindChar {14}Procedure (string pSearchValue), long, virtual')
+WHEN  (309) ('FindChar {14}Procedure (string pSearchValue, long pStart), long, virtual')
+WHEN  (310) ('FindChar {14}Procedure (string pSearchValue, long pStart=1, long pEnd), long, virtual')
+WHEN  (311) ('FindChar {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, String p_Text), long, virtual')
+WHEN  (312) ('_memChrs {14}Procedure (*string pSearchValue, long pAddr, long pMaxStartAddr), long, virtual')
+WHEN  (313) ('_memiChrs {13}Procedure (*string pSearchValue, long pAddr, long pMaxStartAddr), long, virtual')
+WHEN  (314) ('_memiChr {14}Procedure (long buf, long c, unsigned count), long, virtual')
+WHEN  (315) ('FindEndOfString       Procedure (Long pEncoding, Long pStringAddress, Long pMaxLength=255),long ,virtual')
+WHEN  (316) ('FindCharsAddr {9}Procedure (*string pSearchValue, long pAddr, long pLen), long, virtual')
+WHEN  (317) ('FindChars {13}Procedure (*string pSearchValue),long, virtual')
+WHEN  (318) ('FindChars {13}Procedure (string pSearchValue), long, virtual')
+WHEN  (319) ('FindChars {13}Procedure (*string pSearchValue, long pStart), long, virtual')
+WHEN  (320) ('FindChars {13}Procedure (string pSearchValue,  long pStart), long, virtual')
+WHEN  (321) ('FindChars {13}Procedure (*string pSearchValue, long pStart=1, long pEnd), long, virtual')
+WHEN  (322) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd), long, virtual')
+WHEN  (323) ('FindChars {13}Procedure (*string pSearchValue, long pStart=1, long pEnd=0, *String p_Text), long, virtual')
+WHEN  (324) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd=0, *String p_Text), long, virtual')
+WHEN  (325) ('FindChars {13}Procedure (string pSearchValue,  long pStart=1, long pEnd=0, String p_Text), long, virtual')
+WHEN  (326) ('FindNth {15}Procedure (string pSearchValue, long pOccurrence, long pStart=1, long pEnd=0, long pNocase=0), long, virtual')
+WHEN  (327) ('ReplaceNth {12}Procedure (string pOldValue, string pNewValue, long pOccurrence, long pStart=1, long pEnd=0, long pNocase=0) , long, virtual')
+WHEN  (328) ('FindLast {14}Procedure (string pSearchValue, long pStart=1, long pEnd=0, long pNocase=0), long, virtual')
+WHEN  (329) ('ReplaceLast {11}Procedure (string pOldValue, string pNewValue, long pStart=1, long pEnd=0, long pNocase=0) , long, virtual')
+WHEN  (330) ('ColorToHex {12}Procedure (string pColor, bool pAddHash=false), string, virtual')
+WHEN  (331) ('ColorFromHex {10}Procedure (String pColor),Long, virtual')
+WHEN  (332) ('ColorToLong {11}Procedure (String pColor),Long, virtual')
+WHEN  (333) ('_ColorToHex {11}Procedure (long pAddHash=false), virtual')
+WHEN  (334) ('_ColorFromHex {9}Procedure (string pColor),Long, virtual')
+WHEN  (335) ('_ColorFromCSL {9}Procedure (string pColor),Long, virtual')
+WHEN  (336) ('UrlEncode {13}Procedure (String p_Text, long flags, String pDelimiter,String pSpace,String pAlphabet), string, virtual')
+WHEN  (337) ('UrlEncode {13}Procedure (long flags =0,<<String pDelimiter>,<<String pSpace>,<<String pAlphabet>), virtual')
+WHEN  (338) ('UrlDecode {13}Procedure (<<String pDelimiter>,<<String pSpace>), virtual')
+WHEN  (339) ('CleanFileName {9}Procedure (<<string pFileName>, <<string pReplaceChar>), string, proc, virtual')
+WHEN  (340) ('PeekRam {15}Procedure(Long pFormat=st:Decimal),Virtual')
+WHEN  (341) ('PeekRam {15}Procedure(uLong pAdr,Long pLen, Long pFormat=st:Decimal),Virtual')
+WHEN  (342) ('PeekRam {15}Procedure(stringTheory pResult,uLong pAdr,Long pLen, Long pFormat=st:Decimal),Virtual')
+WHEN  (343) ('loadlibs {14}Procedure(),Long,Proc,Virtual')
+WHEN  (344) ('LoadNormalize {9}Procedure(),Long,Proc,Virtual')
+WHEN  (345) ('gzip {18}Procedure(Long pLevel=5),Long,Virtual,Proc')
+WHEN  (346) ('gunzip {16}Procedure(),Long,Virtual,Proc')
+WHEN  (347) ('MergeXml {14}Procedure(String pNew, Long pWhere),Virtual')
+WHEN  (348) ('LineEndings {11}Procedure(Long pEndings=st:windows,Long pFrom=0), Virtual')
+WHEN  (349) ('FormatTime {12}PROCEDURE (String pValue, String pFormat),String,Virtual')
+WHEN  (350) ('FormatTime {12}PROCEDURE (String pFormat),Virtual')
+WHEN  (351) ('DeformatTime {10}PROCEDURE (String pValue),String, Virtual')
+WHEN  (352) ('DeformatTime {10}PROCEDURE (),Virtual')
+WHEN  (353) ('IsTime {16}PROCEDURE (String pValue),Long, Virtual')
+WHEN  (354) ('IsTime {16}PROCEDURE (),Long, Virtual')
+WHEN  (355) ('StartsWith {12}Procedure (String pStr,Long pCase=True,Long pClip=st:Clip),Long,Virtual')
+WHEN  (356) ('EndsWith {14}Procedure (String pStr,Long pCase=True,Long pClip=st:Clip),Long,Virtual')
+WHEN  (357) ('ConvertOemToAnsi      Procedure(),Virtual')
+WHEN  (358) ('ConvertAnsiToOem      Procedure(),Virtual')
+WHEN  (359) ('AsnDecode {13}Procedure (*Long pPos,*StringTheory rASNValue,<<*String rASNType>),Long,Virtual')
+WHEN  (360) ('AsnEncode {13}Procedure (String pType,<<String pValue>),Virtual')
+WHEN  (361) ('AsnEncodeNumber       Procedure (String pType,Long pValue),Virtual')
+WHEN  (362) ('FormatHTML {12}procedure (),Virtual')
+WHEN  (363) ('_IANANameToNumber     Procedure (String pIANAName),Long,Virtual')
+WHEN  (364) ('FormatValue {11}Procedure (String pPicture),String,Virtual')
+WHEN  (365) ('FormatValue {11}Procedure (String pValue,String pPicture),String,Virtual')
+WHEN  (366) ('DeformatValue {9}Procedure (String pPicture),String,Virtual')
+WHEN  (367) ('DeformatValue {9}Procedure (String pValue,String pPicture),String,Virtual')
+WHEN  (368) ('SetFormatValue        Procedure (String pPicture),Virtual')
+WHEN  (369) ('SetFormatValue        Procedure (String pValue,String pPicture),Virtual')
+WHEN  (370) ('SetDeformatValue      Procedure (String pPicture),Virtual')
+WHEN  (371) ('SetDeformatValue      Procedure (String pValue,String pPicture),Virtual')
 WHEN  (2)TIMES 38
 WHEN  (1) ('CreatePicture {14}Procedure(<<String pType>,Long pFlag=0),String,Virtual')
 WHEN  (2) ('CreateDatePicture {10}Procedure(Long pFlag=0),String,Proc,Virtual')
@@ -990,7 +1000,7 @@ WHEN  (12) ('DeformatUnixTimeStamp      PROCEDURE (String pValue,<<String pPictu
 %dAdditionalINCFiles MULTI LONG  ()
 %dAdditionalINCFile DEPEND %dAdditionalINCFiles DEFAULT TIMES 0
 
-%dClassVersion DEFAULT  ('80950')
+%dClassVersion DEFAULT  ('80951')
 [ADDITION]
 NAME UtilitiesTemplate IncludeUtilities
 [INSTANCE]
@@ -1729,7 +1739,7 @@ NAME BrowseCapeSoftAccessories
 [COMMON]
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2022/08/16' '15:09:13'
+MODIFIED '2022/08/17' ' 0:17:04'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('bdc36483-d7d0-4d2a-945d-1bc63219fa9f')
@@ -1748,8 +1758,7 @@ CapeSoftAccessories
 [KEY]
 CSA:InstallerNameKey
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?Change:3') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
 WHEN  ('?Delete:3') ('No Special Action')
@@ -1764,8 +1773,7 @@ WHEN  ('?View:2') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?Change:3') ('25000')
 WHEN  ('?Close') ('25000')
 WHEN  ('?Delete:3') ('25000')
@@ -1774,8 +1782,7 @@ WHEN  ('?View:2') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?Change:3') ('None')
 WHEN  ('?Close') ('None')
 WHEN  ('?Delete:3') ('None')
@@ -1998,41 +2005,33 @@ WHEN  (1) ('BrowseBox(ABC)')
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Close') ('Default')
 WHEN  ('?CurrentTab') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Close') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Close') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
@@ -2047,8 +2046,7 @@ WHEN  ('?Close') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -2067,16 +2065,14 @@ WHEN  ('?Close') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -2089,46 +2085,39 @@ WHEN  ('?Close')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Close') ('AIBtn8')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?Browse:1')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Close') ('?Browse:1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -2137,32 +2126,28 @@ WHEN  ('?Close') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Close') (0)
 
 [EMBED]
@@ -2428,41 +2413,31 @@ WHEN  ('Step0')TIMES 0
 %HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
 
 %UseSameColorForAll LONG  (0)
-%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
@@ -2472,85 +2447,61 @@ WHEN  ('?Close')TIMES 0
 
 %ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
 
-%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
@@ -2594,25 +2545,19 @@ WHEN  ('?Close')TIMES 0
 %ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
 
 %UseSameStyleForAll LONG  (0)
-%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Local List')
 WHEN  ('InBatch') ('Local List')
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('')
 WHEN  ('InBatch') ('')
@@ -2620,17 +2565,13 @@ WHEN  ('?Close')TIMES 0
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Local List')
 WHEN  ('InBatch') ('Local List')
 WHEN  ('?Close')TIMES 0
 
-%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('')
 WHEN  ('InBatch') ('')
@@ -2638,17 +2579,13 @@ WHEN  ('?Close')TIMES 0
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Local List')
 WHEN  ('InBatch') ('Local List')
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('')
 WHEN  ('InBatch') ('')
@@ -2660,14 +2597,10 @@ WHEN  ('?Close')TIMES 0
 
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
@@ -2712,25 +2645,19 @@ WHEN  ('?Close')TIMES 0
 %EnableSortHeader LONG  (0)
 %ControlFieldSortHeaderSave LONG  (0)
 %ControlFieldSortHeaderMulti LONG  (1)
-%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
@@ -2740,14 +2667,10 @@ WHEN  ('?Close')TIMES 0
 
 %ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
 
-%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
 WHEN  ('?Close')TIMES 0
 
-%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %SortHeaderColumnsUseColor LONG  (0)
@@ -2927,17 +2850,13 @@ WHEN  ('EIP_InBatch')TIMES 0
 
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
-%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (1)
 WHEN  ('InBatch') (1)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Entry')
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Entry')
 WHEN  ('InBatch') ('Entry')
@@ -2945,49 +2864,37 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Default')
 WHEN  ('InBatch') ('Default')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Fixed')
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Fixed')
 WHEN  ('InBatch') ('Fixed')
@@ -2997,9 +2904,7 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
-%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
 WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
@@ -3008,9 +2913,7 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
-%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
@@ -3020,25 +2923,19 @@ WHEN  ('?Close')TIMES 0
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (1)
 WHEN  ('InBatch') (1)
 WHEN  ('?Close')TIMES 0
 
-%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Open')
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Open')
 WHEN  ('InBatch') ('Open')
 WHEN  ('?Close')TIMES 0
 
-%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
@@ -3046,17 +2943,13 @@ WHEN  ('?Close')TIMES 0
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('All Files')
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('All Files')
 WHEN  ('InBatch') ('All Files')
 WHEN  ('?Close')TIMES 0
 
-%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('*.*')
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('*.*')
 WHEN  ('InBatch') ('*.*')
@@ -3068,33 +2961,25 @@ WHEN  ('?Close')TIMES 0
 
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
-%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (-1)
 WHEN  ('InBatch') (-1)
@@ -3108,65 +2993,49 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Default')
 WHEN  ('InBatch') ('Default')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
@@ -3180,9 +3049,7 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Default')
 WHEN  ('InBatch') ('Default')
@@ -3196,49 +3063,37 @@ WHEN  ('?Close')TIMES 0
 
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Default')
 WHEN  ('InBatch') ('Default')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('0')
 WHEN  ('InBatch') ('0')
 WHEN  ('?Close')TIMES 0
 
-%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') (0)
 WHEN  ('InBatch') (0)
 WHEN  ('?Close')TIMES 0
 
-%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
-WHEN  ('')TIMES 1
-WHEN  ('') ('Related Field')
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('CSA:InstallerName') ('Related Field')
 WHEN  ('InBatch') ('Related Field')
@@ -3403,29 +3258,29 @@ WHEN  ('Default')TIMES 0
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [WINDOW]
-QuickWindow WINDOW('Browse the CapeSoftAccessories file'),AT(,,248,198),FONT('Microsoft ' & |
+QuickWindow WINDOW('Browse the CapeSoftAccessories file'),AT(,,278,198),FONT('Microsoft ' & |
           'Sans Serif',8,,FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('BrowseCape' & |
           'SoftAccessories'),SYSTEM
-          LIST,AT(8,30,232,124),USE(?Browse:1),HVSCROLL,FORMAT('180L(2)|M~Installer Nam' & |
+          LIST,AT(9,23,258,148),USE(?Browse:1),HVSCROLL,FORMAT('180L(2)|M~Installer Nam' & |
             'e~@s64@4L(2)|M~In Batch?~@s1@'),FROM(Queue:Browse:1),IMM,MSG('Browsing the' & |
             ' CapeSoftAccessories file'),#FIELDS(CSA:InstallerName,InBatch),#ORIG(?List),#SEQ(1), |
             #ORDINAL(1)
-          BUTTON('&View'),AT(32,158,49,14),USE(?View:2),LEFT,ICON('WAVIEW.ICO'),FLAT,MSG('View Record'), |
+          BUTTON('&View'),AT(8,180,49,14),USE(?View:2),LEFT,ICON('WAVIEW.ICO'),FLAT,MSG('View Record'), |
             TIP('View Record'),#ORIG(?View),#SEQ(2),#ORDINAL(2)
-          BUTTON('&Insert'),AT(85,158,49,14),USE(?Insert:3),LEFT,ICON('WAINSERT.ICO'),FLAT, |
+          BUTTON('&Insert'),AT(61,180,49,14),USE(?Insert:3),LEFT,ICON('WAINSERT.ICO'),FLAT, |
             MSG('Insert a Record'),TIP('Insert a Record'),#LINK(?Change:3),#ORIG(?Insert), |
             #SEQ(3),#ORDINAL(3)
-          BUTTON('&Change'),AT(138,158,49,14),USE(?Change:3),LEFT,ICON('WACHANGE.ICO'),DEFAULT, |
+          BUTTON('&Change'),AT(114,180,49,14),USE(?Change:3),LEFT,ICON('WACHANGE.ICO'),DEFAULT, |
             FLAT,MSG('Change the Record'),TIP('Change the Record'),#LINK(?Delete:3),#ORIG(?Change), |
             #SEQ(3),#ORDINAL(4)
-          BUTTON('&Delete'),AT(191,158,49,14),USE(?Delete:3),LEFT,ICON('WADELETE.ICO'),FLAT, |
+          BUTTON('&Delete'),AT(167,180,49,14),USE(?Delete:3),LEFT,ICON('WADELETE.ICO'),FLAT, |
             MSG('Delete the Record'),TIP('Delete the Record'),#LINK(?Insert:3),#ORIG(?Delete), |
             #SEQ(3),#ORDINAL(5)
-          SHEET,AT(4,4,240,172),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(6)
+          SHEET,AT(4,4,269,172),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(6)
             TAB('&1) By Installer Name'),USE(?Tab:2),#ORDINAL(7)
             END
           END
-          BUTTON('&Close'),AT(195,180,49,14),USE(?Close),LEFT,ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'), |
+          BUTTON('&Close'),AT(220,180,49,14),USE(?Close),LEFT,ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'), |
             TIP('Close Window'),#ORIG(?Close),#SEQ(4),#ORDINAL(8)
         END
 
@@ -3434,7 +3289,7 @@ NAME UpdateCapeSoftAccessories
 [COMMON]
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2022/08/16' '15:49:22'
+MODIFIED '2022/08/17' ' 0:15:19'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('8e031fd3-1ec1-4d3a-b4d7-58d85e456437')
@@ -3446,8 +3301,7 @@ CapeSoftAccessories
 [INSTANCE]
 2
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CSA:InstallerName') ('No Special Action')
 WHEN  ('?CSA:InstallerPassword') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
@@ -3461,8 +3315,7 @@ WHEN  ('?OK') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CSA:InstallerName') ('25000')
 WHEN  ('?CSA:InstallerPassword') ('25000')
 WHEN  ('?Cancel') ('25000')
@@ -3470,8 +3323,7 @@ WHEN  ('?OK') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CSA:InstallerName') ('None')
 WHEN  ('?CSA:InstallerPassword') ('None')
 WHEN  ('?Cancel') ('None')
@@ -3702,54 +3554,46 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName') ('Default')
 WHEN  ('?CSA:InstallerPassword') ('Default')
 WHEN  ('?Cancel') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName') ('Off')
 WHEN  ('?CSA:InstallerPassword') ('Off')
 WHEN  ('?Cancel') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName') ('')
 WHEN  ('?CSA:InstallerPassword') ('')
 WHEN  ('?Cancel') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 4
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (-1)
 WHEN  ('?CSA:InstallerPassword') (-1)
 WHEN  ('?Cancel') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 4
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (-1)
 WHEN  ('?CSA:InstallerPassword') (-1)
 WHEN  ('?Cancel') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
@@ -3770,8 +3614,7 @@ WHEN  ('?CSA:InstallerPassword') ('')
 WHEN  ('?CSA:InstallerName') ('')
 WHEN  ('?CSA:InstallerPassword') ('')
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 4
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (1)
 WHEN  ('?CSA:InstallerPassword') (1)
 WHEN  ('?Cancel') (1)
@@ -3792,8 +3635,7 @@ WHEN  ('?Cancel') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
@@ -3802,8 +3644,7 @@ WHEN  ('?Cancel')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
@@ -3818,8 +3659,7 @@ WHEN  ('?Cancel')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
@@ -3828,8 +3668,7 @@ WHEN  ('?Cancel')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
@@ -3838,8 +3677,7 @@ WHEN  ('?Cancel')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
@@ -3848,28 +3686,24 @@ WHEN  ('?Cancel')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName')TIMES 0
 WHEN  ('?CSA:InstallerPassword')TIMES 0
 WHEN  ('?Cancel')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName') ('AIBtn2')
 WHEN  ('?CSA:InstallerPassword') ('AIBtn4')
 WHEN  ('?Cancel') ('AIBtn7')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 4
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (1)
 WHEN  ('?CSA:InstallerPassword') (1)
 WHEN  ('?Cancel') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('?CSA:InstallerName:Prompt')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CSA:InstallerName') ('?CSA:InstallerName:Prompt')
 WHEN  ('?CSA:InstallerPassword') ('?CSA:InstallerName:Prompt')
 WHEN  ('?Cancel') ('?CSA:InstallerName:Prompt')
@@ -3880,8 +3714,7 @@ WHEN  ('?Cancel') ('?CSA:InstallerName:Prompt')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
@@ -3890,8 +3723,7 @@ WHEN  ('?Cancel') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
@@ -3900,8 +3732,7 @@ WHEN  ('?Cancel') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
@@ -3910,8 +3741,7 @@ WHEN  ('?Cancel') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 4
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CSA:InstallerName') (0)
 WHEN  ('?CSA:InstallerPassword') (0)
 WHEN  ('?Cancel') (0)
@@ -4008,8 +3838,7 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 8
-WHEN  ('') ('None')
+%ViewAction DEPEND %Control DEFAULT TIMES 7
 WHEN  ('?CSA:IncludeInGeneratedBatchFile') ('None')
 WHEN  ('?CSA:InstallerName') ('ReadOnly')
 WHEN  ('?CSA:InstallerName:Prompt') ('None')
@@ -4168,12 +3997,12 @@ QuickWindow WINDOW('Form CapeSoftAccessories'),AT(,,356,82),FONT('Microsoft Sans
           ENTRY(@s64),AT(88,34,260,10),USE(CSA:InstallerPassword),LEFT(2),PASSWORD,#LINK(?CSA:InstallerPassword:Prompt), |
             #ORIG(CSA:InstallerPassword),#ORDINAL(4)
           CHECK('Include In Generated Batch File'),AT(88,48,136,10),USE(CSA:IncludeInGeneratedBatchFile), |
-            #ORIG(CSA:IncludeInGeneratedBatchFile),#ORDINAL(5)
-          BUTTON('&OK'),AT(247,64,49,14),USE(?OK),LEFT,ICON('WAOK.ICO'),DEFAULT,FLAT,MSG('Accept dat' & |
-            'a and close the window'),TIP('Accept data and close the window'),#ORIG(?OK),#SEQ(2), |
-            #ORDINAL(6)
-          BUTTON('&Cancel'),AT(299,64,49,14),USE(?Cancel),LEFT,ICON('WACANCEL.ICO'),FLAT,MSG('Cancel operation'), |
-            TIP('Cancel operation'),#ORIG(?Cancel),#SEQ(3),#ORDINAL(7)
+            FONT(,,,FONT:bold),#ORIG(CSA:IncludeInGeneratedBatchFile),#ORDINAL(5)
+          BUTTON('&OK'),AT(247,64,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
+            DEFAULT,FLAT,MSG('Accept data and close the window'),TIP('Accept data and c' & |
+            'lose the window'),#ORIG(?OK),#SEQ(2),#ORDINAL(6)
+          BUTTON('&Cancel'),AT(299,64,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
+            FLAT,MSG('Cancel operation'),TIP('Cancel operation'),#ORIG(?Cancel),#SEQ(3),#ORDINAL(7)
         END
 
 [PROCEDURE]
@@ -4667,7 +4496,7 @@ BatchPath       CSTRING(256)
 NAME SetPaths
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/16' '17:58:31'
+MODIFIED '2022/08/17' ' 0:10:25'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('&SafeReader Path:'),USE(?SafeReaderPath:Prompt)
@@ -4882,52 +4711,43 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath') ('Default')
 WHEN  ('?LookupSafeReaderPath') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath') ('Off')
 WHEN  ('?LookupSafeReaderPath') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath') ('')
 WHEN  ('?LookupSafeReaderPath') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (-1)
 WHEN  ('?LookupSafeReaderPath') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (-1)
 WHEN  ('?LookupSafeReaderPath') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CancelButton') ('No Special Action')
 WHEN  ('?LookupInstallerPath') ('No Special Action')
 WHEN  ('?LookupSafeReaderPath') ('No Special Action')
@@ -4949,8 +4769,7 @@ WHEN  ('?LookupSafeReaderPath') ()
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CancelButton') ('25000')
 WHEN  ('?LookupInstallerPath') ('25000')
 WHEN  ('?LookupSafeReaderPath') ('25000')
@@ -4968,8 +4787,7 @@ WHEN  ('?LookupSafeReaderPath') ()
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 5
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CancelButton') ('None')
 WHEN  ('?LookupInstallerPath') ('None')
 WHEN  ('?LookupSafeReaderPath') ('None')
@@ -4999,8 +4817,7 @@ WHEN  ('?LookupSafeReaderPath') ()
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 5
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 4
 WHEN  ('?InstallerPath') (1)
 WHEN  ('?LookupInstallerPath') (1)
 WHEN  ('?LookupSafeReaderPath') (1)
@@ -5024,8 +4841,7 @@ WHEN  ('?SafeReaderPath') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
@@ -5033,8 +4849,7 @@ WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
@@ -5048,8 +4863,7 @@ WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
@@ -5057,8 +4871,7 @@ WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
@@ -5066,8 +4879,7 @@ WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
@@ -5075,25 +4887,21 @@ WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath')TIMES 0
 WHEN  ('?LookupSafeReaderPath')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath') ('AIBtn8')
 WHEN  ('?LookupSafeReaderPath') ('AIBtn7')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 3
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (1)
 WHEN  ('?LookupSafeReaderPath') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('?OkButton')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupInstallerPath') ('?OkButton')
 WHEN  ('?LookupSafeReaderPath') ('?OkButton')
 
@@ -5103,8 +4911,7 @@ WHEN  ('?LookupSafeReaderPath') ('?OkButton')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
@@ -5112,8 +4919,7 @@ WHEN  ('?LookupSafeReaderPath') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
@@ -5121,8 +4927,7 @@ WHEN  ('?LookupSafeReaderPath') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
@@ -5130,8 +4935,7 @@ WHEN  ('?LookupSafeReaderPath') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupInstallerPath') (0)
 WHEN  ('?LookupSafeReaderPath') (0)
 
@@ -5415,17 +5219,18 @@ WHEN  ('Default')TIMES 0
 [WINDOW]
 Window  WINDOW('Set Paths'),AT(,,395,78),FONT('Segoe UI',9),DOUBLE,ICON('CoolBox.ico'),GRAY, |
           MDI,SYSTEM
-          BUTTON('&OK'),AT(287,53,47,14),USE(?OkButton),LEFT,ICON('WAOk.ico'),DEFAULT,#ORDINAL(1)
-          BUTTON('&Cancel'),AT(340,53,47,14),USE(?CancelButton),LEFT,ICON('WACancel.ico'), |
+          BUTTON('&OK'),AT(287,53,47,14),USE(?OkButton),FONT(,,,FONT:bold),LEFT,ICON('WAOk.ico'), |
+            DEFAULT,#ORDINAL(1)
+          BUTTON('&Cancel'),AT(340,53,47,14),USE(?CancelButton),FONT(,,,FONT:bold),LEFT,ICON('WACancel.ico'), |
             STD(STD:Close),#ORDINAL(2)
           PROMPT('&SafeReader Path:'),AT(13,12),USE(?SafeReaderPath:Prompt),RIGHT,#ORDINAL(3)
           ENTRY(@s255),AT(68,12,265,10),USE(SafeReaderPath),LEFT,#ORDINAL(4)
           PROMPT('&Installer Path:'),AT(13,34,51),USE(?InstallerPath:Prompt),RIGHT,#ORDINAL(5)
           ENTRY(@s255),AT(68,34,265,10),USE(InstallerPath),LEFT,#ORDINAL(6)
-          BUTTON('Browse'),AT(340,10,47,14),USE(?LookupSafeReaderPath),#ORIG(?LookupFile), |
-            #SEQ(1),#ORDINAL(7)
-          BUTTON('Browse'),AT(340,31,47,14),USE(?LookupInstallerPath),#ORIG(?LookupFile),#SEQ(2), |
-            #ORDINAL(8)
+          BUTTON('Browse'),AT(340,10,47,14),USE(?LookupSafeReaderPath),FONT(,,,FONT:bold), |
+            #ORIG(?LookupFile),#SEQ(1),#ORDINAL(7)
+          BUTTON('Browse'),AT(340,31,47,14),USE(?LookupInstallerPath),FONT(,,,FONT:bold),#ORIG(?LookupFile), |
+            #SEQ(2),#ORDINAL(8)
         END
 
 [PROCEDURE]
@@ -5876,7 +5681,7 @@ Window  WINDOW('Utilities Class Test Suite'),AT(,,328,207),FONT('Segoe UI',9),DO
 NAME GarbageInGarbageOut
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/16' '23:56:52'
+MODIFIED '2022/08/17' ' 0:14:56'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('Garbage In:'),USE(?GarbageIn:Prompt)
@@ -6301,14 +6106,23 @@ Window  WINDOW('Garbage In, Garbage Out'),AT(,,276,64),FONT('Segoe UI',9),RESIZE
           ENTRY(@s64),AT(50,11,216,10),USE(GarbageIn),LEFT,#ORDINAL(2)
           PROMPT('Garbage Out:'),AT(5,43),USE(?GarbageOut:Prompt),RIGHT,#ORDINAL(3)
           ENTRY(@s64),AT(50,43,216,10),USE(GarbageOut),LEFT,#ORDINAL(4)
-          BUTTON('&Out with the garbage'),AT(97,25),USE(?GarbageButton),#ORDINAL(5)
+          BUTTON('&Out with the garbage'),AT(97,25),USE(?GarbageButton),FONT(,,,FONT:bold), |
+            #ORDINAL(5)
         END
 
 [PROCEDURE]
 NAME Noisemaker
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/16' '23:26:07'
+MODIFIED '2022/08/17' ' 0:14:45'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Noise To Make:'),USE(?NoiseToMake:Prompt)
+! ENTRY(@s255),USE(NoiseToMake),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s255),USE(NoiseToMake),LEFT(2)
+NoiseToMake              CSTRING(256)
+!!> GUID('6ecfc72e-f39d-4ca0-9d15-d9dfd9a23e95'),PROMPT('Noise To Make:'),HEADER('Noise To Make'),PICTURE(@s255),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -6321,7 +6135,7 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -6507,49 +6321,72 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 0
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 0
+%ButtonAction DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupNoise') ('No Special Action')
+WHEN  ('?MakeNoiseButton') ('No Special Action')
 
-%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+%ButtonRunName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('')
 
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('')
 
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?LookupNoise') ()
 
-%ButtonThread DEPEND %Control LONG TIMES 0
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 0
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupNoise') ('25000')
+WHEN  ('?MakeNoiseButton') ('25000')
 
-%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('')
 
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?LookupNoise') ()
 
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 0
+%ButtonRequest DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?LookupNoise') ('None')
+WHEN  ('?MakeNoiseButton') ('None')
 
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('')
 
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?LookupNoise') ()
 
 %PreLookupKey DEPEND %Control KEY TIMES 0
 
@@ -6567,7 +6404,9 @@ WHEN  ('WindowToolbar') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 0
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+WHEN  ('?LookupNoise') (1)
+WHEN  ('?NoiseToMake') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
 
@@ -6587,13 +6426,15 @@ WHEN  ('WindowToolbar') (0)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -6605,33 +6446,40 @@ WHEN  ('WindowToolbar') (0)
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('?LookupNoise')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 0
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('AIBtn3')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 0
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 0
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?LookupNoise') ('?NoiseToMake:Prompt')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -6639,29 +6487,172 @@ WHEN  ('WindowToolbar') (0)
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('?LookupNoise') (0)
+
+[EMBED]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?MakeNoiseButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4499
+PROPERTY:END
+!TODO: Add Sound(NoiseToMake) upon acquisition of WinEvent (5?)
+[END]
+[END]
+[END]
+[END]
+[ADDITION]
+NAME ABC DOSFileLookup
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('SelectFileClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+
+%DOSFileDialogHeader DEFAULT  ('Find a noise to make')
+%DOSFileField FIELD  (NoiseToMake)
+%DOSInitialDirectory DEFAULT  ('!getCSIDLfolder.GetDir(SV:CSIDL_WINDOWS) & ''\Media''')
+%DOSInitialFilename DEFAULT  ('')
+%ReturnToOriginalDir LONG  (1)
+%AllowLongFilenames LONG  (1)
+%DOSFileDialogType DEFAULT  ('Open')
+%AllowNoError LONG  (0)
+%DefaultOnCancel LONG  (0)
+%AllowMultiSelect LONG  (0)
+%ActionsToTake DEFAULT  ('')
+%AssignToImageControl LONG  (0)
+%ImageControl DEFAULT  ('')
+%ImageResize LONG  (1)
+%DOSVariableMask LONG  (0)
+%DOSMaskVariable DEFAULT  ('')
+%DOSMaskDesc DEFAULT  ('WAV Sound Files')
+%DOSMask DEFAULT  ('*.wav')
+%DOSMoreMasks MULTI LONG  ()
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
+
+%RedisplayWindow LONG  (1)
+%UpdateFields MULTI LONG  ()
+%UpdateFeq DEPEND %UpdateFields DEFAULT TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('FileLookup1')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 1
+WHEN  ('Default') ('ADOBlob')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 1
+WHEN  ('Default') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [WINDOW]
-Window  WINDOW('Noisemaker'),AT(,,185,92),FONT('Segoe UI',9),RESIZE,ICON(ICON:VCRplay),GRAY, |
+Window  WINDOW('Noisemaker'),AT(,,256,44),FONT('Segoe UI',9),DOUBLE,ICON('WIZDOWN.ICO'),GRAY, |
           MDI,SYSTEM
+          PROMPT('Noise To Make:'),AT(7,7),USE(?NoiseToMake:Prompt),#ORDINAL(1)
+          ENTRY(@s255),AT(56,7,196,10),USE(NoiseToMake),LEFT(2),#ORDINAL(2)
+          BUTTON('&Browse for noise'),AT(27,20,85),USE(?LookupNoise),FONT(,,,FONT:bold),LEFT, |
+            ICON(ICON:Pick),#ORIG(?LookupFile),#SEQ(1),#ORDINAL(3)
+          BUTTON('&MAKE NOISE!'),AT(145,20,85),USE(?MakeNoiseButton),FONT(,,,FONT:bold),LEFT, |
+            ICON('WIZDOWN.ICO'),#ORDINAL(4)
         END
 
 [END]
