@@ -4597,7 +4597,7 @@ Window  WINDOW,AT(,,180,128),FONT('Segoe UI',9),CENTERED,CENTER,COLOR(COLOR:Whit
 NAME GenCapeSoftBatch
 [COMMON]
 FROM ABC Source
-MODIFIED '2022/08/18' '13:40:47'
+MODIFIED '2022/08/18' '13:56:10'
 [FILES]
 [OTHERS]
 CapeSoftAccessories
@@ -4612,7 +4612,9 @@ PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
 CapeSoftBatchFile  StringTheory
-Util               Utilities
+Util               CLASS(Utilities)
+BatchError             PROCEDURE(STRING TraceMessage)
+                   END
 [END]
 EMBED %ProcessedCode
 [DEFINITION]
@@ -4653,7 +4655,7 @@ CsaRecs         LONG
         ELSE
             IF CSA:InstallerName AND CSA:InstallerPassword AND CSA:IncludeInGeneratedBatchFile
                 CapeSoftBatchFile.Append('"' & SafeReaderPath & '" "' & |
-                Util.TrailingBackslash(InstallerPath) & CSA:InstallerName & '".saf "'   & |
+                Util.TrailingBackslash(InstallerPath) & CSA:InstallerName & '.saf" "' & |
                 CSA:InstallerPassword & '" -R' & CRLF & '@pause' & CRLF)
             END
         END
@@ -4668,22 +4670,10 @@ CsaRecs         LONG
             BUTTON:OK, |
             MSGMODE:CANCOPY)
         ELSE
-            MESSAGE(BatchErrMsg, |
-            BatchErrTitle, |
-            ICON:Hand, |
-            BUTTON:OK, |
-            BUTTON:OK, |
-            MSGMODE:CANCOPY)
-            CapeSoftBatchFile.Trace('Save Failed')
+            Util.BatchError('Save Failed')
         END
     ELSE
-        MESSAGE(BatchErrMsg, |
-        BatchErrTitle, |
-        ICON:Hand, |
-        BUTTON:OK, |
-        BUTTON:OK, |
-        MSGMODE:CANCOPY)
-        CapeSoftBatchFile.Trace('Empty File')
+        Util.BatchError('Empty File')
     END
 [END]
 EMBED %LocalDataAfterClasses
@@ -4697,6 +4687,22 @@ InstallerPath   CSTRING(256)
 BatchPath       CSTRING(256)
 BatchErrMsg     STRING(1024)
 BatchErrTitle   STRING('Batch File Not Generated')
+[END]
+EMBED %LocalProcedures
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Util.BatchError     PROCEDURE(STRING TraceMessage)
+    CODE
+    MESSAGE(BatchErrMsg, |
+    BatchErrTitle, |
+    ICON:Hand, |
+    BUTTON:OK, |
+    BUTTON:OK, |
+    MSGMODE:CANCOPY)
+    CapeSoftBatchFile.Trace(TraceMessage)
 [END]
 [END]
 [PROCEDURE]
