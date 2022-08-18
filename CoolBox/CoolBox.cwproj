@@ -40,6 +40,9 @@
     <Compile Include="CoolBox_BC0.CLW">
       <Generated>true</Generated>
     </Compile>
+    <Compile Include="EFOCUS.CLW">
+      <Generated>true</Generated>
+    </Compile>
     <None Include="zlibwapi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Generated>True</Generated>
