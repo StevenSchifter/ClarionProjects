@@ -27,7 +27,10 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
+WHEN  ('FileManager:CapeSoftAccessories') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1005,8 +1008,8 @@ INSTANCE 3
 [PERSIST]
 %SaveCreateLocalMap DEFAULT  ('1')
 %GenerationCompleted DEPEND %Module DEFAULT TIMES 2
-WHEN  ('CoolBox.clw') ('')
-WHEN  ('CoolBox001.clw') ('')
+WHEN  ('CoolBox.clw') ('1')
+WHEN  ('CoolBox001.clw') ('1')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
@@ -1019,8 +1022,17 @@ WHEN  ('CoolBox001.clw') ('')
 #model clarion dll
 #pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
+#pragma define(StringTheoryLinkMode=>1) -- GENERATED
+#pragma define(StringTheoryDllMode=>0) -- GENERATED
+#pragma define(MD5=>0) -- GENERATED
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
+#compile "EFOCUS.CLW" -- GENERATED
+#compile "CoolBox_BC0.CLW" -- GENERATED
+#compile "COOLBOX_BC.CLW" -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
@@ -2002,8 +2014,7 @@ WHEN  (1) ('BrowseBox(ABC)')
 %ProcedureUserBindFields MULTI LONG  ()
 %ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
 
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 1
-WHEN  (1) (0)
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
 
 %ProcedureUserBindProcedures MULTI LONG  ()
 %ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
@@ -4598,7 +4609,7 @@ Window  WINDOW,AT(,,180,128),FONT('Segoe UI',9),CENTERED,CENTER,COLOR(COLOR:Whit
 NAME GenCapeSoftBatch
 [COMMON]
 FROM ABC Source
-MODIFIED '2022/08/18' '10:31:45'
+MODIFIED '2022/08/18' '12:35:27'
 [FILES]
 [OTHERS]
 CapeSoftAccessories
@@ -4639,7 +4650,15 @@ CsaRecs         LONG
     CODE
     INIMgr.Fetch('CapeSoftAccessoriesOptions','SafeReaderPath',SafeReaderPath)
     INIMgr.Fetch('CapeSoftAccessoriesOptions','InstallerPath',InstallerPath)
-    CapeSoftBatchFile.SetValue('@echo off' & CRLF)
+    BatchPath = Util.TrailingBackslash(InstallerPath) & 'InstallCapeSoftAccessories.bat'
+    BatchErrMsg = 'No batch file has been generated.|Please make sure there are' & |
+                  ' complete records in the CapeSoft Accessories table and that|' & |
+                  BatchPath & '|and/or any of its containing folders allow file creation and/or modification.'
+    REMOVE(BatchPath,REMOVE:FILESONLY)
+    IF Util.ShowErrorDetails(BatchErrMsg,BatchErrTitle) = BUTTON:ABORT
+        RETURN
+    END
+    CapeSoftBatchFile.Start()
     CsaRecs = RECORDS(CapeSoftAccessories)
     CLEAR(CapeSoftAccessories)
     SET(CSA:InstallerNameKey,CSA:InstallerNameKey)
@@ -4656,25 +4675,18 @@ CsaRecs         LONG
         END
     END
     IF CapeSoftBatchFile.Length()
+        CapeSoftBatchFile.Prepend('@echo off' & CRLF)
         CapeSoftBatchFile.Append('exit' & CRLF)
-        BatchPath = Util.TrailingBackslash(InstallerPath) & 'InstallCapeSoftAccessories.bat'
         CapeSoftBatchFile.SaveFile(BatchPath)
     END
     IF EXISTS(BatchPath)
         MESSAGE('A batch file has been generated at:|' & BatchPath, |
         'Batch File Generated', |
-        Icon:Asterisk,|
-        'OK',|
-        1,|
+        ICON:Asterisk,|
+        BUTTON:OK,|
         MSGMODE:CANCOPY)
     ELSE
-        MESSAGE('No batch file has been generated. Please make sure there are' & |
-        ' complete records in the CapeSoft Accessories table.', |
-        'Batch File Not Generated', |
-        Icon:Hand,|
-        'OK',|
-        1,|
-        MSGMODE:CANCOPY)
+        Util.ShowErrorDetails(BatchErrMsg,BatchErrTitle)
     END
 [END]
 EMBED %LocalDataAfterClasses
@@ -4686,6 +4698,8 @@ PROPERTY:END
 SafeReaderPath  CSTRING(256)
 InstallerPath   CSTRING(256)
 BatchPath       CSTRING(256)
+BatchErrMsg     STRING(1024)
+BatchErrTitle   STRING('Batch File Not Generated')
 [END]
 [END]
 [PROCEDURE]
@@ -5502,7 +5516,7 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
+  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -5960,7 +5974,8 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -6416,7 +6431,8 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
