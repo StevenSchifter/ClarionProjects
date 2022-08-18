@@ -27,10 +27,7 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
-WHEN  ('FileManager:CapeSoftAccessories') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
-WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1022,17 +1019,8 @@ WHEN  ('CoolBox001.clw') ('1')
 #model clarion dll
 #pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
-#pragma define(StringTheoryLinkMode=>1) -- GENERATED
-#pragma define(StringTheoryDllMode=>0) -- GENERATED
-#pragma define(MD5=>0) -- GENERATED
-#pragma define(_ABCDllMode_=>0) -- GENERATED
-#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
-#compile "EFOCUS.CLW" -- GENERATED
-#compile "CoolBox_BC0.CLW" -- GENERATED
-#compile "COOLBOX_BC.CLW" -- GENERATED
-#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
@@ -4609,7 +4597,7 @@ Window  WINDOW,AT(,,180,128),FONT('Segoe UI',9),CENTERED,CENTER,COLOR(COLOR:Whit
 NAME GenCapeSoftBatch
 [COMMON]
 FROM ABC Source
-MODIFIED '2022/08/18' '12:35:27'
+MODIFIED '2022/08/18' '13:40:47'
 [FILES]
 [OTHERS]
 CapeSoftAccessories
@@ -4654,10 +4642,6 @@ CsaRecs         LONG
     BatchErrMsg = 'No batch file has been generated.|Please make sure there are' & |
                   ' complete records in the CapeSoft Accessories table and that|' & |
                   BatchPath & '|and/or any of its containing folders allow file creation and/or modification.'
-    REMOVE(BatchPath,REMOVE:FILESONLY)
-    IF Util.ShowErrorDetails(BatchErrMsg,BatchErrTitle) = BUTTON:ABORT
-        RETURN
-    END
     CapeSoftBatchFile.Start()
     CsaRecs = RECORDS(CapeSoftAccessories)
     CLEAR(CapeSoftAccessories)
@@ -4677,16 +4661,29 @@ CsaRecs         LONG
     IF CapeSoftBatchFile.Length()
         CapeSoftBatchFile.Prepend('@echo off' & CRLF)
         CapeSoftBatchFile.Append('exit' & CRLF)
-        CapeSoftBatchFile.SaveFile(BatchPath)
-    END
-    IF EXISTS(BatchPath)
-        MESSAGE('A batch file has been generated at:|' & BatchPath, |
-        'Batch File Generated', |
-        ICON:Asterisk,|
-        BUTTON:OK,|
-        MSGMODE:CANCOPY)
+        IF CapeSoftBatchFile.SaveFile(BatchPath)
+            MESSAGE('A batch file has been generated at:|' & BatchPath, |
+            'Batch File Generated', |
+            ICON:Asterisk, |
+            BUTTON:OK, |
+            MSGMODE:CANCOPY)
+        ELSE
+            MESSAGE(BatchErrMsg, |
+            BatchErrTitle, |
+            ICON:Hand, |
+            BUTTON:OK, |
+            BUTTON:OK, |
+            MSGMODE:CANCOPY)
+            CapeSoftBatchFile.Trace('Save Failed')
+        END
     ELSE
-        Util.ShowErrorDetails(BatchErrMsg,BatchErrTitle)
+        MESSAGE(BatchErrMsg, |
+        BatchErrTitle, |
+        ICON:Hand, |
+        BUTTON:OK, |
+        BUTTON:OK, |
+        MSGMODE:CANCOPY)
+        CapeSoftBatchFile.Trace('Empty File')
     END
 [END]
 EMBED %LocalDataAfterClasses

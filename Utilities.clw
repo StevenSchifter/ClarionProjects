@@ -22,6 +22,7 @@ Utilities.MinVal                PROCEDURE(LONG X,LONG Y)!,LONG
     END
 
 Utilities.ShowErrorDetails        PROCEDURE(<STRING MoreDetails>,<STRING ErrTitle>)!,LONG,PROC
+BtnRslt         LONG
 MsgStr          STRING(2048)
     CODE
     IF ERRORCODE()
@@ -32,15 +33,14 @@ MsgStr          STRING(2048)
         IF NOT OMITTED(MoreDetails)
             MsgStr = CLIP(MsgStr) & '|More Details: ' & CLIP(MoreDetails)
         END
-        RETURN MESSAGE(CLIP(MsgStr), |
+        BtnRslt = MESSAGE(CLIP(MsgStr), |
         ErrTitle, |
         ICON:Hand,|
         BUTTON:ABORT + BUTTON:IGNORE,|
         BUTTON:IGNORE,|
         MSGMODE:CANCOPY)
-    ELSE
-        RETURN 0
     END
+    RETURN BtnRslt
 
 Utilities.TrailingBackslash     PROCEDURE(STRING MyPath)!,STRING
 IncomingPath    STRING(FILE:MaxFilePath)
