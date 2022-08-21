@@ -34,6 +34,9 @@
     <Compile Include="CoolBox001.clw">
       <Generated>true</Generated>
     </Compile>
+    <Compile Include="CoolBox002.clw">
+      <Generated>true</Generated>
+    </Compile>
     <Compile Include="COOLBOX_BC.CLW">
       <Generated>true</Generated>
     </Compile>
