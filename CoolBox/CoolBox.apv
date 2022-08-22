@@ -998,7 +998,7 @@ WHEN  (12) ('DeformatUnixTimeStamp      PROCEDURE (String pValue,<<String pPictu
 %dAdditionalINCFiles MULTI LONG  ()
 %dAdditionalINCFile DEPEND %dAdditionalINCFiles DEFAULT TIMES 0
 
-%dClassVersion DEFAULT  ('80954')
+%dClassVersion DEFAULT  ('80956')
 [ADDITION]
 NAME UtilitiesTemplate IncludeUtilities
 [INSTANCE]
@@ -1006,9 +1006,9 @@ INSTANCE 3
 [PERSIST]
 %SaveCreateLocalMap DEFAULT  ('1')
 %GenerationCompleted DEPEND %Module DEFAULT TIMES 3
-WHEN  ('CoolBox.clw') ('')
-WHEN  ('CoolBox001.clw') ('')
-WHEN  ('CoolBox002.clw') ('')
+WHEN  ('CoolBox.clw') ('1')
+WHEN  ('CoolBox001.clw') ('1')
+WHEN  ('CoolBox002.clw') ('1')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
@@ -1063,13 +1063,14 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Wizard Application for C:\Users\Steven\ClarionProjects\CoolBox\CoolBox.dct'
 FROM ABC Frame
-MODIFIED '2022/08/19' '12:14:59'
+MODIFIED '2022/08/22' '15:28:17'
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 19
+%ButtonAction DEPEND %Control DEFAULT TIMES 20
 WHEN  ('') ('No Special Action')
 WHEN  ('?Arrange') ('No Special Action')
 WHEN  ('?BrowseCapeSoftAccessories') ('Call a Procedure')
 WHEN  ('?Cascade') ('No Special Action')
+WHEN  ('?ChecklistTest') ('Call a Procedure')
 WHEN  ('?Copy') ('No Special Action')
 WHEN  ('?Cut') ('No Special Action')
 WHEN  ('?Exit') ('No Special Action')
@@ -1086,8 +1087,9 @@ WHEN  ('?SetPaths') ('Call a Procedure')
 WHEN  ('?Tile') ('No Special Action')
 WHEN  ('?UtilitiesClassTestSuite') ('Call a Procedure')
 
-%ButtonRunName DEPEND %Control DEFAULT TIMES 7
+%ButtonRunName DEPEND %Control DEFAULT TIMES 8
 WHEN  ('?BrowseCapeSoftAccessories') ('')
+WHEN  ('?ChecklistTest') ('')
 WHEN  ('?GIGO') ('')
 WHEN  ('?GenCapeSoftBatch') ('')
 WHEN  ('?InstallCapeSoftAccessories') ('')
@@ -1095,8 +1097,9 @@ WHEN  ('?Noisemaker') ('')
 WHEN  ('?SetPaths') ('')
 WHEN  ('?UtilitiesClassTestSuite') ('')
 
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 7
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 8
 WHEN  ('?BrowseCapeSoftAccessories') ('')
+WHEN  ('?ChecklistTest') ('')
 WHEN  ('?GIGO') ('')
 WHEN  ('?GenCapeSoftBatch') ('')
 WHEN  ('?InstallCapeSoftAccessories') ('')
@@ -1104,8 +1107,9 @@ WHEN  ('?Noisemaker') ('')
 WHEN  ('?SetPaths') ('')
 WHEN  ('?UtilitiesClassTestSuite') ('')
 
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 7
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 8
 WHEN  ('?BrowseCapeSoftAccessories') (BrowseCapeSoftAccessories)
+WHEN  ('?ChecklistTest') (Checklist)
 WHEN  ('?GIGO') (GarbageInGarbageOut)
 WHEN  ('?GenCapeSoftBatch') (GenCapeSoftBatch)
 WHEN  ('?InstallCapeSoftAccessories') (InstallCapeSoftAccessories)
@@ -1113,8 +1117,9 @@ WHEN  ('?Noisemaker') (Noisemaker)
 WHEN  ('?SetPaths') (SetPaths)
 WHEN  ('?UtilitiesClassTestSuite') (UtilitiesClassTestSuite)
 
-%ButtonThread DEPEND %Control LONG TIMES 7
+%ButtonThread DEPEND %Control LONG TIMES 8
 WHEN  ('?BrowseCapeSoftAccessories') (1)
+WHEN  ('?ChecklistTest') (1)
 WHEN  ('?GIGO') (1)
 WHEN  ('?GenCapeSoftBatch') (1)
 WHEN  ('?InstallCapeSoftAccessories') (1)
@@ -1122,11 +1127,12 @@ WHEN  ('?Noisemaker') (1)
 WHEN  ('?SetPaths') (1)
 WHEN  ('?UtilitiesClassTestSuite') (1)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 19
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 20
 WHEN  ('') ('25000')
 WHEN  ('?Arrange') ('25000')
 WHEN  ('?BrowseCapeSoftAccessories') ('050000')
 WHEN  ('?Cascade') ('25000')
+WHEN  ('?ChecklistTest') ('25000')
 WHEN  ('?Copy') ('25000')
 WHEN  ('?Cut') ('25000')
 WHEN  ('?Exit') ('25000')
@@ -1143,8 +1149,9 @@ WHEN  ('?SetPaths') ('25000')
 WHEN  ('?Tile') ('25000')
 WHEN  ('?UtilitiesClassTestSuite') ('25000')
 
-%ButtonParameters DEPEND %Control DEFAULT TIMES 7
+%ButtonParameters DEPEND %Control DEFAULT TIMES 8
 WHEN  ('?BrowseCapeSoftAccessories') ('')
+WHEN  ('?ChecklistTest') ('')
 WHEN  ('?GIGO') ('')
 WHEN  ('?GenCapeSoftBatch') ('')
 WHEN  ('?InstallCapeSoftAccessories') ('')
@@ -1152,11 +1159,12 @@ WHEN  ('?Noisemaker') ('')
 WHEN  ('?SetPaths') ('')
 WHEN  ('?UtilitiesClassTestSuite') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 19
+%ButtonRequest DEPEND %Control DEFAULT TIMES 20
 WHEN  ('') ('None')
 WHEN  ('?Arrange') ('None')
 WHEN  ('?BrowseCapeSoftAccessories') ('')
 WHEN  ('?Cascade') ('None')
+WHEN  ('?ChecklistTest') ('None')
 WHEN  ('?Copy') ('None')
 WHEN  ('?Cut') ('None')
 WHEN  ('?Exit') ('None')
@@ -1389,9 +1397,10 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 9
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 10
 WHEN  ('') ('Default')
 WHEN  ('?BrowseCapeSoftAccessories') ('Default')
+WHEN  ('?ChecklistTest') ('Default')
 WHEN  ('?GIGO') ('Default')
 WHEN  ('?GenCapeSoftBatch') ('Default')
 WHEN  ('?HelpOnHelp') ('Default')
@@ -1400,9 +1409,10 @@ WHEN  ('?Noisemaker') ('Default')
 WHEN  ('?SetPaths') ('Default')
 WHEN  ('?UtilitiesClassTestSuite') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 9
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 10
 WHEN  ('') ('Off')
 WHEN  ('?BrowseCapeSoftAccessories') ('Off')
+WHEN  ('?ChecklistTest') ('Off')
 WHEN  ('?GIGO') ('Off')
 WHEN  ('?GenCapeSoftBatch') ('Off')
 WHEN  ('?HelpOnHelp') ('Off')
@@ -1411,9 +1421,10 @@ WHEN  ('?Noisemaker') ('Off')
 WHEN  ('?SetPaths') ('Off')
 WHEN  ('?UtilitiesClassTestSuite') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 9
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 10
 WHEN  ('') ('')
 WHEN  ('?BrowseCapeSoftAccessories') ('')
+WHEN  ('?ChecklistTest') ('')
 WHEN  ('?GIGO') ('')
 WHEN  ('?GenCapeSoftBatch') ('')
 WHEN  ('?HelpOnHelp') ('')
@@ -1422,9 +1433,10 @@ WHEN  ('?Noisemaker') ('')
 WHEN  ('?SetPaths') ('')
 WHEN  ('?UtilitiesClassTestSuite') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 9
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1433,9 +1445,10 @@ WHEN  ('?Noisemaker') (0)
 WHEN  ('?SetPaths') (0)
 WHEN  ('?UtilitiesClassTestSuite') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 9
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 10
 WHEN  ('') (-1)
 WHEN  ('?BrowseCapeSoftAccessories') (-1)
+WHEN  ('?ChecklistTest') (-1)
 WHEN  ('?GIGO') (-1)
 WHEN  ('?GenCapeSoftBatch') (-1)
 WHEN  ('?HelpOnHelp') (-1)
@@ -1446,9 +1459,10 @@ WHEN  ('?UtilitiesClassTestSuite') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 9
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1457,9 +1471,10 @@ WHEN  ('?Noisemaker') (0)
 WHEN  ('?SetPaths') (0)
 WHEN  ('?UtilitiesClassTestSuite') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 9
+%FieldGradientColorTo DEPEND %Control LONG TIMES 10
 WHEN  ('') (-1)
 WHEN  ('?BrowseCapeSoftAccessories') (-1)
+WHEN  ('?ChecklistTest') (-1)
 WHEN  ('?GIGO') (-1)
 WHEN  ('?GenCapeSoftBatch') (-1)
 WHEN  ('?HelpOnHelp') (-1)
@@ -1470,9 +1485,10 @@ WHEN  ('?UtilitiesClassTestSuite') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 9
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1481,7 +1497,8 @@ WHEN  ('?Noisemaker') (0)
 WHEN  ('?SetPaths') (0)
 WHEN  ('?UtilitiesClassTestSuite') (0)
 
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 6
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 7
+WHEN  ('?ChecklistTest') ()
 WHEN  ('?GIGO') ()
 WHEN  ('?GenCapeSoftBatch') ()
 WHEN  ('?InstallCapeSoftAccessories') ()
@@ -1489,7 +1506,8 @@ WHEN  ('?Noisemaker') ()
 WHEN  ('?SetPaths') ()
 WHEN  ('?UtilitiesClassTestSuite') ()
 
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 6
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 7
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?InstallCapeSoftAccessories') (0)
@@ -1497,7 +1515,8 @@ WHEN  ('?Noisemaker') (0)
 WHEN  ('?SetPaths') (0)
 WHEN  ('?UtilitiesClassTestSuite') (0)
 
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 6
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 7
+WHEN  ('?ChecklistTest') ('')
 WHEN  ('?GIGO') ('')
 WHEN  ('?GenCapeSoftBatch') ('')
 WHEN  ('?InstallCapeSoftAccessories') ('')
@@ -1505,7 +1524,8 @@ WHEN  ('?Noisemaker') ('')
 WHEN  ('?SetPaths') ('')
 WHEN  ('?UtilitiesClassTestSuite') ('')
 
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 6
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 7
+WHEN  ('?ChecklistTest') ()
 WHEN  ('?GIGO') ()
 WHEN  ('?GenCapeSoftBatch') ()
 WHEN  ('?InstallCapeSoftAccessories') ()
@@ -1517,9 +1537,10 @@ WHEN  ('?UtilitiesClassTestSuite') ()
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 9
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 10
 WHEN  ('') (1)
 WHEN  ('?BrowseCapeSoftAccessories') (1)
+WHEN  ('?ChecklistTest') (1)
 WHEN  ('?GIGO') (1)
 WHEN  ('?GenCapeSoftBatch') (1)
 WHEN  ('?HelpOnHelp') (1)
@@ -1544,9 +1565,10 @@ WHEN  ('?UtilitiesClassTestSuite') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 9
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1559,9 +1581,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 9
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1580,9 +1603,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 9
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1595,9 +1619,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 9
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1610,9 +1635,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 9
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1625,9 +1651,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 9
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 10
 WHEN  ('')TIMES 0
 WHEN  ('?BrowseCapeSoftAccessories')TIMES 0
+WHEN  ('?ChecklistTest')TIMES 0
 WHEN  ('?GIGO')TIMES 0
 WHEN  ('?GenCapeSoftBatch')TIMES 0
 WHEN  ('?HelpOnHelp')TIMES 0
@@ -1638,9 +1665,10 @@ WHEN  ('?UtilitiesClassTestSuite')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 9
+%AIObjectName DEPEND %Control DEFAULT TIMES 10
 WHEN  ('') ('AIBtn0')
 WHEN  ('?BrowseCapeSoftAccessories') ('AIBtn13')
+WHEN  ('?ChecklistTest') ('AIBtn18')
 WHEN  ('?GIGO') ('AIBtn17')
 WHEN  ('?GenCapeSoftBatch') ('AIBtn4')
 WHEN  ('?HelpOnHelp') ('AIBtn21')
@@ -1649,9 +1677,10 @@ WHEN  ('?Noisemaker') ('AIBtn18')
 WHEN  ('?SetPaths') ('AIBtn12')
 WHEN  ('?UtilitiesClassTestSuite') ('AIBtn16')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 9
+%AIEnableMimicControl DEPEND %Control LONG TIMES 10
 WHEN  ('') (1)
 WHEN  ('?BrowseCapeSoftAccessories') (1)
+WHEN  ('?ChecklistTest') (1)
 WHEN  ('?GIGO') (1)
 WHEN  ('?GenCapeSoftBatch') (1)
 WHEN  ('?HelpOnHelp') (1)
@@ -1660,9 +1689,10 @@ WHEN  ('?Noisemaker') (1)
 WHEN  ('?SetPaths') (1)
 WHEN  ('?UtilitiesClassTestSuite') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 9
+%AIMimicControl DEPEND %Control DEFAULT TIMES 10
 WHEN  ('') ('?Menubar')
 WHEN  ('?BrowseCapeSoftAccessories') ('?Menubar')
+WHEN  ('?ChecklistTest') ('?Menubar')
 WHEN  ('?GIGO') ('?Menubar')
 WHEN  ('?GenCapeSoftBatch') ('?Menubar')
 WHEN  ('?HelpOnHelp') ('?Menubar')
@@ -1677,9 +1707,10 @@ WHEN  ('?UtilitiesClassTestSuite') ('?Menubar')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 9
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1692,9 +1723,10 @@ WHEN  ('?UtilitiesClassTestSuite') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 9
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1707,9 +1739,10 @@ WHEN  ('?UtilitiesClassTestSuite') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 9
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1722,9 +1755,10 @@ WHEN  ('?UtilitiesClassTestSuite') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 9
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 10
 WHEN  ('') (0)
 WHEN  ('?BrowseCapeSoftAccessories') (0)
+WHEN  ('?ChecklistTest') (0)
 WHEN  ('?GIGO') (0)
 WHEN  ('?GenCapeSoftBatch') (0)
 WHEN  ('?HelpOnHelp') (0)
@@ -1745,44 +1779,45 @@ AppFrame APPLICATION('CoolBox'),AT(,,675,315),FONT('Microsoft Sans Serif',8,,FON
             MENU('&File'),USE(?FileMenu),#ORDINAL(2)
               ITEM('&Print Setup ...'),USE(?PrintSetup),HIDE,MSG('Setup printer'),STD(STD:PrintSetup), |
                 #ORDINAL(3)
-              ITEM,USE(?SEPARATOR1),SEPARATOR,#ORDINAL(5)
-              ITEM('E&xit'),USE(?Exit),MSG('Exit this application'),STD(STD:Close),#ORDINAL(6)
+              ITEM,USE(?SEPARATOR1),SEPARATOR,#ORDINAL(4)
+              ITEM('E&xit'),USE(?Exit),MSG('Exit this application'),STD(STD:Close),#ORDINAL(5)
             END
-            MENU('&Edit'),USE(?EditMenu),#ORDINAL(7)
-              ITEM('Cu&t'),USE(?Cut),MSG('Cut Selection To Clipboard'),STD(STD:Cut),#ORDINAL(8)
-              ITEM('&Copy'),USE(?Copy),MSG('Copy Selection To Clipboard'),STD(STD:Copy),#ORDINAL(9)
-              ITEM('&Paste'),USE(?Paste),MSG('Paste From Clipboard'),STD(STD:Paste),#ORDINAL(10)
-              ITEM,USE(?SEPARATOR2),SEPARATOR,#ORDINAL(11)
+            MENU('&Edit'),USE(?EditMenu),#ORDINAL(6)
+              ITEM('Cu&t'),USE(?Cut),MSG('Cut Selection To Clipboard'),STD(STD:Cut),#ORDINAL(7)
+              ITEM('&Copy'),USE(?Copy),MSG('Copy Selection To Clipboard'),STD(STD:Copy),#ORDINAL(8)
+              ITEM('&Paste'),USE(?Paste),MSG('Paste From Clipboard'),STD(STD:Paste),#ORDINAL(9)
+              ITEM,USE(?SEPARATOR2),SEPARATOR,#ORDINAL(10)
             END
-            MENU('&Browse'),USE(?BrowseMenu),#ORDINAL(13)
+            MENU('&Browse'),USE(?BrowseMenu),#ORDINAL(11)
             END
-            MENU('Manage CapeSoft Accessories'),USE(?ManageCapeSoftAccessoriesMenu),#ORDINAL(10000)
-              ITEM('&Set Paths'),USE(?SetPaths),#ORDINAL(12)
+            MENU('Manage CapeSoft Accessories'),USE(?ManageCapeSoftAccessoriesMenu),#ORDINAL(12)
+              ITEM('&Set Paths'),USE(?SetPaths),#ORDINAL(13)
               ITEM('&Browse CapeSoft Accessories'),USE(?BrowseCapeSoftAccessories),MSG('Browse Cap' & |
                 'eSoft Accessories'),#ORDINAL(14)
-              ITEM('&Generate CapeSoft Installation Batch File'),USE(?GenCapeSoftBatch),#ORDINAL(4)
-              ITEM('&Install CapeSoft Accessories'),USE(?InstallCapeSoftAccessories),#ORDINAL(10001)
+              ITEM('&Generate CapeSoft Installation Batch File'),USE(?GenCapeSoftBatch),#ORDINAL(15)
+              ITEM('&Install CapeSoft Accessories'),USE(?InstallCapeSoftAccessories),#ORDINAL(16)
             END
-            MENU('E&xtras'),USE(?ExtrasMenu),#ORDINAL(15)
-              ITEM('&Utilities Class Test Suite'),USE(?UtilitiesClassTestSuite),#ORDINAL(16)
-              ITEM('&Garbage In, Garbage Out'),USE(?GIGO),#ORDINAL(17)
-              ITEM('&Noisemaker'),USE(?Noisemaker),#ORDINAL(18)
+            MENU('E&xtras'),USE(?ExtrasMenu),#ORDINAL(17)
+              ITEM('&Checklist'),USE(?ChecklistTest),#ORDINAL(10000)
+              ITEM('&Garbage In, Garbage Out'),USE(?GIGO),#ORDINAL(19)
+              ITEM('&Noisemaker'),USE(?Noisemaker),#ORDINAL(20)
+              ITEM('&Utilities Class Test Suite'),USE(?UtilitiesClassTestSuite),#ORDINAL(18)
             END
-            MENU('&Window'),USE(?WindowMenu),STD(STD:WindowList),#ORDINAL(19)
+            MENU('&Window'),USE(?WindowMenu),STD(STD:WindowList),#ORDINAL(21)
               ITEM('T&ile'),USE(?Tile),MSG('Arrange multiple opened windows'),STD(STD:TileWindow), |
-                #ORDINAL(20)
+                #ORDINAL(22)
               ITEM('&Cascade'),USE(?Cascade),MSG('Arrange multiple opened windows'),STD(STD:CascadeWindow), |
-                #ORDINAL(21)
+                #ORDINAL(23)
               ITEM('&Arrange Icons'),USE(?Arrange),MSG('Arrange the icons for minimized windows'), |
-                STD(STD:ArrangeIcons),#ORDINAL(22)
+                STD(STD:ArrangeIcons),#ORDINAL(24)
             END
-            MENU('&Help'),USE(?HelpMenu),#ORDINAL(23)
+            MENU('&Help'),USE(?HelpMenu),#ORDINAL(25)
               ITEM('&Contents'),USE(?Helpindex),MSG('View the contents of the help file'), |
-                STD(STD:HelpIndex),#ORDINAL(24)
+                STD(STD:HelpIndex),#ORDINAL(26)
               ITEM('&Search for Help On...'),USE(?HelpSearch),MSG('Search for help on a subject'), |
-                STD(STD:HelpSearch),#ORDINAL(25)
+                STD(STD:HelpSearch),#ORDINAL(27)
               ITEM('&How to Use Help'),USE(?HelpOnHelp),MSG('Provides general instructi' & |
-                'ons on using help'),STD(STD:HelpOnHelp),#ORDINAL(26)
+                'ons on using help'),STD(STD:HelpOnHelp),#ORDINAL(28)
             END
           END
         END
@@ -3695,6 +3730,473 @@ Window  WINDOW('Noisemaker'),AT(,,256,44),FONT('Segoe UI',9),DOUBLE,ICON('WIZDOW
             ICON('WIZDOWN.ICO'),#ORDINAL(4)
         END
 
+[PROCEDURE]
+NAME Checklist
+[COMMON]
+FROM ABC Window
+MODIFIED '2022/08/22' '15:40:47'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Check Q:'),USE(?CheckQ:Prompt)
+! ENTRY(@s20),USE(CheckQ),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s20),USE(CheckQ),LEFT(2)
+CheckQ                   QUEUE,PRE(CQ)
+!!> GUID('1a813627-bbea-4325-8db8-0bf7fdb90ee2'),PROMPT('Check Q:'),HEADER('Check Q'),PICTURE(@s20),TYPEMODE(INS)
+[SCREENCONTROLS]
+! CHECK('Ck Mk:'),USE(CQ:CkMk)
+[REPORTCONTROLS]
+! CHECK('Ck Mk:'),USE(CQ:CkMk)
+CkMk                       BYTE
+!!> GUID('1ff54e4f-910e-4cac-aa04-26fb3146ae6c'),VALID(BOOLEAN),PROMPT('Ck Mk:'),HEADER('CkMk'),PICTURE(@n1b),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Some Text:'),USE(?CQ:SomeText:Prompt)
+! ENTRY(@s20),USE(CQ:SomeText),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s20),USE(CQ:SomeText),LEFT(2)
+SomeText                   STRING(20)
+!!> GUID('6b34812f-e02e-48c4-a812-513b1e7872cf'),PROMPT('Some Text:'),HEADER('Some Text'),PICTURE(@s20),TYPEMODE(INS),JUSTIFY(LEFT,2)
+                         END
+!!> GUID('ebaa38b8-4920-49e6-ab66-a34970802b53')
+[PROMPTS]
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
+  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Update {17}PROCEDURE(),DERIVED')
+
+%ReturnValue FIELD  ()
+%ProcedureOneInstance LONG  (0)
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%PreserveVarsLoc MULTI LONG  ()
+%PreserveVarLoc DEPEND %PreserveVarsLoc DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+WHEN  ('') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('None')
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+WHEN  ('') (1)
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+WHEN  ('')TIMES 0
+
+%ActiveImageEnable DEPEND %Control LONG TIMES 0
+
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('AIBtn0')
+
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+WHEN  ('') (1)
+
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+WHEN  ('') ('?CheckList')
+
+%AIImgRound DEPEND %Control LONG TIMES 0
+
+%AIOverrideImg DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIDisableImg DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIHotImg DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+%AIPressedImg DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
+
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+WHEN  ('') (0)
+
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+    LOOP 300 TIMES
+        CLEAR(CheckQ)
+        CQ:SomeText = St.Random(20)
+        ADD(CheckQ)
+    END
+[END]
+[END]
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+St                   StringTheory
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?CheckList'
+[INSTANCES]
+WHEN 'AlertKey'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+  IF KEYCODE() = MouseLeft2
+      IF ?CheckList{PROPLIST:MouseDownField} = 1
+          GET(CheckQ,CHOICE(?CheckList))
+          CQ:CkMk = 1
+          PUT(CheckQ)
+      END
+  END
+  
+[END]
+[END]
+[END]
+[END]
+[ADDITION]
+NAME ABC CleanCloseDownLocal
+[INSTANCE]
+INSTANCE 1
+OWNER 1
+[WINDOW]
+ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),FONT('Segoe UI',9),GRAY,MDI,SYSTEM
+          LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,ALRT(MouseLeft2),FORMAT('12L(2)|M~C' & |
+            'k~@n1b@80L(2)|M~Some Text~@s20@'),FROM(CheckQ),#FIELDS(CQ:CkMk,CQ:SomeText),#ORDINAL(1)
+        END
+
 [END]
 [MODULE]
 [COMMON]
@@ -3955,8 +4457,7 @@ WHEN  (1) ('BrowseBox(ABC)')
 %ProcedureUserBindFields MULTI LONG  ()
 %ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
 
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 1
-WHEN  (1) (0)
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
 
 %ProcedureUserBindProcedures MULTI LONG  ()
 %ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
@@ -7064,7 +7565,7 @@ GenSafeReaderRunString
 NAME InstallCapeSoftAccessories
 [COMMON]
 FROM ConnectableIterativeOperationsTemplate ConnectableIterativeOperationsProcedure
-MODIFIED '2022/08/20' '23:56:10'
+MODIFIED '2022/08/20' '23:58:43'
 [DATA]
 CurrentOperation         LONG
 !!> GUID('65a453da-2e71-4656-9795-ed59fb3db821')
@@ -7088,12 +7589,8 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
-  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Update {17}PROCEDURE(),DERIVED')
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -7291,35 +7788,44 @@ WHEN  (1) ('1')
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('Default')
 WHEN  ('?CancelOperation') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('Off')
 WHEN  ('?CancelOperation') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('')
 WHEN  ('?CancelOperation') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?CancelOperation') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?CancelOperation') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 1
+%ButtonAction DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('No Special Action')
 WHEN  ('?CancelOperation') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
@@ -7330,7 +7836,8 @@ WHEN  ('?CancelOperation') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('25000')
 WHEN  ('?CancelOperation') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
@@ -7339,7 +7846,8 @@ WHEN  ('?CancelOperation') ('25000')
 
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 1
+%ButtonRequest DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('None')
 WHEN  ('?CancelOperation') ('None')
 
 %ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
@@ -7362,7 +7870,8 @@ WHEN  ('?CancelOperation') ('None')
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?CancelOperation') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -7383,14 +7892,16 @@ WHEN  ('?CancelOperation') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -7403,39 +7914,46 @@ WHEN  ('?CancelOperation')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?CancelOperation')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('AIBtn0')
 WHEN  ('?CancelOperation') ('AIBtn4')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?CancelOperation') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('?CurrentOpInfo')
 WHEN  ('?CancelOperation') ('?CurrentOpProgress')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -7444,28 +7962,32 @@ WHEN  ('?CancelOperation') ('?CurrentOpProgress')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?CancelOperation') (0)
 
 %AutoStartOperations LONG  (1)
@@ -7519,9 +8041,10 @@ PRIORITY 5000
 PROPERTY:END
 CASE Access:CapeSoftAccessories.Next()
 OF Level:Notify OROF Level:Fatal
-    BREAK
+    StopOperation()
 ELSE
     IF CSA:InstallerName AND CSA:InstallerPassword AND CSA:IncludeInGeneratedBatchFile
+        CurrentOpInfo = 'Installing ' & CSA:InstallerName
         RUN(GenSafeReaderRunString(SafeReaderPath,InstallerPath,CSA:InstallerName,CSA:InstallerPassword),1)
     END
 END

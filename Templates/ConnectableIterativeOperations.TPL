@@ -81,7 +81,7 @@ StopOperation #< PROCEDURE()
     ChooseOperation(CurrentOperation + 1)
     #ENDIF
     #IF(%AutoCloseOpWindow)
-    IF CurrentOperation >= %Operations
+    IF CurrentOperation >= %(ITEMS(%Operations))
         POST(EVENT:CloseWindow)
     END
     #ENDIF
