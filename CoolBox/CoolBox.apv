@@ -27,7 +27,10 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
+WHEN  ('FileManager:CapeSoftAccessories') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1021,9 +1024,18 @@ WHEN  ('CoolBox002.clw') ('1')
 #model clarion dll
 #pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
+#pragma define(StringTheoryLinkMode=>1) -- GENERATED
+#pragma define(StringTheoryDllMode=>0) -- GENERATED
+#pragma define(MD5=>0) -- GENERATED
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
 #compile "CoolBox002.clw" -- GENERATED
+#compile "EFOCUS.CLW" -- GENERATED
+#compile "CoolBox_BC0.CLW" -- GENERATED
+#compile "COOLBOX_BC.CLW" -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
@@ -3734,7 +3746,7 @@ Window  WINDOW('Noisemaker'),AT(,,256,44),FONT('Segoe UI',9),DOUBLE,ICON('WIZDOW
 NAME Checklist
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/22' '15:40:47'
+MODIFIED '2022/08/22' '17:42:19'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('Check Q:'),USE(?CheckQ:Prompt)
@@ -3769,12 +3781,9 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
-  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Update {17}PROCEDURE(),DERIVED')
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeFieldEvent {9}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3960,36 +3969,27 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 0
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 0
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 0
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -3999,8 +3999,7 @@ WHEN  ('') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 0
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -4008,8 +4007,7 @@ WHEN  ('') ('25000')
 
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 0
 
 %ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -4031,8 +4029,7 @@ WHEN  ('') ('None')
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 0
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
 
@@ -4052,15 +4049,13 @@ WHEN  ('') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -4072,40 +4067,33 @@ WHEN  ('')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 0
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 0
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
-WHEN  ('') ('?CheckList')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 0
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -4113,29 +4101,25 @@ WHEN  ('') ('?CheckList')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 0
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
 
 [EMBED]
 EMBED %WindowManagerMethodCodeSection
@@ -4148,11 +4132,7 @@ WHEN '(),BYTE'
 PROPERTY:BEGIN
 PRIORITY 7501
 PROPERTY:END
-    LOOP 300 TIMES
-        CLEAR(CheckQ)
-        CQ:SomeText = St.Random(20)
-        ADD(CheckQ)
-    END
+    DO PopulateQ
 [END]
 [END]
 [END]
@@ -4174,16 +4154,54 @@ WHEN 'AlertKey'
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-  IF KEYCODE() = MouseLeft2
-      IF ?CheckList{PROPLIST:MouseDownField} = 1
-          GET(CheckQ,CHOICE(?CheckList))
-          CQ:CkMk = 1
-          PUT(CheckQ)
-      END
-  END
+  DO HandleAlertKeys
   
 [END]
 [END]
+[END]
+EMBED %ProcedureRoutines
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+HandleAlertKeys     ROUTINE
+DATA
+CODE
+    CASE KEYCODE()
+    OF MouseLeftUp
+        IF ?CheckList{PROPLIST:MouseDownField} = 1
+            DO ToggleCkInRow
+        END
+    OF SpaceKey
+    
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+PopulateQ    ROUTINE
+    DATA
+    CODE
+    LOOP 300 TIMES
+        CLEAR(CheckQ)
+        CQ:SomeText = St.Random(20)
+        ADD(CheckQ)
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+ToggleCkInRow    ROUTINE
+    DATA
+    CODE
+    GET(CheckQ,CHOICE(?CheckList))
+    IF CQ:CkMk
+        CQ:CkMk = 0
+    ELSE
+        CQ:CkMk = 1
+    END
+    PUT(CheckQ)
 [END]
 [END]
 [ADDITION]
@@ -4193,7 +4211,7 @@ INSTANCE 1
 OWNER 1
 [WINDOW]
 ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),FONT('Segoe UI',9),GRAY,MDI,SYSTEM
-          LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,ALRT(MouseLeft2),FORMAT('12L(2)|M~C' & |
+          LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,ALRT(MouseLeftUp),ALRT(SpaceKey),FORMAT('12L(2)|M~C' & |
             'k~@n1b@80L(2)|M~Some Text~@s20@'),FROM(CheckQ),#FIELDS(CQ:CkMk,CQ:SomeText),#ORDINAL(1)
         END
 
