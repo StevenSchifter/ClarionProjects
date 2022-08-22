@@ -3746,7 +3746,7 @@ Window  WINDOW('Noisemaker'),AT(,,256,44),FONT('Segoe UI',9),DOUBLE,ICON('WIZDOW
 NAME Checklist
 [COMMON]
 FROM ABC Window
-MODIFIED '2022/08/22' '17:42:19'
+MODIFIED '2022/08/22' '19:02:26'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('Check Q:'),USE(?CheckQ:Prompt)
@@ -3756,11 +3756,12 @@ MODIFIED '2022/08/22' '17:42:19'
 CheckQ                   QUEUE,PRE(CQ)
 !!> GUID('1a813627-bbea-4325-8db8-0bf7fdb90ee2'),PROMPT('Check Q:'),HEADER('Check Q'),PICTURE(@s20),TYPEMODE(INS)
 [SCREENCONTROLS]
-! CHECK('Ck Mk:'),USE(CQ:CkMk)
+! PROMPT('Check:'),USE(?CQ:Check:Prompt)
+! ENTRY(@s1),USE(CQ:Check),LEFT(2)
 [REPORTCONTROLS]
-! CHECK('Ck Mk:'),USE(CQ:CkMk)
-CkMk                       BYTE
-!!> GUID('1ff54e4f-910e-4cac-aa04-26fb3146ae6c'),VALID(BOOLEAN),PROMPT('Ck Mk:'),HEADER('CkMk'),PICTURE(@n1b),TYPEMODE(INS)
+! STRING(@s1),USE(CQ:Check),LEFT(2)
+Check                      STRING(1)
+!!> GUID('1ff54e4f-910e-4cac-aa04-26fb3146ae6c'),PROMPT('Check:'),HEADER('Check'),PICTURE(@s1),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [SCREENCONTROLS]
 ! PROMPT('Some Text:'),USE(?CQ:SomeText:Prompt)
 ! ENTRY(@s20),USE(CQ:SomeText),LEFT(2)
@@ -4166,8 +4167,6 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 HandleAlertKeys     ROUTINE
-DATA
-CODE
     CASE KEYCODE()
     OF MouseLeftUp
         IF ?CheckList{PROPLIST:MouseDownField} = 1
@@ -4181,10 +4180,9 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 PopulateQ    ROUTINE
-    DATA
-    CODE
     LOOP 300 TIMES
         CLEAR(CheckQ)
+        CQ:Check = St.Random(1,0,'YN')
         CQ:SomeText = St.Random(20)
         ADD(CheckQ)
     END
@@ -4196,10 +4194,10 @@ ToggleCkInRow    ROUTINE
     DATA
     CODE
     GET(CheckQ,CHOICE(?CheckList))
-    IF CQ:CkMk
-        CQ:CkMk = 0
-    ELSE
-        CQ:CkMk = 1
+    IF CQ:Check = 'Y'
+        CQ:Check = 'N'
+    ELSIF CQ:Check = 'N'
+        CQ:Check = 'Y'
     END
     PUT(CheckQ)
 [END]
@@ -4212,7 +4210,7 @@ OWNER 1
 [WINDOW]
 ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),FONT('Segoe UI',9),GRAY,MDI,SYSTEM
           LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,ALRT(MouseLeftUp),ALRT(SpaceKey),FORMAT('12L(2)|M~C' & |
-            'k~@n1b@80L(2)|M~Some Text~@s20@'),FROM(CheckQ),#FIELDS(CQ:CkMk,CQ:SomeText),#ORDINAL(1)
+            'k~@s1@80L(2)|M~Some Text~@s20@'),FROM(CheckQ),#FIELDS(CQ:Check,CQ:SomeText),#ORDINAL(1)
         END
 
 [END]
