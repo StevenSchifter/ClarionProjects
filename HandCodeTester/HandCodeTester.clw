@@ -24,13 +24,13 @@ CkMk          BYTE
 SomeText      STRING(20)
           END
 
-ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),GRAY,FONT('Segoe UI',9)
+ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),GRAY,SYSTEM,ICON(ICON:Application), |
+            FONT('Segoe UI',9)
         LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,FROM(CheckQ),FORMAT('20L(2)' & |
-                '|M~Ck~@n1b@80L(2)|M~Some Text~@s20@')
+                '|M~Ck~@n1@80L(2)|M~Some Text~@s20@')
     END
 
     CODE
-    STOP('Checkpoint')
     LOOP 300 TIMES
         CLEAR(CheckQ)
         CQ:SomeText = St.Random(20)
@@ -43,12 +43,19 @@ ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),GRAY,FONT('Segoe UI',9)
             CASE EVENT()
             OF EVENT:MouseDown
                 IF ?CheckList{PROPLIST:MouseDownField} = 1
-                    GET(CheckQ,CHOICE(?CheckList))
-                    CQ:CkMk = 1
-                    PUT(CheckQ)
+                    DO ToggleCkMk
                 END
             END
         END
     END
+
+ToggleCkMk    ROUTINE
+    GET(CheckQ,CHOICE(?CheckList))
+    IF CQ:CkMk = 0
+        CQ:CkMk = 1
+    ELSIF CQ:CkMk = 1
+        CQ:CkMk = 0
+    END
+    PUT(CheckQ)
 !  MESSAGE('Hello World')
 !  MESSAGE(Util.MaxVal(6,3))
