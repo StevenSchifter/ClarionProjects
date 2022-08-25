@@ -16,8 +16,10 @@
 *.txd
 map/
 obj/
-CoolBox/*.clw
-CoolBox/*.inc
+CoolBox/CoolBox.clw
+CoolBox/*0*.clw
+CoolBox/*_B*.clw
+CoolBox/*0*.inc
 CoolBox/*.ini
 LegacyPeople/*.clw
 LegacyPeople/*.inc
