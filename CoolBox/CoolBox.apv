@@ -27,10 +27,7 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
-WHEN  ('FileManager:CapeSoftAccessories') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
-WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1080,7 +1077,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Wizard Application for C:\Users\Steven\ClarionProjects\CoolBox\CoolBox.dct'
 FROM ABC Frame
-MODIFIED '2022/08/25' '14:06:19'
+MODIFIED '2022/09/07' '10:20:40'
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 20
 WHEN  ('?Arrange') ('No Special Action')
@@ -1811,6 +1808,7 @@ AppFrame APPLICATION('CoolBox'),AT(,,675,315),FONT('Microsoft Sans Serif',8,,FON
             MENU('E&xtras'),USE(?ExtrasMenu),#ORDINAL(17)
               ITEM('&Checklist'),USE(?ChecklistTest),#ORDINAL(18)
               ITEM('&Garbage In, Garbage Out'),USE(?GIGO),#ORDINAL(19)
+              ITEM('&Hand typed message'),USE(?HTMproc),#ORDINAL(30)
               ITEM('&Noisemaker'),USE(?Noisemaker),#ORDINAL(20)
               ITEM('&Utilities Class Test Suite'),USE(?UtilitiesClassTestSuite),#ORDINAL(21)
             END
@@ -1830,7 +1828,6 @@ AppFrame APPLICATION('CoolBox'),AT(,,675,315),FONT('Microsoft Sans Serif',8,,FON
               ITEM('&How to Use Help'),USE(?HelpOnHelp),MSG('Provides general instructi' & |
                 'ons on using help'),STD(STD:HelpOnHelp),#ORDINAL(29)
             END
-            ITEM('Hand typed message!'),USE(?HTMproc),#ORDINAL(10000)
           END
         END
 
@@ -4238,6 +4235,14 @@ ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),FONT('Segoe UI',9),GRAY,MDI,SY
             'k~@s1@80L(2)|M~Some Text~@s20@'),FROM(CheckQ),#FIELDS(CQ:Check,CQ:SomeText),#ORDINAL(1)
         END
 
+[PROCEDURE]
+NAME DateTimeGroupTest
+[COMMON]
+FROM ABC Source
+MODIFIED '2022/09/07' '10:19:30'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
 [END]
 [MODULE]
 [COMMON]
@@ -4498,7 +4503,8 @@ WHEN  (1) ('BrowseBox(ABC)')
 %ProcedureUserBindFields MULTI LONG  ()
 %ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
 
-%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 1
+WHEN  (1) (0)
 
 %ProcedureUserBindProcedures MULTI LONG  ()
 %ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
