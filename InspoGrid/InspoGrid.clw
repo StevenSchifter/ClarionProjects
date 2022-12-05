@@ -24,20 +24,30 @@ MyWindow WINDOW('Caption'),AT(,,500,500),GRAY,FONT('Consolas',10,,FONT:regular),
     END
 
     CODE
-
     OPEN(MyWindow)
     ACCEPT
         CASE FIELD()
         OF 0
             CASE EVENT()
             OF EVENT:OpenWindow
+                CreateSquares()
             END
         END
     END
 
 CreateSquares           PROCEDURE()
+CurrentBox    SIGNED
+LoopX         LONG
+LoopY         LONG
     CODE
-    
+    LOOP LoopY = 1 TO GRID_SIZE
+        LOOP LoopX = 1 TO GRID_SIZE
+            CurrentBox = CREATE(0,CREATE:box)
+            SETPOSITION(CurrentBox,10*LoopX,10*LoopY,10,10)
+            CurrentBox{PROP:Fill} = DEFAULT_COLOR
+            CurrentBox{PROP:Hide} = FALSE
+        END
+    END
 RecolorRandomSquares    PROCEDURE()
     CODE
     
