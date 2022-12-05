@@ -23,7 +23,8 @@ GRID_SIZE           EQUATE(48)
 DEFAULT_COLOR       EQUATE(COLOR:Blue)
 ALTERNATE_COLOR     EQUATE(COLOR:White)
 BOXES_TO_RECOLOR    EQUATE(18)
-MyWindow WINDOW('Caption'),AT(,,500,500),GRAY,FONT('Consolas',10,,FONT:regular),SYSTEM
+
+MyWindow WINDOW('InspoGrid'),AT(,,500,500),GRAY,FONT('Consolas',10,,FONT:regular),SYSTEM
     END
 
     CODE
@@ -52,10 +53,13 @@ LoopY         LONG
             CurrentBox{PROP:Fill} = DEFAULT_COLOR
         END
     END
+
 RecolorRandomBoxes    PROCEDURE()
 RandomBox    LONG
     CODE
     LOOP BOXES_TO_RECOLOR TIMES
-        RandomBox = RANDOM(FIRSTFIELD(),LASTFIELD())
+        LOOP CLOCK() / 3600 TIMES
+            RandomBox = RANDOM(FIRSTFIELD(),LASTFIELD())
+        END
         RandomBox{PROP:Fill} = ALTERNATE_COLOR
     END
