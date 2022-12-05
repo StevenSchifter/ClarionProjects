@@ -11,15 +11,18 @@ OMIT('***')
  ***
 
     MAP
-CreateSquares           PROCEDURE()
-RecolorRandomSquares    PROCEDURE()
+CreateBoxes           PROCEDURE()
+RecolorRandomBoxes    PROCEDURE()
     END
 
-    INCLUDE('equates.clw'),ONCE 
+    INCLUDE('equates.clw'),ONCE
 
-GRID_SIZE          EQUATE(48)
-DEFAULT_COLOR      EQUATE(COLOR:Blue)
-ALTERNATE_COLOR    EQUATE(COLOR:White)
+BOX_SIZE            EQUATE(9)
+BOX_SPACE           EQUATE(10)
+GRID_SIZE           EQUATE(48)
+DEFAULT_COLOR       EQUATE(COLOR:Blue)
+ALTERNATE_COLOR     EQUATE(COLOR:White)
+BOXES_TO_RECOLOR    EQUATE(18)
 MyWindow WINDOW('Caption'),AT(,,500,500),GRAY,FONT('Consolas',10,,FONT:regular),SYSTEM
     END
 
@@ -30,12 +33,14 @@ MyWindow WINDOW('Caption'),AT(,,500,500),GRAY,FONT('Consolas',10,,FONT:regular),
         OF 0
             CASE EVENT()
             OF EVENT:OpenWindow
-                CreateSquares()
+                CreateBoxes()
+                RecolorRandomBoxes()
+                UNHIDE(FIRSTFIELD(),LASTFIELD())
             END
         END
     END
 
-CreateSquares           PROCEDURE()
+CreateBoxes           PROCEDURE()
 CurrentBox    SIGNED
 LoopX         LONG
 LoopY         LONG
@@ -43,11 +48,14 @@ LoopY         LONG
     LOOP LoopY = 1 TO GRID_SIZE
         LOOP LoopX = 1 TO GRID_SIZE
             CurrentBox = CREATE(0,CREATE:box)
-            SETPOSITION(CurrentBox,10*LoopX,10*LoopY,10,10)
+            SETPOSITION(CurrentBox,BOX_SPACE*LoopX,BOX_SPACE*LoopY,BOX_SIZE,BOX_SIZE)
             CurrentBox{PROP:Fill} = DEFAULT_COLOR
-            CurrentBox{PROP:Hide} = FALSE
         END
     END
-RecolorRandomSquares    PROCEDURE()
+RecolorRandomBoxes    PROCEDURE()
+RandomBox    LONG
     CODE
-    
+    LOOP BOXES_TO_RECOLOR TIMES
+        RandomBox = RANDOM(FIRSTFIELD(),LASTFIELD())
+        RandomBox{PROP:Fill} = ALTERNATE_COLOR
+    END
