@@ -4263,7 +4263,7 @@ MODIFIED '2022/09/07' '10:19:30'
 NAME GenerateRandomConversionQuestions
 [COMMON]
 FROM ABC Window
-MODIFIED '2023/01/31' '18:20:38'
+MODIFIED '2023/01/31' '18:25:56'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -4274,13 +4274,7 @@ WHEN  ('WindowToolbar') ('ToolbarClass')
 WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
-  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Update {17}PROCEDURE(),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -4658,8 +4652,8 @@ PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
 GenerateQuestions    PROCEDURE()
-Bin1    STRING(4)
-Bin2    STRING(4)
+Bin1    CSTRING(5)
+Bin2    CSTRING(5)
 Rand    ULONG
     CODE
     ?TEXT1{PROP:Text} = ''
@@ -4678,11 +4672,24 @@ Rand    ULONG
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & Rand
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Hex') & CRLF
         OF 3 ! Hex
-            Rand = RANDOM(0,255)
-            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & LONGTOHEX(Rand)
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & '0x' & Str.Random(4,st:Hex)
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Decimal') & CRLF
         END
     END
+[END]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7800
+PROPERTY:END
+GenerateQuestions() ! Automatic, before window opens
+[END]
+[END]
 [END]
 [END]
 [WINDOW]
