@@ -27,7 +27,10 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
+WHEN  ('FileManager:CapeSoftAccessories') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1008,10 +1011,20 @@ WHEN  ('CoolBoxHand.clw') ('')
 #model clarion dll
 #pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
+#pragma define(StringTheoryLinkMode=>1) -- GENERATED
+#pragma define(StringTheoryDllMode=>0) -- GENERATED
+#pragma define(MD5=>0) -- GENERATED
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBoxHand.clw"
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
 #compile "CoolBox002.clw" -- GENERATED
+#compile "EFOCUS.CLW" -- GENERATED
+#compile "CoolBox_BC0.CLW" -- GENERATED
+#compile "COOLBOX_BC.CLW" -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
+#pragma link("CoolBox.EXE.manifest") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
@@ -4263,7 +4276,7 @@ MODIFIED '2022/09/07' '10:19:30'
 NAME GenerateRandomConversionQuestions
 [COMMON]
 FROM ABC Window
-MODIFIED '2023/01/31' '18:25:56'
+MODIFIED '2023/01/31' '18:31:57'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -4274,7 +4287,9 @@ WHEN  ('WindowToolbar') ('ToolbarClass')
 WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -4654,26 +4669,24 @@ PROPERTY:END
 GenerateQuestions    PROCEDURE()
 Bin1    CSTRING(5)
 Bin2    CSTRING(5)
-Rand    ULONG
+Rand    LONG
     CODE
     ?TEXT1{PROP:Text} = ''
     Str.SeedRandom()
     LOOP 20 TIMES
         CASE RANDOM(1,3)
         OF 1 ! Binary
-            LOOP 4 TIMES
-                Bin1 = Bin1 & CHOOSE(RANDOM(0,1),'1','0')
-                Bin2 = Bin2 & CHOOSE(RANDOM(0,1),'1','0')
-            END
+            Bin1 = Str.Random(4,,'01')
+            Bin2 = Str.Random(4,,'01')
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & Bin1 & ' ' & Bin2
-            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Decimal',' > Hex') & CRLF
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Decimal',' > Hex') & CRLF & CRLF
         OF 2 ! Decimal
             Rand = RANDOM(0,255)
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & Rand
-            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Hex') & CRLF
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Hex') & CRLF & CRLF
         OF 3 ! Hex
             ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & '0x' & Str.Random(4,st:Hex)
-            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Decimal') & CRLF
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Decimal') & CRLF & CRLF
         END
     END
 [END]
@@ -4685,9 +4698,9 @@ WHEN '(),BYTE'
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
-PRIORITY 7800
+PRIORITY 8005
 PROPERTY:END
-GenerateQuestions() ! Automatic, before window opens
+GenerateQuestions() ! Automatic, when window opens
 [END]
 [END]
 [END]
