@@ -27,7 +27,8 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:CapeSoftAccessories') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('RelationManager:CapeSoftAccessories') ('Init {19}PROCEDURE')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('CoolBox.ico')
@@ -1008,15 +1009,26 @@ WHEN  ('CoolBoxHand.clw') ('')
 #model clarion dll
 #pragma link_option(icon=>CoolBox.ico)
 #pragma debug(vid=>full)
+#pragma define(StringTheoryLinkMode=>1) -- GENERATED
+#pragma define(StringTheoryDllMode=>0) -- GENERATED
+#pragma define(MD5=>0) -- GENERATED
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "CoolBoxHand.clw"
 #compile "CoolBox.clw" -- GENERATED
 #compile "CoolBox001.clw" -- GENERATED
 #compile "CoolBox002.clw" -- GENERATED
+#compile "EFOCUS.CLW" -- GENERATED
+#compile "CoolBox_BC0.CLW" -- GENERATED
+#compile "COOLBOX_BC.CLW" -- GENERATED
+#pragma link("None(zlibwapi.dll), CopyToOutputDirectory=Always") -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
+#pragma link("CoolBox.EXE.manifest") -- GENERATED
 #link "CoolBox.EXE"
 [PROGRAM]
 [COMMON]
 FROM ABC ABC
-MODIFIED '2022/08/25' '14:03:55'
+MODIFIED '2023/01/31' '18:17:41'
 [EMBED]
 EMBED %AfterGlobalIncludes
 [DEFINITION]
@@ -1035,6 +1047,7 @@ PROPERTY:BEGIN
 PRIORITY 3600
 PROPERTY:END
 INCLUDE('CoolBoxHand.inc'),ONCE
+INCLUDE('CWUTIL.INC'),ONCE
 [GROUP]
 PRIORITY 4000
 INSTANCE 1
@@ -4262,7 +4275,7 @@ MODIFIED '2022/09/07' '10:19:30'
 NAME GenerateRandomConversionQuestions
 [COMMON]
 FROM ABC Window
-MODIFIED '2023/01/31' '17:56:36'
+MODIFIED '2023/01/31' '18:16:57'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
@@ -4273,7 +4286,13 @@ WHEN  ('WindowToolbar') ('ToolbarClass')
 WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
+  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Update {17}PROCEDURE(),DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -4479,7 +4498,8 @@ WHEN  ('WindowToolbar') (0)
 
 %FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 0
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 0
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GenerateButton') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -4489,7 +4509,8 @@ WHEN  ('WindowToolbar') (0)
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 0
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GenerateButton') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -4497,7 +4518,8 @@ WHEN  ('WindowToolbar') (0)
 
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 0
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?GenerateButton') ('None')
 
 %ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
 
@@ -4611,6 +4633,70 @@ WHEN  ('WindowToolbar') (0)
 
 %AIPressedImgIsVariable DEPEND %Control LONG TIMES 0
 
+[EMBED]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?GenerateButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+GenerateQuestions()
+[END]
+[END]
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+    MAP
+GenerateQuestions    PROCEDURE()
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3580
+PROPERTY:END
+Str                  StringTheory
+[END]
+EMBED %LocalProcedures
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+GenerateQuestions    PROCEDURE()
+Bin1    STRING(4)
+Bin2    STRING(4)
+Rand    ULONG
+    CODE
+    ?TEXT1{PROP:Text} = ''
+    Str.SeedRandom()
+    LOOP 20 TIMES
+        CASE RANDOM(1,3)
+        OF 1 ! Binary
+            LOOP 4 TIMES
+                Bin1 = Bin1 & RANDOM(0,1)
+                Bin2 = Bin2 & RANDOM(0,1)
+            END
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & Bin1 & ' ' & Bin2
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Decimal',' > Hex') & CRLF
+        OF 2 ! Decimal
+            Rand = RANDOM(0,255)
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & Rand
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Hex') & CRLF
+        OF 3 ! Hex
+            Rand = RANDOM(0,255)
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & LONGTOHEX(Rand)
+            ?TEXT1{PROP:Text} = ?TEXT1{PROP:Text} & CHOOSE(RANDOM(0,1),' > Binary',' > Decimal') & CRLF
+        END
+    END
+[END]
+[END]
 [WINDOW]
 Window  WINDOW('Random Conversion Questions'),AT(,,198,189),FONT('Segoe UI',9),DOUBLE,ICON(ICON:Question), |
           GRAY,MDI,SYSTEM
