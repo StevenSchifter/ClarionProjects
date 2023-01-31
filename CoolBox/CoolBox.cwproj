@@ -49,6 +49,7 @@
     <Compile Include="EFOCUS.CLW">
       <Generated>true</Generated>
     </Compile>
+    <Library Include="CoolBox.EXE.manifest" />
     <None Include="zlibwapi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Generated>True</Generated>
