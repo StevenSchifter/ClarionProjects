@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary Name="tmpavi" Version="1" DctxFormat="4">
+	<DictionaryVersion Version="1" Description="Initial version"/>
+	<Table Guid="{074c7576-3cbf-46ad-9cc2-4ed17d954c79}" Ident="1" Name="AVI" Description="Main File" Prefix="AVI" Driver="TOPSPEED" Owner="NK4" Path="!FileSpec" Create="true" Thread="true">
+		<Audit CreateUser="Administrator" CreateDate="22 APR 1996" CreateTime="10:04:13PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 3 MAR 2023" ModifiedTime="12:28:37PM" ModifiedVersionNumber="1"/>
+		<Field Guid="{f59dd3d7-7a72-4804-ae88-a718e5b1ec98}" Ident="2" Name="FileSpec" DataType="STRING" Size="128" ScreenPicture="@s128" ScreenPrompt="&amp;File Spec:" ReportHeading="File Spec" ReportControl=" STRING(@s128),USE(AVI:FileSpec)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;&amp;File Spec:&apos;),USE(?AVI:FileSpec:Prompt)"/>
+				<Line Text=" ENTRY(@s20),USE(AVI:FileSpec)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="22 APR 1996" CreateTime="10:04:13PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 3 MAR 2023" ModifiedTime="12:28:37PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NONZERO"/>
+		</Field>
+		<Field Guid="{22830de7-8f86-4c46-b90a-15ccd84203ee}" Ident="3" Name="Description" DataType="STRING" Size="80" ScreenPicture="@s80" ScreenPrompt="&amp;Description:" ReportHeading="Description" ReportControl=" STRING(@s80),USE(TST:Description)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;&amp;Description:&apos;),USE(?AVI:Description:Prompt)"/>
+				<Line Text=" ENTRY(@s20),USE(AVI:Description)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="22 APR 1996" CreateTime="10:04:13PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate=" 3 MAR 2023" ModifiedTime="12:28:09PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{e14b9d4c-dcfe-4b65-83a7-0588776c47ae}" Ident="7" Name="Mark" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="Mark:" ReportHeading="Mark" ReportControl=" STRING(@n3),USE(AVI:Mark)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Mark:&apos;),USE(?AVI:Mark:Prompt)"/>
+				<Line Text=" ENTRY,USE(AVI:Mark),COLOR(0336E40H,0336E40H,0D40004H)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="25 APR 1996" CreateTime=" 4:43:43PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{33d450e0-1918-4116-a9c0-6deb5abfb469}" Ident="1" Order="1" Name="KeyFileSpec" KeyType="KEY" Unique="true" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="22 APR 1996" CreateTime="10:04:13PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedVersionNumber="1"/>
+			<Component Guid="{f5bc91b0-663e-4f37-8ad2-8ee021562fac}" FieldId="{f59dd3d7-7a72-4804-ae88-a718e5b1ec98}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="22 APR 1996" CreateTime="10:04:13PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+	</Table>
+</Dictionary>
+

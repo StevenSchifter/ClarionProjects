@@ -1,0 +1,63 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{DEFF11D4-3C12-4C15-A658-17BFD19B1F07}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>AVI</AssemblyName>
+    <OutputName>AVI</OutputName>
+    <DefineConstants>
+    </DefineConstants>
+    <Model>Dll</Model>
+    <ApplicationIcon>PEN.ICO</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+    <OutputPath>.\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+    <OutputPath>.\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AVI-BRO1.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI-FRM1.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI-MAIN.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI-PLAY.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI_RD.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI_RU.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="AVI_SF.CLW">
+      <Generated>true</Generated>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <FileDriver Include="TOPSPEED" />
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>
