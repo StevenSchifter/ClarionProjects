@@ -11,8 +11,8 @@ OMIT('***')
  ***
 
     MAP
-        MODULE('WinMM.lib')
-            PlaySound(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,RAW,NAME('_playsound')
+        MODULE('Windows.dll')
+            PlaySoundA(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,PROC,PASCAL,RAW,NAME('PlaySoundA')
         END
     END
 
@@ -22,12 +22,14 @@ OMIT('***')
 St      StringTheory
 Util    Utilities
 
+TestSound    CSTRING(255)
+
 CheckQ    QUEUE,PRE(CQ)
 CkMk          BYTE
 SomeText      STRING(20)
           END
 
-ListWindow WINDOW('Checkbox Queue'),AT(,,162,181),GRAY,SYSTEM,ICON(ICON:Application), |
+ListWindow WINDOW('Checkbox Queue'),AT(,,162,192),GRAY,SYSTEM,ICON(ICON:Application), |
             FONT('Segoe UI',9)
         LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,FROM(CheckQ),FORMAT('20L(2)' & |
                 '|M~Ck~@n1@80L(2)|M~Some Text~@s20@')
@@ -35,6 +37,7 @@ ListWindow WINDOW('Checkbox Queue'),AT(,,162,181),GRAY,SYSTEM,ICON(ICON:Applicat
     END
 
     CODE
+    TestSound = 'C:\\Windows\\Media\\tada.wav'
     LOOP 300 TIMES
         CLEAR(CheckQ)
         CQ:SomeText = St.Random(20)
@@ -44,7 +47,7 @@ ListWindow WINDOW('Checkbox Queue'),AT(,,162,181),GRAY,SYSTEM,ICON(ICON:Applicat
     ACCEPT
         CASE ACCEPTED()
         OF ?PlayButton
-            MESSAGE('Not yet implemented')
+            PlaySoundA(TestSound,0,20000h)
         END
         CASE FIELD()
         OF ?CheckList
