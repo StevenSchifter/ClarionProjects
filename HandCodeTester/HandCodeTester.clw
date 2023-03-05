@@ -11,6 +11,9 @@ OMIT('***')
  ***
 
     MAP
+        MODULE('WinMM.lib')
+            PlaySound(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,RAW,NAME('_playsound')
+        END
     END
 
     INCLUDE('StringTheory.inc'),ONCE
@@ -24,10 +27,11 @@ CkMk          BYTE
 SomeText      STRING(20)
           END
 
-ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),GRAY,SYSTEM,ICON(ICON:Application), |
+ListWindow WINDOW('Checkbox Queue'),AT(,,162,181),GRAY,SYSTEM,ICON(ICON:Application), |
             FONT('Segoe UI',9)
         LIST,AT(5,5,153,153),USE(?CheckList),VSCROLL,FROM(CheckQ),FORMAT('20L(2)' & |
                 '|M~Ck~@n1@80L(2)|M~Some Text~@s20@')
+        BUTTON('Play!'),AT(62,162),USE(?PlayButton),ICON(ICON:VCRplay),LEFT
     END
 
     CODE
@@ -38,6 +42,10 @@ ListWindow WINDOW('Checkbox Queue'),AT(,,162,162),GRAY,SYSTEM,ICON(ICON:Applicat
     END
     OPEN(ListWindow)
     ACCEPT
+        CASE ACCEPTED()
+        OF ?PlayButton
+            MESSAGE('Not yet implemented')
+        END
         CASE FIELD()
         OF ?CheckList
             CASE EVENT()
