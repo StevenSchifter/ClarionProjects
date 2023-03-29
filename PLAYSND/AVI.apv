@@ -355,15 +355,8 @@ WHEN  ('AVI001.clw') ('1')
 [PROGRAM]
 [COMMON]
 FROM Clarion Clarion
-MODIFIED '2023/03/03' '12:14:20'
+MODIFIED '2023/03/29' '15:12:30'
 [DATA]
-[SCREENCONTROLS]
-! PROMPT('avi Device Open:'),USE(?aviDeviceOpen:Prompt)
-! ENTRY,USE(aviDeviceOpen),COLOR(0316E40H,0316E40H,0DC0008H),MSG('Flag of aviDevice (1-open, 0-closed)')
-[REPORTCONTROLS]
-! STRING(@n1),USE(aviDeviceOpen)
-aviDeviceOpen            BYTE !Flag of aviDevice (1-open, 0-closed)
-!!> GUID('46386bda-8d5e-4bb6-97a2-0335dc81a49d'),PROMPT('avi Device Open:'),HEADER('avi Device Open'),MESSAGE('Flag of aviDevice (1-open, 0-closed)'),PICTURE(@n1)
 [SCREENCONTROLS]
 ! PROMPT('File Spec:'),USE(?FileSpec:Prompt)
 ! ENTRY,USE(FileSpec),COLOR(032317340H,0740038H,032317340H)
@@ -371,6 +364,13 @@ aviDeviceOpen            BYTE !Flag of aviDevice (1-open, 0-closed)
 ! STRING(@s128),USE(FileSpec)
 FileSpec                 STRING(128)
 !!> GUID('9c2e19c4-4b9c-4d58-8713-9d9320c22783'),INITIAL('''\DATA\AVI.DAT'' {113}'),PROMPT('File Spec:'),HEADER('File Spec'),PICTURE(@s128)
+[SCREENCONTROLS]
+! PROMPT('Wav File Cstring:'),USE(?WavFileCstring:Prompt)
+! ENTRY(@s254),USE(WavFileCstring),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s254),USE(WavFileCstring),LEFT(2)
+WavFileCstring           CSTRING(255)
+!!> GUID('0c079506-8f6e-4b50-b381-0120147b9f2b'),PROMPT('Wav File Cstring:'),HEADER('Wav File Cstring'),PICTURE(@s254),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [EMBED]
 EMBED %GlobalMap
 [DEFINITION]
@@ -378,18 +378,9 @@ EMBED %GlobalMap
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-  MODULE('WINDOWS.LIB')
-    GetSystemMetrics(SHORT),SHORT,RAW,PASCAL
-    GetWindowsDirectory(*CSTRING,USHORT),USHORT,RAW,PASCAL
-    GetSystemDirectory(*CSTRING,USHORT),USHORT,RAW,PASCAL
-    GetModuleFileName(SHORT,*CSTRING,SHORT),SHORT,RAW,PASCAL
-    _lopen(*CSTRING,SHORT),SHORT,RAW,PASCAL
-    _lclose(SHORT),SHORT,RAW,PASCAL
-  END
-  MODULE('WinMM.Lib')
-    mciSendString(*CSTRING,*CSTRING,USHORT,SHORT),ULONG,RAW,PASCAL
-    mmsystemGetVersion(),LONG,RAW,PASCAL
-  END
+    MODULE('Windows.dll')
+        PlaySoundA(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,PROC,PASCAL,RAW,NAME('PlaySoundA')
+    END
 [END]
 EMBED %ProgramSetup
 [DEFINITION]
@@ -412,7 +403,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Clarion for Windows Quick Application for E:\CW15\A'
 FROM Clarion Frame
-MODIFIED '2023/03/03' '12:30:31'
+MODIFIED '2023/03/29' '15:11:38'
 [DATA]
 LocalRequest             LONG
 !!> GUID('dd5a78fa-e0c3-445a-a518-2826cd1a0854')
@@ -712,9 +703,9 @@ EMBED %ProcedureSetup
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
-PRIORITY 4000
+PRIORITY 5000
 PROPERTY:END
-  aviDeviceOpen=0
+WavFileCstring = ''
 [END]
 [END]
 [WINDOW]
@@ -736,7 +727,7 @@ NAME BrowseAVI
 [COMMON]
 DESCRIPTION 'Browse the AVI File'
 FROM Clarion Browse
-MODIFIED '2023/03/03' '12:29:39'
+MODIFIED '2023/03/29' '15:09:46'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('2421cfbd-e740-4d8b-b126-3d5ffe42da84')
@@ -1202,12 +1193,14 @@ PRIORITY 4000
 PROPERTY:END
   SET(AVI); NofMarked#=0
   LOOP UNTIL EOF(AVI)
-    NEXT(AVI); IF ~AVI:Mark THEN CYCLE.
-    PlayAvi(AVI:FileSpec); NofMarked#+=1
-  .
+    NEXT(AVI); IF NOT AVI:Mark THEN CYCLE.
+    WavFileCstring = AVI:FileSpec
+    PlayAvi(WavFileCstring); NofMarked#+=1
+  END
   IF NofMarked#=0
-    DO SyncWindow; PlayAvi(AVI:FileSpec)
-  .
+    WavFileCstring = AVI:FileSpec
+    DO SyncWindow; PlayAvi(WavFileCstring)
+  END
 [END]
 [END]
 [END]
@@ -2036,7 +2029,7 @@ NAME UpdateAVI
 [COMMON]
 DESCRIPTION 'Update the AVI File'
 FROM Clarion Form
-MODIFIED '2023/03/03' '12:30:56'
+MODIFIED '2023/03/29' '15:14:29'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('2927c7b1-cec7-4e63-b446-5723446a8201')
@@ -2469,9 +2462,9 @@ QuickWindow WINDOW('Update the AVI database'),AT(,,282,71),FONT('MS Sans Serif',
           BUTTON('Browse'),AT(5,53,45,14),USE(?LookupFile),MSG('Press to pick file in browser'), |
             #ORIG(?LookupFile),#SEQ(4),#ORDINAL(3)
           PROMPT('&File Spec:'),AT(11,7),USE(?AVI:FileSpec:Prompt),#ORDINAL(4)
-          ENTRY(@s20),AT(61,6,213,10),USE(AVI:FileSpec),#ORDINAL(5)
+          ENTRY(@s128),AT(61,6,213,10),USE(AVI:FileSpec),#ORDINAL(5)
           PROMPT('&Description:'),AT(11,30),USE(?AVI:Description:Prompt),#ORDINAL(6)
-          ENTRY(@s20),AT(61,29,213,10),USE(AVI:Description),#ORDINAL(7)
+          ENTRY(@s80),AT(61,29,213,10),USE(AVI:Description),#ORDINAL(7)
         END
 
 [END]
@@ -2482,55 +2475,12 @@ FROM Clarion GENERATED
 MODIFIED '2023/03/03' '12:00:05'
 [PROCEDURE]
 NAME PlayAVI
-PROTOTYPE '(STRING)'
-PARAMETERS '(FSpec)'
+PROTOTYPE '(*CSTRING MySound)'
+PARAMETERS '(*CSTRING MySound)'
 [COMMON]
 DESCRIPTION 'Play selected items in AVI'
 FROM Clarion Source
-MODIFIED '2023/03/03' '12:00:05'
-[DATA]
-[SCREENCONTROLS]
-! PROMPT('Ret Str Length:'),USE(?RetStrLength:Prompt)
-! ENTRY,USE(RetStrLength),COLOR(0366E40H,053746552H,0654C7274H)
-[REPORTCONTROLS]
-! STRING(@n6),USE(RetStrLength)
-RetStrLength             USHORT
-!!> GUID('84d6b0e6-bd0b-418d-b1e6-2d6d38b6d8f4'),PROMPT('Ret Str Length:'),HEADER('Ret Str Length'),PICTURE(@n6)
-[SCREENCONTROLS]
-! PROMPT('App Window Handle:'),USE(?AppWindowHandle:Prompt)
-! ENTRY,USE(AppWindowHandle),COLOR(0362D6E40H,0FC00DC00H,057707041H)
-[REPORTCONTROLS]
-! STRING(@n-6),USE(AppWindowHandle),CURSOR('€')
-AppWindowHandle          SHORT
-!!> GUID('1bf06bb8-785b-4fdb-aafc-be8ced2d4394'),PROMPT('App Window Handle:'),HEADER('App Window Handle'),PICTURE(@n-6)
-[SCREENCONTROLS]
-! PROMPT('Err Msg 1:'),USE(?ErrMsg1:Prompt)
-! ENTRY,USE(ErrMsg1),COLOR(030387340H,COLOR:Black,04D727245H)
-[REPORTCONTROLS]
-! STRING(@s80),USE(ErrMsg1),CURSOR('€')
-ErrMsg1                  STRING(80)
-!!> GUID('3a69849e-b0fc-4fc0-89da-8ca954f1b325'),PROMPT('Err Msg 1:'),HEADER('Err Msg 1'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('Err Msg 2:'),USE(?ErrMsg2:Prompt)
-! ENTRY,USE(ErrMsg2),COLOR(030387340H,COLOR:Black,04D727245H)
-[REPORTCONTROLS]
-! STRING(@s80),USE(ErrMsg2),CURSOR('€')
-ErrMsg2                  STRING(80)
-!!> GUID('69bf91c3-d0eb-432f-a56b-72d67652f33d'),PROMPT('Err Msg 2:'),HEADER('Err Msg 2'),PICTURE(@s80)
-[SCREENCONTROLS]
-! PROMPT('mci Return String:'),USE(?mciReturnString:Prompt)
-! ENTRY,USE(mciReturnString),COLOR(032317340H,0FC000037H,05269636DH)
-[REPORTCONTROLS]
-! STRING(@s127),USE(mciReturnString),CURSOR('€')
-mciReturnString          CSTRING(128)
-!!> GUID('e5b029f1-46b8-4ea0-b435-e684c8037fcf'),PROMPT('mci Return String:'),HEADER('mci Return String'),PICTURE(@s127)
-[SCREENCONTROLS]
-! PROMPT('mci Command String:'),USE(?mciCommandString:Prompt)
-! ENTRY,USE(mciCommandString),COLOR(032317340H,052690037H,04369636DH)
-[REPORTCONTROLS]
-! STRING(@s127),USE(mciCommandString)
-mciCommandString         CSTRING(128)
-!!> GUID('40ae2730-ccbc-45be-92fc-06877bdbf76d'),PROMPT('mci Command String:'),HEADER('mci Command String'),PICTURE(@s127)
+MODIFIED '2023/03/29' '15:13:03'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 [EMBED]
@@ -2540,52 +2490,7 @@ EMBED %ProcessedCode
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-  DO CloseMovie_
-  DO OpenMovie_
-  DO OpenFile_
-  DO OpenWindow_
-  DO PlayMovie_
-
-CloseMovie_  ROUTINE
-  IF aviDeviceOpen
-    mciCommandString='close movie wait'
-    ErrMsg1='Could not close the AVI device:'
-    DO SendCommand_
-    aviDeviceOpen=0
-  .
-
-OpenMovie_  ROUTINE
-  mciCommandString='open avidevice wait'
-  ErrMsg1='Could not open the AVI device:'
-  DO SendCommand_
-  aviDeviceOpen=1
-
-OpenFile_  ROUTINE
-  mciCommandString='open '&CLIP(FSpec)&' alias movie'
-  ErrMsg1='Could not open the AVI file:'
-  DO SendCommand_
-
-OpenWindow_  ROUTINE
-  mciCommandString='window movie state show'
-  ErrMsg1='An error occured displaying the movie window'
-  DO SendCommand_
-
-PlayMovie_  ROUTINE
-  mciCommandString='play movie wait'
-  ErrMsg1='An error occured displaying the movie window'
-  DO SendCommand_
-
-SendCommand_  ROUTINE
-  RetStrLength=127
-  err#=mciSendString(mciCommandString,mciReturnString,RetStrLength,AppWindowHandle)
-! IF err#
-!   stop(CLIP(ErrMsg1)&' '&err#)
-!   DO Return_
-! .
-
-
-Return_  ROUTINE
-  RETURN
+  PlaySoundA(WavFileCstring,0,20000h)
 [END]
 [END]
 [END]
