@@ -1085,9 +1085,9 @@ MODIFIED '2022/08/15' '18:28:06'
 [PROCEDURE]
 NAME Main
 [COMMON]
-DESCRIPTION 'Coolbox is a toolbox full of cool utilities and skill demos!'
+DESCRIPTION 'CoolBox is a toolbox full of cool utilities and skill demos!'
 FROM ABC Frame
-MODIFIED '2023/09/01' '15:43:01'
+MODIFIED '2023/09/01' '15:51:44'
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 20
 WHEN  ('?Arrange') ('No Special Action')
@@ -2689,8 +2689,9 @@ Window  WINDOW('Utilities Class Test Suite'),AT(,,448,207),FONT('Segoe UI',9),DO
 [PROCEDURE]
 NAME Noisemaker
 [COMMON]
+DESCRIPTION 'Plays a .wav file selected by the user'
 FROM ABC Window
-MODIFIED '2023/04/17' '13:15:37'
+MODIFIED '2023/09/01' '15:52:32'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('Noise To Make:'),USE(?NoiseToMake:Prompt)
@@ -2898,44 +2899,35 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?LookupNoise') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?LookupNoise') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?LookupNoise') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
-%ButtonAction DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupNoise') ('No Special Action')
 WHEN  ('?MakeNoiseButton') ('No Special Action')
 
@@ -2951,8 +2943,7 @@ WHEN  ('?LookupNoise') ()
 %ButtonThread DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupNoise') ('25000')
 WHEN  ('?MakeNoiseButton') ('25000')
 
@@ -2965,8 +2956,7 @@ WHEN  ('?LookupNoise') ()
 %ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?LookupNoise') ('None')
 WHEN  ('?MakeNoiseButton') ('None')
 
@@ -2992,8 +2982,7 @@ WHEN  ('?LookupNoise') ()
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
 WHEN  ('?LookupNoise') (1)
 WHEN  ('?NoiseToMake') (1)
 
@@ -3015,16 +3004,14 @@ WHEN  ('?NoiseToMake') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -3037,46 +3024,39 @@ WHEN  ('?LookupNoise')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
 WHEN  ('?LookupNoise')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?LookupNoise') ('AIBtn3')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?NoiseToMake:Prompt')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?LookupNoise') ('?NoiseToMake:Prompt')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -3085,32 +3065,28 @@ WHEN  ('?LookupNoise') ('?NoiseToMake:Prompt')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?LookupNoise') (0)
 
 [EMBED]
@@ -4178,7 +4154,7 @@ OWNER 1
 Window  WINDOW('Random Conversion Questions'),AT(,,198,189),FONT('Segoe UI',9),DOUBLE,ICON(ICON:Question), |
           GRAY,MDI,SYSTEM
           TEXT,AT(3,3,193,167),USE(?TEXT1),FONT('Consolas',12),VSCROLL,#ORDINAL(1)
-          BUTTON('&Generate'),AT(151,173,45,14),USE(?GenerateButton),#ORDINAL(2)
+          BUTTON('&Generate'),AT(151,173,45,14),USE(?GenerateButton),#ORDINAL(10000)
         END
 
 [END]
@@ -7385,8 +7361,9 @@ NAME GenSafeReaderRunString
 PROTOTYPE '(STRING SrPath,STRING SafPath,STRING SafName,STRING SafePW),STRING'
 PARAMETERS '(STRING SrPath,STRING SafPath,STRING SafName,STRING SafePW)'
 [COMMON]
+DESCRIPTION 'Generates command line for CapeSoft SafeReader'
 FROM ABC Source
-MODIFIED '2022/08/20' '23:05:40'
+MODIFIED '2023/09/01' '15:53:21'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
