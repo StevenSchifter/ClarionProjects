@@ -19,15 +19,14 @@ OMIT('***')
     INCLUDE('StringTheory.inc'),ONCE
     INCLUDE('Utilities.inc'),ONCE
 
-St      StringTheory
-Util    Utilities
+St           StringTheory
 
 TestSound    CSTRING(255)
 
-CheckQ    QUEUE,PRE(CQ)
-CkMk          BYTE
-SomeText      STRING(20)
-          END
+CheckQ       QUEUE,PRE(CQ)
+CkMk             BYTE
+SomeText         STRING(20)
+             END
 
 ListWindow WINDOW('Checkbox Queue'),AT(,,162,192),GRAY,SYSTEM,ICON(ICON:Application), |
             FONT('Segoe UI',9)
@@ -68,5 +67,3 @@ ToggleCkMk    ROUTINE
         CQ:CkMk = 0
     END
     PUT(CheckQ)
-!  MESSAGE('Hello World')
-!  MESSAGE(Util.MaxVal(6,3))
