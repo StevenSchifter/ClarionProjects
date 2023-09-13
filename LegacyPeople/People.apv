@@ -431,8 +431,6 @@ WHEN  ('People004.clw') ('1')
 %LastApplicationDebug DEFAULT  ('1')
 %LastApplicationLocalLibrary DEFAULT  ('')
 [PROJECT]
--- NAMESPACE People
--- OUTPUTPATH C:\Users\Steven\ClarionProjects\LegacyPeople
 #system win32 exe
 #model clarion dll
 #pragma link_option(icon=>Photo.ico)
