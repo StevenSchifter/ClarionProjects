@@ -10,7 +10,7 @@ This is a toolbox full of cool utilities and skill demos!<br>
 
 > [!IMPORTANT]<br>
 > CoolBox requires [CapeSoft StringTheory](https://www.capesoft.com/accessories/StringTheorysp.htm).<br>
-> Coolbox also requires ConnectableIterativeOperations.TPL and Utilities.TPL, both of which can be found in the Templates folder.<br>
+> Coolbox also requires ConnectableIterativeOperations.TPL and Utilities.TPL, both of which can be found in my [Templates](https://github.com/StevenSchifter/ClarionProjects/tree/main/Templates) folder.<br>
 
 ## [HandCodeTester](https://github.com/StevenSchifter/ClarionProjects/tree/main/HandCodeTester)<br>
 An assortment of ideas and tests, all in one hand-coded project.<br>
