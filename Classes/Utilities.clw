@@ -5,6 +5,22 @@
         MAP
         END
 
+Utilities.GetFileFolder   PROCEDURE(STRING MyPath)!,STRING
+IncomingPath    STRING(FILE:MaxFilePath)
+LastSlashPos    LONG
+    CODE
+    IncomingPath = CLIP(MyPath)
+    LastSlashPos = INSTRING('\',IncomingPath,-1,LEN(CLIP(IncomingPath)))
+    RETURN SUB(CLIP(IncomingPath),1,LastSlashPos - 1)
+
+Utilities.GetFileName     PROCEDURE(STRING MyPath)!,STRING
+IncomingPath    STRING(FILE:MaxFilePath)
+LastSlashPos    LONG
+    CODE
+    IncomingPath = CLIP(MyPath)
+    LastSlashPos = INSTRING('\',IncomingPath,-1,LEN(CLIP(IncomingPath)))
+    RETURN SUB(CLIP(IncomingPath),LastSlashPos + 1,FILE:MaxFileName)
+
 Utilities.MaxVal                PROCEDURE(LONG X,LONG Y)!,LONG
     CODE
     IF X > Y
