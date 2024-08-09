@@ -5,7 +5,7 @@ DICTIONARY 'avi.dct'
 PROCEDURE Main
 [COMMON]
 FROM Clarion
-MODIFIED '2023/03/03' '12:17:31'
+MODIFIED '2024/08/09' '18:02:47'
 [PROMPTS]
 %ClassItem UNIQUE DEFAULT  ('ClientSideTriggers:AVI')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 0
@@ -127,7 +127,7 @@ MODIFIED '2023/03/03' '12:17:31'
 %GlobalUseEnterInsteadTabEnable DEFAULT  ('Enable')
 %GlobalUseEnterInsteadTabEnableValue DEFAULT  ('True')
 %GlobalInterLine DEFAULT  ('0')
-%GlobalEnableAutoSizeColumn LONG  (0)
+%GlobalEnableAutoSizeColumn LONG  (1)
 %GlobalEnableListFormatManager LONG  (0)
 %GlobalUserFieldListFormatManager DEFAULT  ('1')
 %TableOrigin DEFAULT  ('Application')
@@ -175,8 +175,7 @@ MODIFIED '2023/03/03' '12:17:31'
 %OverrideGenerate DEPEND %File LONG TIMES 1
 WHEN  ('AVI') (0)
 
-%OverrideRILogout DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideRILogout DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
 %GlobalObject DEPEND %ClassItem DEFAULT TIMES 1
@@ -254,16 +253,13 @@ WHEN  ('ClientSideTriggers:AVI')TIMES 0
 
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%OverrideThreaded DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideThreaded DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
-%OverrideCreate DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideCreate DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
-%OverrideExternal DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideExternal DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
 %OverrideLocalExternal DEPEND %File LONG TIMES 0
@@ -289,16 +285,13 @@ WHEN  ('AVI') (0)
 
 %FileDeclarationOver DEPEND %File DEFAULT TIMES 0
 
-%OverrideOpenMode DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideOpenMode DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
-%OverrideUserAccess DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideUserAccess DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
-%OverrideOtherAccess DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideOtherAccess DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
 %OverrideLazyOpen DEPEND %File DEFAULT TIMES 0
@@ -409,8 +402,7 @@ WHEN  ('AVI.clw') (1)
 %INIActive LONG  (1)
 %DefaultCloseFile DEFAULT  ('Close the File')
 %WarnOnLogoutError LONG  (1)
-%OverrideCloseFile DEPEND %File DEFAULT TIMES 2
-WHEN  ('') ('Use Default')
+%OverrideCloseFile DEPEND %File DEFAULT TIMES 1
 WHEN  ('AVI') ('Use Default')
 
 %DefaultExportGlobalData LONG  (1)
@@ -501,7 +493,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Clarion for Windows Quick Application'
 FROM Clarion Frame
-MODIFIED '2023/04/25' '12:46:09'
+MODIFIED '2024/08/09' '18:03:16'
 [DATA]
 LocalRequest             LONG
 !!> GUID('dd5a78fa-e0c3-445a-a518-2826cd1a0854')
@@ -523,8 +515,7 @@ FilesOpened              LONG
 [OTHERS]
 AVI
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('Call a Procedure')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 1
@@ -539,15 +530,13 @@ WHEN  ('?Browse') (BrowseAVI)
 %ButtonThread DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (1)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('None')
 
 %PreLookupKey DEPEND %Control KEY TIMES 0
@@ -565,9 +554,8 @@ WHEN  ('?Browse') ('None')
 %ForceWindowRefresh DEPEND %Control LONG TIMES 0
 
 %ReturnValue FIELD  ()
-%INISaveWindow LONG  (1)
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%INISaveWindow LONG  (0)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (1)
 
 %CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -580,8 +568,7 @@ WHEN  ('?Browse') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
 WHEN  ('?Browse')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -594,8 +581,7 @@ WHEN  ('?Browse')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
 WHEN  ('?Browse')TIMES 0
 
 %WindowOperationMode DEFAULT  ('Use WINDOW setting')
@@ -719,38 +705,32 @@ WHEN  ('?Browse') ()
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
 WHEN  ('?Browse')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
 WHEN  ('?Browse')TIMES 0
 
 %ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('Default')
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('AIBtn2')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?MENUBAR1')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('?MENUBAR1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -759,64 +739,53 @@ WHEN  ('?Browse') ('?MENUBAR1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?Browse') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
 [EMBED]
@@ -830,8 +799,8 @@ WavFileCstring = ''
 [END]
 [END]
 [WINDOW]
-AppFrame APPLICATION('AVI Application'),AT(10,10,354,231),FONT('MS Sans Serif',10,,FONT:bold), |
-          RESIZE,HVSCROLL,ICON('PEN.ICO'),MAX,SYSTEM
+AppFrame APPLICATION('AVI Application'),AT(,,354,231),FONT('MS Sans Serif',10,,FONT:bold), |
+          RESIZE,HVSCROLL,CENTER,ICON('PEN.ICO'),MAX,SYSTEM
           MENUBAR,USE(?MENUBAR1),#ORDINAL(1)
             ITEM('&Browse!'),USE(?Browse),#ORDINAL(2)
           END
@@ -848,7 +817,7 @@ NAME BrowseAVI
 [COMMON]
 DESCRIPTION 'Browse the AVI File'
 FROM Clarion Browse
-MODIFIED '2023/04/25' '12:44:52'
+MODIFIED '2024/08/09' '18:12:34'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('2421cfbd-e740-4d8b-b126-3d5ffe42da84')
@@ -868,6 +837,13 @@ RecordFiltered           LONG
 !!> GUID('ccac076f-8ffa-4db6-b542-558d9735cf9d')
 FilesOpened              LONG
 !!> GUID('25239e31-97d0-4db6-8e18-6454caa26d17')
+[SCREENCONTROLS]
+! PROMPT('File Marked:'),USE(?FileMarked:Prompt)
+! ENTRY(@s1),USE(FileMarked),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s1),USE(FileMarked),LEFT(2)
+FileMarked               STRING(1)
+!!> GUID('572f3d13-54f6-4e68-8ebb-894eb0e692c7'),PROMPT('File Marked:'),HEADER('Mark'),PICTURE(@s1),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [FILES]
 [PRIMARY]
 AVI
@@ -876,8 +852,9 @@ AVI
 [KEY]
 AVI:KeyFileSpec
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 8
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 12
+WHEN  ('?AddFileButton') ('No Special Action')
+WHEN  ('?AddFolderButton') ('No Special Action')
 WHEN  ('?Browse:1') ('No Special Action')
 WHEN  ('?Change:2') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
@@ -885,6 +862,9 @@ WHEN  ('?Delete:2') ('No Special Action')
 WHEN  ('?Insert:2') ('No Special Action')
 WHEN  ('?Mark') ('No Special Action')
 WHEN  ('?Play') ('No Special Action')
+WHEN  ('?PlayAll') ('No Special Action')
+WHEN  ('?PlayMarked') ('No Special Action')
+WHEN  ('?SHEET1') ('No Special Action')
 
 %ButtonProcedure DEPEND %Control PROCEDURE TIMES 7
 WHEN  ('?Browse:1') ()
@@ -895,8 +875,9 @@ WHEN  ('?Insert:2') ()
 WHEN  ('?Mark') ()
 WHEN  ('?Play') ()
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 8
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 12
+WHEN  ('?AddFileButton') ('25000')
+WHEN  ('?AddFolderButton') ('25000')
 WHEN  ('?Browse:1') ('25000')
 WHEN  ('?Change:2') ('25000')
 WHEN  ('?Close') ('25000')
@@ -904,6 +885,9 @@ WHEN  ('?Delete:2') ('25000')
 WHEN  ('?Insert:2') ('25000')
 WHEN  ('?Mark') ('25000')
 WHEN  ('?Play') ('25000')
+WHEN  ('?PlayAll') ('25000')
+WHEN  ('?PlayMarked') ('25000')
+WHEN  ('?SHEET1') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 7
 WHEN  ('?Browse:1') ('')
@@ -914,8 +898,9 @@ WHEN  ('?Insert:2') ('')
 WHEN  ('?Mark') ('')
 WHEN  ('?Play') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 8
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 12
+WHEN  ('?AddFileButton') ('None')
+WHEN  ('?AddFolderButton') ('None')
 WHEN  ('?Browse:1') ('None')
 WHEN  ('?Change:2') ('None')
 WHEN  ('?Close') ('None')
@@ -923,11 +908,15 @@ WHEN  ('?Delete:2') ('None')
 WHEN  ('?Insert:2') ('None')
 WHEN  ('?Mark') ('None')
 WHEN  ('?Play') ('None')
+WHEN  ('?PlayAll') ('None')
+WHEN  ('?PlayMarked') ('None')
+WHEN  ('?SHEET1') ('None')
 
 %WindowOperationMode DEFAULT  ('Use WINDOW setting')
-%INISaveWindow LONG  (1)
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 8
-WHEN  ('') (1)
+%INISaveWindow LONG  (0)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 10
+WHEN  ('?AddFileButton') (1)
+WHEN  ('?AddFolderButton') (1)
 WHEN  ('?Browse:1') (1)
 WHEN  ('?Change:2') (1)
 WHEN  ('?Close') (1)
@@ -935,6 +924,7 @@ WHEN  ('?Delete:2') (1)
 WHEN  ('?Insert:2') (1)
 WHEN  ('?Mark') (1)
 WHEN  ('?Play') (1)
+WHEN  ('?SHEET1') (1)
 
 %ReturnValue FIELD  ()
 %ButtonRunName DEPEND %Control DEFAULT TIMES 7
@@ -1058,8 +1048,9 @@ WHEN  ('?Insert:2')TIMES 0
 WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 8
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 10
+WHEN  ('?AddFileButton')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
 WHEN  ('?Change:2')TIMES 0
 WHEN  ('?Close')TIMES 0
@@ -1067,6 +1058,7 @@ WHEN  ('?Delete:2')TIMES 0
 WHEN  ('?Insert:2')TIMES 0
 WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
+WHEN  ('?SHEET1')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -1099,8 +1091,9 @@ WHEN  ('?Insert:2')TIMES 0
 WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 8
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 10
+WHEN  ('?AddFileButton')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
 WHEN  ('?Change:2')TIMES 0
 WHEN  ('?Close')TIMES 0
@@ -1108,6 +1101,7 @@ WHEN  ('?Delete:2')TIMES 0
 WHEN  ('?Insert:2')TIMES 0
 WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
+WHEN  ('?SHEET1')TIMES 0
 
 %ProcedureDisableEnhanceFocus LONG  (0)
 %ProcedureUseEnterInsteadTabOverride LONG  (0)
@@ -1224,39 +1218,57 @@ WHEN  ('?Play')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 5
+WHEN  ('?AddFileButton')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?Mark')TIMES 0
+WHEN  ('?SHEET1')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 5
+WHEN  ('?AddFileButton')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
+WHEN  ('?Mark')TIMES 0
+WHEN  ('?SHEET1')TIMES 0
 
 %ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?AddFileButton') ('Default')
+WHEN  ('?AddFolderButton') ('Default')
 WHEN  ('?Browse:1') ('Default')
+WHEN  ('?Mark') ('Default')
+WHEN  ('?SHEET1') ('Default')
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?AddFileButton') ('AIBtn11')
+WHEN  ('?AddFolderButton') ('AIBtn14')
 WHEN  ('?Browse:1') ('AIBtn1')
+WHEN  ('?Mark') ('AIBtn6')
+WHEN  ('?SHEET1') ('AIBtn3')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (1)
+WHEN  ('?AddFolderButton') (1)
 WHEN  ('?Browse:1') (1)
+WHEN  ('?Mark') (1)
+WHEN  ('?SHEET1') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?Browse:1')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?AddFileButton') ('?Browse:1')
+WHEN  ('?AddFolderButton') ('?Browse:1')
 WHEN  ('?Browse:1') ('?Browse:1')
+WHEN  ('?Mark') ('?Browse:1')
+WHEN  ('?SHEET1') ('?Browse:1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -1264,65 +1276,98 @@ WHEN  ('?Browse:1') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?AddFileButton') ('Off')
+WHEN  ('?AddFolderButton') ('Off')
 WHEN  ('?Browse:1') ('Off')
+WHEN  ('?Mark') ('Off')
+WHEN  ('?SHEET1') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 5
+WHEN  ('?AddFileButton') ('')
+WHEN  ('?AddFolderButton') ('')
 WHEN  ('?Browse:1') ('')
+WHEN  ('?Mark') ('')
+WHEN  ('?SHEET1') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (-1)
+WHEN  ('?AddFolderButton') (-1)
 WHEN  ('?Browse:1') (-1)
+WHEN  ('?Mark') (-1)
+WHEN  ('?SHEET1') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (-1)
+WHEN  ('?AddFolderButton') (-1)
 WHEN  ('?Browse:1') (-1)
+WHEN  ('?Mark') (-1)
+WHEN  ('?SHEET1') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 5
+WHEN  ('?AddFileButton') (0)
+WHEN  ('?AddFolderButton') (0)
 WHEN  ('?Browse:1') (0)
+WHEN  ('?Mark') (0)
+WHEN  ('?SHEET1') (0)
 
 [EMBED]
 EMBED %ControlPreEventHandling
@@ -1335,22 +1380,10 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-  SET(AVI); NofMarked#=0
-  LOOP UNTIL EOF(AVI)
-    NEXT(AVI); IF NOT AVI:Mark THEN CYCLE.
-    WavFileCstring = AVI:FileSpec
-    PlayAvi(WavFileCstring); NofMarked#+=1
-  END
-  IF NofMarked#=0
-    WavFileCstring = AVI:FileSpec
-    DO SyncWindow; PlayAvi(WavFileCstring)
-  END
+Local.PlayOne()
 [END]
 [END]
-[END]
-EMBED %ControlPostEventHandling
-[INSTANCES]
-WHEN '?Mark'
+WHEN '?AddFileButton'
 [INSTANCES]
 WHEN 'Accepted'
 [DEFINITION]
@@ -1358,10 +1391,51 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-  DO SyncWindow
-  AVI:Mark=1-AVI:Mark; PUT(AVI)
-  ForceRefresh=TRUE; DO RefreshWindow
-
+Local.AddFile()
+[END]
+[END]
+WHEN '?AddFolderButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.AddFolder()
+[END]
+[END]
+WHEN '?Mark'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Local.ToggleMark()
+[END]
+[END]
+WHEN '?PlayAll'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayAll()
+[END]
+[END]
+WHEN '?PlayMarked'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayMarked()
 [END]
 [END]
 [END]
@@ -1373,8 +1447,7 @@ WHEN '1'
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-ENABLE(?Play)
-ENABLE(?Mark)
+ENABLE(?PlayTab)
 [END]
 [END]
 EMBED %BrowseBoxEmpty
@@ -1385,8 +1458,98 @@ WHEN '1'
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-DISABLE(?Play)
-DISABLE(?Mark)
+DISABLE(?PlayTab)
+[END]
+[END]
+EMBED %DataSectionBeforeWindow
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3500
+PROPERTY:END
+Local    CLASS
+AddFile     PROCEDURE()
+AddFolder   PROCEDURE()
+PlayOne     PROCEDURE()
+PlayMarked  PROCEDURE()
+PlayAll     PROCEDURE()
+ToggleMark  PROCEDURE()
+    END
+[END]
+EMBED %LocalProcedures
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.AddFile PROCEDURE
+    CODE
+    
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.AddFolder PROCEDURE
+    CODE
+    
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayOne PROCEDURE
+    CODE
+    WavFileCstring = AVI:FileSpec
+    PlayAvi(WavFileCstring)
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayAll PROCEDURE
+    CODE
+    SET(AVI)
+    LOOP UNTIL EOF(AVI)
+        NEXT(AVI)
+        Local.PlayOne()
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayMarked PROCEDURE
+    CODE
+    SET(AVI)
+    LOOP UNTIL EOF(AVI)
+        NEXT(AVI)
+        IF NOT AVI:Mark
+            CYCLE
+        END
+        Local.PlayOne()
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.ToggleMark PROCEDURE
+    CODE
+    AVI:Mark = 1 - AVI:Mark ! quick toggle of Mark
+    PUT(AVI)
+    ForceRefresh = True
+    DO RefreshWindow
+    
+[END]
+EMBED %FormatBrowse
+[INSTANCES]
+WHEN '1'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+IF AVI:Mark
+    FileMarked = '>'
+ELSE
+    FileMarked = ' '
+END
 [END]
 [END]
 [END]
@@ -1467,32 +1630,32 @@ PROCPROP
 %HotFieldBound DEPEND %HotFields LONG TIMES 0
 
 %ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %ConditionalColors DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 1
 WHEN  ('?Browse:1')TIMES 2
@@ -1507,8 +1670,7 @@ WHEN  ('AVI:FileSpec')TIMES 1
 WHEN  (1) ('AVI:Mark')
 
 %ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('AVI:Description')TIMES 1
 WHEN  (1) (-1)
@@ -1516,8 +1678,7 @@ WHEN  ('AVI:FileSpec')TIMES 1
 WHEN  (1) (-1)
 
 %ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('AVI:Description')TIMES 1
 WHEN  (1) (12632256)
@@ -1525,8 +1686,7 @@ WHEN  ('AVI:FileSpec')TIMES 1
 WHEN  (1) (12632256)
 
 %ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('AVI:Description')TIMES 1
 WHEN  (1) (-1)
@@ -1534,8 +1694,7 @@ WHEN  ('AVI:FileSpec')TIMES 1
 WHEN  (1) (-1)
 
 %ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 2
 WHEN  ('AVI:Description')TIMES 1
 WHEN  (1) (8421504)
@@ -1621,67 +1780,67 @@ WHEN  ('AVI:FileSpec')TIMES 0
 
 %UseSameColorForAll LONG  (0)
 %ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %AllControlGreenBarColor LONG  (0)
 %AllControlGreenBarColorAlternate LONG  (0)
@@ -1714,57 +1873,57 @@ WHEN  ('AVI:FileSpec') (-1)
 
 %UseSameStyleForAll LONG  (0)
 %ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Local List')
 WHEN  ('AVI:FileSpec') ('Local List')
+WHEN  ('FileMarked') ('Local List')
 
 %GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('')
 WHEN  ('AVI:FileSpec') ('')
+WHEN  ('FileMarked') ('')
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Local List')
 WHEN  ('AVI:FileSpec') ('Local List')
+WHEN  ('FileMarked') ('Local List')
 
 %GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('')
 WHEN  ('AVI:FileSpec') ('')
+WHEN  ('FileMarked') ('')
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Local List')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Local List')
 WHEN  ('AVI:FileSpec') ('Local List')
+WHEN  ('FileMarked') ('Local List')
 
 %ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('')
 WHEN  ('AVI:FileSpec') ('')
+WHEN  ('FileMarked') ('')
 
 %ControlFieldStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
@@ -1773,13 +1932,11 @@ WHEN  ('AVI:FileSpec') ('')
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
 %ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
 
 %ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
@@ -1854,43 +2011,54 @@ PROCPROP
 %UpdateProcedure PROCEDURE  (UpdateAVI)
 %EditViaPopup LONG  (1)
 %EditInPlace LONG  (0)
-%ClassItem UNIQUE DEFAULT  ('CWEIPManager', 'EIP_AVI:Description', 'EIP_AVI:FileSpec')
+%ClassItem UNIQUE DEFAULT  ('CWEIPManager', 'EIP_', 'EIP_AVI:Description', 'EIP_AVI:FileSpec', |
+  'EIP_FileMarked', 'EIP_Marked')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 0
 
 %ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 0
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
-%GlobalObject DEPEND %ClassItem DEFAULT TIMES 3
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 5
 WHEN  ('CWEIPManager') ('NO')
 WHEN  ('EIP_AVI:Description') ('NO')
 WHEN  ('EIP_AVI:FileSpec') ('NO')
+WHEN  ('EIP_FileMarked') ('NO')
+WHEN  ('EIP_Marked') ('NO')
 
 %ThisObjectName DEPEND %ClassItem DEFAULT TIMES 0
 
-%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 3
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 5
 WHEN  ('CWEIPManager') (1)
 WHEN  ('EIP_AVI:Description') (1)
 WHEN  ('EIP_AVI:FileSpec') (1)
+WHEN  ('EIP_FileMarked') (1)
+WHEN  ('EIP_Marked') (1)
 
-%UseABCBaseClass DEPEND %ClassItem LONG TIMES 3
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 5
 WHEN  ('CWEIPManager') (1)
 WHEN  ('EIP_AVI:Description') (1)
 WHEN  ('EIP_AVI:FileSpec') (1)
+WHEN  ('EIP_FileMarked') (1)
+WHEN  ('EIP_Marked') (1)
 
-%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 3
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 5
 WHEN  ('CWEIPManager') ('')
 WHEN  ('EIP_AVI:Description') ('')
 WHEN  ('EIP_AVI:FileSpec') ('')
+WHEN  ('EIP_FileMarked') ('')
+WHEN  ('EIP_Marked') ('')
 
 %ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
 
 %BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
 
-%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 3
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 5
 WHEN  ('CWEIPManager') (0)
 WHEN  ('EIP_AVI:Description') (0)
 WHEN  ('EIP_AVI:FileSpec') (0)
+WHEN  ('EIP_FileMarked') (0)
+WHEN  ('EIP_Marked') (0)
 
 %NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
 
@@ -1902,7 +2070,8 @@ WHEN  ('EIP_AVI:FileSpec') (0)
 
 %NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('EIP_AVI:Description')TIMES 0
 
 %NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
@@ -1928,7 +2097,8 @@ WHEN  ('EIP_AVI:FileSpec') (0)
 
 %ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('EIP_AVI:Description')TIMES 0
 
 %ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
@@ -1960,70 +2130,69 @@ WHEN  ('EIP_AVI:FileSpec') (0)
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
 %AllowEIP DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (1)
 WHEN  ('AVI:FileSpec') (1)
+WHEN  ('FileMarked') (1)
 
 %EditInPlaceType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Entry')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Entry')
 WHEN  ('AVI:FileSpec') ('Entry')
+WHEN  ('FileMarked') ('Entry')
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Default')
 WHEN  ('AVI:FileSpec') ('Default')
+WHEN  ('FileMarked') ('Default')
 
 %EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Fixed')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Fixed')
 WHEN  ('AVI:FileSpec') ('Fixed')
+WHEN  ('FileMarked') ('Fixed')
 
 %EditInPlaceFEQFixedDataSource DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
 %EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
-WHEN  ('')TIMES 1
-WHEN  ('')TIMES 0
+WHEN  ('?AddFolderButton')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
@@ -2032,52 +2201,52 @@ WHEN  ('')TIMES 0
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
 %EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQAutoSerializeFieldDelimiter DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
 %AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (1)
 WHEN  ('AVI:FileSpec') (1)
+WHEN  ('FileMarked') (1)
 
 %DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Open')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Open')
 WHEN  ('AVI:FileSpec') ('Open')
+WHEN  ('FileMarked') ('Open')
 
 %AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
 %DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('All Files')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('All Files')
 WHEN  ('AVI:FileSpec') ('All Files')
+WHEN  ('FileMarked') ('All Files')
 
 %DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('*.*')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('*.*')
 WHEN  ('AVI:FileSpec') ('*.*')
+WHEN  ('FileMarked') ('*.*')
 
 %DOSMoreMasks DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
 
@@ -2086,32 +2255,32 @@ WHEN  ('AVI:FileSpec') ('*.*')
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
 %EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (-1)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (-1)
 WHEN  ('AVI:FileSpec') (-1)
+WHEN  ('FileMarked') (-1)
 
 %EditInPlaceFEQFrom DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
@@ -2122,60 +2291,60 @@ WHEN  ('AVI:FileSpec') (-1)
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Default')
 WHEN  ('AVI:FileSpec') ('Default')
+WHEN  ('FileMarked') ('Default')
 
 %EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %LookupAssign DEPEND %Control DEPEND %ControlField MULTI LONG TIMES 0
 
@@ -2186,11 +2355,11 @@ WHEN  ('AVI:FileSpec') (0)
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Default')
 WHEN  ('AVI:FileSpec') ('Default')
+WHEN  ('FileMarked') ('Default')
 
 %EditInPlaceFEQTrue DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
@@ -2201,46 +2370,46 @@ WHEN  ('AVI:FileSpec') ('Default')
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
 %EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Default')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Default')
 WHEN  ('AVI:FileSpec') ('Default')
+WHEN  ('FileMarked') ('Default')
 
 %EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('0')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('0')
 WHEN  ('AVI:FileSpec') ('0')
+WHEN  ('FileMarked') ('0')
 
 %EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') (0)
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') (0)
 WHEN  ('AVI:FileSpec') (0)
+WHEN  ('FileMarked') (0)
 
 %LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
-WHEN  ('')TIMES 1
-WHEN  ('') ('Related Field')
-WHEN  ('?Browse:1')TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Browse:1')TIMES 3
 WHEN  ('AVI:Description') ('Related Field')
 WHEN  ('AVI:FileSpec') ('Related Field')
+WHEN  ('FileMarked') ('Related Field')
 
 %PostLookupKey DEPEND %Control DEPEND %ControlField KEY TIMES 0
 
@@ -2262,24 +2431,36 @@ NAME Clarion CloseButton
 [INSTANCE]
 INSTANCE 3
 [WINDOW]
-QuickWindow WINDOW('Browse the AVI database'),AT(2,2,334,154),FONT('MS Sans Serif',8),DOUBLE, |
-          GRAY,IMM
-          LIST,AT(4,4,324,126),USE(?Browse:1),HVSCROLL,ALRT(InsertKey),FORMAT('141L|M*~Fi' & |
-            'le Spec~L(2)@s40@122L|M*~Description~L(2)@s40@'),FROM(Queue:Browse:1),IMM,MARK(Queue:Browse:1), |
-            MSG('Browsing Records'),#FIELDS(AVI:FileSpec,AVI:Description),#ORIG(?List),#SEQ(1), |
-            #ORDINAL(1)
-          BUTTON('&Play'),AT(3,135,45,14),USE(?Play),MSG('Press to play file(s)'),#ORIG(?Button6), |
-            #ORDINAL(7)
-          BUTTON('&Mark'),AT(53,135,45,14),USE(?Mark),MSG('Press to mark/unmark file'),TIP(' '), |
-            #ORIG(?Play),#ORDINAL(5)
-          BUTTON('&Insert'),AT(119,135,45,14),USE(?Insert:2),MSG('Press to add a new record'), |
-            #LINK(?Change:2),#ORIG(?Insert),#SEQ(2),#ORDINAL(2)
-          BUTTON('&Edit'),AT(169,135,45,14),USE(?Change:2),MSG('Press to edit the record'), |
-            #LINK(?Delete:2),#ORIG(?Change),#SEQ(2),#ORDINAL(3)
-          BUTTON('&Delete'),AT(218,135,45,14),USE(?Delete:2),MSG('Press to delete the record'), |
-            #LINK(?Insert:2),#ORIG(?Delete),#SEQ(2),#ORDINAL(4)
-          BUTTON('&Close'),AT(283,135,45,14),USE(?Close),MSG('Press to close this window'), |
-            #ORIG(?Close),#SEQ(3),#ORDINAL(6)
+QuickWindow WINDOW('Browse the AVI database'),AT(,,334,180),FONT('MS Sans Serif',8),DOUBLE, |
+          CENTER,GRAY,IMM,MDI,SYSTEM
+          LIST,AT(4,4,324,126),USE(?Browse:1),HVSCROLL,ALRT(InsertKey),FORMAT('20L(2)|M*~' & |
+            'Mark~@s1@141L(2)|M*~File Spec~@s40@122L(2)|M*~Description~@s40@'),FROM(Queue:Browse:1), |
+            IMM,MARK(Queue:Browse:1),MSG('Browsing Records'),#FIELDS(FileMarked,AVI:FileSpec, |
+            AVI:Description),#ORIG(?List),#SEQ(1),#ORDINAL(1)
+          BUTTON('&Close'),AT(274,135,54,32),USE(?Close),LEFT,ICON('WAClose.ico'),MSG('Press to c' & |
+            'lose this window'),#ORIG(?Close),#SEQ(3),#ORDINAL(2)
+          SHEET,AT(4,135,267,38),USE(?SHEET1),#ORDINAL(3)
+            TAB('&Play'),USE(?PlayTab),#ORDINAL(4)
+              BUTTON('&Play'),AT(9,153,45,14),USE(?Play),LEFT,ICON('WIZDOWN.ICO'),MSG('Press to p' & |
+                'lay selected file'),#ORIG(?Button6),#ORDINAL(5)
+              BUTTON('&Mark'),AT(62,153,45,14),USE(?Mark),LEFT,ICON('WIZMARK.ICO'),MSG('Press to m' & |
+                'ark/unmark file'),TIP(' '),#ORIG(?Play),#ORDINAL(6)
+              BUTTON('&Marked'),AT(114,153,45,14),USE(?PlayMarked),LEFT,ICON('WIZDOWN.ICO'), |
+                MSG('Press to play marked file(s)'),#ORIG(?Play),#ORDINAL(7)
+              BUTTON('&All'),AT(166,153,45,14),USE(?PlayAll),LEFT,ICON('WIZDOWN.ICO'),MSG('Press to p' & |
+                'lay all files'),#ORIG(?PlayMarked),#ORDINAL(8)
+            END
+            TAB('&Edit'),USE(?EditTab),#ORDINAL(9)
+              BUTTON('&Insert'),AT(114,153,45,14),USE(?Insert:2),LEFT,ICON('WIZINS.ICO'),MSG('Press to a' & |
+                'dd a new record'),#LINK(?Change:2),#ORIG(?Insert),#SEQ(2),#ORDINAL(10)
+              BUTTON('&Edit'),AT(166,153,45,14),USE(?Change:2),LEFT,ICON('WIZEDIT.ICO'),MSG('Press to e' & |
+                'dit the record'),#LINK(?Delete:2),#ORIG(?Change),#SEQ(2),#ORDINAL(11)
+              BUTTON('&Delete'),AT(219,153,45,14),USE(?Delete:2),LEFT,ICON('WIZDEL.ICO'),MSG('Press to d' & |
+                'elete the record'),#LINK(?Insert:2),#ORIG(?Delete),#SEQ(2),#ORDINAL(12)
+              BUTTON('&Add File'),AT(9,153,45,14),USE(?AddFileButton),#ORDINAL(13)
+              BUTTON('Add &Folder'),AT(62,153,45,14),USE(?AddFolderButton),#ORDINAL(14)
+            END
+          END
         END
 
 [END]
@@ -2293,7 +2474,7 @@ NAME UpdateAVI
 [COMMON]
 DESCRIPTION 'Update the AVI File'
 FROM Clarion Form
-MODIFIED '2023/09/13' '15:25:28'
+MODIFIED '2024/08/09' '18:03:07'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('2927c7b1-cec7-4e63-b446-5723446a8201')
@@ -2335,7 +2516,7 @@ AVI
 2
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('No Special Action')
+WHEN  ('?AVI:Description') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?LookupFile') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
@@ -2361,7 +2542,7 @@ WHEN  ('?LookupFile') (0)
 WHEN  ('?OK') (0)
 
 %ButtonThreadStack DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('25000')
+WHEN  ('?AVI:Description') ('25000')
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?LookupFile') ('25000')
 WHEN  ('?OK') ('25000')
@@ -2372,7 +2553,7 @@ WHEN  ('?LookupFile') ('')
 WHEN  ('?OK') ('')
 
 %ButtonRequest DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('None')
+WHEN  ('?AVI:Description') ('None')
 WHEN  ('?Cancel') ('None')
 WHEN  ('?LookupFile') ('None')
 WHEN  ('?OK') ('None')
@@ -2414,9 +2595,8 @@ WHEN  ('?OK') (0)
 
 %ReturnValue FIELD  ()
 %WindowOperationMode DEFAULT  ('Use WINDOW setting')
-%INISaveWindow LONG  (1)
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
-WHEN  ('') (1)
+%INISaveWindow LONG  (0)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 5
 WHEN  ('?AVI:Description') (1)
 WHEN  ('?AVI:FileSpec') (1)
 WHEN  ('?Cancel') (1)
@@ -2443,7 +2623,7 @@ WHEN  ('?LookupFile')TIMES 0
 WHEN  ('?OK')TIMES 0
 
 %CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+WHEN  ('?AVI:Description')TIMES 0
 WHEN  ('?Cancel')TIMES 0
 WHEN  ('?LookupFile')TIMES 0
 WHEN  ('?OK')TIMES 0
@@ -2468,7 +2648,7 @@ WHEN  ('?LookupFile')TIMES 0
 WHEN  ('?OK')TIMES 0
 
 %UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 4
-WHEN  ('')TIMES 0
+WHEN  ('?AVI:Description')TIMES 0
 WHEN  ('?Cancel')TIMES 0
 WHEN  ('?LookupFile')TIMES 0
 WHEN  ('?OK')TIMES 0
@@ -2593,7 +2773,7 @@ WHEN  ('?LookupFile') ()
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
 %CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+WHEN  ('?AVI:Description')TIMES 0
 WHEN  ('?LookupFile')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
@@ -2601,7 +2781,7 @@ WHEN  ('?LookupFile')TIMES 0
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
 %UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
+WHEN  ('?AVI:Description')TIMES 0
 WHEN  ('?LookupFile')TIMES 0
 
 %ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
@@ -2609,21 +2789,21 @@ WHEN  ('?LookupFile')TIMES 0
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
 %ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
+WHEN  ('?AVI:Description') ('Default')
 WHEN  ('?LookupFile') ('Default')
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
 %AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
+WHEN  ('?AVI:Description') ('AIBtn7')
 WHEN  ('?LookupFile') ('AIBtn3')
 
 %AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
+WHEN  ('?AVI:Description') (1)
 WHEN  ('?LookupFile') (1)
 
 %AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?OK')
+WHEN  ('?AVI:Description') ('?OK')
 WHEN  ('?LookupFile') ('?OK')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -2633,7 +2813,7 @@ WHEN  ('?LookupFile') ('?OK')
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
@@ -2641,7 +2821,7 @@ WHEN  ('?LookupFile') (0)
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
@@ -2649,7 +2829,7 @@ WHEN  ('?LookupFile') (0)
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
@@ -2657,39 +2837,39 @@ WHEN  ('?LookupFile') (0)
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
+WHEN  ('?AVI:Description') ('Off')
 WHEN  ('?LookupFile') ('Off')
 
 %FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
+WHEN  ('?AVI:Description') ('')
 WHEN  ('?LookupFile') ('')
 
 %FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+WHEN  ('?AVI:Description') (-1)
 WHEN  ('?LookupFile') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
 %FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 %FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
+WHEN  ('?AVI:Description') (-1)
 WHEN  ('?LookupFile') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
 %FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
+WHEN  ('?AVI:Description') (0)
 WHEN  ('?LookupFile') (0)
 
 [ADDITION]
@@ -2740,19 +2920,21 @@ NAME Clarion DOSFileLookup
 [INSTANCE]
 INSTANCE 4
 [PROMPTS]
-%DOSFileDialogHeader DEFAULT  ('Select an AVI file to add')
+%DOSFileDialogHeader DEFAULT  ('Select a sound file to add')
 %DOSFileField FIELD  (AVI:FileSpec)
 %DOSInitialDirectory DEFAULT  ('')
 %DOSVariableMask LONG  (0)
 %DOSVariableMaskValue FIELD  ()
 %DOSMaskDesc DEFAULT  ('WAV files')
-%DOSMask DEFAULT  ('*.WAV')
-%DOSMoreMasks MULTI LONG  (1)
-%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 1
+%DOSMask DEFAULT  ('*.wav')
+%DOSMoreMasks MULTI LONG  (1, 2)
+%DOSMoreMaskDesc DEPEND %DOSMoreMasks DEFAULT TIMES 2
 WHEN  (1) ('AVI files')
+WHEN  (2) ('All files')
 
-%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 1
-WHEN  (1) ('*.AVI')
+%DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 2
+WHEN  (1) ('*.avi')
+WHEN  (2) ('*.*')
 
 %ReturnToOriginalDir LONG  (0)
 %AllowLongFilenames LONG  (1)
@@ -2764,7 +2946,7 @@ WHEN  (1) ('*.AVI')
 %ImageResize LONG  (1)
 [WINDOW]
 QuickWindow WINDOW('Update the AVI database'),AT(,,282,71),FONT('MS Sans Serif',8,COLOR:Black), |
-          DOUBLE,GRAY,IMM
+          DOUBLE,CENTER,GRAY,IMM,MDI,SYSTEM
           BUTTON('&OK'),AT(179,53,45,14),USE(?OK),MSG('Press to accept changes'),#ORIG(?OK), |
             #SEQ(2),#ORDINAL(1)
           BUTTON('&Cancel'),AT(229,53,45,14),USE(?Cancel),MSG('Press to cancel  changes'), |
