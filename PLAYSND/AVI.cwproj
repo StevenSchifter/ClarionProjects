@@ -37,9 +37,6 @@
     <Compile Include="AVI-MAIN.clw">
       <Generated>true</Generated>
     </Compile>
-    <Compile Include="AVI-PLAY.clw">
-      <Generated>true</Generated>
-    </Compile>
     <Compile Include="AVI.clw">
       <Generated>true</Generated>
     </Compile>
