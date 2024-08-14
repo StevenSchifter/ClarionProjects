@@ -27,7 +27,10 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
+WHEN  ('FileManager:Sounds') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:Sounds') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('')
@@ -471,8 +474,13 @@ WHEN  ('SoundBrowser001.clw') ('1')
 #system win32 exe
 #model clarion dll
 #pragma debug(vid=>full)
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
+#compile "SoundBrowser_BC0.CLW" -- GENERATED
+#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
@@ -946,7 +954,7 @@ NAME BrowseSounds
 DESCRIPTION 'Browse the Sounds file'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/08/14' '16:03:40'
+MODIFIED '2024/08/14' '16:55:33'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('0fa0ec8e-bca9-4e95-b74f-74615c332df4')
@@ -958,7 +966,9 @@ Sounds
 [KEY]
 Snd:NameKey
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 11
+%ButtonAction DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?AddFileButton') ('No Special Action')
+WHEN  ('?AddFolderButton') ('No Special Action')
 WHEN  ('?Change:3') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
 WHEN  ('?Delete:3') ('No Special Action')
@@ -979,7 +989,9 @@ WHEN  ('?View:2') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 11
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?AddFileButton') ('25000')
+WHEN  ('?AddFolderButton') ('25000')
 WHEN  ('?Change:3') ('25000')
 WHEN  ('?Close') ('25000')
 WHEN  ('?Delete:3') ('25000')
@@ -994,7 +1006,9 @@ WHEN  ('?View:2') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 11
+%ButtonRequest DEPEND %Control DEFAULT TIMES 13
+WHEN  ('?AddFileButton') ('None')
+WHEN  ('?AddFolderButton') ('None')
 WHEN  ('?Change:3') ('None')
 WHEN  ('?Close') ('None')
 WHEN  ('?Delete:3') ('None')
@@ -1083,7 +1097,8 @@ WHEN  ('WindowToolbar') (0)
 
 %NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
 
 %NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
@@ -1109,7 +1124,8 @@ WHEN  ('WindowToolbar') (0)
 
 %ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
 
 %ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
@@ -1218,33 +1234,49 @@ WHEN  ('WindowToolbar') (0)
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?AddFolderButton') ('Default')
 WHEN  ('?CurrentTab') ('Default')
+WHEN  ('?Mark') ('Default')
 WHEN  ('?Play') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?AddFolderButton') ('Off')
+WHEN  ('?Mark') ('Off')
 WHEN  ('?Play') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?AddFolderButton') ('')
+WHEN  ('?Mark') ('')
 WHEN  ('?Play') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (-1)
+WHEN  ('?Mark') (-1)
 WHEN  ('?Play') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (-1)
+WHEN  ('?Mark') (-1)
 WHEN  ('?Play') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
@@ -1259,7 +1291,9 @@ WHEN  ('?Play') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (1)
+WHEN  ('?Mark') (1)
 WHEN  ('?Play') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -1278,14 +1312,18 @@ WHEN  ('?Play') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -1298,39 +1336,53 @@ WHEN  ('?Play')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
+WHEN  ('?AddFolderButton')TIMES 0
+WHEN  ('?Mark')TIMES 0
 WHEN  ('?Play')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?AddFolderButton') ('AIBtn19')
+WHEN  ('?Mark') ('AIBtn13')
 WHEN  ('?Play') ('AIBtn10')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (1)
+WHEN  ('?Mark') (1)
 WHEN  ('?Play') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
+WHEN  ('?AddFolderButton') ('?CurrentTab')
+WHEN  ('?Mark') ('?CurrentTab')
 WHEN  ('?Play') ('?View:2')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -1339,28 +1391,36 @@ WHEN  ('?Play') ('?View:2')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('?AddFolderButton') (0)
+WHEN  ('?Mark') (0)
 WHEN  ('?Play') (0)
 
 [EMBED]
@@ -1442,7 +1502,13 @@ PRIORITY 4000
 PROPERTY:END
 Local.ToggleMark PROCEDURE
     CODE
-    Snd:FileMarked = 1 - Snd:FileMarked ! quick toggle of Snd:FileMarked
+    Snd:FileName = Queue:Browse:1.Snd:FileName
+    GET(Sounds,Snd:NameKey)
+    IF NOT Snd:FileMarked
+        Snd:FileMarked = '>'
+    ELSE
+        Snd:FileMarked = ''
+    END
     PUT(Sounds)
     ThisWindow.Reset(TRUE)
 [END]
@@ -1465,7 +1531,7 @@ WHEN 'Accepted'
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
-PRIORITY 2500
+PRIORITY 4999
 PROPERTY:END
 Local.ToggleMark()
 [END]
@@ -1504,6 +1570,29 @@ Local.StopPlaying()
 [END]
 [END]
 [END]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7750
+PROPERTY:END
+IF RECORDS(Sounds)
+    ENABLE(?PlaybackGroup)
+END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8005
+PROPERTY:END
+IF RECORDS(Sounds)
+    ENABLE(?PlaybackGroup)
+END
+[END]
+[END]
+[END]
 [END]
 [ADDITION]
 NAME ABC BrowseBox
@@ -1513,7 +1602,7 @@ PROCPROP
 [PROMPTS]
 %AcceptToolBarControl LONG  (0)
 %EnableQuickScan LONG  (0)
-%LocatorType DEFAULT  ('Step')
+%LocatorType DEFAULT  ('Incremental')
 %OverrideDefaultLocator LONG  (0)
 %OverrideLocator DEFAULT  ('')
 %RecordFilter DEFAULT  ('')
@@ -1570,23 +1659,23 @@ PROCPROP
 
 %SortScrollAlt DEPEND %SortOrder LONG TIMES 0
 
-%ClassItem UNIQUE DEFAULT  ('Default', 'Locator0', 'Step0')
+%ClassItem UNIQUE DEFAULT  ('Default', 'Locator', 'Locator0', 'Step', 'Step0')
 %DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 3
 WHEN  ('Default') ('BrowseClass')
-WHEN  ('Locator0') ('StepLocatorClass')
+WHEN  ('Locator0') ('IncrementalLocatorClass')
 WHEN  ('Step0') ('StepClass')
 
 %ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 3
 WHEN  ('Default') ('')
 WHEN  ('Locator0') ('')
-WHEN  ('Step0') ('StepStringClass')
+WHEN  ('Step0') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
-%LoadMethod DEFAULT  ('Page')
+%LoadMethod DEFAULT  ('File')
 %InterLine DEFAULT  ('0')
 %FindDefaultAnywhere LONG  (0)
 %DefaultEnableOnEmpty LONG  (0)
@@ -1634,7 +1723,9 @@ WHEN  ('Step0') (0)
 
 %NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 2
+WHEN  ('Default')TIMES 0
+WHEN  ('Step0')TIMES 0
 
 %NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
@@ -1660,7 +1751,9 @@ WHEN  ('Step0') (0)
 
 %ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 2
+WHEN  ('Default')TIMES 0
+WHEN  ('Step0')TIMES 0
 
 %ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
@@ -1729,39 +1822,45 @@ WHEN  ('Step0') (0)
 
 %SortResetField DEPEND %SortResetFields FIELD TIMES 0
 
-%HotFields MULTI LONG  ()
-%HotField DEPEND %HotFields FIELD TIMES 0
+%HotFields MULTI LONG  (1)
+%HotField DEPEND %HotFields FIELD TIMES 1
+WHEN  (1) (Snd:FileMarked)
 
 %HotFieldBound DEPEND %HotFields LONG TIMES 0
 
 %HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
 
 %UseSameColorForAll LONG  (0)
-%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
@@ -1771,57 +1870,69 @@ WHEN  ('Snd:FileName') (-1)
 
 %ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
 
-%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 0
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 0
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 0
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 0
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
@@ -1865,19 +1976,22 @@ WHEN  ('Snd:FileName') (-1)
 %ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
 
 %UseSameStyleForAll LONG  (0)
-%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Local List')
 WHEN  ('Snd:FileMarked') ('Local List')
 WHEN  ('Snd:FileName') ('Local List')
 
-%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('')
 WHEN  ('Snd:FileMarked') ('')
@@ -1885,13 +1999,15 @@ WHEN  ('Snd:FileName') ('')
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Local List')
 WHEN  ('Snd:FileMarked') ('Local List')
 WHEN  ('Snd:FileName') ('Local List')
 
-%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('')
 WHEN  ('Snd:FileMarked') ('')
@@ -1899,13 +2015,15 @@ WHEN  ('Snd:FileName') ('')
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Local List')
 WHEN  ('Snd:FileMarked') ('Local List')
 WHEN  ('Snd:FileName') ('Local List')
 
-%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('')
 WHEN  ('Snd:FileMarked') ('')
@@ -1917,9 +2035,11 @@ WHEN  ('Snd:FileName') ('')
 
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 0
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 0
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
 
@@ -1963,19 +2083,22 @@ WHEN  ('Snd:FileName') ('')
 %EnableSortHeader LONG  (0)
 %ControlFieldSortHeaderSave LONG  (0)
 %ControlFieldSortHeaderMulti LONG  (1)
-%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
@@ -1985,9 +2108,11 @@ WHEN  ('Snd:FileName') (0)
 
 %ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
 
-%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 0
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
-%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 0
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
 %SortHeaderColumnsUseColor LONG  (0)
 %SortHeaderColorBkHdrAsc LONG  (10526303)
@@ -2172,13 +2297,15 @@ WHEN  ('EIP_Snd:Description')TIMES 0
 
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
-%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (1)
 WHEN  ('Snd:FileMarked') (1)
 WHEN  ('Snd:FileName') (1)
 
-%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Entry')
 WHEN  ('Snd:FileMarked') ('Entry')
@@ -2186,37 +2313,43 @@ WHEN  ('Snd:FileName') ('Entry')
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Default')
 WHEN  ('Snd:FileMarked') ('Default')
 WHEN  ('Snd:FileName') ('Default')
 
-%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Fixed')
 WHEN  ('Snd:FileMarked') ('Fixed')
@@ -2226,7 +2359,8 @@ WHEN  ('Snd:FileName') ('Fixed')
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
-%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 0
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
+WHEN  ('?AddFolderButton')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
@@ -2234,7 +2368,8 @@ WHEN  ('Snd:FileName') ('Fixed')
 
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
-%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
@@ -2244,19 +2379,22 @@ WHEN  ('Snd:FileName') (0)
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (1)
 WHEN  ('Snd:FileMarked') (1)
 WHEN  ('Snd:FileName') (1)
 
-%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Open')
 WHEN  ('Snd:FileMarked') ('Open')
 WHEN  ('Snd:FileName') ('Open')
 
-%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
@@ -2264,13 +2402,15 @@ WHEN  ('Snd:FileName') (0)
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('All Files')
 WHEN  ('Snd:FileMarked') ('All Files')
 WHEN  ('Snd:FileName') ('All Files')
 
-%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('*.*')
 WHEN  ('Snd:FileMarked') ('*.*')
@@ -2282,25 +2422,29 @@ WHEN  ('Snd:FileName') ('*.*')
 
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
-%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
 WHEN  ('Snd:FileName') (-1)
 
-%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (-1)
 WHEN  ('Snd:FileMarked') (-1)
@@ -2314,49 +2458,57 @@ WHEN  ('Snd:FileName') (-1)
 
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Default')
 WHEN  ('Snd:FileMarked') ('Default')
 WHEN  ('Snd:FileName') ('Default')
 
-%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
@@ -2370,7 +2522,8 @@ WHEN  ('Snd:FileName') (0)
 
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Default')
 WHEN  ('Snd:FileMarked') ('Default')
@@ -2384,37 +2537,43 @@ WHEN  ('Snd:FileName') ('Default')
 
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Default')
 WHEN  ('Snd:FileMarked') ('Default')
 WHEN  ('Snd:FileName') ('Default')
 
-%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('0')
 WHEN  ('Snd:FileMarked') ('0')
 WHEN  ('Snd:FileName') ('0')
 
-%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 1
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') (0)
 WHEN  ('Snd:FileMarked') (0)
 WHEN  ('Snd:FileName') (0)
 
-%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 1
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+WHEN  ('?AddFolderButton')TIMES 0
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('Snd:Description') ('Related Field')
 WHEN  ('Snd:FileMarked') ('Related Field')
@@ -2539,7 +2698,8 @@ WHEN  ('Default') (0)
 
 %NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
-%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
 
 %NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
 
@@ -2565,7 +2725,8 @@ WHEN  ('Default') (0)
 
 %ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('Default')TIMES 0
 
 %ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
@@ -2582,40 +2743,49 @@ WHEN  ('Default') (0)
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [WINDOW]
-QuickWindow WINDOW('Browse the Sounds file'),AT(,,391,219),FONT('Microsoft Sans Serif',8,, |
+QuickWindow WINDOW('Browse the Sounds file'),AT(,,405,254),FONT('Microsoft Sans Serif',8,, |
           FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('BrowseSounds'),SYSTEM
-          BUTTON('&View'),AT(10,203,49,14),USE(?View:2),LEFT,ICON('WAVIEW.ICO'),FLAT,MSG('View Record'), |
-            TIP('View Record'),#ORIG(?View),#SEQ(2),#ORDINAL(1)
-          BUTTON('&Insert'),AT(62,203,49,14),USE(?Insert:3),LEFT,ICON('WIZINS.ICO'),FLAT,MSG('Insert a Record'), |
-            TIP('Insert a Record'),#LINK(?Change:3),#ORIG(?Insert),#SEQ(3),#ORDINAL(2)
-          BUTTON('&Change'),AT(116,203,49,14),USE(?Change:3),LEFT,ICON('WIZEDIT.ICO'),DEFAULT, |
-            FLAT,MSG('Change the Record'),TIP('Change the Record'),#LINK(?Delete:3),#ORIG(?Change), |
-            #SEQ(3),#ORDINAL(3)
-          BUTTON('&Delete'),AT(168,203,49,14),USE(?Delete:3),LEFT,ICON('WIZDEL.ICO'),FLAT, |
-            MSG('Delete the Record'),TIP('Delete the Record'),#LINK(?Insert:3),#ORIG(?Delete), |
-            #SEQ(3),#ORDINAL(4)
-          SHEET,AT(6,4,378,172),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(5)
-            TAB('&1) By Name'),USE(?Tab:2),#ORDINAL(6)
-              LIST,AT(10,23,369,146),USE(?Browse:1),HVSCROLL,FORMAT('20L(2)|M~Mark~L(2)' & |
-                '@s1@80L(2)|M~File Name~L(2)@s255@80L(2)|M~Description~L(2)@s255@'),FROM(Queue:Browse:1), |
+          SHEET,AT(6,4,390,172),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(1)
+            TAB('&1) By Name'),USE(?Tab:2),#ORDINAL(2)
+              LIST,AT(10,23,369,146),USE(?Browse:1),HVSCROLL,FORMAT('20R(2)|M~Mark~@s1@' & |
+                '180L(2)|M~File Name~@s255@180L(2)|M~Description~@s255@'),FROM(Queue:Browse:1), |
                 IMM,MSG('Browsing the Sounds file'),#FIELDS(Snd:FileMarked,Snd:FileName,Snd:Description), |
-                #ORIG(?List),#SEQ(1),#ORDINAL(7)
+                #ORIG(?List),#SEQ(1),#ORDINAL(3)
             END
           END
-          BUTTON('&Close'),AT(287,203,49,14),USE(?Close),LEFT,ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'), |
-            TIP('Close Window'),#ORIG(?Close),#SEQ(4),#ORDINAL(8)
-          BUTTON('&Help'),AT(340,203,49,14),USE(?Help),LEFT,ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'), |
-            STD(STD:Help),TIP('See Help Window'),#ORIG(?Help),#SEQ(5),#ORDINAL(9)
-          BUTTON('&Play'),AT(10,179,54,14),USE(?Play),LEFT,ICON('WIZDOWN.ICO'),MSG('Press to p' & |
-            'lay selected file'),#ORDINAL(10)
-          BUTTON('&Mark'),AT(68,179,54,14),USE(?Mark),LEFT,ICON('WIZMARK.ICO'),MSG('Press to m' & |
-            'ark/unmark file'),#ORDINAL(11)
-          BUTTON('Mar&ked'),AT(126,179,54,14),USE(?PlayMarked),LEFT,ICON('WIZDOWN.ICO'),MSG('Press to p' & |
-            'lay marked file(s)'),#ORDINAL(12)
-          BUTTON('&All'),AT(182,179,54,14),USE(?PlayAll),LEFT,ICON('WIZDOWN.ICO'),MSG('Press to p' & |
-            'lay all files'),#ORDINAL(13)
-          BUTTON('&Stop'),AT(240,179,54,14),USE(?StopPlaying),LEFT,ICON('WIZCNCL.ICO'),MSG('Press to s' & |
-            'top playing'),#ORDINAL(14)
+          BUTTON('&Close'),AT(346,188,45,14),USE(?Close),LEFT,ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'), |
+            TIP('Close Window'),#ORIG(?Close),#SEQ(4),#ORDINAL(4)
+          BUTTON('&Help'),AT(346,218,45,14),USE(?Help),LEFT,ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'), |
+            STD(STD:Help),TIP('See Help Window'),#ORIG(?Help),#SEQ(5),#ORDINAL(5)
+          GROUP('Manage'),AT(78,210,254,31),USE(?ManageGroup),BOXED,#ORDINAL(6)
+            BUTTON('&View'),AT(86,221,45,14),USE(?View:2),LEFT,ICON('WAVIEW.ICO'),FLAT,MSG('View Record'), |
+              TIP('View Record'),#ORIG(?View),#SEQ(2),#ORDINAL(7)
+            BUTTON('&Insert'),AT(134,221,45,14),USE(?Insert:3),LEFT,ICON('WIZINS.ICO'),FLAT, |
+              MSG('Insert a Record'),TIP('Insert a Record'),#LINK(?Change:3),#ORIG(?Insert), |
+              #SEQ(3),#ORDINAL(8)
+            BUTTON('&Change'),AT(182,221,45,14),USE(?Change:3),LEFT,ICON('WIZEDIT.ICO'),DEFAULT, |
+              FLAT,MSG('Change the Record'),TIP('Change the Record'),#LINK(?Delete:3),#ORIG(?Change), |
+              #SEQ(3),#ORDINAL(9)
+            BUTTON('&Delete'),AT(230,221,45,14),USE(?Delete:3),LEFT,ICON('WIZDEL.ICO'),FLAT, |
+              MSG('Delete the Record'),TIP('Delete the Record'),#LINK(?Insert:3),#ORIG(?Delete), |
+              #SEQ(3),#ORDINAL(10)
+          END
+          GROUP('Playback'),AT(78,176,254,31),USE(?PlaybackGroup),BOXED,DISABLE,#ORDINAL(11)
+            BUTTON('&Play'),AT(134,188,45,14),USE(?Play),LEFT,ICON('WIZDOWN.ICO'),FLAT,MSG('Press to p' & |
+              'lay selected file'),#ORDINAL(12)
+            BUTTON('&Mark'),AT(86,188,45,14),USE(?Mark),LEFT,ICON('WIZMARK.ICO'),FLAT,MSG('Press to m' & |
+              'ark/unmark file'),#ORDINAL(13)
+            BUTTON('Mar&ked'),AT(182,188,45,14),USE(?PlayMarked),LEFT,ICON('WIZDOWN.ICO'), |
+              FLAT,MSG('Press to play marked file(s)'),#ORDINAL(14)
+            BUTTON('&All'),AT(230,188,45,14),USE(?PlayAll),LEFT,ICON('WIZDOWN.ICO'),FLAT,MSG('Press to p' & |
+              'lay all files'),#ORDINAL(15)
+            BUTTON('&Stop'),AT(278,188,45,14),USE(?StopPlaying),LEFT,ICON('WIZCNCL.ICO'),FLAT, |
+              MSG('Press to stop playing'),#ORDINAL(16)
+          END
+          GROUP('Add'),AT(6,176,48,48),USE(?AddGroup),BOXED,#ORDINAL(17)
+            BUTTON('&File'),AT(12,188),USE(?AddFileButton),LEFT,FLAT,#ORDINAL(18)
+            BUTTON('F&older'),AT(12,206,32,14),USE(?AddFolderButton),LEFT,FLAT,#ORDINAL(19)
+          END
         END
 
 [PROCEDURE]
