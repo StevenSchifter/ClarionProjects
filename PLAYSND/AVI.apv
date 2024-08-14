@@ -413,13 +413,14 @@ WHEN  ('AVI') ('Use Default')
 %TriggersManagerType DEFAULT  ('TriggerManager')
 %CWBrowseEIPManagerType DEFAULT  ('CWEIPManager')
 [PERSIST]
-%GenerationCompleted DEPEND %Module DEFAULT TIMES 6
+%GenerationCompleted DEPEND %Module DEFAULT TIMES 7
 WHEN  ('AVI-BRO1.clw') ('1')
 WHEN  ('AVI-FRM1.clw') ('1')
 WHEN  ('AVI-MAIN.clw') ('1')
 WHEN  ('AVI-PLAY.clw') ('1')
 WHEN  ('AVI.clw') ('1')
 WHEN  ('AVI001.clw') ('1')
+WHEN  ('Playback.clw') ('1')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
@@ -435,7 +436,7 @@ WHEN  ('AVI001.clw') ('1')
 #compile "AVI-MAIN.clw" -- GENERATED
 #compile "AVI-BRO1.clw" -- GENERATED
 #compile "AVI-FRM1.clw" -- GENERATED
-#compile "AVI001.clw" -- GENERATED
+#compile "Playback.clw" -- GENERATED
 #compile "AVI_RD.CLW" -- GENERATED
 #compile "AVI_RU.CLW" -- GENERATED
 #compile "AVI_SF.CLW" -- GENERATED
@@ -443,7 +444,7 @@ WHEN  ('AVI001.clw') ('1')
 [PROGRAM]
 [COMMON]
 FROM Clarion Clarion
-MODIFIED '2024/08/13' '18:43:43'
+MODIFIED '2024/08/13' '21:58:58'
 [DATA]
 [SCREENCONTROLS]
 ! PROMPT('File Spec:'),USE(?FileSpec:Prompt)
@@ -451,7 +452,7 @@ MODIFIED '2024/08/13' '18:43:43'
 [REPORTCONTROLS]
 ! STRING(@s128),USE(FileSpec)
 FileSpec                 STRING(128)
-!!> GUID('9c2e19c4-4b9c-4d58-8713-9d9320c22783'),PROMPT('File Spec:'),HEADER('File Spec'),PICTURE(@s128)
+!!> GUID('9c2e19c4-4b9c-4d58-8713-9d9320c22783'),INITIAL('.\AVI.DAT {119}'),PROMPT('File Spec:'),HEADER('File Spec'),PICTURE(@s128)
 [EMBED]
 EMBED %GlobalMap
 [DEFINITION]
@@ -462,15 +463,6 @@ PROPERTY:END
     MODULE('Windows.dll')
         PlaySoundA(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,PROC,PASCAL,RAW,NAME('PlaySoundA')
     END
-[END]
-EMBED %ProgramSetup
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-  FileSpec='.\AVI.DAT'
-!  FileSpec='.\DATA\AVI.DAT'
 [END]
 [END]
 [END]
@@ -484,7 +476,7 @@ NAME Main
 [COMMON]
 DESCRIPTION 'Clarion for Windows Quick Application'
 FROM Clarion Frame
-MODIFIED '2024/08/13' '18:51:53'
+MODIFIED '2024/08/13' '22:37:48'
 [DATA]
 LocalRequest             LONG
 !!> GUID('dd5a78fa-e0c3-445a-a518-2826cd1a0854')
@@ -779,16 +771,6 @@ WHEN  ('?Browse') (-1)
 %FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Browse') (0)
 
-[EMBED]
-EMBED %ProcedureSetup
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-!WavFileCstring = ''
-[END]
-[END]
 [WINDOW]
 AppFrame APPLICATION('AVI Application'),AT(,,354,231),FONT('MS Sans Serif',10,,FONT:bold), |
           RESIZE,HVSCROLL,CENTER,ICON('PEN.ICO'),MAX,SYSTEM
@@ -808,7 +790,7 @@ NAME BrowseAVI
 [COMMON]
 DESCRIPTION 'Browse the AVI File'
 FROM Clarion Browse
-MODIFIED '2024/08/13' '18:55:04'
+MODIFIED '2024/08/13' '22:45:14'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('2421cfbd-e740-4d8b-b126-3d5ffe42da84')
@@ -1470,13 +1452,14 @@ PROPERTY:BEGIN
 PRIORITY 3500
 PROPERTY:END
 Local    CLASS
-AddFile     PROCEDURE()
-AddFolder   PROCEDURE()
-PlayOne     PROCEDURE()
-PlayMarked  PROCEDURE()
-PlayAll     PROCEDURE()
-StopPlaying PROCEDURE()
-ToggleMark  PROCEDURE()
+SoundThread     SIGNED
+AddFile         PROCEDURE()
+AddFolder       PROCEDURE()
+PlayOne         PROCEDURE()
+PlayMarked      PROCEDURE()
+PlayAll         PROCEDURE()
+StopPlaying     PROCEDURE()
+ToggleMark      PROCEDURE()
     END
 [END]
 EMBED %LocalProcedures
@@ -1501,10 +1484,10 @@ PRIORITY 4000
 PROPERTY:END
 Local.PlayOne PROCEDURE
     CODE
-    PsParams.SoundFile = AVI:FileSpec
-    PsParams.Handle = 0
-    PsParams.Flags = 20000h
-    PlaySoundA(PsParams.SoundFile,PsParams.Handle,PsParams.Flags)
+    Local.SoundThread = START(PlaySound,,AVI:FileSpec,'0','20000h')
+    QuickWindow{PROP:StatusText,2} = Local.SoundThread
+    QuickWindow{PROP:StatusText,3} = 0
+    
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -1535,12 +1518,12 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 Local.StopPlaying PROCEDURE
-NullCstring    CSTRING('')
     CODE
-    PsParams.SoundFile = ''
-    PsParams.Handle = 0
-    PsParams.Flags  = 0h
-    PlaySoundA(PsParams.SoundFile,PsParams.Handle,PsParams.Flags)
+    !Local.SoundThread = START(PlaySound,,'','0','20000h')
+    !QuickWindow{PROP:StatusText,2} = Local.SoundThread
+    !QuickWindow{PROP:StatusText,3} = 0
+    StopSound(Local.SoundThread)
+    
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -1567,18 +1550,6 @@ ELSE
     FileMarked = ' '
 END
 [END]
-[END]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-PsParams    GROUP ! PlaySound Parameters
-SoundFile    CSTRING(255)
-ExeHandle    UNSIGNED(0)
-Flags        ULONG(0h)
-    END
 [END]
 [END]
 [ADDITION]
@@ -2458,9 +2429,12 @@ WHEN  ('?Change:2')TIMES 0
 NAME Clarion CloseButton
 [INSTANCE]
 INSTANCE 3
+[CALLS]
+PlaySound
+StopSound
 [WINDOW]
 QuickWindow WINDOW('Browse the AVI database'),AT(,,334,180),FONT('MS Sans Serif',8),DOUBLE, |
-          CENTER,GRAY,IMM,MDI,SYSTEM
+          CENTER,GRAY,IMM,MDI,STATUS(160,20),SYSTEM
           LIST,AT(4,4,324,126),USE(?Browse:1),HVSCROLL,ALRT(InsertKey),FORMAT('20L(2)|M*~' & |
             'Mark~@s1@141L(2)|M*~File Spec~@s40@122L(2)|M*~Description~@s40@'),FROM(Queue:Browse:1), |
             IMM,MARK(Queue:Browse:1),MSG('Browsing Records'),#FIELDS(FileMarked,AVI:FileSpec, |
@@ -2991,7 +2965,74 @@ QuickWindow WINDOW('Update the AVI database'),AT(,,282,71),FONT('MS Sans Serif',
 
 [END]
 [MODULE]
+NAME 'Playback.clw'
 [COMMON]
 FROM Clarion GENERATED
-MODIFIED '2023/03/03' '12:00:05'
+MODIFIED '2024/08/13' '22:14:50'
+[EMBED]
+EMBED %ModuleDataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+PsParams    GROUP ! PlaySound Parameters
+SoundFile    CSTRING(255)
+ExeHandle    UNSIGNED(0)
+Flags        ULONG(0h)
+    END
+[END]
+[END]
+[PROCEDURE]
+NAME PlaySound
+PROTOTYPE '(STRING SoundToPlay, STRING ModuleHandle, STRING Flags)'
+PARAMETERS '(STRING SoundToPlay, STRING ModuleHandle, STRING Flags)'
+[COMMON]
+FROM Clarion Source
+MODIFIED '2024/08/13' '22:30:26'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    PsParams.SoundFile = CLIP(SoundToPlay)
+    PsParams.ExeHandle = 0 !ModuleHandle
+    PsParams.Flags     = 20000h !Flags
+    PlaySoundA(PsParams.SoundFile,PsParams.ExeHandle,PsParams.Flags)
+    
+[END]
+[END]
+[PROCEDURE]
+NAME StopSound
+PROTOTYPE '(SIGNED SoundThread)'
+PARAMETERS '(SIGNED SoundThread)'
+[COMMON]
+FROM Clarion Source
+MODIFIED '2024/08/13' '22:44:44'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    !SETTARGET(,SoundThread)
+    NullCstring = ''
+    PlaySoundA(NullCstring,0,0)
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3500
+PROPERTY:END
+NullCstring    CSTRING(3)
+[END]
+[END]
 [END]

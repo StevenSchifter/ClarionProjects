@@ -40,9 +40,6 @@
     <Compile Include="AVI.clw">
       <Generated>true</Generated>
     </Compile>
-    <Compile Include="AVI001.clw">
-      <Generated>true</Generated>
-    </Compile>
     <Compile Include="AVI_RD.CLW">
       <Generated>true</Generated>
     </Compile>
@@ -50,6 +47,9 @@
       <Generated>true</Generated>
     </Compile>
     <Compile Include="AVI_SF.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Playback.clw">
       <Generated>true</Generated>
     </Compile>
   </ItemGroup>
