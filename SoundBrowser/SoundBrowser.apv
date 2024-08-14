@@ -27,8 +27,7 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('RelationManager:Sounds') ('Init {19}PROCEDURE')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('')
@@ -472,13 +471,8 @@ WHEN  ('SoundBrowser001.clw') ('1')
 #system win32 exe
 #model clarion dll
 #pragma debug(vid=>full)
-#pragma define(_ABCDllMode_=>0) -- GENERATED
-#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
-#compile "SoundBrowser_BC0.CLW" -- GENERATED
-#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
-#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
@@ -952,7 +946,7 @@ NAME BrowseSounds
 DESCRIPTION 'Browse the Sounds file'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/08/14' '15:39:48'
+MODIFIED '2024/08/14' '16:03:40'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('0fa0ec8e-bca9-4e95-b74f-74615c332df4')
@@ -1037,8 +1031,12 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED')
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
+  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Update {17}PROCEDURE(),DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -1377,13 +1375,11 @@ PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
 Local       CLASS
-SoundThread     SIGNED
 TimeToStop      BYTE
 AddFile         PROCEDURE()
 AddFolder       PROCEDURE()
+PlayMultiple    PROCEDURE(BYTE MarkedOnly)
 PlayOne         PROCEDURE()
-PlayMarked      PROCEDURE()
-PlayAll         PROCEDURE()
 StopPlaying     PROCEDURE()
 ToggleMark      PROCEDURE()
             END
@@ -1415,25 +1411,7 @@ Local.AddFolder PROCEDURE
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-Local.PlayOne PROCEDURE
-    CODE
-    PlaySound(Snd:FileName)
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-Local.PlayAll PROCEDURE
-    CODE
-    SET(Sounds,Snd:NameKey)
-    LOOP UNTIL EOF(Sounds)
-        NEXT(Sounds)
-        Local.PlayOne()
-    END
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-Local.PlayMarked PROCEDURE
+Local.PlayMultiple PROCEDURE(BYTE MarkedOnly)
     CODE
     SET(Sounds,Snd:NameKey)
     LOOP UNTIL EOF(Sounds)
@@ -1442,11 +1420,18 @@ Local.PlayMarked PROCEDURE
             BREAK
         END
         NEXT(Sounds)
-        IF NOT Snd:FileMarked
+        IF MarkedOnly AND NOT Snd:FileMarked
             CYCLE
         END
         Local.PlayOne()
     END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+Local.PlayOne PROCEDURE
+    CODE
+    PlaySound(Snd:FileName)
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -1461,7 +1446,7 @@ PRIORITY 4000
 PROPERTY:END
 Local.ToggleMark PROCEDURE
     CODE
-    Snd:FileMarked = 1 - Snd:FileMarked ! quick toggle of Mark
+    Snd:FileMarked = 1 - Snd:FileMarked ! quick toggle of Snd:FileMarked
     PUT(Sounds)
     ThisWindow.Reset(TRUE)
 [END]
@@ -1497,7 +1482,7 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 2500
 PROPERTY:END
-Local.PlayMarked()
+Local.PlayMultiple(TRUE)
 [END]
 [END]
 WHEN '?PlayAll'
@@ -1508,7 +1493,7 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 2500
 PROPERTY:END
-Local.PlayAll()
+Local.PlayMultiple(FALSE)
 [END]
 [END]
 WHEN '?StopPlaying'
@@ -1600,8 +1585,22 @@ WHEN  ('Default') ('')
 WHEN  ('Locator0') ('')
 WHEN  ('Step0') ('StepStringClass')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 3
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'AppendOrder {12}PROCEDURE(STRING Order),DERIVED', |
+  'ApplyRange {13}PROCEDURE(),BYTE,PROC,DERIVED', 'ClearFilesRecord       PROCEDURE(),DERIVED', |
+  'GetFreeElementAscending PROCEDURE(),STRING,DERIVED', 'Init {19}PROCEDURE(IListControl IC,VIEW V,BrowseQueue LQ,RelationManager RM,WindowManager WM)', |
+  'InitSort {15}PROCEDURE(BYTE NewOrder),BYTE,DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'Next {19}PROCEDURE(),BYTE,DERIVED', 'Open {19}PROCEDURE(),DERIVED', 'Previous {15}PROCEDURE(),BYTE,DERIVED', |
+  'ReplaceSort {12}PROCEDURE(STRING NewSortString,<<LocatorClass NewLocator>,<<StepClass NewStepClass>),DERIVED', |
+  'ResetSort {14}PROCEDURE(BYTE Force),BYTE,PROC,DERIVED', 'RestoreBuffers {9}PROCEDURE(),DERIVED', |
+  'SetSort {16}PROCEDURE(BYTE NewOrder,BYTE Force),BYTE,PROC,DERIVED', 'SetUseMRP {14}PROCEDURE(BYTE UseMRP=True),DERIVED', |
+  'TakeKey {16}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeLocate {13}PROCEDURE(),DERIVED', |
+  'ValidateRecord {9}PROCEDURE(),BYTE,DERIVED')
+WHEN  ('Locator0') ('Destruct {15}PROCEDURE(),DERIVED', 'GetShadow {14}PROCEDURE(),STRING,DERIVED', |
+  'Init {19}PROCEDURE(SIGNED Control = 0,*? Free,BYTE NoCase = 0),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,DERIVED', |
+  'UpdateWindow {11}PROCEDURE(),DERIVED')
+WHEN  ('Step0') ('GetPercentile {10}PROCEDURE(? Value),BYTE,DERIVED', 'Init {19}PROCEDURE(BYTE Controls)', |
+  'SetLimitNeeded {9}PROCEDURE(),BYTE,DERIVED')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
@@ -2506,7 +2505,9 @@ WHEN  ('Default') ('WindowResizeClass')
 WHEN  ('Default') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+WHEN  ('Default') ('GetParentControl       PROCEDURE(SIGNED Control),SIGNED,DERIVED', |
+  'Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)', |
+  'Resize {17}PROCEDURE(),BYTE,PROC,DERIVED', 'RestoreWindow {10}PROCEDURE(),DERIVED')
 
 %WindowMinHeight DEFAULT  ('')
 %RestrictMaxSize LONG  (0)
@@ -3332,9 +3333,9 @@ NAME StopSound
 PROTOTYPE '(STRING MySoundFile)'
 PARAMETERS '(STRING MySoundFile)'
 [COMMON]
-DESCRIPTION 'Supposed to stop playing the current sound'
+DESCRIPTION 'Stops playing the current sound (and breaks the "play marked/all" loop through the database)'
 FROM ABC Source
-MODIFIED '2024/08/14' '15:37:44'
+MODIFIED '2024/08/14' '15:42:46'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
