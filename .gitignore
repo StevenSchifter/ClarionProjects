@@ -32,3 +32,6 @@ PLAYSND/*.clw
 PLAYSND/*.inc
 PLAYSND/*.ini
 PLAYSND/*.wav
+SoundBrowser/*.clw
+SoundBrowser/*.inc
+SoundBrowser/*.ini

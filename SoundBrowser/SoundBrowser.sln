@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+# Clarion 2.1.0.2447
+Project("{12B76EC0-1D7B-4FA7-A7D0-C524288B48A1}") = "SoundBrowser", "SoundBrowser.cwproj", "{FB33280B-DC15-4086-B315-7BDDB8A5E265}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2150E333-8FDC-42A3-9474-1A3956D46DE8}"
+	ProjectSection(SolutionItems) = postProject
+		SoundBrowser.app = SoundBrowser.app
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB33280B-DC15-4086-B315-7BDDB8A5E265}.Debug|Win32.Build.0 = Debug|Win32
+		{FB33280B-DC15-4086-B315-7BDDB8A5E265}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB33280B-DC15-4086-B315-7BDDB8A5E265}.Release|Win32.Build.0 = Release|Win32
+		{FB33280B-DC15-4086-B315-7BDDB8A5E265}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+EndGlobal

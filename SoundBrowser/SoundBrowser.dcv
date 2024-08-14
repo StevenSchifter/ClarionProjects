@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary Name="tmpSoundBrowser" Version="1" StructureChecked="1" DctxFormat="4">
+	<DictionaryVersion Version="1" Description="Initial version"/>
+	<Table Guid="{8934ca17-4a30-4735-ad3e-26b0016f35d2}" Name="Sounds" Prefix="Snd" Driver="TOPSPEED" Path="Sounds.dat" Create="true" Thread="true" Bindable="true">
+		<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:53:18AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
+		<Field Guid="{7f998c12-110f-4f35-a387-7fd614ff40d5}" Name="FileMarked" DataType="STRING" Size="1" ScreenPicture="@s1" ScreenPrompt="File Marked:" ReportHeading="Mark" Justification="LEFT" Offset="2" ReportControl=" STRING(@s1),USE(Snd:FileMarked),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Marked:&apos;),USE(?Snd:FileMarked:Prompt)"/>
+				<Line Text=" ENTRY(@s1),USE(Snd:FileMarked),LEFT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:03AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:03AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{35a77080-bc41-4db6-b743-75e781d0e7ae}" Name="FileName" DataType="CSTRING" Size="256" ScreenPicture="@s255" ScreenPrompt="File Name:" ReportHeading="File Name" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Snd:FileName),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Name:&apos;),USE(?Snd:FileName:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(Snd:FileName),LEFT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:34AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:34AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{f77c836b-202d-40a3-b5c1-a393e9f4d06d}" Name="Description" DataType="CSTRING" Size="1024" ScreenPicture="@s255" ScreenPrompt="Description:" ReportHeading="Description" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Snd:Description),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?Snd:Description:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(Snd:Description),LEFT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:56AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:56AM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{0c31346b-c524-44ad-b63d-3aed9d5c01ab}" Order="1" Name="NameKey" KeyType="KEY" Unique="true" Primary="true" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:55:16AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
+			<Component Guid="{7f53ddff-4b32-447a-ade6-d39351eb909d}" FieldId="{35a77080-bc41-4db6-b743-75e781d0e7ae}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:55:35AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+	</Table>
+</Dictionary>
+
