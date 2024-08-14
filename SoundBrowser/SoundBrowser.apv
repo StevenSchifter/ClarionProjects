@@ -27,10 +27,8 @@ WHEN  ('INIManager') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 2
-WHEN  ('FileManager:Sounds') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
-WHEN  ('RelationManager:Sounds') ('Init {19}PROCEDURE', 'Kill {19}PROCEDURE(),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('RelationManager:Sounds') ('Init {19}PROCEDURE')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('')
@@ -470,6 +468,7 @@ WHEN  ('SoundBrowser001.clw') ('1')
 %LastApplicationDebug DEFAULT  ('1')
 %LastApplicationLocalLibrary DEFAULT  ('')
 [PROJECT]
+-- OUTPUTPATH C:\Users\Steven\ClarionProjects\SoundBrowser
 #system win32 exe
 #model clarion dll
 #pragma debug(vid=>full)
@@ -484,7 +483,7 @@ WHEN  ('SoundBrowser001.clw') ('1')
 [PROGRAM]
 [COMMON]
 FROM ABC ABC
-MODIFIED '2024/08/14' ' 1:00:10'
+MODIFIED '2024/08/14' '15:40:14'
 [EMBED]
 EMBED %GlobalMap
 [DEFINITION]
@@ -493,8 +492,16 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 MODULE('Windows.dll')
-    PlaySoundA(*CSTRING pszSound, UNSIGNED hmod, ULONG fdwSound),SIGNED,PROC,PASCAL,RAW,NAME('PlaySoundA')
+    mciSendString(*LPCSTR,*LPSTR,UNSIGNED,hwnd),DWORD,PASCAL,RAW,NAME('mciSendStringA')
 END
+[END]
+EMBED %AfterGlobalIncludes
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+INCLUDE('WINAPI.CLW','Equates'),ONCE
 [END]
 [END]
 [END]
@@ -945,7 +952,7 @@ NAME BrowseSounds
 DESCRIPTION 'Browse the Sounds file'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/08/14' ' 1:18:16'
+MODIFIED '2024/08/14' '15:39:48'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('0fa0ec8e-bca9-4e95-b74f-74615c332df4')
@@ -1371,6 +1378,7 @@ PRIORITY 1300
 PROPERTY:END
 Local       CLASS
 SoundThread     SIGNED
+TimeToStop      BYTE
 AddFile         PROCEDURE()
 AddFolder       PROCEDURE()
 PlayOne         PROCEDURE()
@@ -1409,16 +1417,14 @@ PRIORITY 4000
 PROPERTY:END
 Local.PlayOne PROCEDURE
     CODE
-    Local.SoundThread = START(PlaySound,,Snd:FileName,'0','20000h')
-    QuickWindow{PROP:StatusText,2} = Local.SoundThread
-    QuickWindow{PROP:StatusText,3} = 0
+    PlaySound(Snd:FileName)
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 Local.PlayAll PROCEDURE
     CODE
-    SET(Sounds,Snd:FileName)
+    SET(Sounds,Snd:NameKey)
     LOOP UNTIL EOF(Sounds)
         NEXT(Sounds)
         Local.PlayOne()
@@ -1429,8 +1435,12 @@ PRIORITY 4000
 PROPERTY:END
 Local.PlayMarked PROCEDURE
     CODE
-    SET(Sounds,Snd:FileName)
+    SET(Sounds,Snd:NameKey)
     LOOP UNTIL EOF(Sounds)
+        IF SELF.TimeToStop
+            SELF.TimeToStop = FALSE
+            BREAK
+        END
         NEXT(Sounds)
         IF NOT Snd:FileMarked
             CYCLE
@@ -1443,10 +1453,8 @@ PRIORITY 4000
 PROPERTY:END
 Local.StopPlaying PROCEDURE
     CODE
-    !Local.SoundThread = START(PlaySound,,'','0','20000h')
-    !QuickWindow{PROP:StatusText,2} = Local.SoundThread
-    !QuickWindow{PROP:StatusText,3} = 0
-    StopSound(Local.SoundThread)
+    SELF.TimeToStop = TRUE
+    StopSound(Snd:FileName)
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -3272,13 +3280,13 @@ QuickWindow WINDOW('Form Sounds'),AT(,,358,84),FONT('Microsoft Sans Serif',8,,FO
 
 [PROCEDURE]
 NAME PlaySound
-PROTOTYPE '(STRING SoundToPlay,STRING ModuleHandle,STRING Flags)'
-PARAMETERS '(STRING SoundToPlay,STRING ModuleHandle,STRING Flags)'
+PROTOTYPE '(STRING MySoundFile)'
+PARAMETERS '(STRING MySoundFile)'
 GLOBAL
 [COMMON]
-DESCRIPTION 'Plays a sound in a new thread'
+DESCRIPTION 'Plays a sound from the database'
 FROM ABC Source
-MODIFIED '2024/08/14' ' 1:04:01'
+MODIFIED '2024/08/14' '15:39:20'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -3289,32 +3297,44 @@ EMBED %DataSection
 PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
-PsParams    GROUP ! PlaySound Parameters
-SoundFile       CSTRING(255)
-ModuleHandle    UNSIGNED(0)
-Flags           ULONG(0h)
-            END
+! References:
+! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
+! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
 [END]
-EMBED %AdditionalDebugHooks
+EMBED %ProcessedCode
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-    PsParams.SoundFile    = CLIP(SoundToPlay)
-    PsParams.ModuleHandle = 0
-    PsParams.Flags        = 20000h
-    PlaySoundA(PsParams.SoundFile,PsParams.ModuleHandle,PsParams.Flags)
+    CommandString = 'open ' & MySoundFile
+    ReturnString = ''
+    ReturnValue = mciSendString(CommandString,ReturnString,0,0)
+    IF ReturnValue = 0
+        CommandString = 'play ' & MySoundFile
+        ReturnValue = mciSendString(CommandString,ReturnString,0,0)
+    END
+    
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+CommandString    CSTRING(256)
+ReturnString     CSTRING(2)
+ReturnValue      DWORD
 [END]
 [END]
 [PROCEDURE]
 NAME StopSound
-PROTOTYPE '(SIGNED SoundThread)'
-PARAMETERS '(SIGNED SoundThread)'
+PROTOTYPE '(STRING MySoundFile)'
+PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Supposed to stop playing the current sound'
 FROM ABC Source
-MODIFIED '2024/08/14' ' 1:03:46'
+MODIFIED '2024/08/14' '15:37:44'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -3325,17 +3345,20 @@ EMBED %DataSection
 PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
-NullCstring    CSTRING(3)
+CommandString    CSTRING(256)
+ReturnString     CSTRING(2)
+ReturnValue      DWORD
 [END]
-EMBED %AdditionalDebugHooks
+EMBED %ProcessedCode
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-    SETTARGET(,SoundThread)
-    NullCstring = ''
-    PlaySoundA(NullCstring,0,0)
+    CommandString = 'stop ' & MySoundFile
+    ReturnString = ''
+    ReturnValue = mciSendString(CommandString,ReturnString,0,0)
+    
 [END]
 [END]
 [END]
