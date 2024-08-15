@@ -1,38 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Dictionary Name="tmpSoundBrowser" Version="1" StructureChecked="1" DctxFormat="4">
 	<DictionaryVersion Version="1" Description="Initial version"/>
-	<Table Guid="{8934ca17-4a30-4735-ad3e-26b0016f35d2}" Name="Sounds" Prefix="Snd" Driver="TOPSPEED" Path="Sounds.dat" Create="true" Thread="true" Bindable="true">
-		<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:53:18AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
-		<Field Guid="{7f998c12-110f-4f35-a387-7fd614ff40d5}" Name="FileMarked" DataType="STRING" Size="1" ScreenPicture="@s1" ScreenPrompt="File Marked:" ReportHeading="Mark" Justification="LEFT" Offset="2" ReportControl=" STRING(@s1),USE(Snd:FileMarked),LEFT(2)">
+	<Table Guid="{5fbb7d9f-d20b-4194-83b1-8b8b4266e7dc}" Name="SoundFolders" Prefix="SoundFolder" Driver="TOPSPEED" Path="SoundFolders.dat" Create="true" Thread="true" Bindable="true">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="11:56:08AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:32PM" ModifiedVersionNumber="1"/>
+		<Field Guid="{26a80db9-37d7-4411-b003-0039d7d8003a}" Name="ID" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="ID:" ReportHeading="ID" Justification="RIGHT" Offset="2" ReportControl=" STRING(@n-14),USE(SoundFolder:ID),RIGHT(2)">
 			<WindowControl>
-				<Line Text=" PROMPT(&apos;File Marked:&apos;),USE(?Snd:FileMarked:Prompt)"/>
-				<Line Text=" ENTRY(@s1),USE(Snd:FileMarked),LEFT(2)"/>
+				<Line Text=" PROMPT(&apos;ID:&apos;),USE(?SoundFolder:ID:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(SoundFolder:ID),RIGHT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:02:54PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:02:54PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{f7e3226e-f485-4c87-b56e-a23d6264c28b}" Name="Name" DataType="CSTRING" Size="256" ScreenPicture="@s255" ScreenPrompt="Name:" ReportHeading="Name" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(SoundFolder:Name),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Name:&apos;),USE(?SoundFolder:Name:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(SoundFolder:Name),LEFT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:03:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:03:14PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{5f64a3d5-e742-4872-a645-7bacde1b6c7d}" Name="Description" DataType="CSTRING" Size="1025" ScreenPicture="@s255" ScreenPrompt="Description:" ReportHeading="Description" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(SoundFolder:Description),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?SoundFolder:Description:Prompt)"/>
+				<Line Text=" TEXT,USE(SoundFolder:Description),LEFT"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:03:38PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:03:38PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Key Guid="{6130cca9-202a-4796-be8f-9348babf5a03}" Order="1" Name="KeyID" KeyType="KEY" Unique="true" Primary="true" AutoNumber="true" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:16PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:16PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{1988c11f-cb1b-4c2f-9b49-d44d2b5920ed}" FieldId="{26a80db9-37d7-4411-b003-0039d7d8003a}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:16PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:16PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+		<Key Guid="{8ce4e67b-eeab-46e0-90aa-bfb1e7bff53a}" Order="2" Name="KeyName" KeyType="KEY" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:32PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:32PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{6c159504-3b7b-4d53-a686-8974b8d7c44c}" FieldId="{f7e3226e-f485-4c87-b56e-a23d6264c28b}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:32PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:32PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+	</Table>
+	<Table Guid="{5359651a-81a9-4ae5-8bda-a536412eaf0c}" Name="SoundFiles" Prefix="SoundFile" Driver="TOPSPEED" Path="SoundFiles.dat" Create="true" Thread="true" Bindable="true">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:01:49PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:24:01PM" ModifiedVersionNumber="1"/>
+		<Field Guid="{cd1e02f5-3ab8-4151-8d08-b034710eec33}" Name="ID" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="ID:" ReportHeading="ID" Justification="RIGHT" Offset="2" ReportControl=" STRING(@n-14),USE(SoundFile:ID),RIGHT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;ID:&apos;),USE(?SoundFile:ID:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(SoundFile:ID),RIGHT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:04:01PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:04:01PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{81c6bd4a-f978-4e6d-b39c-a814f7c19fc0}" Name="FolderID" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="Folder ID:" ReportHeading="Folder ID" Justification="RIGHT" Offset="2" ReportControl=" STRING(@n-14),USE(SoundFile:FolderID),RIGHT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Folder ID:&apos;),USE(?SoundFile:FolderID:Prompt)"/>
+				<Line Text=" ENTRY(@n-14),USE(SoundFile:FolderID),RIGHT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:04:10PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:04:10PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+		<Field Guid="{57bf8338-2392-4c6f-945a-3590ee55fb27}" Name="FileMarked" DataType="STRING" Size="1" ScreenPicture="@s1" ScreenPrompt="File Marked:" ReportHeading="Mark" Justification="LEFT" Offset="2" ReportControl=" STRING(@s1),USE(SoundFile:FileMarked),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;File Marked:&apos;),USE(?SoundFile:FileMarked:Prompt)"/>
+				<Line Text=" ENTRY(@s1),USE(SoundFile:FileMarked),LEFT(2)"/>
 			</WindowControl>
 			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:03AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:03AM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
-		<Field Guid="{35a77080-bc41-4db6-b743-75e781d0e7ae}" Name="FileName" DataType="CSTRING" Size="256" ScreenPicture="@s255" ScreenPrompt="File Name:" ReportHeading="File Name" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Snd:FileName),LEFT(2)">
+		<Field Guid="{4f056d27-2d84-4f96-8c55-0ea14b32125d}" Name="Name" DataType="CSTRING" Size="256" ScreenPicture="@s255" ScreenPrompt="Name:" ReportHeading="Name" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(SoundFile:Name),LEFT(2)">
 			<WindowControl>
-				<Line Text=" PROMPT(&apos;File Name:&apos;),USE(?Snd:FileName:Prompt)"/>
-				<Line Text=" ENTRY(@s255),USE(Snd:FileName),LEFT(2)"/>
+				<Line Text=" PROMPT(&apos;Name:&apos;),USE(?SoundFile:Name:Prompt)"/>
+				<Line Text=" ENTRY(@s255),USE(SoundFile:Name),LEFT(2)"/>
 			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:34AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:34AM" ModifiedVersionNumber="1"/>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:04:21PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:04:21PM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
-		<Field Guid="{f77c836b-202d-40a3-b5c1-a393e9f4d06d}" Name="Description" DataType="CSTRING" Size="1024" ScreenPicture="@s255" ScreenPrompt="Description:" ReportHeading="Description" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Snd:Description),LEFT(2)">
+		<Field Guid="{12ecc2bf-2437-4d25-9e0a-b15c2054f3b0}" Name="Description" DataType="CSTRING" Size="1025" ScreenPicture="@s255" ScreenPrompt="Description:" ReportHeading="Description" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(SoundFile:Description),LEFT(2)">
 			<WindowControl>
-				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?Snd:Description:Prompt)"/>
-				<Line Text=" ENTRY(@s255),USE(Snd:Description),LEFT(2)"/>
+				<Line Text=" PROMPT(&apos;Description:&apos;),USE(?SoundFile:Description:Prompt)"/>
+				<Line Text=" TEXT,USE(SoundFile:Description),LEFT"/>
 			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:54:56AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:54:56AM" ModifiedVersionNumber="1"/>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:04:34PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:04:34PM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
-		<Key Guid="{0c31346b-c524-44ad-b63d-3aed9d5c01ab}" Order="1" Name="NameKey" KeyType="KEY" Unique="true" Primary="true" Exclude="true">
-			<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:55:16AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
-			<Component Guid="{7f53ddff-4b32-447a-ade6-d39351eb909d}" FieldId="{35a77080-bc41-4db6-b743-75e781d0e7ae}" Order="1" Ascend="true">
-				<Audit CreateUser="Administrator" CreateDate="14 AUG 2024" CreateTime="12:55:35AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="14 AUG 2024" ModifiedTime="12:55:35AM" ModifiedVersionNumber="1"/>
+		<Key Guid="{eaa0d2f2-9a61-4825-a7ff-3b577ae0e9c1}" Order="1" Name="KeyID" KeyType="KEY" Unique="true" Primary="true" AutoNumber="true" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:59PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:59PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{1f46a10f-3e97-4796-964a-a12d90369442}" FieldId="{cd1e02f5-3ab8-4151-8d08-b034710eec33}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:59PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:05:59PM" ModifiedVersionNumber="1"/>
+			</Component>
+		</Key>
+		<Key Guid="{2dac5b9b-c329-4fa8-881c-02e2bb39ba61}" Order="2" Name="KeyFolderFile" KeyType="KEY" Exclude="true">
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:05:59PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:06:32PM" ModifiedVersionNumber="1"/>
+			<Component Guid="{2b64cce4-17d7-474e-845b-c83b69e393d4}" FieldId="{81c6bd4a-f978-4e6d-b39c-a814f7c19fc0}" Order="1" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:06:32PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:06:32PM" ModifiedVersionNumber="1"/>
+			</Component>
+			<Component Guid="{17ac0a8b-59e5-48e3-b3d8-6dc46a1742ed}" FieldId="{4f056d27-2d84-4f96-8c55-0ea14b32125d}" Order="2" Ascend="true">
+				<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:06:32PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:06:32PM" ModifiedVersionNumber="1"/>
 			</Component>
 		</Key>
 	</Table>
+	<Table Guid="{1a116dde-3788-4868-b739-bceb9c523de3}" Usage="Global" Name="SbGlobals" Prefix="Glo" GenerateLast="true">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:36:26PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime=" 3:37:36PM" ModifiedVersionNumber="1"/>
+		<Field Guid="{d425422b-f527-4d52-82f7-66b16175d721}" Name="CurrentSound" BaseType="SoundFile:Name" DataType="LIKE" ScreenPicture="@s20" ScreenPrompt="Current Sound:" ReportHeading="Current Sound" ReportControl=" STRING(@s20),USE(Glo:CurrentSound),LEFT(2)">
+			<WindowControl>
+				<Line Text=" PROMPT(&apos;Current Sound:&apos;),USE(?Glo:CurrentSound:Prompt)"/>
+				<Line Text=" ENTRY(@s20),USE(Glo:CurrentSound),LEFT(2)"/>
+			</WindowControl>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:37:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime=" 3:37:36PM" ModifiedVersionNumber="1"/>
+			<Validity Check="NOCHECKS"/>
+		</Field>
+	</Table>
+	<Relation Guid="{271c80f5-8fcc-4f9b-a7b3-dd278cf0c6b1}" PrimaryTable="{5fbb7d9f-d20b-4194-83b1-8b8b4266e7dc}" ForeignTable="{5359651a-81a9-4ae5-8bda-a536412eaf0c}" PrimaryKey="{6130cca9-202a-4796-be8f-9348babf5a03}" ForeignKey="{2dac5b9b-c329-4fa8-881c-02e2bb39ba61}" Delete="CASCADE" Update="RESTRICT">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:06:52PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:07:28PM" ModifiedVersionNumber="1"/>
+		<ForeignMapping Guid="{ad6d4b62-bfb2-4f07-8b4d-31b8ee5ae0af}" Field="{26a80db9-37d7-4411-b003-0039d7d8003a}"/>
+		<PrimaryMapping Guid="{5d9509e7-7c27-471c-9270-f2409b08eff5}" Field="{81c6bd4a-f978-4e6d-b39c-a814f7c19fc0}"/>
+	</Relation>
 </Dictionary>
 
