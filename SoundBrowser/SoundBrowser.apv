@@ -539,11 +539,23 @@ INSTANCE 1
 [PROMPTS]
 %DoNotAssertOnCloseMisuse LONG  (1)
 %CreateSQL LONG  (0)
+[ADDITION]
+NAME ABC cwHHGlobal
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%cwHHgFileName DEFAULT  ('SoundBrowser.chm')
+%cwHHappendHTM LONG  (0)
+%cwHHUseHelpButton LONG  (1)
+%cwHHUseHelpIndex LONG  (1)
+%cwHHUseHelpSearch LONG  (0)
+%cwHHUseHelpHowTo LONG  (0)
+%cwHHGlobalAltTrapKey DEFAULT  ('')
 [PERSIST]
 %SaveCreateLocalMap DEFAULT  ('1')
 %GenerationCompleted DEPEND %Module DEFAULT TIMES 2
 WHEN  ('SoundBrowser.clw') ('1')
-WHEN  ('SoundBrowser001.clw') ('1')
+WHEN  ('SoundBrowser001.clw') ('')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
@@ -554,13 +566,9 @@ WHEN  ('SoundBrowser001.clw') ('1')
 #system win32 exe
 #model clarion dll
 #pragma debug(vid=>full)
-#pragma define(_ABCDllMode_=>0) -- GENERATED
-#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
-#compile "SoundBrowser_BC0.CLW" -- GENERATED
-#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
-#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
+#pragma link("cwHH%V%.LIB") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
@@ -1075,6 +1083,15 @@ WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [WINDOW]
 AppFrame APPLICATION('Sound Browser'),AT(,,540,270),FONT('Segoe UI',10,,FONT:regular,CHARSET:ANSI), |
           RESIZE,CENTER,ICON('WAFRAME.ICO'),MAX,STATUS(-1,80,120,45),SYSTEM
@@ -1167,6 +1184,15 @@ ReturnValue      DWORD
 QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
 [END]
 [END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [PROCEDURE]
 NAME StopSound
 PROTOTYPE '(STRING MySoundFile)'
@@ -1203,13 +1229,22 @@ PROPERTY:END
     ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
 [END]
 [END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [PROCEDURE]
 NAME BrowseSoundFolders
 [COMMON]
 DESCRIPTION 'Browse sound folders'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/08/16' '11:34:28'
+MODIFIED '2024/08/16' '13:21:40'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('20fa4d6f-61b6-40e9-abe0-6c264db81f12')
@@ -1625,6 +1660,15 @@ WHEN  ('?Help') (0)
 %AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
 WHEN  ('?Help') (0)
 
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 8
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [ADDITION]
 NAME ABC BrowseBox
 [INSTANCE]
@@ -2818,7 +2862,7 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 QuickWindow WINDOW('Browse sound folders'),AT(,,450,202),FONT('Segoe UI',10,COLOR:Black,FONT:regular, |
-          CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('BrowseSoundFolders'),SYSTEM
+          CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('~BrowseSoundFolders.htm'),SYSTEM
           LIST,AT(8,19,436,124),USE(?Browse:1),HVSCROLL,FORMAT('36R(2)|M~ID~@n-14@180L(' & |
             '2)|M~Name~@s255@180L(2)|M~Description~@s255@'),FROM(Queue:Browse:1),IMM,MSG('Browsing t' & |
             'he SoundFolders file'),#FIELDS(SoundFolder:ID,SoundFolder:Name,SoundFolder:Description), |
@@ -2861,7 +2905,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/08/16' '11:34:46'
+MODIFIED '2024/08/16' '13:24:14'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -3446,6 +3490,15 @@ QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
 [END]
 [END]
 [END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 7
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [ADDITION]
 NAME ABC BrowseBox
 [INSTANCE]
@@ -4597,8 +4650,8 @@ PlaySound
 StopSound
 [WINDOW]
 QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,196),FONT('Segoe UI',10,COLOR:Black, |
-          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('BrowseSoundFile' & |
-          'sBySoundFile:KeyFolderFile'),SYSTEM
+          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('~BrowseSoundFiles.htm'), |
+          SYSTEM
           LIST,AT(9,18,427,108),USE(?Browse:1),HVSCROLL,FORMAT('20R(2)|M~Mark~@s1@180L(' & |
             '2)|M~Name~@s255@180L(2)|M~Description~@s255@'),FROM(Queue:Browse:1),IMM,MSG('Browsing t' & |
             'he SoundFiles file'),#FIELDS(SoundFile:FileMarked,SoundFile:Name,SoundFile:Description), |
@@ -4618,8 +4671,8 @@ QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,196),FONT('Segoe UI'
           BUTTON('&Close'),AT(388,138,49,14),USE(?Close),FONT(,,,FONT:bold),LEFT,ICON('WACLOSE.ICO'), |
             FLAT,MSG('Close Window'),TIP('Close Window'),TRN,#ORIG(?Close),#SEQ(4),#ORDINAL(8)
           BUTTON('&Help'),AT(388,168,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
-            FLAT,MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'),TRN,#ORIG(?Help), |
-            #SEQ(5),#ORDINAL(9)
+            FLAT,HLP('BrowseSoundFolders.htm'),MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'), |
+            TRN,#ORIG(?Help),#SEQ(5),#ORDINAL(9)
           GROUP('Manage'),AT(8,158,306,27),USE(?ManageGroup),BOXED,TRN,#ORDINAL(10)
             BUTTON('&View'),AT(16,168,54,14),USE(?View:2),FONT(,,,FONT:bold),LEFT,ICON('WAVIEW.ICO'), |
               FLAT,MSG('View Record'),TIP('View Record'),TRN,#ORIG(?View),#SEQ(2),#ORDINAL(11)
@@ -4645,7 +4698,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/16' '11:38:08'
+MODIFIED '2024/08/16' '13:24:44'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -5151,6 +5204,15 @@ RecordsDeleted    LONG
 [END]
 [END]
 [ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 7
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[ADDITION]
 NAME ABC RecordValidation
 [INSTANCE]
 INSTANCE 1
@@ -5373,7 +5435,7 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI',10,COLOR:Black, |
-          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('UpdateSoundFolder'), |
+          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('~ManageSoundFolders.htm'), |
           SYSTEM
           SHEET,AT(4,4,350,78),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(1)
             TAB('&1) General'),USE(?Tab:1),#ORDINAL(2)
@@ -5412,7 +5474,7 @@ NAME UpdateSoundFiles
 DESCRIPTION 'Manage a SoundFiles record'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/16' '11:38:20'
+MODIFIED '2024/08/16' '13:24:30'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('e384cbea-33a0-44c1-857c-beee66627c83')
@@ -5899,6 +5961,15 @@ OriginalPath   STRING(FILE:MaxFilePath)
 [END]
 [END]
 [ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 7
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[ADDITION]
 NAME ABC RecordValidation
 [INSTANCE]
 INSTANCE 1
@@ -6120,7 +6191,7 @@ WHEN  ('Default')TIMES 0
 
 [WINDOW]
 QuickWindow WINDOW('Manage a SoundFiles record'),AT(,,358,132),FONT('Segoe UI',10,COLOR:Black, |
-          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('UpdateSoundFiles'), |
+          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,GRAY,IMM,MDI,HLP('~ManageSoundFiles.htm'), |
           SYSTEM
           SHEET,AT(4,4,350,106),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(1)
             TAB('&1) General'),USE(?Tab:1),#ORDINAL(2)

@@ -38,6 +38,7 @@
     <Compile Include="SoundBrowser_BC0.CLW">
       <Generated>true</Generated>
     </Compile>
+    <Library Include="cwHH%25V%25.LIB" />
   </ItemGroup>
   <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
 </Project>
