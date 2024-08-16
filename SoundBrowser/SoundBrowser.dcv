@@ -99,13 +99,13 @@
 		</Key>
 	</Table>
 	<Table Guid="{1a116dde-3788-4868-b739-bceb9c523de3}" Usage="Global" Name="SbGlobals" Prefix="Glo" GenerateLast="true">
-		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:36:26PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime=" 3:37:36PM" ModifiedVersionNumber="1"/>
-		<Field Guid="{d425422b-f527-4d52-82f7-66b16175d721}" Name="CurrentSound" BaseType="SoundFile:Name" DataType="LIKE" ScreenPicture="@s20" ScreenPrompt="Current Sound:" ReportHeading="Current Sound" ReportControl=" STRING(@s20),USE(Glo:CurrentSound),LEFT(2)">
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:36:26PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2024" ModifiedTime=" 1:19:22AM" ModifiedVersionNumber="1"/>
+		<Field Guid="{d425422b-f527-4d52-82f7-66b16175d721}" Name="CurrentSound" DataType="CSTRING" Size="261" ScreenPicture="@s255" ScreenPrompt="Current Sound:" ReportHeading="Current Sound" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Glo:CurrentSound),LEFT(2)">
 			<WindowControl>
 				<Line Text=" PROMPT(&apos;Current Sound:&apos;),USE(?Glo:CurrentSound:Prompt)"/>
-				<Line Text=" ENTRY(@s20),USE(Glo:CurrentSound),LEFT(2)"/>
+				<Line Text=" ENTRY(@s255),USE(Glo:CurrentSound),LEFT(2)"/>
 			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:37:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime=" 3:37:36PM" ModifiedVersionNumber="1"/>
+			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:37:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2024" ModifiedTime=" 1:19:22AM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 		</Field>
 	</Table>
