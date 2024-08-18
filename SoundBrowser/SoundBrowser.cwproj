@@ -3,12 +3,14 @@
     <ProjectGuid>{FB33280B-DC15-4086-B315-7BDDB8A5E265}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>SoundBrowser</RootNamespace>
     <AssemblyName>SoundBrowser</AssemblyName>
     <OutputName>SoundBrowser</OutputName>
     <CWOutputType>Exe</CWOutputType>
     <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+    <ApplicationIcon>SoundBrowserApp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>True</DebugSymbols>
