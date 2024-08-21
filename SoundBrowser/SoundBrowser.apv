@@ -4983,7 +4983,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/21' '14:16:32'
+MODIFIED '2024/08/21' '14:35:01'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -5423,7 +5423,7 @@ EMBED %DataSection
 PROPERTY:BEGIN
 PRIORITY 50
 PROPERTY:END
-Util          Utilities
+Util                   Utilities
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 1300
@@ -5501,10 +5501,7 @@ RecordsAdded   LONG
     IF SoundFolder:AVI THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.avi',ff_:NORMAL) END
     IF SoundFolder:MID THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.mid',ff_:NORMAL) END
     IF SoundFolder:MP3 THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.mp3',ff_:NORMAL) END
-    IF SoundFolder:WMA
-        MESSAGE('WMA')
-        DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.wma',ff_:NORMAL)
-    END
+    IF SoundFolder:WMA THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.wma',ff_:NORMAL) END
     Qrecords = RECORDS(FileQ)
     IF Qrecords
         LOOP Qindex = 1 TO Qrecords
@@ -5516,7 +5513,7 @@ RecordsAdded   LONG
             LastRecord += 1
             SoundFile:ID = LastRecord
             SoundFile:FolderID = SoundFolder:ID
-            SoundFile:Name = FileQ.Name
+            SoundFile:Name = FQ:Name
             ADD(SoundFiles)
             IF ERRORCODE()
                 STOP(ERROR())
