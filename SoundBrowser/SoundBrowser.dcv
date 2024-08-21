@@ -2,7 +2,7 @@
 <Dictionary Name="tmpSoundBrowser" Version="1" StructureChecked="1" DctxFormat="4">
 	<DictionaryVersion Version="1" Description="Initial version"/>
 	<Table Guid="{5fbb7d9f-d20b-4194-83b1-8b8b4266e7dc}" Name="SoundFolders" Prefix="SoundFolder" Driver="TOPSPEED" Path="SoundFolders.tps" Create="true" Thread="true" Bindable="true">
-		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="11:56:08AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime="12:04:20PM" ModifiedVersionNumber="1"/>
+		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="11:56:08AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime=" 1:48:17PM" ModifiedVersionNumber="1"/>
 		<Field Guid="{26a80db9-37d7-4411-b003-0039d7d8003a}" Name="ID" DataType="LONG" Size="4" ScreenPicture="@n-14" ScreenPrompt="ID:" ReportHeading="ID" Justification="RIGHT" Offset="2" ReportControl=" STRING(@n-14),USE(SoundFolder:ID),RIGHT(2)">
 			<WindowControl>
 				<Line Text=" PROMPT(&apos;ID:&apos;),USE(?SoundFolder:ID:Prompt)"/>
@@ -32,7 +32,7 @@
 				<Line Text=" PROMPT(&apos;Extensions:&apos;),USE(?SoundFolder:Extensions:Prompt)"/>
 				<Line Text=" ENTRY(@s20),USE(SoundFolder:Extensions),LEFT(2)"/>
 			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="21 AUG 2024" CreateTime="11:21:40AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime="11:45:43AM" ModifiedVersionNumber="1"/>
+			<Audit CreateUser="Administrator" CreateDate="21 AUG 2024" CreateTime="11:21:40AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime=" 1:47:27PM" ModifiedVersionNumber="1"/>
 			<Validity Check="NOCHECKS"/>
 			<Field Guid="{d45f0559-d691-4e66-863c-496eb56ba5e1}" Name="WAV" Description="Microsoft Wave Sound Format" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="WAV" ReportHeading="WAV" Message="Microsoft Wave Sound Format" Tooltip="Microsoft Wave Sound Format" WindowControl=" CHECK(&apos;WAV&apos;),USE(SoundFolder:WAV),MSG(&apos;Microsoft Wave Sound Format&apos;),TIP(&apos;Microsoft Wave Sound Format&apos;)" ReportControl=" CHECK(&apos;WAV&apos;),USE(SoundFolder:WAV)">
 				<Audit CreateUser="Administrator" CreateDate="21 AUG 2024" CreateTime="11:21:40AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime="11:42:11AM" ModifiedVersionNumber="1"/>
@@ -48,6 +48,10 @@
 			</Field>
 			<Field Guid="{7d586818-28e7-4873-b579-10f11376a946}" Name="MP3" Description="MPEG Layer 3 Audio File (Constant bit rate only)" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="MP3" ReportHeading="MP3" Message="MPEG Layer 3 Audio File (Constant bit rate only)" Tooltip="MPEG Layer 3 Audio File (Constant bit rate only)" WindowControl=" CHECK(&apos;MP3&apos;),USE(SoundFolder:MP3),MSG(&apos;MPEG Layer 3 Audio File (Constant bit rate only)&apos;),TIP(&apos;MPEG Layer 3 Audio File (Constant bit rate only)&apos;)" ReportControl=" CHECK(&apos;MP3&apos;),USE(SoundFolder:MP3)">
 				<Audit CreateUser="Administrator" CreateDate="21 AUG 2024" CreateTime="11:37:23AM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime="11:45:43AM" ModifiedVersionNumber="1"/>
+				<Validity Check="BOOLEAN"/>
+			</Field>
+			<Field Guid="{dc266349-738f-483d-984b-99b39bf20820}" Name="WMA" Description="Windows Media Audio Format" DataType="BYTE" Size="1" ScreenPicture="@n3" ScreenPrompt="WMA" ReportHeading="WMA" Message="Windows Media Audio Format" Tooltip="Windows Media Audio Format" WindowControl=" CHECK(&apos;WMA&apos;),USE(SoundFolder:WMA),MSG(&apos;Windows Media Audio Format&apos;),TIP(&apos;Windows Media Audio Format&apos;)" ReportControl=" CHECK(&apos;WMA&apos;),USE(SoundFolder:WMA)">
+				<Audit CreateUser="Administrator" CreateDate="21 AUG 2024" CreateTime=" 1:46:22PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="21 AUG 2024" ModifiedTime=" 1:48:17PM" ModifiedVersionNumber="1"/>
 				<Validity Check="BOOLEAN"/>
 			</Field>
 		</Field>
