@@ -1,6 +1,7 @@
 *.6app
 *.app
 *.ap~
+*.bak
 *.bct
 *.bpp
 *.chw

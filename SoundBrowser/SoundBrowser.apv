@@ -207,7 +207,8 @@ WHEN  ('RelationManager:SoundFolders') ('Init {19}PROCEDURE', 'DeferedAddRelatio
 %DataPathOtherDirectoryCreate LONG  (0)
 %OverrideGenerate DEPEND %File LONG TIMES 0
 
-%OverrideRILogout DEPEND %File DEFAULT TIMES 2
+%OverrideRILogout DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
@@ -351,15 +352,18 @@ WHEN  ('RelationManager:Sounds')TIMES 0
 
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
-%OverrideThreaded DEPEND %File DEFAULT TIMES 2
+%OverrideThreaded DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideCreate DEPEND %File DEFAULT TIMES 2
+%OverrideCreate DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideExternal DEPEND %File DEFAULT TIMES 2
+%OverrideExternal DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
@@ -371,19 +375,23 @@ WHEN  ('SoundFolders') ('Use Default')
 
 %OverrideExport DEPEND %File LONG TIMES 0
 
-%FileDeclarationMode DEPEND %File DEFAULT TIMES 2
+%FileDeclarationMode DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use User Options')
 WHEN  ('SoundFiles') ('Use User Options')
 WHEN  ('SoundFolders') ('Use User Options')
 
-%FileDeclarationType DEPEND %File LONG TIMES 2
+%FileDeclarationType DEPEND %File LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('SoundFiles') (0)
 WHEN  ('SoundFolders') (0)
 
-%FileDeclarationThread DEPEND %File LONG TIMES 2
+%FileDeclarationThread DEPEND %File LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('SoundFiles') (1)
 WHEN  ('SoundFolders') (1)
 
-%FileDeclarationBindable DEPEND %File LONG TIMES 2
+%FileDeclarationBindable DEPEND %File LONG TIMES 3
+WHEN  ('') (1)
 WHEN  ('SoundFiles') (1)
 WHEN  ('SoundFolders') (1)
 
@@ -391,27 +399,33 @@ WHEN  ('SoundFolders') (1)
 
 %FileDeclarationOver DEPEND %File DEFAULT TIMES 0
 
-%OverrideOpenMode DEPEND %File DEFAULT TIMES 2
+%OverrideOpenMode DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideUserAccess DEPEND %File DEFAULT TIMES 2
+%OverrideUserAccess DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideOtherAccess DEPEND %File DEFAULT TIMES 2
+%OverrideOtherAccess DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideLazyOpen DEPEND %File DEFAULT TIMES 2
+%OverrideLazyOpen DEPEND %File DEFAULT TIMES 3
+WHEN  ('') ('Use Default')
 WHEN  ('SoundFiles') ('Use Default')
 WHEN  ('SoundFolders') ('Use Default')
 
-%OverrideDoNotAssertOnCloseMisuse DEPEND %File LONG TIMES 2
+%OverrideDoNotAssertOnCloseMisuse DEPEND %File LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('SoundFiles') (0)
 WHEN  ('SoundFolders') (0)
 
-%StandardExternalModule DEPEND %Module LONG TIMES 2
+%StandardExternalModule DEPEND %Module LONG TIMES 3
+WHEN  ('') (1)
 WHEN  ('SoundBrowser.clw') (1)
 WHEN  ('SoundBrowser001.clw') (1)
 
@@ -540,7 +554,7 @@ WHEN  ('SoundBrowser001.clw') ('1')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
-%LastApplicationDebug DEFAULT  ('')
+%LastApplicationDebug DEFAULT  ('1')
 %LastApplicationLocalLibrary DEFAULT  ('')
 [PROJECT]
 -- NAMESPACE SoundBrowser
@@ -548,6 +562,7 @@ WHEN  ('SoundBrowser001.clw') ('1')
 #system win32 exe
 #model clarion dll
 #pragma link_option(icon=>SoundBrowserApp.ico)
+#pragma debug(vid=>full)
 #pragma define(_ABCDllMode_=>0) -- GENERATED
 #pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowser.clw" -- GENERATED
@@ -603,7 +618,8 @@ DESCRIPTION 'Wizard Application for C:\Users\Steven\ClarionProjects\SoundBrowser
 FROM ABC Frame
 MODIFIED '2024/08/18' '13:57:13'
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 13
+%ButtonAction DEPEND %Control DEFAULT TIMES 14
+WHEN  ('') ('No Special Action')
 WHEN  ('?Arrange') ('No Special Action')
 WHEN  ('?BrowseMenu') ('No Special Action')
 WHEN  ('?BrowseSoundFolders') ('Call a Procedure')
@@ -630,7 +646,8 @@ WHEN  ('?BrowseSoundFolders') (BrowseSoundFolders)
 %ButtonThread DEPEND %Control LONG TIMES 1
 WHEN  ('?BrowseSoundFolders') (1)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 13
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 14
+WHEN  ('') ('25000')
 WHEN  ('?Arrange') ('25000')
 WHEN  ('?BrowseMenu') ('25000')
 WHEN  ('?BrowseSoundFolders') ('050000')
@@ -648,7 +665,8 @@ WHEN  ('?Tile') ('25000')
 %ButtonParameters DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?BrowseSoundFolders') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 13
+%ButtonRequest DEPEND %Control DEFAULT TIMES 14
+WHEN  ('') ('None')
 WHEN  ('?Arrange') ('None')
 WHEN  ('?BrowseMenu') ('None')
 WHEN  ('?BrowseSoundFolders') ('None')
@@ -877,39 +895,47 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('Default')
 WHEN  ('?BrowseMenu') ('Default')
 WHEN  ('?BrowseSoundFolders') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('Off')
 WHEN  ('?BrowseMenu') ('Off')
 WHEN  ('?BrowseSoundFolders') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('')
 WHEN  ('?BrowseMenu') ('')
 WHEN  ('?BrowseSoundFolders') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
 WHEN  ('?BrowseMenu') (-1)
 WHEN  ('?BrowseSoundFolders') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
 WHEN  ('?BrowseMenu') (-1)
 WHEN  ('?BrowseSoundFolders') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
@@ -927,7 +953,8 @@ WHEN  ('?BrowseSoundFolders') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
+WHEN  ('') (1)
 WHEN  ('?BrowseMenu') (1)
 WHEN  ('?BrowseSoundFolders') (1)
 
@@ -947,7 +974,8 @@ WHEN  ('?BrowseSoundFolders') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
@@ -955,7 +983,8 @@ WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
@@ -969,7 +998,8 @@ WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
@@ -977,7 +1007,8 @@ WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
@@ -985,7 +1016,8 @@ WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
@@ -993,21 +1025,25 @@ WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?BrowseMenu')TIMES 0
 WHEN  ('?BrowseSoundFolders')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('AIBtn0')
 WHEN  ('?BrowseMenu') ('AIBtn10')
 WHEN  ('?BrowseSoundFolders') ('AIBtn11')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
+WHEN  ('') (1)
 WHEN  ('?BrowseMenu') (1)
 WHEN  ('?BrowseSoundFolders') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('?Menubar')
 WHEN  ('?BrowseMenu') ('?Menubar')
 WHEN  ('?BrowseSoundFolders') ('?Menubar')
 
@@ -1017,7 +1053,8 @@ WHEN  ('?BrowseSoundFolders') ('?Menubar')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
@@ -1025,7 +1062,8 @@ WHEN  ('?BrowseSoundFolders') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
@@ -1033,7 +1071,8 @@ WHEN  ('?BrowseSoundFolders') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
@@ -1041,7 +1080,8 @@ WHEN  ('?BrowseSoundFolders') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?BrowseMenu') (0)
 WHEN  ('?BrowseSoundFolders') (0)
 
@@ -1218,7 +1258,8 @@ SoundFolders
 [KEY]
 SoundFolder:KeyID
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 8
+%ButtonAction DEPEND %Control DEFAULT TIMES 9
+WHEN  ('') ('No Special Action')
 WHEN  ('?BrowseSoundFiles') ('Call a Procedure')
 WHEN  ('?Change:4') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
@@ -1240,7 +1281,8 @@ WHEN  ('?BrowseSoundFiles') (BrowseSoundFilesBySoundFile:KeyFolderFile)
 %ButtonThread DEPEND %Control LONG TIMES 1
 WHEN  ('?BrowseSoundFiles') (0)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 8
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 9
+WHEN  ('') ('25000')
 WHEN  ('?BrowseSoundFiles') ('025000')
 WHEN  ('?Change:4') ('25000')
 WHEN  ('?Close') ('25000')
@@ -1253,7 +1295,8 @@ WHEN  ('?View:3') ('25000')
 %ButtonParameters DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?BrowseSoundFiles') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 8
+%ButtonRequest DEPEND %Control DEFAULT TIMES 9
+WHEN  ('') ('None')
 WHEN  ('?BrowseSoundFiles') ('')
 WHEN  ('?Change:4') ('None')
 WHEN  ('?Close') ('None')
@@ -1476,34 +1519,42 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
+WHEN  ('') ('Default')
 WHEN  ('?CurrentTab') ('Default')
 WHEN  ('?Help') ('Default')
 WHEN  ('?ManageGroup') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('Off')
 WHEN  ('?Help') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('')
 WHEN  ('?Help') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?Help') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?Help') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
@@ -1518,7 +1569,8 @@ WHEN  ('?Help') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?Help') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -1537,14 +1589,16 @@ WHEN  ('?Help') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -1557,39 +1611,46 @@ WHEN  ('?Help')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('AIBtn0')
 WHEN  ('?Help') ('AIBtn13')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?Help') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('?Browse:1')
 WHEN  ('?Help') ('?Browse:1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -1598,28 +1659,32 @@ WHEN  ('?Help') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 
 [ADDITION]
@@ -1903,35 +1968,45 @@ WHEN  (1)TIMES 0
 %HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
 
 %UseSameColorForAll LONG  (0)
-%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
@@ -1942,68 +2017,92 @@ WHEN  ('?Help')TIMES 0
 
 %ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
 
-%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
@@ -2048,21 +2147,27 @@ WHEN  ('?Help')TIMES 0
 %ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
 
 %UseSameStyleForAll LONG  (0)
-%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Local List')
 WHEN  ('SoundFolder:ID') ('Local List')
 WHEN  ('SoundFolder:Name') ('Local List')
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('')
 WHEN  ('SoundFolder:ID') ('')
@@ -2071,14 +2176,18 @@ WHEN  ('?Help')TIMES 0
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Local List')
 WHEN  ('SoundFolder:ID') ('Local List')
 WHEN  ('SoundFolder:Name') ('Local List')
 WHEN  ('?Help')TIMES 0
 
-%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('')
 WHEN  ('SoundFolder:ID') ('')
@@ -2087,14 +2196,18 @@ WHEN  ('?Help')TIMES 0
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Local List')
 WHEN  ('SoundFolder:ID') ('Local List')
 WHEN  ('SoundFolder:Name') ('Local List')
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('')
 WHEN  ('SoundFolder:ID') ('')
@@ -2107,10 +2220,14 @@ WHEN  ('?Help')TIMES 0
 
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
@@ -2155,21 +2272,27 @@ WHEN  ('?Help')TIMES 0
 %EnableSortHeader LONG  (0)
 %ControlFieldSortHeaderSave LONG  (0)
 %ControlFieldSortHeaderMulti LONG  (1)
-%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
@@ -2180,10 +2303,14 @@ WHEN  ('?Help')TIMES 0
 
 %ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
 
-%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
-%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %SortHeaderColumnsUseColor LONG  (0)
@@ -2377,14 +2504,18 @@ WHEN  ('EIP_SoundFolder:Description')TIMES 0
 
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
-%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (1)
 WHEN  ('SoundFolder:ID') (1)
 WHEN  ('SoundFolder:Name') (1)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Entry')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Entry')
 WHEN  ('SoundFolder:ID') ('Entry')
@@ -2393,42 +2524,54 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Default')
 WHEN  ('SoundFolder:ID') ('Default')
 WHEN  ('SoundFolder:Name') ('Default')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Fixed')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Fixed')
 WHEN  ('SoundFolder:ID') ('Fixed')
@@ -2439,7 +2582,9 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
-%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
@@ -2448,7 +2593,9 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
-%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
@@ -2459,21 +2606,27 @@ WHEN  ('?Help')TIMES 0
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (1)
 WHEN  ('SoundFolder:ID') (1)
 WHEN  ('SoundFolder:Name') (1)
 WHEN  ('?Help')TIMES 0
 
-%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Open')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Open')
 WHEN  ('SoundFolder:ID') ('Open')
 WHEN  ('SoundFolder:Name') ('Open')
 WHEN  ('?Help')TIMES 0
 
-%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
@@ -2482,14 +2635,18 @@ WHEN  ('?Help')TIMES 0
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('All Files')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('All Files')
 WHEN  ('SoundFolder:ID') ('All Files')
 WHEN  ('SoundFolder:Name') ('All Files')
 WHEN  ('?Help')TIMES 0
 
-%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('*.*')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('*.*')
 WHEN  ('SoundFolder:ID') ('*.*')
@@ -2502,28 +2659,36 @@ WHEN  ('?Help')TIMES 0
 
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
-%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
 WHEN  ('SoundFolder:Name') (-1)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (-1)
 WHEN  ('SoundFolder:ID') (-1)
@@ -2538,56 +2703,72 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Default')
 WHEN  ('SoundFolder:ID') ('Default')
 WHEN  ('SoundFolder:Name') ('Default')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
@@ -2602,7 +2783,9 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Default')
 WHEN  ('SoundFolder:ID') ('Default')
@@ -2617,42 +2800,54 @@ WHEN  ('?Help')TIMES 0
 
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Default')
 WHEN  ('SoundFolder:ID') ('Default')
 WHEN  ('SoundFolder:Name') ('Default')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('0')
 WHEN  ('SoundFolder:ID') ('0')
 WHEN  ('SoundFolder:Name') ('0')
 WHEN  ('?Help')TIMES 0
 
-%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') (0)
 WHEN  ('SoundFolder:ID') (0)
 WHEN  ('SoundFolder:Name') (0)
 WHEN  ('?Help')TIMES 0
 
-%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Related Field')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFolder:Description') ('Related Field')
 WHEN  ('SoundFolder:ID') ('Related Field')
@@ -2882,7 +3077,8 @@ SoundFile:KeyFolderFile
 [OTHERS]
 SoundFolders
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 12
+%ButtonAction DEPEND %Control DEFAULT TIMES 13
+WHEN  ('') ('No Special Action')
 WHEN  ('?Change:3') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
 WHEN  ('?Delete:3') ('No Special Action')
@@ -2904,7 +3100,8 @@ WHEN  ('?View:2') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 12
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 13
+WHEN  ('') ('25000')
 WHEN  ('?Change:3') ('25000')
 WHEN  ('?Close') ('25000')
 WHEN  ('?Delete:3') ('25000')
@@ -2920,7 +3117,8 @@ WHEN  ('?View:2') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 12
+%ButtonRequest DEPEND %Control DEFAULT TIMES 13
+WHEN  ('') ('None')
 WHEN  ('?Change:3') ('None')
 WHEN  ('?Close') ('None')
 WHEN  ('?Delete:3') ('None')
@@ -3147,33 +3345,41 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('Default')
 WHEN  ('?CurrentTab') ('Default')
 WHEN  ('?Tab:2') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('Off')
 WHEN  ('?Tab:2') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 1
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('')
 WHEN  ('?Tab:2') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 1
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?Tab:2') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 1
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+WHEN  ('') (-1)
 WHEN  ('?Tab:2') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 1
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
@@ -3188,7 +3394,8 @@ WHEN  ('?Tab:2') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 1
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?Tab:2') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -3207,14 +3414,16 @@ WHEN  ('?Tab:2') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 1
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 1
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -3227,39 +3436,46 @@ WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 1
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 1
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 1
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 1
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 1
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('AIBtn0')
 WHEN  ('?Tab:2') ('AIBtn16')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 1
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+WHEN  ('') (1)
 WHEN  ('?Tab:2') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 1
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+WHEN  ('') ('?Browse:1')
 WHEN  ('?Tab:2') ('?Browse:1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -3268,28 +3484,32 @@ WHEN  ('?Tab:2') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 1
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 1
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 1
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 1
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+WHEN  ('') (0)
 WHEN  ('?Tab:2') (0)
 
 [EMBED]
@@ -3697,35 +3917,45 @@ WHEN  ('Step0')TIMES 0
 %HotFieldBindOnly DEPEND %HotFields LONG TIMES 0
 
 %UseSameColorForAll LONG  (0)
-%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlGreenBarColor DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
@@ -3736,68 +3966,92 @@ WHEN  ('?Tab:2')TIMES 0
 
 %ColorCondition DEPEND %ConditionalColors DEFAULT TIMES 0
 
-%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldForegroundNormal DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldBackgroundNormal DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldForegroundSelected DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 1
+%ConditionalControlFieldBackgroundSelected DEPEND %ConditionalColors LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOnBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%GreenBarOffBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
@@ -3842,21 +4096,27 @@ WHEN  ('?Tab:2')TIMES 0
 %ConditionalControlFieldIconIsNumber DEPEND %ConditionalIcons LONG TIMES 0
 
 %UseSameStyleForAll LONG  (0)
-%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlGreenBarStyle DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOnStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Local List')
 WHEN  ('SoundFile:FileMarked') ('Local List')
 WHEN  ('SoundFile:Name') ('Local List')
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOnStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('')
 WHEN  ('SoundFile:FileMarked') ('')
@@ -3865,14 +4125,18 @@ WHEN  ('?Tab:2')TIMES 0
 
 %GreenBarOnStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOffStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Local List')
 WHEN  ('SoundFile:FileMarked') ('Local List')
 WHEN  ('SoundFile:Name') ('Local List')
 WHEN  ('?Tab:2')TIMES 0
 
-%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%GreenBarOffStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('')
 WHEN  ('SoundFile:FileMarked') ('')
@@ -3881,14 +4145,18 @@ WHEN  ('?Tab:2')TIMES 0
 
 %GreenBarOffStyle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%ControlFieldStyleType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Local List')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Local List')
 WHEN  ('SoundFile:FileMarked') ('Local List')
 WHEN  ('SoundFile:Name') ('Local List')
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%ControlFieldStyleLocalList DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('')
 WHEN  ('SoundFile:FileMarked') ('')
@@ -3901,10 +4169,14 @@ WHEN  ('?Tab:2')TIMES 0
 
 %StyleCondition DEPEND %ConditionalStyles DEFAULT TIMES 0
 
-%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 1
+%ConditionalControlFieldStyleType DEPEND %ConditionalStyles DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 1
+%ConditionalControlFieldStyleLocalList DEPEND %ConditionalStyles DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %ConditionalControlFieldStyle DEPEND %ConditionalStyles DEFAULT TIMES 0
@@ -3949,21 +4221,27 @@ WHEN  ('?Tab:2')TIMES 0
 %EnableSortHeader LONG  (0)
 %ControlFieldSortHeaderSave LONG  (0)
 %ControlFieldSortHeaderMulti LONG  (1)
-%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderOnlyAsc DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderOverride DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%ControlFieldSortHeaderDisableColumn DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
@@ -3974,10 +4252,14 @@ WHEN  ('?Tab:2')TIMES 0
 
 %ControlFieldSortHeaderField DEPEND %ControlFieldSortHeaderFields FIELD TIMES 0
 
-%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 1
+%ControlFieldSortHeaderFieldOrder DEPEND %ControlFieldSortHeaderFields DEFAULT TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
-%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 1
+%ControlFieldSortHeaderFieldCase DEPEND %ControlFieldSortHeaderFields LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %SortHeaderColumnsUseColor LONG  (0)
@@ -4163,14 +4445,18 @@ WHEN  ('EIP_SoundFile:Description')TIMES 0
 
 %PrimedValue DEPEND %PrimingFields DEFAULT TIMES 0
 
-%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowEIPExt DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (1)
 WHEN  ('SoundFile:FileMarked') (1)
 WHEN  ('SoundFile:Name') (1)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceTypeExt DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Entry')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Entry')
 WHEN  ('SoundFile:FileMarked') ('Entry')
@@ -4179,42 +4465,54 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQTitle DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Default')
 WHEN  ('SoundFile:FileMarked') ('Default')
 WHEN  ('SoundFile:Name') ('Default')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQOffset DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQTransparent DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQReadOnly DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQRequired DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQDataSource DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Fixed')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Fixed')
 WHEN  ('SoundFile:FileMarked') ('Fixed')
@@ -4225,7 +4523,9 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceValue DEPEND %EditInPlaceFEQFixedDataSource DEFAULT TIMES 0
 
-%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 1
+%EditInPlaceFEQFixedDataSourceSelected DEPEND %EditInPlaceFEQFixedDataSource LONG TIMES 2
+WHEN  ('')TIMES 1
+WHEN  ('')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceQN DEPEND %Control DEPEND %ControlField FIELD TIMES 0
@@ -4234,7 +4534,9 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQQueueDataSourceS DEPEND %Control DEPEND %ControlField FIELD TIMES 0
 
-%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQAutoSerializeField DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
@@ -4245,21 +4547,27 @@ WHEN  ('?Tab:2')TIMES 0
 
 %ReturnToOriginalDir DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowLongFilenames DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (1)
 WHEN  ('SoundFile:FileMarked') (1)
 WHEN  ('SoundFile:Name') (1)
 WHEN  ('?Tab:2')TIMES 0
 
-%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSFileDialogType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Open')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Open')
 WHEN  ('SoundFile:FileMarked') ('Open')
 WHEN  ('SoundFile:Name') ('Open')
 WHEN  ('?Tab:2')TIMES 0
 
-%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%AllowNoError DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
@@ -4268,14 +4576,18 @@ WHEN  ('?Tab:2')TIMES 0
 
 %AllowMultiSelect DEPEND %Control DEPEND %ControlField LONG TIMES 0
 
-%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSMaskDesc DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('All Files')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('All Files')
 WHEN  ('SoundFile:FileMarked') ('All Files')
 WHEN  ('SoundFile:Name') ('All Files')
 WHEN  ('?Tab:2')TIMES 0
 
-%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%DOSMask DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('*.*')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('*.*')
 WHEN  ('SoundFile:FileMarked') ('*.*')
@@ -4288,28 +4600,36 @@ WHEN  ('?Tab:2')TIMES 0
 
 %DOSMoreMask DEPEND %DOSMoreMasks DEFAULT TIMES 0
 
-%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQForegroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQBackgroundNormal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQForegroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
 WHEN  ('SoundFile:Name') (-1)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQBackgroundSelected DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (-1)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (-1)
 WHEN  ('SoundFile:FileMarked') (-1)
@@ -4324,56 +4644,72 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQListFormat DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQDrop DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQWidth DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQCase DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Default')
 WHEN  ('SoundFile:FileMarked') ('Default')
 WHEN  ('SoundFile:Name') ('Default')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQFlat DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQHorizontal DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQVertical DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQImmediate DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQEntryCompletion DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
@@ -4388,7 +4724,9 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQFixedDataSourceText DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQCheckJust DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Default')
 WHEN  ('SoundFile:FileMarked') ('Default')
@@ -4403,42 +4741,54 @@ WHEN  ('?Tab:2')TIMES 0
 
 %EditInPlaceFEQFalseLabel DEPEND %Control DEPEND %ControlField DEFAULT TIMES 0
 
-%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQEntryMode DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Default')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Default')
 WHEN  ('SoundFile:FileMarked') ('Default')
 WHEN  ('SoundFile:Name') ('Default')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQLower DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQUpper DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%EditInPlaceFEQStep DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('0')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('0')
 WHEN  ('SoundFile:FileMarked') ('0')
 WHEN  ('SoundFile:Name') ('0')
 WHEN  ('?Tab:2')TIMES 0
 
-%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 2
+%EditInPlaceFEQPassword DEPEND %Control DEPEND %ControlField LONG TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') (0)
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') (0)
 WHEN  ('SoundFile:FileMarked') (0)
 WHEN  ('SoundFile:Name') (0)
 WHEN  ('?Tab:2')TIMES 0
 
-%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 2
+%LookupType DEPEND %Control DEPEND %ControlField DEFAULT TIMES 3
+WHEN  ('')TIMES 1
+WHEN  ('') ('Related Field')
 WHEN  ('?Browse:1')TIMES 3
 WHEN  ('SoundFile:Description') ('Related Field')
 WHEN  ('SoundFile:FileMarked') ('Related Field')
@@ -4661,7 +5011,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/18' '13:57:49'
+MODIFIED '2024/08/21' '12:02:04'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -4920,8 +5270,7 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('?CurrentTab') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 1
 WHEN  ('?PopulateButton') ('Default')
 
 %FieldGradientColorType DEPEND %Control DEFAULT TIMES 1
@@ -5115,6 +5464,7 @@ BrowseForFolder    PROCEDURE()
 DialogTitle    STRING('Select a folder with sound files')
     CODE
     FILEDIALOG(DialogTitle,SoundFolder:Name,,FILE:LongName + FILE:Directory)
+    ThisWindow.Reset(TRUE)
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -5128,9 +5478,10 @@ RecordsAdded   LONG
     CODE
     DeleteExistingRecords()
     CLEAR(SoundFiles.Record)
-    DIRECTORY(FileQ,SoundFolder:Name & '\*.wav',ff_:NORMAL)
-    DIRECTORY(FileQ,SoundFolder:Name & '\*.avi',ff_:NORMAL)
-    DIRECTORY(FileQ,SoundFolder:Name & '\*.mid',ff_:NORMAL)
+    IF SoundFolder:WAV THEN DIRECTORY(FileQ,SoundFolder:Name & '\*.wav',ff_:NORMAL) END
+    IF SoundFolder:AVI THEN DIRECTORY(FileQ,SoundFolder:Name & '\*.avi',ff_:NORMAL) END
+    IF SoundFolder:MID THEN DIRECTORY(FileQ,SoundFolder:Name & '\*.mid',ff_:NORMAL) END
+    IF SoundFolder:MP3 THEN DIRECTORY(FileQ,SoundFolder:Name & '\*.mp3',ff_:NORMAL) END
     Qrecords = RECORDS(FileQ)
     IF Qrecords
         LOOP Qindex = 1 TO Qrecords
@@ -5234,20 +5585,23 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 13
+%ViewAction DEPEND %Control DEFAULT TIMES 16
 WHEN  ('?BrowseFolderButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
-WHEN  ('?CurrentTab') ('None')
+WHEN  ('?ExtensionsGroup') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('Hide')
 WHEN  ('?PopulateButton') ('Set Properties')
+WHEN  ('?SoundFolder:AVI') ('None')
 WHEN  ('?SoundFolder:Description') ('ReadOnly')
 WHEN  ('?SoundFolder:Description:Prompt') ('None')
 WHEN  ('?SoundFolder:ID') ('ReadOnly')
 WHEN  ('?SoundFolder:ID:Prompt') ('None')
+WHEN  ('?SoundFolder:MID') ('None')
+WHEN  ('?SoundFolder:MP3') ('None')
 WHEN  ('?SoundFolder:Name') ('ReadOnly')
 WHEN  ('?SoundFolder:Name:Prompt') ('None')
-WHEN  ('?Tab:1') ('None')
+WHEN  ('?SoundFolder:WAV') ('None')
 
 %PropertyAssignments DEPEND %Control MULTI LONG TIMES 2
 WHEN  ('?Cancel') (1)
@@ -5400,35 +5754,42 @@ WHEN  ('Default')TIMES 0
 QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI',10,COLOR:Black, |
           FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
           MDI,HLP('~ManageSoundFolders.htm'),SYSTEM
-          SHEET,AT(4,4,350,78),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(1)
-            TAB('&1) General'),USE(?Tab:1),#ORDINAL(2)
-              PROMPT('ID:'),AT(8,20),USE(?SoundFolder:ID:Prompt),TRN,#LINK(?SoundFolder:ID), |
-                #ORIG(?SoundFolder:ID:Prompt),#ORDINAL(3)
-              ENTRY(@n-14),AT(54,20,36,10),USE(SoundFolder:ID),RIGHT(2),READONLY,#LINK(?SoundFolder:ID:Prompt), |
-                #ORIG(SoundFolder:ID),#ORDINAL(4)
-              PROMPT('Name:'),AT(8,34),USE(?SoundFolder:Name:Prompt),TRN,#LINK(?SoundFolder:Name), |
-                #ORIG(?SoundFolder:Name:Prompt),#ORDINAL(5)
-              ENTRY(@s255),AT(95,34,255,10),USE(SoundFolder:Name),LEFT(2),#LINK(?SoundFolder:Name:Prompt), |
-                #ORIG(SoundFolder:Name),#ORDINAL(6)
-              PROMPT('Description:'),AT(8,48),USE(?SoundFolder:Description:Prompt),TRN,#LINK(?SoundFolder:Description), |
-                #ORIG(?SoundFolder:Description:Prompt),#ORDINAL(7)
-              TEXT,AT(54,48,289,30),USE(SoundFolder:Description),LEFT,#LINK(?SoundFolder:Description:Prompt), |
-                #ORIG(SoundFolder:Description),#ORDINAL(8)
-              BUTTON('&Browse'),AT(54,34,36,11),USE(?BrowseFolderButton),FONT(,,,FONT:bold), |
-                FLAT,TRN,#ORDINAL(9)
-            END
-          END
+          PROMPT('ID:'),AT(7,7),USE(?SoundFolder:ID:Prompt),TRN,#LINK(?SoundFolder:ID),#ORIG(?SoundFolder:ID:Prompt), |
+            #ORDINAL(1)
+          ENTRY(@n-14),AT(53,7,36,10),USE(SoundFolder:ID),RIGHT(2),READONLY,#LINK(?SoundFolder:ID:Prompt), |
+            #ORIG(SoundFolder:ID),#ORDINAL(2)
+          PROMPT('Name:'),AT(7,21),USE(?SoundFolder:Name:Prompt),TRN,#LINK(?SoundFolder:Name), |
+            #ORIG(?SoundFolder:Name:Prompt),#ORDINAL(3)
+          ENTRY(@s255),AT(94,21,255,10),USE(SoundFolder:Name),LEFT(2),#LINK(?SoundFolder:Name:Prompt), |
+            #ORIG(SoundFolder:Name),#ORDINAL(4)
+          PROMPT('Description:'),AT(7,33),USE(?SoundFolder:Description:Prompt),TRN,#LINK(?SoundFolder:Description), |
+            #ORIG(?SoundFolder:Description:Prompt),#ORDINAL(5)
+          TEXT,AT(53,33,296,30),USE(SoundFolder:Description),LEFT,VSCROLL,#LINK(?SoundFolder:Description:Prompt), |
+            #ORIG(SoundFolder:Description),#ORDINAL(6)
+          BUTTON('&Browse'),AT(53,21,36,11),USE(?BrowseFolderButton),FONT(,,,FONT:bold),FLAT, |
+            TRN,#ORDINAL(7)
           BUTTON('&OK'),AT(199,86,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
             DEFAULT,FLAT,MSG('Accept data and close the window'),TIP('Accept data and c' & |
-            'lose the window'),TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(10)
+            'lose the window'),TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(8)
           BUTTON('&Cancel'),AT(252,86,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
             FLAT,MSG('Cancel operation'),TIP('Cancel operation'),TRN,#ORIG(?Cancel),#SEQ(3), |
-            #ORDINAL(11)
+            #ORDINAL(9)
           BUTTON('&Help'),AT(305,86,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
             FLAT,MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'),TRN,#ORIG(?Help), |
-            #SEQ(4),#ORDINAL(12)
+            #SEQ(4),#ORDINAL(10)
           BUTTON('&Populate File Records'),AT(4,86),USE(?PopulateButton),FONT(,,,FONT:bold), |
-            DISABLE,FLAT,TRN,#ORDINAL(13)
+            DISABLE,FLAT,TRN,#ORDINAL(11)
+          GROUP('Extensions'),AT(7,63,342,21),USE(?ExtensionsGroup),BOXED,TRN,#ORDINAL(12)
+            CHECK('WAV'),AT(52,69),USE(SoundFolder:WAV),MSG('Microsoft Wave Sound Format'), |
+              TIP('Microsoft Wave Sound Format'),#ORDINAL(13)
+            CHECK('AVI'),AT(94,69),USE(SoundFolder:AVI),MSG('Microsoft Audio Video Inte' & |
+              'rleave Format'),TIP('Microsoft Audio Video Interleave Format'),#ORDINAL(14)
+            CHECK('MID'),AT(127,69),USE(SoundFolder:MID),MSG('MIDI File Format'),TIP('MIDI File Format'), |
+              #ORDINAL(10000)
+            CHECK('MP3'),AT(163,69),USE(SoundFolder:MP3),MSG('MPEG Layer 3 Audio File (' & |
+              'Constant bit rate only)'),TIP('MPEG Layer 3 Audio File (Constant bit rate only)'), |
+              #ORDINAL(10001)
+          END
         END
 
 [PROCEDURE]
@@ -5437,7 +5798,7 @@ NAME UpdateSoundFiles
 DESCRIPTION 'Manage a SoundFiles record'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/18' '13:57:43'
+MODIFIED '2024/08/21' '11:59:09'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('e384cbea-33a0-44c1-857c-beee66627c83')
@@ -5451,7 +5812,8 @@ SoundFiles
 [SECONDARY]
 SoundFolders SoundFiles
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 5
+%ButtonAction DEPEND %Control DEFAULT TIMES 6
+WHEN  ('') ('No Special Action')
 WHEN  ('?BrowseFileButton') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
@@ -5466,7 +5828,8 @@ WHEN  ('?SoundFile:FileMarked') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
+WHEN  ('') ('25000')
 WHEN  ('?BrowseFileButton') ('25000')
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?Help') ('25000')
@@ -5475,7 +5838,8 @@ WHEN  ('?SoundFile:FileMarked') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 5
+%ButtonRequest DEPEND %Control DEFAULT TIMES 6
+WHEN  ('') ('None')
 WHEN  ('?BrowseFileButton') ('None')
 WHEN  ('?Cancel') ('None')
 WHEN  ('?Help') ('None')
@@ -5696,40 +6060,48 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
+WHEN  ('') ('Default')
 WHEN  ('?CurrentTab') ('Default')
 WHEN  ('?Help') ('Default')
 WHEN  ('?SoundFile:FileMarked') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('Off')
 WHEN  ('?Help') ('Off')
 WHEN  ('?SoundFile:FileMarked') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('')
 WHEN  ('?Help') ('')
 WHEN  ('?SoundFile:FileMarked') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
 WHEN  ('?Help') (-1)
 WHEN  ('?SoundFile:FileMarked') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
+WHEN  ('') (-1)
 WHEN  ('?Help') (-1)
 WHEN  ('?SoundFile:FileMarked') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -5745,7 +6117,8 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 7
+WHEN  ('') (1)
 WHEN  ('?Help') (1)
 WHEN  ('?SoundFile:FileMarked') (1)
 WHEN  ('?SoundFile:FolderID') (1)
@@ -5774,7 +6147,8 @@ WHEN  (1) ('''>''')
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -5782,7 +6156,8 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -5801,7 +6176,8 @@ WHEN  (1) ('''''')
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -5809,7 +6185,8 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -5817,7 +6194,8 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -5825,21 +6203,25 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
+WHEN  ('')TIMES 0
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('AIBtn0')
 WHEN  ('?Help') ('AIBtn17')
 WHEN  ('?SoundFile:FileMarked') ('AIBtn12')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
+WHEN  ('') (1)
 WHEN  ('?Help') (1)
 WHEN  ('?SoundFile:FileMarked') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
+WHEN  ('') ('?CurrentTab')
 WHEN  ('?Help') ('?CurrentTab')
 WHEN  ('?SoundFile:FileMarked') ('?CurrentTab')
 
@@ -5849,7 +6231,8 @@ WHEN  ('?SoundFile:FileMarked') ('?CurrentTab')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -5857,7 +6240,8 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -5865,7 +6249,8 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -5873,7 +6258,8 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
+WHEN  ('') (0)
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -5911,7 +6297,11 @@ PRIORITY 4000
 PROPERTY:END
 BrowseForFile    PROCEDURE()
 DialogTitle    STRING('Select a sound file')
-Extensions     STRING('WAV files|*.wav|AVI files|*.avi|All files|*.*')
+Extensions     STRING('WAV files|*.wav|' & | 
+                      'AVI files|*.avi|' & | 
+                      'MIDI files|*.mid|' & | 
+                      'MP3 files|*.mp3|' & | 
+                      'All files|*.*')
 OriginalPath   STRING(FILE:MaxFilePath)
     CODE
     OriginalPath = LONGPATH()
@@ -5991,7 +6381,8 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 17
+%ViewAction DEPEND %Control DEFAULT TIMES 18
+WHEN  ('') ('None')
 WHEN  ('?BrowseFileButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
 WHEN  ('?CurrentTab') ('None')
