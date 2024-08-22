@@ -37,7 +37,15 @@ WHEN  ('RelationManager:SoundFolders') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 4
+WHEN  ('FileManager:SoundFiles') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('FileManager:SoundFolders') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:SoundFiles') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
+WHEN  ('RelationManager:SoundFolders') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('SoundBrowserApp.ico')
@@ -4838,7 +4846,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/21' '14:35:01'
+MODIFIED '2024/08/21' '23:16:18'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -4852,11 +4860,12 @@ SoundFolders
 [SECONDARY]
 SoundFiles SoundFolders
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 5
+%ButtonAction DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?BrowseFolderButton') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
+WHEN  ('?OpenFolderButton') ('No Special Action')
 WHEN  ('?PopulateButton') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
@@ -4867,20 +4876,22 @@ WHEN  ('?PopulateButton') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?BrowseFolderButton') ('25000')
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?Help') ('25000')
 WHEN  ('?OK') ('25000')
+WHEN  ('?OpenFolderButton') ('25000')
 WHEN  ('?PopulateButton') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 5
+%ButtonRequest DEPEND %Control DEFAULT TIMES 6
 WHEN  ('?BrowseFolderButton') ('None')
 WHEN  ('?Cancel') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('None')
+WHEN  ('?OpenFolderButton') ('None')
 WHEN  ('?PopulateButton') ('None')
 
 %PreLookupKey DEPEND %Control KEY TIMES 0
@@ -5254,7 +5265,7 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 4499
 PROPERTY:END
-BrowseForFolder()
+USF.BrowseForFolder()
 [END]
 [END]
 WHEN '?PopulateButton'
@@ -5265,7 +5276,18 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 4499
 PROPERTY:END
-PopulateFileRecords()
+USF.PopulateFileRecords()
+[END]
+[END]
+WHEN '?OpenFolderButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4499
+PROPERTY:END
+USF.OpenFolder()
 [END]
 [END]
 [END]
@@ -5280,12 +5302,13 @@ Util                   Utilities
 PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
-    MAP
+USF                    CLASS
 BrowseForFolder        PROCEDURE()
 DeleteExistingRecords  PROCEDURE()
 GetLastRecordNumber    PROCEDURE(),LONG
+OpenFolder             PROCEDURE()
 PopulateFileRecords    PROCEDURE()
-    END
+                       END
 [END]
 EMBED %LocalProcedures
 [DEFINITION]
@@ -5293,7 +5316,7 @@ EMBED %LocalProcedures
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-BrowseForFolder    PROCEDURE()
+USF.BrowseForFolder    PROCEDURE()
 DialogTitle    STRING('Select a folder with sound files')
     CODE
     FILEDIALOG(DialogTitle,SoundFolder:Name,,FILE:LongName + FILE:Directory)
@@ -5302,7 +5325,7 @@ DialogTitle    STRING('Select a folder with sound files')
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-DeleteExistingRecords    PROCEDURE()
+USF.DeleteExistingRecords    PROCEDURE()
 RecordsDeleted    LONG
     CODE
     CLEAR(SoundFiles.Record,1)
@@ -5320,7 +5343,7 @@ RecordsDeleted    LONG
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-GetLastRecordNumber    PROCEDURE()!,LONG
+USF.GetLastRecordNumber    PROCEDURE()!,LONG
 ReturnValue    LONG
     CODE
     IF RECORDS(SoundFiles)
@@ -5336,24 +5359,39 @@ ReturnValue    LONG
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-PopulateFileRecords    PROCEDURE()
-OriginalPath   STRING(FILE:MaxFilePath)
-FileQ          QUEUE(FILE:Queue),PRE(FQ)
-               END
-LastRecord     LONG
-Qrecords       LONG
-Qindex         LONG
-RecordsAdded   LONG
+USF.OpenFolder    PROCEDURE()
+    CODE
+    IF EXISTS(SoundFolder:Name)
+        RUN('explorer "' & SoundFolder:Name & '"')
+        IF RUNCODE()
+            MESSAGE(RUNCODE() & ' ' & ERROR(),'Command Error',ICON:Hand,'',0,MSGMODE:CANCOPY)
+        END
+    ELSE
+        MESSAGE(SoundFolder:Name & ' does not exist!','Folder Not Found',ICON:Hand,'',0,MSGMODE:CANCOPY)
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+USF.PopulateFileRecords    PROCEDURE()
+OriginalPath    STRING(FILE:MaxFilePath)
+FileQ           QUEUE(FILE:Queue),PRE(FQ)
+                END
+LastRecord      LONG
+Qrecords        LONG
+Qindex          LONG
+RecordsAdded    LONG
     CODE
     OriginalPath = LONGPATH()
-    DeleteExistingRecords()
-    LastRecord = GetLastRecordNumber()
+    SELF.DeleteExistingRecords()
+    LastRecord = SELF.GetLastRecordNumber()
     CLEAR(SoundFiles.Record)
     IF SoundFolder:WAV THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.wav',ff_:NORMAL) END
     IF SoundFolder:AVI THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.avi',ff_:NORMAL) END
     IF SoundFolder:MID THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.mid',ff_:NORMAL) END
     IF SoundFolder:MP3 THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.mp3',ff_:NORMAL) END
     IF SoundFolder:WMA THEN DIRECTORY(FileQ,Util.TrailingBackslash(SoundFolder:Name) & '*.wma',ff_:NORMAL) END
+    SETPATH(CLIP(OriginalPath))
     Qrecords = RECORDS(FileQ)
     IF Qrecords
         LOOP Qindex = 1 TO Qrecords
@@ -5375,7 +5413,6 @@ RecordsAdded   LONG
         END
     END
     MESSAGE(RecordsAdded & ' file records were populated.')
-    SETPATH(CLIP(OriginalPath))
 [END]
 [END]
 [ADDITION]
@@ -5446,12 +5483,13 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 17
+%ViewAction DEPEND %Control DEFAULT TIMES 18
 WHEN  ('?BrowseFolderButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
 WHEN  ('?ExtensionsGroup') ('Disable')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('Hide')
+WHEN  ('?OpenFolderButton') ('Set Properties')
 WHEN  ('?PopulateButton') ('Set Properties')
 WHEN  ('?SoundFolder:AVI') ('None')
 WHEN  ('?SoundFolder:Description') ('ReadOnly')
@@ -5465,19 +5503,24 @@ WHEN  ('?SoundFolder:Name:Prompt') ('None')
 WHEN  ('?SoundFolder:WAV') ('None')
 WHEN  ('?SoundFolder:WMA') ('None')
 
-%PropertyAssignments DEPEND %Control MULTI LONG TIMES 2
+%PropertyAssignments DEPEND %Control MULTI LONG TIMES 3
 WHEN  ('?Cancel') (1)
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?PopulateButton') (1)
 
-%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 2
+%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 3
 WHEN  ('?Cancel')TIMES 1
 WHEN  (1) ('PROP:Text')
+WHEN  ('?OpenFolderButton')TIMES 1
+WHEN  (1) ('PROP:Disable')
 WHEN  ('?PopulateButton')TIMES 1
 WHEN  (1) ('PROP:Disable')
 
-%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 2
+%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 3
 WHEN  ('?Cancel')TIMES 1
 WHEN  (1) ('''&Close''')
+WHEN  ('?OpenFolderButton')TIMES 1
+WHEN  (1) ('FALSE')
 WHEN  ('?PopulateButton')TIMES 1
 WHEN  (1) ('FALSE')
 
@@ -5639,7 +5682,7 @@ QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI'
           BUTTON('&Help'),AT(305,86,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
             FLAT,MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'),TRN,#ORIG(?Help), |
             #SEQ(4),#ORDINAL(10)
-          BUTTON('&Populate File Records'),AT(4,86),USE(?PopulateButton),FONT(,,,FONT:bold), |
+          BUTTON('&Populate File Records'),AT(4,86,90),USE(?PopulateButton),FONT(,,,FONT:bold), |
             DISABLE,FLAT,TRN,#ORDINAL(11)
           GROUP('Extensions'),AT(7,63,342,21),USE(?ExtensionsGroup),BOXED,TRN,#ORDINAL(12)
             CHECK('WAV'),AT(52,69,36),USE(SoundFolder:WAV),MSG('Microsoft Wave Sound Format'), |
@@ -5652,8 +5695,10 @@ QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI'
               'e (Constant bit rate only)'),TIP('MPEG Layer 3 Audio File (Constant bit ' & |
               'rate only)'),#ORDINAL(16)
             CHECK('WMA'),AT(212,69,36),USE(SoundFolder:WMA),MSG('Windows Media Audio Format'), |
-              TIP('Windows Media Audio Format'),#ORDINAL(10000)
+              TIP('Windows Media Audio Format'),#ORDINAL(17)
           END
+          BUTTON('Open &Folder'),AT(99,86,54,14),USE(?OpenFolderButton),FONT(,,,FONT:bold), |
+            DISABLE,FLAT,TRN,#ORDINAL(18)
         END
 
 [PROCEDURE]
@@ -5662,7 +5707,7 @@ NAME UpdateSoundFiles
 DESCRIPTION 'Manage a SoundFiles record'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/21' '13:56:15'
+MODIFIED '2024/08/21' '22:14:34'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('e384cbea-33a0-44c1-857c-beee66627c83')
@@ -6138,7 +6183,7 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 4499
 PROPERTY:END
-BrowseForFile()
+USF.BrowseForFile()
 [END]
 [END]
 [END]
@@ -6146,12 +6191,16 @@ EMBED %DataSection
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
-PRIORITY 1300
+PRIORITY 50
 PROPERTY:END
 Util             Utilities
-    MAP
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+USF              CLASS
 BrowseForFile    PROCEDURE()
-    END
+                 END
 [END]
 EMBED %LocalProcedures
 [DEFINITION]
@@ -6159,7 +6208,7 @@ EMBED %LocalProcedures
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
-BrowseForFile    PROCEDURE()
+USF.BrowseForFile    PROCEDURE()
 DialogTitle    STRING('Select a sound file')
 Extensions     STRING('WAV files|*.wav|' & | 
                       'AVI files|*.avi|' & | 
