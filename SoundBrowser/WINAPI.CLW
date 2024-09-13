@@ -8,7 +8,7 @@ LPSTR                   EQUATE(CSTRING)    !Usage:Pass the Label of the LPSTR
 
   SECTION('Prototypes')
   MODULE('Windows.DLL')
-    mciSendString(*LPCSTR,*LPSTR,UNSIGNED,hwnd),DWORD,PASCAL,RAW,NAME('mciSendStringA')
-    mciGetErrorString(DWORD,*LPSTR,UNSIGNED),BOOL,PASCAL,RAW,NAME('mciGetErrorStringA')
+    mciSendString(*LPCSTR CommandString,*LPSTR ReturnString,UNSIGNED ReturnStringBuffer,hwnd WindowHandle),DWORD,PASCAL,RAW,NAME('mciSendStringA') ! https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
+    mciGetErrorString(DWORD ErrorCode,*LPSTR ErrorText,UNSIGNED ErrorTextBuffer),BOOL,PASCAL,RAW,NAME('mciGetErrorStringA') ! https://learn.microsoft.com/en-us/previous-versions/dd757158(v=vs.85)
     GetActiveWindow(),HWND,PASCAL
   END

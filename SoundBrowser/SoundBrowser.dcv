@@ -126,25 +126,6 @@
 			</Component>
 		</Key>
 	</Table>
-	<Table Guid="{1a116dde-3788-4868-b739-bceb9c523de3}" Usage="Global" Name="SbGlobals" Prefix="Glo" GenerateLast="true">
-		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:36:26PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="13 SEP 2024" ModifiedTime=" 3:17:23PM" ModifiedVersionNumber="1"/>
-		<Field Guid="{d425422b-f527-4d52-82f7-66b16175d721}" Name="CurrentSound" DataType="CSTRING" Size="261" ScreenPicture="@s255" ScreenPrompt="Current Sound:" ReportHeading="Current Sound" Justification="LEFT" Offset="2" ReportControl=" STRING(@s255),USE(Glo:CurrentSound),LEFT(2)">
-			<WindowControl>
-				<Line Text=" PROMPT(&apos;Current Sound:&apos;),USE(?Glo:CurrentSound:Prompt)"/>
-				<Line Text=" ENTRY(@s255),USE(Glo:CurrentSound),LEFT(2)"/>
-			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:37:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="16 AUG 2024" ModifiedTime=" 1:19:22AM" ModifiedVersionNumber="1"/>
-			<Validity Check="NOCHECKS"/>
-		</Field>
-		<Field Guid="{596a6d19-b7d1-4921-80ac-44f6affda847}" Name="CurrentSoundStatus" DataType="CSTRING" Size="33" ScreenPicture="@s32" ScreenPrompt="Current Sound Status:" ReportHeading="Current Sound Status" Justification="LEFT" Offset="2" ReportControl=" STRING(@s32),USE(Glo:CurrentSoundStatus),LEFT(2)">
-			<WindowControl>
-				<Line Text=" PROMPT(&apos;Current Sound Status:&apos;),USE(?Glo:CurrentSoundStatus:Prompt)"/>
-				<Line Text=" ENTRY(@s32),USE(Glo:CurrentSoundStatus),LEFT(2)"/>
-			</WindowControl>
-			<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime=" 3:37:14PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="13 SEP 2024" ModifiedTime=" 3:17:23PM" ModifiedVersionNumber="1"/>
-			<Validity Check="NOCHECKS"/>
-		</Field>
-	</Table>
 	<Relation Guid="{271c80f5-8fcc-4f9b-a7b3-dd278cf0c6b1}" PrimaryTable="{5fbb7d9f-d20b-4194-83b1-8b8b4266e7dc}" ForeignTable="{5359651a-81a9-4ae5-8bda-a536412eaf0c}" PrimaryKey="{6130cca9-202a-4796-be8f-9348babf5a03}" ForeignKey="{2dac5b9b-c329-4fa8-881c-02e2bb39ba61}" Delete="CASCADE" Update="RESTRICT">
 		<Audit CreateUser="Administrator" CreateDate="15 AUG 2024" CreateTime="12:06:52PM" CreateVersionNumber="1" ModifiedUser="Administrator" ModifiedDate="15 AUG 2024" ModifiedTime="12:07:28PM" ModifiedVersionNumber="1"/>
 		<ForeignMapping Guid="{ad6d4b62-bfb2-4f07-8b4d-31b8ee5ae0af}" Field="{26a80db9-37d7-4411-b003-0039d7d8003a}"/>
