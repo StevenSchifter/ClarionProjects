@@ -37,7 +37,15 @@ WHEN  ('RelationManager:SoundFolders') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 4
+WHEN  ('FileManager:SoundFiles') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('FileManager:SoundFolders') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:SoundFiles') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
+WHEN  ('RelationManager:SoundFolders') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('SoundBrowserApp.ico')
@@ -556,10 +564,15 @@ WHEN  ('SoundBrowserMCI.clw') ('1')
 #model clarion dll
 #pragma link_option(icon=>SoundBrowserApp.ico)
 #pragma debug(vid=>full)
+#pragma define(_ABCDllMode_=>0) -- GENERATED
+#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowserMCI.clw"
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
+#compile "SoundBrowser_BC0.CLW" -- GENERATED
+#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
 #pragma link("cwHH%V%.LIB") -- GENERATED
+#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
@@ -3054,12 +3067,9 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
-  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Update {17}PROCEDURE(),DERIVED')
+WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3681,22 +3691,9 @@ WHEN  ('Default') ('')
 WHEN  ('Locator0') ('')
 WHEN  ('Step0') ('StepStringClass')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 3
-WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'AppendOrder {12}PROCEDURE(STRING Order),DERIVED', |
-  'ApplyRange {13}PROCEDURE(),BYTE,PROC,DERIVED', 'ClearFilesRecord       PROCEDURE(),DERIVED', |
-  'GetFreeElementAscending PROCEDURE(),STRING,DERIVED', 'Init {19}PROCEDURE(IListControl IC,VIEW V,BrowseQueue LQ,RelationManager RM,WindowManager WM)', |
-  'InitSort {15}PROCEDURE(BYTE NewOrder),BYTE,DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'Next {19}PROCEDURE(),BYTE,DERIVED', 'Open {19}PROCEDURE(),DERIVED', 'Previous {15}PROCEDURE(),BYTE,DERIVED', |
-  'ReplaceSort {12}PROCEDURE(STRING NewSortString,<<LocatorClass NewLocator>,<<StepClass NewStepClass>),DERIVED', |
-  'ResetSort {14}PROCEDURE(BYTE Force),BYTE,PROC,DERIVED', 'RestoreBuffers {9}PROCEDURE(),DERIVED', |
-  'SetSort {16}PROCEDURE(BYTE NewOrder,BYTE Force),BYTE,PROC,DERIVED', 'SetUseMRP {14}PROCEDURE(BYTE UseMRP=True),DERIVED', |
-  'TakeKey {16}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeLocate {13}PROCEDURE(),DERIVED', |
-  'ValidateRecord {9}PROCEDURE(),BYTE,DERIVED')
-WHEN  ('Locator0') ('Destruct {15}PROCEDURE(),DERIVED', 'GetShadow {14}PROCEDURE(),STRING,DERIVED', |
-  'Init {19}PROCEDURE(SIGNED Control = 0,*? Free,BYTE NoCase = 0),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,DERIVED', |
-  'UpdateWindow {11}PROCEDURE(),DERIVED')
-WHEN  ('Step0') ('GetPercentile {10}PROCEDURE(? Value),BYTE,DERIVED', 'Init {19}PROCEDURE(BYTE Controls)', |
-  'SetLimitNeeded {9}PROCEDURE(),BYTE,DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)', |
+  'ResetQueue {13}PROCEDURE(BYTE ResetMode),DERIVED')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
@@ -4668,9 +4665,7 @@ WHEN  ('Default') ('WindowResizeClass')
 WHEN  ('Default') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('GetParentControl       PROCEDURE(SIGNED Control),SIGNED,DERIVED', |
-  'Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)', |
-  'Resize {17}PROCEDURE(),BYTE,PROC,DERIVED', 'RestoreWindow {10}PROCEDURE(),DERIVED')
+WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
 
 %WindowMinHeight DEFAULT  ('')
 %RestrictMaxSize LONG  (0)
@@ -4825,7 +4820,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/21' '23:16:18'
+MODIFIED '2024/09/16' ' 0:53:18'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -4840,13 +4835,13 @@ SoundFolders
 SoundFiles SoundFolders
 [PROMPTS]
 %ButtonAction DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('No Special Action')
 WHEN  ('?BrowseFolderButton') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
 WHEN  ('?OpenFolderButton') ('No Special Action')
 WHEN  ('?PopulateButton') ('No Special Action')
+WHEN  ('?SoundFolder:Name') ('No Special Action')
 
 %ButtonRunName DEPEND %Control DEFAULT TIMES 0
 
@@ -4857,24 +4852,24 @@ WHEN  ('?PopulateButton') ('No Special Action')
 %ButtonThread DEPEND %Control LONG TIMES 0
 
 %ButtonThreadStack DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('25000')
 WHEN  ('?BrowseFolderButton') ('25000')
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?Help') ('25000')
 WHEN  ('?OK') ('25000')
 WHEN  ('?OpenFolderButton') ('25000')
 WHEN  ('?PopulateButton') ('25000')
+WHEN  ('?SoundFolder:Name') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
 %ButtonRequest DEPEND %Control DEFAULT TIMES 7
-WHEN  ('') ('None')
 WHEN  ('?BrowseFolderButton') ('None')
 WHEN  ('?Cancel') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('None')
 WHEN  ('?OpenFolderButton') ('None')
 WHEN  ('?PopulateButton') ('None')
+WHEN  ('?SoundFolder:Name') ('None')
 
 %PreLookupKey DEPEND %Control KEY TIMES 0
 
@@ -5091,40 +5086,40 @@ WHEN  ('WindowToolbar')TIMES 0
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
 %ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Default')
 WHEN  ('?PopulateButton') ('Default')
+WHEN  ('?SoundFolder:Name') ('Default')
 
 %FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('Off')
 WHEN  ('?PopulateButton') ('Off')
+WHEN  ('?SoundFolder:Name') ('Off')
 
 %FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('')
 WHEN  ('?PopulateButton') ('')
+WHEN  ('?SoundFolder:Name') ('')
 
 %FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %FieldGradientColorFrom DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
 WHEN  ('?PopulateButton') (-1)
+WHEN  ('?SoundFolder:Name') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
 %FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %FieldGradientColorTo DEPEND %Control LONG TIMES 2
-WHEN  ('') (-1)
 WHEN  ('?PopulateButton') (-1)
+WHEN  ('?SoundFolder:Name') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
 %FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
 
@@ -5138,8 +5133,7 @@ WHEN  ('?PopulateButton') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 4
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
 WHEN  ('?PopulateButton') (1)
 WHEN  ('?SoundFolder:ID') (1)
 WHEN  ('?SoundFolder:Name') (1)
@@ -5161,16 +5155,16 @@ WHEN  ('?SoundFolder:Name') (1)
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
 %CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
 %CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
 
@@ -5183,46 +5177,46 @@ WHEN  ('?PopulateButton')TIMES 0
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
 %UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
 %UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
 %CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
 %UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
-WHEN  ('')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
+WHEN  ('?SoundFolder:Name')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
 %AIObjectName DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('AIBtn0')
 WHEN  ('?PopulateButton') ('AIBtn13')
+WHEN  ('?SoundFolder:Name') ('AIBtn4')
 
 %AIEnableMimicControl DEPEND %Control LONG TIMES 2
-WHEN  ('') (1)
 WHEN  ('?PopulateButton') (1)
+WHEN  ('?SoundFolder:Name') (1)
 
 %AIMimicControl DEPEND %Control DEFAULT TIMES 2
-WHEN  ('') ('?SoundFolder:ID:Prompt')
 WHEN  ('?PopulateButton') ('?CurrentTab')
+WHEN  ('?SoundFolder:Name') ('?SoundFolder:ID:Prompt')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
 
@@ -5231,32 +5225,32 @@ WHEN  ('?PopulateButton') ('?CurrentTab')
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
-WHEN  ('') (0)
 WHEN  ('?PopulateButton') (0)
+WHEN  ('?SoundFolder:Name') (0)
 
 [EMBED]
 EMBED %ControlEventHandling
@@ -5294,6 +5288,17 @@ PROPERTY:END
 USF.OpenFolder()
 [END]
 [END]
+WHEN '?SoundFolder:Name'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7501
+PROPERTY:END
+USF.FolderExists = USF.CheckFolderExistence()
+[END]
+[END]
 [END]
 EMBED %DataSection
 [DEFINITION]
@@ -5307,9 +5312,11 @@ PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
 USF                    CLASS
+FolderExists           BYTE
 BrowseForFolder        PROCEDURE()
 DeleteExistingRecords  PROCEDURE()
 GetLastRecordNumber    PROCEDURE(),LONG
+CheckFolderExistence   PROCEDURE(),BYTE
 OpenFolder             PROCEDURE()
 PopulateFileRecords    PROCEDURE()
                        END
@@ -5329,19 +5336,37 @@ DialogTitle    STRING('Select a folder with sound files')
 PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
+USF.CheckFolderExistence    PROCEDURE()
+    CODE
+    IF EXISTS(SoundFolder:Name)
+        RETURN TRUE
+    ELSE
+        ?ErrorString{PROP:Text} = 'ERROR: Folder not found'
+        RETURN FALSE
+    END
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
 USF.DeleteExistingRecords    PROCEDURE()
 RecordsDeleted    LONG
     CODE
     CLEAR(SoundFiles.Record,1)
     SoundFile:FolderID = SoundFolder:ID
     SET(SoundFile:KeyFolderFile,SoundFile:KeyFolderFile)
-    LOOP WHILE Access:SoundFiles.TryPrevious() = Level:Benign |
-         AND SoundFile:FolderID = SoundFolder:ID
-        DELETE(SoundFiles)
-        RecordsDeleted += 1
+    LOOP
+        PREVIOUS(SoundFiles)
+        IF SoundFile:FolderID = SoundFolder:ID
+            DELETE(SoundFiles)
+            RecordsDeleted += 1
+        ELSE
+            BREAK
+        END
     END
     IF RecordsDeleted > 0
-        MESSAGE(RecordsDeleted & ' existing file records were deleted.')
+        ?InfoString{PROP:Text} = RecordsDeleted & ' existing file records were deleted.'
+        DISPLAY()
+        SLEEP(3000)
     END
 [SOURCE]
 PROPERTY:BEGIN
@@ -5365,13 +5390,13 @@ PRIORITY 4000
 PROPERTY:END
 USF.OpenFolder    PROCEDURE()
     CODE
-    IF EXISTS(SoundFolder:Name)
+    IF SELF.CheckFolderExistence()
         RUN('explorer "' & SoundFolder:Name & '"')
         IF RUNCODE()
-            MESSAGE(RUNCODE() & ' ' & ERROR(),'Command Error',ICON:Hand,'',0,MSGMODE:CANCOPY)
+            ?ErrorString{PROP:Text} = 'Folder Open Error: ' & ERROR()
+        ELSE
+            ?ErrorString{PROP:Text} = ''
         END
-    ELSE
-        MESSAGE(SoundFolder:Name & ' does not exist!','Folder Not Found',ICON:Hand,'',0,MSGMODE:CANCOPY)
     END
 [SOURCE]
 PROPERTY:BEGIN
@@ -5386,6 +5411,7 @@ Qrecords        LONG
 Qindex          LONG
 RecordsAdded    LONG
     CODE
+    Access:SoundFiles.Open()
     OriginalPath = LONGPATH()
     SELF.DeleteExistingRecords()
     LastRecord = SELF.GetLastRecordNumber()
@@ -5416,7 +5442,9 @@ RecordsAdded    LONG
             RecordsAdded += 1
         END
     END
-    MESSAGE(RecordsAdded & ' file records were populated.')
+    Access:SoundFiles.Close()
+    ?InfoString{PROP:Text} = RecordsAdded & ' file records were populated.'
+    DISPLAY()
 [END]
 [END]
 [ADDITION]
@@ -5492,12 +5520,13 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 19
-WHEN  ('') ('None')
+%ViewAction DEPEND %Control DEFAULT TIMES 20
 WHEN  ('?BrowseFolderButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
+WHEN  ('?ErrorString') ('None')
 WHEN  ('?ExtensionsGroup') ('Disable')
 WHEN  ('?Help') ('None')
+WHEN  ('?InfoString') ('None')
 WHEN  ('?OK') ('Hide')
 WHEN  ('?OpenFolderButton') ('Set Properties')
 WHEN  ('?PopulateButton') ('Set Properties')
@@ -5530,9 +5559,9 @@ WHEN  (1) ('PROP:Disable')
 WHEN  ('?Cancel')TIMES 1
 WHEN  (1) ('''&Close''')
 WHEN  ('?OpenFolderButton')TIMES 1
-WHEN  (1) ('FALSE')
+WHEN  (1) ('TRUE - USF.CheckFolderExistence()')
 WHEN  ('?PopulateButton')TIMES 1
-WHEN  (1) ('FALSE')
+WHEN  (1) ('TRUE - USF.CheckFolderExistence()')
 
 [ADDITION]
 NAME ABC WindowResize
@@ -5666,8 +5695,8 @@ WHEN  ('Default')TIMES 0
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [WINDOW]
-QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI',10,COLOR:Black, |
-          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
+QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,117),FONT('Segoe UI',10,COLOR:Black, |
+          FONT:regular,CHARSET:DEFAULT),DOUBLE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
           MDI,HLP('~ManageSoundFolders.htm'),SYSTEM
           PROMPT('ID:'),AT(7,7),USE(?SoundFolder:ID:Prompt),TRN,#LINK(?SoundFolder:ID),#ORIG(?SoundFolder:ID:Prompt), |
             #ORDINAL(1)
@@ -5683,16 +5712,16 @@ QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI'
             #ORIG(SoundFolder:Description),#ORDINAL(6)
           BUTTON('&Browse'),AT(53,21,36,11),USE(?BrowseFolderButton),FONT(,,,FONT:bold),FLAT, |
             TRN,#ORDINAL(7)
-          BUTTON('&OK'),AT(199,86,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
+          BUTTON('&OK'),AT(199,90,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
             DEFAULT,FLAT,MSG('Accept data and close the window'),TIP('Accept data and c' & |
             'lose the window'),TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(8)
-          BUTTON('&Cancel'),AT(252,86,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
+          BUTTON('&Cancel'),AT(252,90,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
             FLAT,MSG('Cancel operation'),TIP('Cancel operation'),TRN,#ORIG(?Cancel),#SEQ(3), |
             #ORDINAL(9)
-          BUTTON('&Help'),AT(305,86,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
+          BUTTON('&Help'),AT(305,90,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
             FLAT,MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'),TRN,#ORIG(?Help), |
             #SEQ(4),#ORDINAL(10)
-          BUTTON('&Populate File Records'),AT(4,86,90),USE(?PopulateButton),FONT(,,,FONT:bold), |
+          BUTTON('&Populate File Records'),AT(4,90,90),USE(?PopulateButton),FONT(,,,FONT:bold), |
             DISABLE,FLAT,TRN,#ORDINAL(11)
           GROUP('Extensions'),AT(7,63,342,21),USE(?ExtensionsGroup),BOXED,TRN,#ORDINAL(12)
             CHECK('WAV'),AT(52,69,36),USE(SoundFolder:WAV),MSG('Microsoft Wave Sound Format'), |
@@ -5707,8 +5736,11 @@ QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,358,104),FONT('Segoe UI'
             CHECK('WMA'),AT(212,69,36),USE(SoundFolder:WMA),MSG('Windows Media Audio Format'), |
               TIP('Windows Media Audio Format'),#ORDINAL(17)
           END
-          BUTTON('Open &Folder'),AT(99,86,54,14),USE(?OpenFolderButton),FONT(,,,FONT:bold), |
-            DISABLE,FLAT,TRN,#ORDINAL(10000)
+          BUTTON('Open &Folder'),AT(99,90,54,14),USE(?OpenFolderButton),FONT(,,,FONT:bold), |
+            DISABLE,FLAT,TRN,#ORDINAL(18)
+          STRING(''),AT(94,7,254),USE(?ErrorString),FONT(,,COLOR:Maroon,FONT:bold),LEFT,TRN, |
+            #ORDINAL(19)
+          STRING(''),AT(7,106,254),USE(?InfoString),LEFT,TRN,#ORDINAL(20)
         END
 
 [PROCEDURE]
@@ -5717,7 +5749,7 @@ NAME UpdateSoundFiles
 DESCRIPTION 'Manage a SoundFiles record'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/08/21' '22:14:34'
+MODIFIED '2024/09/16' ' 0:21:04'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('e384cbea-33a0-44c1-857c-beee66627c83')
@@ -5731,8 +5763,7 @@ SoundFiles
 [SECONDARY]
 SoundFolders SoundFiles
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('No Special Action')
+%ButtonAction DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?BrowseFileButton') ('No Special Action')
 WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
@@ -5747,8 +5778,7 @@ WHEN  ('?SoundFile:FileMarked') ('No Special Action')
 
 %ButtonThread DEPEND %Control LONG TIMES 0
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('25000')
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?BrowseFileButton') ('25000')
 WHEN  ('?Cancel') ('25000')
 WHEN  ('?Help') ('25000')
@@ -5757,8 +5787,7 @@ WHEN  ('?SoundFile:FileMarked') ('25000')
 
 %ButtonParameters DEPEND %Control DEFAULT TIMES 0
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 6
-WHEN  ('') ('None')
+%ButtonRequest DEPEND %Control DEFAULT TIMES 5
 WHEN  ('?BrowseFileButton') ('None')
 WHEN  ('?Cancel') ('None')
 WHEN  ('?Help') ('None')
@@ -5980,48 +6009,39 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
-WHEN  ('') ('Default')
-WHEN  ('?CurrentTab') ('Default')
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Help') ('Default')
 WHEN  ('?SoundFile:FileMarked') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('Off')
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Help') ('Off')
 WHEN  ('?SoundFile:FileMarked') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('')
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Help') ('')
 WHEN  ('?SoundFile:FileMarked') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (-1)
 WHEN  ('?SoundFile:FileMarked') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 3
-WHEN  ('') (-1)
+%FieldGradientColorTo DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (-1)
 WHEN  ('?SoundFile:FileMarked') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -6037,8 +6057,7 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 7
-WHEN  ('') (1)
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 6
 WHEN  ('?Help') (1)
 WHEN  ('?SoundFile:FileMarked') (1)
 WHEN  ('?SoundFile:FolderID') (1)
@@ -6067,8 +6086,7 @@ WHEN  (1) ('''>''')
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -6076,8 +6094,7 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -6096,8 +6113,7 @@ WHEN  (1) ('''''')
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -6105,8 +6121,7 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -6114,8 +6129,7 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
@@ -6123,25 +6137,21 @@ WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
-WHEN  ('')TIMES 0
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
 WHEN  ('?Help')TIMES 0
 WHEN  ('?SoundFile:FileMarked')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('AIBtn0')
+%AIObjectName DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Help') ('AIBtn17')
 WHEN  ('?SoundFile:FileMarked') ('AIBtn12')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 3
-WHEN  ('') (1)
+%AIEnableMimicControl DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (1)
 WHEN  ('?SoundFile:FileMarked') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 3
-WHEN  ('') ('?CurrentTab')
+%AIMimicControl DEPEND %Control DEFAULT TIMES 2
 WHEN  ('?Help') ('?CurrentTab')
 WHEN  ('?SoundFile:FileMarked') ('?CurrentTab')
 
@@ -6151,8 +6161,7 @@ WHEN  ('?SoundFile:FileMarked') ('?CurrentTab')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -6160,8 +6169,7 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -6169,8 +6177,7 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -6178,8 +6185,7 @@ WHEN  ('?SoundFile:FileMarked') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
-WHEN  ('') (0)
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
 WHEN  ('?Help') (0)
 WHEN  ('?SoundFile:FileMarked') (0)
 
@@ -6311,11 +6317,9 @@ NAME ABC ViewFormActions
 INSTANCE 5
 [PROMPTS]
 %ForceViewOnly LONG  (0)
-%ViewAction DEPEND %Control DEFAULT TIMES 18
-WHEN  ('') ('None')
+%ViewAction DEPEND %Control DEFAULT TIMES 15
 WHEN  ('?BrowseFileButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
-WHEN  ('?CurrentTab') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('Hide')
 WHEN  ('?SoundFile:Description') ('ReadOnly')
@@ -6329,7 +6333,6 @@ WHEN  ('?SoundFile:ID:Prompt') ('None')
 WHEN  ('?SoundFile:Name') ('ReadOnly')
 WHEN  ('?SoundFile:Name:Prompt') ('None')
 WHEN  ('?SoundFolder:Name') ('ReadOnly')
-WHEN  ('?Tab:1') ('None')
 
 %PropertyAssignments DEPEND %Control MULTI LONG TIMES 1
 WHEN  ('?Cancel') (1)
@@ -6474,44 +6477,40 @@ WHEN  ('Default')TIMES 0
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [WINDOW]
-QuickWindow WINDOW('Manage a SoundFiles record'),AT(,,358,132),FONT('Segoe UI',10,COLOR:Black, |
-          FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
+QuickWindow WINDOW('Manage a SoundFiles record'),AT(,,358,117),FONT('Segoe UI',10,COLOR:Black, |
+          FONT:regular,CHARSET:DEFAULT),DOUBLE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
           MDI,HLP('~ManageSoundFiles.htm'),SYSTEM
-          SHEET,AT(4,4,350,106),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(1)
-            TAB('&1) General'),USE(?Tab:1),#ORDINAL(2)
-              PROMPT('ID:'),AT(8,20),USE(?SoundFile:ID:Prompt),TRN,#LINK(?SoundFile:ID),#ORIG(?SoundFile:ID:Prompt), |
-                #ORDINAL(3)
-              ENTRY(@n-14),AT(61,20,35,10),USE(SoundFile:ID),RIGHT(2),READONLY,#LINK(?SoundFile:ID:Prompt), |
-                #ORIG(SoundFile:ID),#ORDINAL(4)
-              PROMPT('Folder:'),AT(8,34),USE(?SoundFile:FolderID:Prompt),TRN,#LINK(?SoundFile:FolderID), |
-                #ORIG(?SoundFile:FolderID:Prompt),#ORDINAL(5)
-              ENTRY(@n-14),AT(61,34,35,10),USE(SoundFile:FolderID),RIGHT(2),READONLY,#LINK(?SoundFile:FolderID:Prompt), |
-                #ORIG(SoundFile:FolderID),#ORDINAL(6)
-              PROMPT('File Marked:'),AT(8,48),USE(?SoundFile:FileMarked:Prompt),TRN,#LINK(?SoundFile:FileMarked), |
-                #ORIG(?SoundFile:FileMarked:Prompt),#ORDINAL(7)
-              PROMPT('Name:'),AT(8,62),USE(?SoundFile:Name:Prompt),TRN,#LINK(?SoundFile:Name), |
-                #ORIG(?SoundFile:Name:Prompt),#ORDINAL(8)
-              ENTRY(@s255),AT(99,62,251,10),USE(SoundFile:Name),LEFT(2),#LINK(?SoundFile:Name:Prompt), |
-                #ORIG(SoundFile:Name),#ORDINAL(9)
-              PROMPT('Description:'),AT(8,76),USE(?SoundFile:Description:Prompt),TRN,#LINK(?SoundFile:Description), |
-                #ORIG(?SoundFile:Description:Prompt),#ORDINAL(10)
-              TEXT,AT(61,76,289,30),USE(SoundFile:Description),LEFT,#LINK(?SoundFile:Description:Prompt), |
-                #ORIG(SoundFile:Description),#ORDINAL(11)
-              CHECK,AT(60,48),USE(SoundFile:FileMarked),TRN,#ORDINAL(12)
-              ENTRY(@s255),AT(99,34,250,10),USE(SoundFolder:Name),LEFT(2),READONLY,#ORDINAL(13)
-              BUTTON('&Browse'),AT(60,62,36,11),USE(?BrowseFileButton),FONT(,,,FONT:bold), |
-                FLAT,TRN,#ORDINAL(14)
-            END
-          END
-          BUTTON('&OK'),AT(199,114,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
+          PROMPT('ID:'),AT(5,4),USE(?SoundFile:ID:Prompt),TRN,#LINK(?SoundFile:ID),#ORIG(?SoundFile:ID:Prompt), |
+            #ORDINAL(1)
+          ENTRY(@n-14),AT(58,4,35,10),USE(SoundFile:ID),RIGHT(2),READONLY,#LINK(?SoundFile:ID:Prompt), |
+            #ORIG(SoundFile:ID),#ORDINAL(2)
+          PROMPT('Folder:'),AT(5,18),USE(?SoundFile:FolderID:Prompt),TRN,#LINK(?SoundFile:FolderID), |
+            #ORIG(?SoundFile:FolderID:Prompt),#ORDINAL(3)
+          ENTRY(@n-14),AT(58,18,35,10),USE(SoundFile:FolderID),RIGHT(2),READONLY,#LINK(?SoundFile:FolderID:Prompt), |
+            #ORIG(SoundFile:FolderID),#ORDINAL(4)
+          PROMPT('File Marked:'),AT(5,32),USE(?SoundFile:FileMarked:Prompt),TRN,#LINK(?SoundFile:FileMarked), |
+            #ORIG(?SoundFile:FileMarked:Prompt),#ORDINAL(5)
+          PROMPT('Name:'),AT(5,46),USE(?SoundFile:Name:Prompt),TRN,#LINK(?SoundFile:Name), |
+            #ORIG(?SoundFile:Name:Prompt),#ORDINAL(6)
+          ENTRY(@s255),AT(96,46,252,10),USE(SoundFile:Name),LEFT(2),#LINK(?SoundFile:Name:Prompt), |
+            #ORIG(SoundFile:Name),#ORDINAL(7)
+          PROMPT('Description:'),AT(5,60),USE(?SoundFile:Description:Prompt),TRN,#LINK(?SoundFile:Description), |
+            #ORIG(?SoundFile:Description:Prompt),#ORDINAL(8)
+          TEXT,AT(58,59,292,30),USE(SoundFile:Description),LEFT,#LINK(?SoundFile:Description:Prompt), |
+            #ORIG(SoundFile:Description),#ORDINAL(9)
+          CHECK,AT(57,32),USE(SoundFile:FileMarked),TRN,#ORDINAL(10)
+          ENTRY(@s255),AT(96,18,252,10),USE(SoundFolder:Name),LEFT(2),READONLY,#ORDINAL(11)
+          BUTTON('&Browse'),AT(57,46,36,11),USE(?BrowseFileButton),FONT(,,,FONT:bold),FLAT, |
+            TRN,#ORDINAL(12)
+          BUTTON('&OK'),AT(196,96,49,14),USE(?OK),FONT(,,,FONT:bold),LEFT,ICON('WAOK.ICO'), |
             DEFAULT,FLAT,MSG('Accept data and close the window'),TIP('Accept data and c' & |
-            'lose the window'),TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(15)
-          BUTTON('&Cancel'),AT(252,114,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
+            'lose the window'),TRN,#ORIG(?OK),#SEQ(2),#ORDINAL(13)
+          BUTTON('&Cancel'),AT(249,96,49,14),USE(?Cancel),FONT(,,,FONT:bold),LEFT,ICON('WACANCEL.ICO'), |
             FLAT,MSG('Cancel operation'),TIP('Cancel operation'),TRN,#ORIG(?Cancel),#SEQ(3), |
-            #ORDINAL(16)
-          BUTTON('&Help'),AT(305,114,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
+            #ORDINAL(14)
+          BUTTON('&Help'),AT(302,96,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
             FLAT,MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'),TRN,#ORIG(?Help), |
-            #SEQ(4),#ORDINAL(17)
+            #SEQ(4),#ORDINAL(15)
         END
 
 [END]
@@ -6582,9 +6581,9 @@ NAME GetSoundLength
 PROTOTYPE '(STRING MySoundFile),STRING'
 PARAMETERS '(STRING MySoundFile)'
 [COMMON]
-DESCRIPTION 'Reference: https://stackoverflow.com/questions/82319/how-can-i-determine-the-length-i-e-duration-of-a-wav-file-in-c'
+DESCRIPTION 'Gets the length (duration) of a sound'
 FROM ABC Source
-MODIFIED '2024/09/15' '22:51:29'
+MODIFIED '2024/09/16' ' 0:08:13'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -6617,6 +6616,14 @@ ReturnString     CSTRING(33)
 ReturnValue      DWORD
 QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
 [END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+! Reference: https://www.vbforums.com/showthread.php?450236-RESOLVED-How-to-get-Audio-Duration&p=2766002&viewfull=1#post2766002
+[END]
 [END]
 [ADDITION]
 NAME ABC cwHHProc
@@ -6632,9 +6639,9 @@ NAME GetSoundStatus
 PROTOTYPE '(STRING MySoundFile),STRING'
 PARAMETERS '(STRING MySoundFile)'
 [COMMON]
-DESCRIPTION 'Null return string fix: https://stackoverflow.com/questions/29480647/mcisendstring-returning-null-string'
+DESCRIPTION 'Gets the status of a sound file (yet to be used)'
 FROM ABC Source
-MODIFIED '2024/09/15' '23:10:07'
+MODIFIED '2024/09/16' ' 0:09:19'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -6664,6 +6671,15 @@ CommandString    CSTRING(FILE:MaxFilePath + 1)
 ReturnString     CSTRING(33)
 ReturnValue      DWORD
 QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+! Reference:
+! Null return string fix: https://stackoverflow.com/questions/29480647/mcisendstring-returning-null-string
 [END]
 [END]
 [ADDITION]
@@ -6826,12 +6842,12 @@ OWNER 2
 %cwHHAltTrapKey DEFAULT  ('')
 [PROCEDURE]
 NAME GetSoundError
-PROTOTYPE '(ULONG ErrorCode),STRING'
-PARAMETERS '(ULONG ErrorCode)'
+PROTOTYPE '(ULONG MciErrorCode),STRING'
+PARAMETERS '(ULONG MciErrorCode)'
 [COMMON]
-DESCRIPTION 'Uses mciGetErrorString to translate error codes into error strings'
+DESCRIPTION 'Uses mciGetErrorString to translate error codes into readable messages'
 FROM ABC Source
-MODIFIED '2024/09/15' '23:09:06'
+MODIFIED '2024/09/16' ' 0:05:10'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -6851,8 +6867,12 @@ EMBED %ProcessedCode
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-    ReturnValue = mciGetErrorString(ErrorCode,ReturnString,SIZE(ReturnString))
-    RETURN ReturnString
+    IF MciErrorCode
+        ReturnValue = mciGetErrorString(MciErrorCode,ReturnString,SIZE(ReturnString))
+        RETURN ReturnString
+    ELSE
+        RETURN ''
+    END
 [END]
 [END]
 [ADDITION]
