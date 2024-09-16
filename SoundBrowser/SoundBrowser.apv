@@ -416,10 +416,11 @@ WHEN  ('') (0)
 WHEN  ('SoundFiles') (0)
 WHEN  ('SoundFolders') (0)
 
-%StandardExternalModule DEPEND %Module LONG TIMES 3
+%StandardExternalModule DEPEND %Module LONG TIMES 4
 WHEN  ('') (1)
 WHEN  ('SoundBrowser.clw') (1)
 WHEN  ('SoundBrowser001.clw') (1)
+WHEN  ('SoundBrowserMCI.clw') (1)
 
 %NoGenerateGlobals LONG  (0)
 %WindowManagerType DEFAULT  ('WindowManager')
@@ -539,9 +540,10 @@ INSTANCE 1
 %DisableCleanCloseDown LONG  (0)
 [PERSIST]
 %SaveCreateLocalMap DEFAULT  ('1')
-%GenerationCompleted DEPEND %Module DEFAULT TIMES 2
+%GenerationCompleted DEPEND %Module DEFAULT TIMES 3
 WHEN  ('SoundBrowser.clw') ('1')
 WHEN  ('SoundBrowser001.clw') ('1')
+WHEN  ('SoundBrowserMCI.clw') ('1')
 
 %LastTarget32 DEFAULT  ('1')
 %LastProgramExtension DEFAULT  ('EXE')
@@ -554,19 +556,15 @@ WHEN  ('SoundBrowser001.clw') ('1')
 #model clarion dll
 #pragma link_option(icon=>SoundBrowserApp.ico)
 #pragma debug(vid=>full)
-#pragma define(_ABCDllMode_=>0) -- GENERATED
-#pragma define(_ABCLinkMode_=>1) -- GENERATED
+#compile "SoundBrowserMCI.clw"
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
-#compile "SoundBrowser_BC0.CLW" -- GENERATED
-#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
 #pragma link("cwHH%V%.LIB") -- GENERATED
-#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
 FROM ABC ABC
-MODIFIED '2024/09/13' '15:14:46'
+MODIFIED '2024/09/15' '23:25:01'
 [EMBED]
 EMBED %GlobalMap
 [DEFINITION]
@@ -595,6 +593,15 @@ PROPERTY:BEGIN
 PRIORITY 4000
 PROPERTY:END
 INCLUDE('WINAPI.CLW','Equates'),ONCE
+[END]
+EMBED %AfterGlobalDataUser
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+DebugString      CSTRING(1001)
+GoodToGo         EQUATE(0)
 [END]
 [END]
 [END]
@@ -1128,114 +1135,6 @@ AppFrame APPLICATION('Sound Browser'),AT(,,540,270),FONT('Segoe UI',10,,FONT:reg
           END
         END
 
-[PROCEDURE]
-NAME PlaySound
-PROTOTYPE '(STRING MySoundFile)'
-PARAMETERS '(STRING MySoundFile)'
-[COMMON]
-DESCRIPTION 'Plays a sound from the database'
-FROM ABC Source
-MODIFIED '2024/09/14' ' 1:10:28'
-[PROMPTS]
-%GenerateOpenClose LONG  (0)
-%GenerateSaveRestore LONG  (0)
-[EMBED]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 1300
-PROPERTY:END
-! References:
-! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
-! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
-[END]
-EMBED %ProcessedCode
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-    IF MySoundFile
-        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
-        CommandString = 'open ' & QuotedFileName
-        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
-        IF ReturnValue = 0
-            CommandString = 'play ' & QuotedFileName
-            ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
-        ELSE
-            MESSAGE(ReturnValue & '|' & QuotedFileName,'Sound File Open Error',ICON:Hand)
-        END
-    END
-[END]
-EMBED %LocalDataAfterClasses
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
-[END]
-[END]
-[ADDITION]
-NAME ABC cwHHProc
-[INSTANCE]
-INSTANCE 1
-OWNER 2
-[PROMPTS]
-%cwHHFileName DEFAULT  ('')
-%cwHHContextURL DEFAULT  ('')
-%cwHHAltTrapKey DEFAULT  ('')
-[PROCEDURE]
-NAME StopSound
-PROTOTYPE '(STRING MySoundFile)'
-PARAMETERS '(STRING MySoundFile)'
-[COMMON]
-DESCRIPTION 'Stops playing the current sound (and breaks the "play marked/all" loop through the database)'
-FROM ABC Source
-MODIFIED '2024/09/14' ' 1:03:45'
-[PROMPTS]
-%GenerateOpenClose LONG  (0)
-%GenerateSaveRestore LONG  (0)
-[EMBED]
-EMBED %ProcessedCode
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-    IF MySoundFile
-        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
-        CommandString = 'stop ' & QuotedFileName
-        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
-        CommandString = 'close ' & QuotedFileName 
-        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
-    END
-[END]
-EMBED %LocalDataAfterClasses
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 5000
-PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
-[END]
-[END]
-[ADDITION]
-NAME ABC cwHHProc
-[INSTANCE]
-INSTANCE 1
-OWNER 2
-[PROMPTS]
-%cwHHFileName DEFAULT  ('')
-%cwHHContextURL DEFAULT  ('')
-%cwHHAltTrapKey DEFAULT  ('')
 [PROCEDURE]
 NAME BrowseSoundFolders
 [COMMON]
@@ -3051,7 +2950,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/09/14' ' 1:26:12'
+MODIFIED '2024/09/15' '23:26:28'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -3155,9 +3054,12 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
+  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Update {17}PROCEDURE(),DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3535,7 +3437,7 @@ PlaybackControls.PlayMultiple PROCEDURE(BYTE MarkedOnly)
         END
         SELF.PlayOne()
         !Wait until playback has stopped before iterating the loop.
-        SLEEP(GetSoundLength(CurrentSound))
+        SLEEP(CurrentSoundLength)
     END
     SELF.PlayingMultiple = FALSE
 [SOURCE]
@@ -3545,10 +3447,13 @@ PROPERTY:END
 PlaybackControls.PlayOne    PROCEDURE()
     CODE
     StopSound(CurrentSound)
+    CloseSound(CurrentSound)
     CurrentSound = Util.TrailingBackslash(SoundFolder:Name) & SoundFile:Name
-    CurrentSoundLength = GetSoundLength(CurrentSound)
-    DISPLAY()
-    PlaySound(CurrentSound)
+    IF GoodToGo = OpenSound(CurrentSound)
+        CurrentSoundLength = GetSoundLength(CurrentSound)
+        DISPLAY()
+        PlaySound(CurrentSound)
+    END
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -3559,6 +3464,7 @@ PlaybackControls.StopPlaying PROCEDURE()
        SELF.TimeToStop = TRUE
     END
     StopSound(CurrentSound)
+    CloseSound(CurrentSound)
     CurrentSound = ''
     CurrentSoundLength = ''
     DISPLAY()
@@ -3775,9 +3681,22 @@ WHEN  ('Default') ('')
 WHEN  ('Locator0') ('')
 WHEN  ('Step0') ('StepStringClass')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)', |
-  'ResetQueue {13}PROCEDURE(BYTE ResetMode),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 3
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'AppendOrder {12}PROCEDURE(STRING Order),DERIVED', |
+  'ApplyRange {13}PROCEDURE(),BYTE,PROC,DERIVED', 'ClearFilesRecord       PROCEDURE(),DERIVED', |
+  'GetFreeElementAscending PROCEDURE(),STRING,DERIVED', 'Init {19}PROCEDURE(IListControl IC,VIEW V,BrowseQueue LQ,RelationManager RM,WindowManager WM)', |
+  'InitSort {15}PROCEDURE(BYTE NewOrder),BYTE,DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'Next {19}PROCEDURE(),BYTE,DERIVED', 'Open {19}PROCEDURE(),DERIVED', 'Previous {15}PROCEDURE(),BYTE,DERIVED', |
+  'ReplaceSort {12}PROCEDURE(STRING NewSortString,<<LocatorClass NewLocator>,<<StepClass NewStepClass>),DERIVED', |
+  'ResetSort {14}PROCEDURE(BYTE Force),BYTE,PROC,DERIVED', 'RestoreBuffers {9}PROCEDURE(),DERIVED', |
+  'SetSort {16}PROCEDURE(BYTE NewOrder,BYTE Force),BYTE,PROC,DERIVED', 'SetUseMRP {14}PROCEDURE(BYTE UseMRP=True),DERIVED', |
+  'TakeKey {16}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeLocate {13}PROCEDURE(),DERIVED', |
+  'ValidateRecord {9}PROCEDURE(),BYTE,DERIVED')
+WHEN  ('Locator0') ('Destruct {15}PROCEDURE(),DERIVED', 'GetShadow {14}PROCEDURE(),STRING,DERIVED', |
+  'Init {19}PROCEDURE(SIGNED Control = 0,*? Free,BYTE NoCase = 0),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,DERIVED', |
+  'UpdateWindow {11}PROCEDURE(),DERIVED')
+WHEN  ('Step0') ('GetPercentile {10}PROCEDURE(? Value),BYTE,DERIVED', 'Init {19}PROCEDURE(BYTE Controls)', |
+  'SetLimitNeeded {9}PROCEDURE(),BYTE,DERIVED')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
@@ -4749,7 +4668,9 @@ WHEN  ('Default') ('WindowResizeClass')
 WHEN  ('Default') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+WHEN  ('Default') ('GetParentControl       PROCEDURE(SIGNED Control),SIGNED,DERIVED', |
+  'Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)', |
+  'Resize {17}PROCEDURE(),BYTE,PROC,DERIVED', 'RestoreWindow {10}PROCEDURE(),DERIVED')
 
 %WindowMinHeight DEFAULT  ('')
 %RestrictMaxSize LONG  (0)
@@ -6593,18 +6514,36 @@ QuickWindow WINDOW('Manage a SoundFiles record'),AT(,,358,132),FONT('Segoe UI',1
             #SEQ(4),#ORDINAL(17)
         END
 
+[END]
+[MODULE]
+NAME 'SoundBrowserMCI.clw'
+NOPOPULATE 
+[COMMON]
+DESCRIPTION 'Media Control Interface (MCI) procedures'
+FROM ABC GENERATED
+MODIFIED '2024/09/15' '22:46:20'
 [PROCEDURE]
-NAME GetSoundStatus
-PROTOTYPE '(STRING MySoundFile),STRING'
+NAME PlaySound
+PROTOTYPE '(STRING MySoundFile)'
 PARAMETERS '(STRING MySoundFile)'
 [COMMON]
-DESCRIPTION 'Null return string fix: https://stackoverflow.com/questions/29480647/mcisendstring-returning-null-string'
+DESCRIPTION 'Plays a sound file'
 FROM ABC Source
-MODIFIED '2024/09/13' '18:41:51'
+MODIFIED '2024/09/15' '23:09:34'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
 [EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+! References:
+! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
+! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
+[END]
 EMBED %ProcessedCode
 [DEFINITION]
 [SOURCE]
@@ -6613,12 +6552,9 @@ PRIORITY 5000
 PROPERTY:END
     IF MySoundFile
         QuotedFileName = '"' & CLIP(MySoundFile) & '"'
-        CommandString = 'status ' & QuotedFileName & ' mode notify'
-        ReturnValue = mciSendString(CommandString,ReturnString,SIZE(ReturnString),GetActiveWindow())
-    ELSE
-        ReturnString = 'ready'
+        CommandString = 'play ' & QuotedFileName
+        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
     END
-    RETURN ReturnString
 [END]
 EMBED %LocalDataAfterClasses
 [DEFINITION]
@@ -6648,7 +6584,7 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Reference: https://stackoverflow.com/questions/82319/how-can-i-determine-the-length-i-e-duration-of-a-wav-file-in-c'
 FROM ABC Source
-MODIFIED '2024/09/14' ' 1:10:12'
+MODIFIED '2024/09/15' '22:51:29'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -6661,7 +6597,9 @@ PRIORITY 5000
 PROPERTY:END
     IF MySoundFile
         QuotedFileName = '"' & CLIP(MySoundFile) & '"'
-        CommandString = 'status ' & QuotedFileName & ' length notify'
+        CommandString = 'set ' & QuotedFileName & ' time format milliseconds'
+        ReturnValue = mciSendString(CommandString,ReturnString,SIZE(ReturnString),GetActiveWindow())
+        CommandString = 'status ' & QuotedFileName & ' length'
         ReturnValue = mciSendString(CommandString,ReturnString,SIZE(ReturnString),GetActiveWindow())
     ELSE
         ReturnString = '0'
@@ -6678,6 +6616,243 @@ CommandString    CSTRING(FILE:MaxFilePath + 1)
 ReturnString     CSTRING(33)
 ReturnValue      DWORD
 QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[PROCEDURE]
+NAME GetSoundStatus
+PROTOTYPE '(STRING MySoundFile),STRING'
+PARAMETERS '(STRING MySoundFile)'
+[COMMON]
+DESCRIPTION 'Null return string fix: https://stackoverflow.com/questions/29480647/mcisendstring-returning-null-string'
+FROM ABC Source
+MODIFIED '2024/09/15' '23:10:07'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    IF MySoundFile
+        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
+        CommandString = 'status ' & QuotedFileName & ' mode'
+        ReturnValue = mciSendString(CommandString,ReturnString,SIZE(ReturnString),GetActiveWindow())
+    ELSE
+        ReturnString = 'ready'
+    END
+    RETURN ReturnString
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+CommandString    CSTRING(FILE:MaxFilePath + 1)
+ReturnString     CSTRING(33)
+ReturnValue      DWORD
+QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[PROCEDURE]
+NAME StopSound
+PROTOTYPE '(STRING MySoundFile)'
+PARAMETERS '(STRING MySoundFile)'
+[COMMON]
+DESCRIPTION 'Stops playing the current sound file (and breaks the "play marked/all" loop through the database)'
+FROM ABC Source
+MODIFIED '2024/09/15' '22:48:36'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    IF MySoundFile
+        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
+        CommandString = 'stop ' & QuotedFileName
+        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
+    END
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+CommandString    CSTRING(FILE:MaxFilePath + 1)
+ReturnString     CSTRING(33)
+ReturnValue      DWORD
+QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[PROCEDURE]
+NAME OpenSound
+PROTOTYPE '(STRING MySoundFile),LONG'
+PARAMETERS '(STRING MySoundFile)'
+[COMMON]
+DESCRIPTION 'Opens a sound file'
+FROM ABC Source
+MODIFIED '2024/09/15' '23:26:55'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1300
+PROPERTY:END
+! References:
+! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
+! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
+[END]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    IF MySoundFile
+        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
+        CommandString = 'open ' & QuotedFileName
+        ReturnValue = mciSendString(CommandString,ReturnString,SIZE(ReturnString),GetActiveWindow())
+        IF ReturnValue <> 0
+            MESSAGE('Could not open ' & QuotedFileName & ':|' & GetSoundError(ReturnValue),'Sound File Open Error',ICON:Hand)
+        END
+    END
+    RETURN ReturnValue
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+CommandString    CSTRING(FILE:MaxFilePath + 1)
+ReturnString     CSTRING(33)
+ReturnValue      DWORD
+QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[PROCEDURE]
+NAME CloseSound
+PROTOTYPE '(STRING MySoundFile)'
+PARAMETERS '(STRING MySoundFile)'
+[COMMON]
+DESCRIPTION 'Closes a sound file'
+FROM ABC Source
+MODIFIED '2024/09/15' '22:48:28'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    IF MySoundFile
+        QuotedFileName = '"' & CLIP(MySoundFile) & '"'
+        CommandString = 'close ' & QuotedFileName 
+        ReturnValue = mciSendString(CommandString,ReturnString,0,GetActiveWindow())
+    END
+[END]
+EMBED %LocalDataAfterClasses
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+CommandString    CSTRING(FILE:MaxFilePath + 1)
+ReturnString     CSTRING(33)
+ReturnValue      DWORD
+QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[PROCEDURE]
+NAME GetSoundError
+PROTOTYPE '(ULONG ErrorCode),STRING'
+PARAMETERS '(ULONG ErrorCode)'
+[COMMON]
+DESCRIPTION 'Uses mciGetErrorString to translate error codes into error strings'
+FROM ABC Source
+MODIFIED '2024/09/15' '23:09:06'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+ReturnValue      BOOL
+ReturnString     CSTRING(1001)
+[END]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    ReturnValue = mciGetErrorString(ErrorCode,ReturnString,SIZE(ReturnString))
+    RETURN ReturnString
 [END]
 [END]
 [ADDITION]

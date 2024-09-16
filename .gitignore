@@ -39,3 +39,5 @@ SoundBrowser/*0*.clw
 SoundBrowser/*_B*.clw
 SoundBrowser/*0*.inc
 SoundBrowser/*.ini
+SoundBrowser/SoundBrowserMCI.clw
+SoundBrowser/SOUNDBROWSERMCI.INC

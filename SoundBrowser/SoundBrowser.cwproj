@@ -34,6 +34,9 @@
     <Compile Include="SoundBrowser001.clw">
       <Generated>true</Generated>
     </Compile>
+    <Compile Include="SoundBrowserMCI.clw">
+      <Generated>true</Generated>
+    </Compile>
     <Compile Include="SOUNDBROWSER_BC.CLW">
       <Generated>true</Generated>
     </Compile>
