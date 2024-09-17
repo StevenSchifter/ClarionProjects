@@ -2800,7 +2800,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/09/16' '19:01:49'
+MODIFIED '2024/09/17' '18:18:46'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -2828,7 +2828,7 @@ SoundFile:KeyFolderFile
 [OTHERS]
 SoundFolders
 [PROMPTS]
-%ButtonAction DEPEND %Control DEFAULT TIMES 13
+%ButtonAction DEPEND %Control DEFAULT TIMES 14
 WHEN  ('?Change:3') ('No Special Action')
 WHEN  ('?Close') ('No Special Action')
 WHEN  ('?CurrentSoundLength') ('No Special Action')
@@ -2836,6 +2836,7 @@ WHEN  ('?Delete:3') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
 WHEN  ('?Insert:3') ('No Special Action')
 WHEN  ('?Mark') ('No Special Action')
+WHEN  ('?OpenFolderButton') ('Call a Procedure')
 WHEN  ('?Play') ('No Special Action')
 WHEN  ('?PlayAll') ('No Special Action')
 WHEN  ('?PlayMarked') ('No Special Action')
@@ -2843,15 +2844,19 @@ WHEN  ('?StopPlaying') ('No Special Action')
 WHEN  ('?Tab:2') ('No Special Action')
 WHEN  ('?View:2') ('No Special Action')
 
-%ButtonRunName DEPEND %Control DEFAULT TIMES 0
+%ButtonRunName DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?OpenFolderButton') ('')
 
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?OpenFolderButton') ('')
 
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?OpenFolderButton') (OpenSoundFolder)
 
-%ButtonThread DEPEND %Control LONG TIMES 0
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?OpenFolderButton') (1)
 
-%ButtonThreadStack DEPEND %Control DEFAULT TIMES 13
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 14
 WHEN  ('?Change:3') ('25000')
 WHEN  ('?Close') ('25000')
 WHEN  ('?CurrentSoundLength') ('25000')
@@ -2859,6 +2864,7 @@ WHEN  ('?Delete:3') ('25000')
 WHEN  ('?Help') ('25000')
 WHEN  ('?Insert:3') ('25000')
 WHEN  ('?Mark') ('25000')
+WHEN  ('?OpenFolderButton') ('25000')
 WHEN  ('?Play') ('25000')
 WHEN  ('?PlayAll') ('25000')
 WHEN  ('?PlayMarked') ('25000')
@@ -2866,9 +2872,10 @@ WHEN  ('?StopPlaying') ('25000')
 WHEN  ('?Tab:2') ('25000')
 WHEN  ('?View:2') ('25000')
 
-%ButtonParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?OpenFolderButton') ('')
 
-%ButtonRequest DEPEND %Control DEFAULT TIMES 13
+%ButtonRequest DEPEND %Control DEFAULT TIMES 14
 WHEN  ('?Change:3') ('None')
 WHEN  ('?Close') ('None')
 WHEN  ('?CurrentSoundLength') ('None')
@@ -2876,6 +2883,7 @@ WHEN  ('?Delete:3') ('None')
 WHEN  ('?Help') ('None')
 WHEN  ('?Insert:3') ('None')
 WHEN  ('?Mark') ('None')
+WHEN  ('?OpenFolderButton') ('None')
 WHEN  ('?Play') ('None')
 WHEN  ('?PlayAll') ('None')
 WHEN  ('?PlayMarked') ('None')
@@ -3097,57 +3105,70 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?CurrentSoundLength') ('Default')
 WHEN  ('?CurrentTab') ('Default')
+WHEN  ('?OpenFolderButton') ('Default')
 WHEN  ('?Tab:2') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength') ('Off')
+WHEN  ('?OpenFolderButton') ('Off')
 WHEN  ('?Tab:2') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 2
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength') ('')
+WHEN  ('?OpenFolderButton') ('')
 WHEN  ('?Tab:2') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 2
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (-1)
+WHEN  ('?OpenFolderButton') (-1)
 WHEN  ('?Tab:2') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 2
+%FieldGradientColorTo DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (-1)
+WHEN  ('?OpenFolderButton') (-1)
 WHEN  ('?Tab:2') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 2
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 0
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?OpenFolderButton') ()
 
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 0
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
+WHEN  ('?OpenFolderButton') (0)
 
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 0
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?OpenFolderButton') ('SoundFolder:ID')
 
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 0
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?OpenFolderButton') ()
 
 %PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 2
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (1)
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?Tab:2') (1)
 
 %LookupAssign DEPEND %Control MULTI LONG TIMES 0
@@ -3166,16 +3187,18 @@ WHEN  ('?Tab:2') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 2
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %CheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 2
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
@@ -3188,46 +3211,53 @@ WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 2
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 2
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %CheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 2
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 2
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?Tab:2')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 2
+%AIObjectName DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength') ('AIBtn20')
+WHEN  ('?OpenFolderButton') ('AIBtn17')
 WHEN  ('?Tab:2') ('AIBtn16')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 2
+%AIEnableMimicControl DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (1)
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?Tab:2') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 2
+%AIMimicControl DEPEND %Control DEFAULT TIMES 3
 WHEN  ('?CurrentSoundLength') ('?Browse:1')
+WHEN  ('?OpenFolderButton') ('?Browse:1')
 WHEN  ('?Tab:2') ('?Browse:1')
 
 %AIImgRound DEPEND %Control LONG TIMES 0
@@ -3236,32 +3266,36 @@ WHEN  ('?Tab:2') ('?Browse:1')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 2
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIDisableImg DEPEND %Control DEFAULT TIMES 0
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 2
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIHotImg DEPEND %Control DEFAULT TIMES 0
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 2
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
 %AIPressedImg DEPEND %Control DEFAULT TIMES 0
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 2
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
 WHEN  ('?CurrentSoundLength') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?Tab:2') (0)
 
 [EMBED]
@@ -3271,7 +3305,14 @@ EMBED %DataSection
 PROPERTY:BEGIN
 PRIORITY 50
 PROPERTY:END
-Util          Utilities
+Util            Utilities
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+BSF    CLASS
+SetupWindow    PROCEDURE()
+       END
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 1300
@@ -3287,6 +3328,18 @@ ToggleMark              PROCEDURE()
 [END]
 EMBED %LocalProcedures
 [DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+BSF.SetupWindow    PROCEDURE()
+FolderExists    BYTE
+    CODE
+    FolderExists = CheckFolderExistence(SoundFolder:ID)
+    ?ErrorString{PROP:Text} = CHOOSE(FolderExists,'','ERROR: Folder not found')
+    ?OpenFolderButton{PROP:Disable} = CHOOSE(FolderExists,FALSE,TRUE)
+    QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
+    
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -3414,6 +3467,18 @@ PROPERTY:END
 PlaybackControls.StopPlaying()
 [END]
 [END]
+WHEN '?OpenFolderButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+?ErrorString{PROP:Text} = CHOOSE(RUNCODE(),'Folder Open Error: ' & ERROR(),'')
+DISPLAY()
+[END]
+[END]
 [END]
 EMBED %BrowserMethodCodeSection
 [INSTANCES]
@@ -3447,7 +3512,7 @@ WHEN '(),BYTE'
 PROPERTY:BEGIN
 PRIORITY 8001
 PROPERTY:END
-QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
+BSF.SetupWindow()
 [END]
 [END]
 WHEN 'Kill'
@@ -4695,37 +4760,38 @@ CloseSound
 GetSoundError
 GetSoundLength
 OpenSound
+OpenSoundFolder
 PlaySound
 StopSound
 [WINDOW]
 QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI',10,COLOR:Black, |
           FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
           MDI,HLP('~BrowseSoundFiles.htm'),STATUS(-1,80,120,45),SYSTEM
-          LIST,AT(9,18,427,108),USE(?Browse:1),HVSCROLL,FORMAT('20R(2)|M~Mark~@s1@180L(' & |
-            '2)|M~Name~@s255@180L(2)|M~Description~@s255@'),FROM(Queue:Browse:1),IMM,MSG('Browsing t' & |
-            'he SoundFiles file'),#FIELDS(SoundFile:FileMarked,SoundFile:Name,SoundFile:Description), |
-            #ORIG(?List),#SEQ(1),#ORDINAL(1)
           GROUP('Playback controls'),AT(8,128,306,27),USE(?PlaybackGroup),BOXED,DISABLE,TRN, |
-            #ORDINAL(2)
+            #ORDINAL(1)
             BUTTON('&Play'),AT(75,138,54,14),USE(?Play),FONT(,,,FONT:bold),LEFT,ICON('WIZDOWN.ICO'), |
-              FLAT,MSG('Press to play selected file'),TRN,#ORDINAL(3)
+              FLAT,MSG('Press to play selected file'),TRN,#ORDINAL(2)
             BUTTON('&Mark'),AT(16,138,54,14),USE(?Mark),FONT(,,,FONT:bold),LEFT,ICON('WIZMARK.ICO'), |
-              FLAT,MSG('Press to mark/unmark file'),TRN,#ORDINAL(4)
+              FLAT,MSG('Press to mark/unmark file'),TRN,#ORDINAL(3)
             BUTTON('Mar&ked'),AT(134,138,54,14),USE(?PlayMarked),FONT(,,,FONT:bold),LEFT,ICON('WIZDOWN.ICO'), |
-              FLAT,MSG('Press to play marked file(s)'),TRN,#ORDINAL(5)
+              FLAT,MSG('Press to play marked file(s)'),TRN,#ORDINAL(4)
             BUTTON('&All'),AT(193,138,54,14),USE(?PlayAll),FONT(,,,FONT:bold),LEFT,ICON('WIZDOWN.ICO'), |
-              FLAT,MSG('Press to play all files'),TRN,#ORDINAL(6)
+              FLAT,MSG('Press to play all files'),TRN,#ORDINAL(5)
             BUTTON('&Stop'),AT(252,138,54,14),USE(?StopPlaying),FONT(,,,FONT:bold),LEFT,ICON('WIZCNCL.ICO'), |
-              FLAT,MSG('Press to stop playing'),TRN,#ORDINAL(7)
+              FLAT,MSG('Press to stop playing'),TRN,#ORDINAL(6)
           END
-          SHEET,AT(3,3,440,205),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(8)
-            TAB('&1) Sound files by name in folder'),USE(?Tab:2),#ORDINAL(9)
+          SHEET,AT(3,3,440,205),USE(?CurrentTab),#ORIG(CurrentTab),#ORDINAL(7)
+            TAB('&1) Sound files by name in folder'),USE(?Tab:2),#ORDINAL(8)
+              LIST,AT(8,18,427,108),USE(?Browse:1),HVSCROLL,FORMAT('20R(2)|M~Mark~@s1@1' & |
+                '80L(2)|M~Name~@s255@180L(2)|M~Description~@s255@'),FROM(Queue:Browse:1),IMM, |
+                MSG('Browsing the SoundFiles file'),#FIELDS(SoundFile:FileMarked,SoundFile:Name, |
+                SoundFile:Description),#ORIG(?List),#SEQ(1),#ORDINAL(9)
               BUTTON('&Close'),AT(336,189,49,14),USE(?Close),FONT(,,,FONT:bold),LEFT,ICON('WACLOSE.ICO'), |
                 FLAT,MSG('Close Window'),TIP('Close Window'),TRN,#ORIG(?Close),#SEQ(4),#ORDINAL(10)
               BUTTON('&Help'),AT(388,189,49,14),USE(?Help),FONT(,,,FONT:bold),LEFT,ICON('WIZHELP.ICO'), |
                 FLAT,HLP('BrowseSoundFolders.htm'),MSG('See Help Window'),STD(STD:Help),TIP('See Help Window'), |
                 TRN,#ORIG(?Help),#SEQ(5),#ORDINAL(11)
-              GROUP('Manage sound files'),AT(8,179,243,27),USE(?ManageGroup),BOXED,TRN,#ORDINAL(12)
+              GROUP('Manage sound files'),AT(8,179,306,27),USE(?ManageGroup),BOXED,TRN,#ORDINAL(12)
                 BUTTON('&View'),AT(16,189,54,14),USE(?View:2),FONT(,,,FONT:bold),LEFT,ICON('WAVIEW.ICO'), |
                   FLAT,MSG('View Record'),TIP('View Record'),TRN,#ORIG(?View),#SEQ(2),#ORDINAL(13)
                 BUTTON('&Insert'),AT(76,189,54,14),USE(?Insert:3),FONT(,,,FONT:bold),LEFT, |
@@ -4737,11 +4803,15 @@ QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI'
                 BUTTON('&Delete'),AT(193,189,54,14),USE(?Delete:3),FONT(,,,FONT:bold),LEFT, |
                   ICON('WIZDEL.ICO'),FLAT,MSG('Delete the Record'),TIP('Delete the Record'), |
                   TRN,#LINK(?Insert:3),#ORIG(?Delete),#SEQ(3),#ORDINAL(16)
+                BUTTON('&Open Folder'),AT(252,189,54),USE(?OpenFolderButton),FONT(,,,FONT:bold), |
+                  FLAT,TRN,#ORDINAL(17)
               END
-              PROMPT('Currently Playing:'),AT(8,156),USE(?CurrentlyPlayingPrompt),TRN,#ORDINAL(17)
-              STRING(@s255),AT(71,156),USE(CurrentSound),TRN,#ORDINAL(18)
-              PROMPT('Length (ms):'),AT(8,167),USE(?LengthPrompt),TRN,#ORDINAL(19)
-              STRING(@s32),AT(52,167),USE(CurrentSoundLength),TRN,#ORDINAL(20)
+              PROMPT('Currently Playing:'),AT(8,156),USE(?CurrentlyPlayingPrompt),TRN,#ORDINAL(18)
+              STRING(@s255),AT(71,156),USE(CurrentSound),TRN,#ORDINAL(19)
+              PROMPT('Length (ms):'),AT(8,167),USE(?LengthPrompt),TRN,#ORDINAL(20)
+              STRING(@s32),AT(52,167,135),USE(CurrentSoundLength),TRN,#ORDINAL(21)
+              STRING(''),AT(133,3,180,10),USE(?ErrorString),FONT(,,COLOR:Maroon,FONT:bold), |
+                CENTER,TRN,#ORDINAL(22)
             END
           END
         END
@@ -4752,7 +4822,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/09/16' '22:27:03'
+MODIFIED '2024/09/17' '18:08:25'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -4772,20 +4842,24 @@ WHEN  ('?Cancel') ('No Special Action')
 WHEN  ('?ErrorString') ('No Special Action')
 WHEN  ('?Help') ('No Special Action')
 WHEN  ('?OK') ('No Special Action')
-WHEN  ('?OpenFolderButton') ('No Special Action')
+WHEN  ('?OpenFolderButton') ('Call a Procedure')
 WHEN  ('?PopulateButton') ('Call a Procedure')
 WHEN  ('?SoundFolder:Name') ('No Special Action')
 
-%ButtonRunName DEPEND %Control DEFAULT TIMES 1
+%ButtonRunName DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?OpenFolderButton') ('')
 WHEN  ('?PopulateButton') ('')
 
-%ButtonRunParameters DEPEND %Control DEFAULT TIMES 1
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?OpenFolderButton') ('')
 WHEN  ('?PopulateButton') ('')
 
-%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 2
+WHEN  ('?OpenFolderButton') (OpenSoundFolder)
 WHEN  ('?PopulateButton') (PopulateSoundFileRecords)
 
-%ButtonThread DEPEND %Control LONG TIMES 1
+%ButtonThread DEPEND %Control LONG TIMES 2
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?PopulateButton') (1)
 
 %ButtonThreadStack DEPEND %Control DEFAULT TIMES 8
@@ -4798,7 +4872,8 @@ WHEN  ('?OpenFolderButton') ('25000')
 WHEN  ('?PopulateButton') ('25000')
 WHEN  ('?SoundFolder:Name') ('25000')
 
-%ButtonParameters DEPEND %Control DEFAULT TIMES 1
+%ButtonParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?OpenFolderButton') ('')
 WHEN  ('?PopulateButton') ('')
 
 %ButtonRequest DEPEND %Control DEFAULT TIMES 8
@@ -5025,68 +5100,81 @@ WHEN  ('WindowToolbar')TIMES 0
 
 %ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
 
-%ExtUITabStyle DEPEND %Control DEFAULT TIMES 3
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?ErrorString') ('Default')
+WHEN  ('?OpenFolderButton') ('Default')
 WHEN  ('?PopulateButton') ('Default')
 WHEN  ('?SoundFolder:Name') ('Default')
 
-%FieldGradientColorType DEPEND %Control DEFAULT TIMES 3
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?ErrorString') ('Off')
+WHEN  ('?OpenFolderButton') ('Off')
 WHEN  ('?PopulateButton') ('Off')
 WHEN  ('?SoundFolder:Name') ('Off')
 
-%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 3
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?ErrorString') ('')
+WHEN  ('?OpenFolderButton') ('')
 WHEN  ('?PopulateButton') ('')
 WHEN  ('?SoundFolder:Name') ('')
 
-%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 3
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
-%FieldGradientColorFrom DEPEND %Control LONG TIMES 3
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (-1)
+WHEN  ('?OpenFolderButton') (-1)
 WHEN  ('?PopulateButton') (-1)
 WHEN  ('?SoundFolder:Name') (-1)
 
 %FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 3
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
-%FieldGradientColorTo DEPEND %Control LONG TIMES 3
+%FieldGradientColorTo DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (-1)
+WHEN  ('?OpenFolderButton') (-1)
 WHEN  ('?PopulateButton') (-1)
 WHEN  ('?SoundFolder:Name') (-1)
 
 %FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
 
-%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 3
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
-%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 2
+WHEN  ('?OpenFolderButton') ()
 WHEN  ('?PopulateButton') ()
 
-%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 2
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 
-%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 2
+WHEN  ('?OpenFolderButton') ('SoundFolder:ID')
 WHEN  ('?PopulateButton') ('SoundFolder:ID')
 
-%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 2
+WHEN  ('?OpenFolderButton') ()
 WHEN  ('?PopulateButton') ()
 
 %PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
 %PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
 
-%PostLookupDuringValidate DEPEND %Control LONG TIMES 4
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 5
 WHEN  ('?ErrorString') (1)
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?PopulateButton') (1)
 WHEN  ('?SoundFolder:ID') (1)
 WHEN  ('?SoundFolder:Name') (1)
@@ -5107,8 +5195,9 @@ WHEN  ('?SoundFolder:Name') (1)
 
 %CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
 
-%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 3
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
@@ -5116,8 +5205,9 @@ WHEN  ('?SoundFolder:Name')TIMES 0
 
 %CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
 
-%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 3
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
@@ -5131,8 +5221,9 @@ WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
 
-%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 3
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
@@ -5140,8 +5231,9 @@ WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
 
-%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 3
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
@@ -5149,8 +5241,9 @@ WHEN  ('?SoundFolder:Name')TIMES 0
 
 %CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
 
-%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 3
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
@@ -5158,25 +5251,29 @@ WHEN  ('?SoundFolder:Name')TIMES 0
 
 %UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
 
-%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 3
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 4
 WHEN  ('?ErrorString')TIMES 0
+WHEN  ('?OpenFolderButton')TIMES 0
 WHEN  ('?PopulateButton')TIMES 0
 WHEN  ('?SoundFolder:Name')TIMES 0
 
 %ActiveImageEnable DEPEND %Control LONG TIMES 0
 
-%AIObjectName DEPEND %Control DEFAULT TIMES 3
+%AIObjectName DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?ErrorString') ('AIBtn13')
+WHEN  ('?OpenFolderButton') ('AIBtn12')
 WHEN  ('?PopulateButton') ('AIBtn13')
 WHEN  ('?SoundFolder:Name') ('AIBtn4')
 
-%AIEnableMimicControl DEPEND %Control LONG TIMES 3
+%AIEnableMimicControl DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (1)
+WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?PopulateButton') (1)
 WHEN  ('?SoundFolder:Name') (1)
 
-%AIMimicControl DEPEND %Control DEFAULT TIMES 3
+%AIMimicControl DEPEND %Control DEFAULT TIMES 4
 WHEN  ('?ErrorString') ('?SoundFolder:ID:Prompt')
+WHEN  ('?OpenFolderButton') ('?SoundFolder:ID:Prompt')
 WHEN  ('?PopulateButton') ('?CurrentTab')
 WHEN  ('?SoundFolder:Name') ('?SoundFolder:ID:Prompt')
 
@@ -5186,8 +5283,9 @@ WHEN  ('?SoundFolder:Name') ('?SoundFolder:ID:Prompt')
 
 %AIOverrideImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 3
+%AIOverrideImgIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
@@ -5195,8 +5293,9 @@ WHEN  ('?SoundFolder:Name') (0)
 
 %AIDisableImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIDisableImgIsVariable DEPEND %Control LONG TIMES 3
+%AIDisableImgIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
@@ -5204,8 +5303,9 @@ WHEN  ('?SoundFolder:Name') (0)
 
 %AIHotImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIHotImgIsVariable DEPEND %Control LONG TIMES 3
+%AIHotImgIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
@@ -5213,8 +5313,9 @@ WHEN  ('?SoundFolder:Name') (0)
 
 %AIPressedImgVariable DEPEND %Control DEFAULT TIMES 0
 
-%AIPressedImgIsVariable DEPEND %Control LONG TIMES 3
+%AIPressedImgIsVariable DEPEND %Control LONG TIMES 4
 WHEN  ('?ErrorString') (0)
+WHEN  ('?OpenFolderButton') (0)
 WHEN  ('?PopulateButton') (0)
 WHEN  ('?SoundFolder:Name') (0)
 
@@ -5232,17 +5333,6 @@ PROPERTY:END
 USF.BrowseForFolder()
 [END]
 [END]
-WHEN '?OpenFolderButton'
-[INSTANCES]
-WHEN 'Accepted'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4499
-PROPERTY:END
-USF.OpenFolder()
-[END]
-[END]
 WHEN '?SoundFolder:Name'
 [INSTANCES]
 WHEN 'Accepted'
@@ -5251,7 +5341,19 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 7501
 PROPERTY:END
-USF.FolderExists = USF.CheckFolderExistence()
+?ErrorString{PROP:Text} = CHOOSE(CheckFolderExistence(SoundFolder:ID),'','ERROR: Folder not found')
+[END]
+[END]
+WHEN '?OpenFolderButton'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 6000
+PROPERTY:END
+?ErrorString{PROP:Text} = CHOOSE(RUNCODE(),'Folder Open Error: ' & ERROR(),'')
+DISPLAY()
 [END]
 [END]
 [END]
@@ -5266,33 +5368,6 @@ DialogTitle    STRING('Select a folder with sound files')
     CODE
     FILEDIALOG(DialogTitle,SoundFolder:Name,,FILE:LongName + FILE:Directory)
     ThisWindow.Reset(TRUE)
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-USF.CheckFolderExistence    PROCEDURE()
-    CODE
-    IF EXISTS(SoundFolder:Name)
-        ?ErrorString{PROP:Text} = ''
-        RETURN TRUE
-    ELSE
-        ?ErrorString{PROP:Text} = 'ERROR: Folder not found'
-        RETURN FALSE
-    END
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4000
-PROPERTY:END
-USF.OpenFolder    PROCEDURE()
-    CODE
-    IF SELF.CheckFolderExistence()
-        RUN('explorer "' & SoundFolder:Name & '"')
-        IF RUNCODE()
-            ?ErrorString{PROP:Text} = 'Folder Open Error: ' & ERROR()
-        ELSE
-            ?ErrorString{PROP:Text} = ''
-        END
-    END
 [END]
 EMBED %DataSection
 [DEFINITION]
@@ -5301,10 +5376,7 @@ PROPERTY:BEGIN
 PRIORITY 4500
 PROPERTY:END
 USF                 CLASS
-FolderExists            BYTE
 BrowseForFolder         PROCEDURE()
-CheckFolderExistence    PROCEDURE(),BYTE
-OpenFolder              PROCEDURE()
                     END
 [END]
 [END]
@@ -5413,9 +5485,9 @@ WHEN  (1) ('PROP:Disable')
 WHEN  ('?Cancel')TIMES 1
 WHEN  (1) ('''&Close''')
 WHEN  ('?OpenFolderButton')TIMES 1
-WHEN  (1) ('TRUE - USF.CheckFolderExistence()')
+WHEN  (1) ('TRUE - CheckFolderExistence(SoundFolder:ID)')
 WHEN  ('?PopulateButton')TIMES 1
-WHEN  (1) ('TRUE - USF.CheckFolderExistence()')
+WHEN  (1) ('TRUE - CheckFolderExistence(SoundFolder:ID)')
 
 [ADDITION]
 NAME ABC WindowResize
@@ -5549,6 +5621,8 @@ WHEN  ('Default')TIMES 0
 %ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
 
 [CALLS]
+CheckFolderExistence
+OpenSoundFolder
 PopulateSoundFileRecords
 [WINDOW]
 QuickWindow WINDOW('Manage a SoundFolders record'),AT(,,360,81),FONT('Segoe UI',10,,FONT:regular, |
@@ -7186,6 +7260,90 @@ QuickWindow WINDOW('Populate Sound File Records'),AT(,,170,125),FONT('Segoe UI',
             TRN,#ORDINAL(11)
         END
 
+[PROCEDURE]
+NAME OpenSoundFolder
+PROTOTYPE '(STRING MyFolderID)'
+PARAMETERS '(STRING MyFolderID)'
+[COMMON]
+DESCRIPTION 'Opens the sound folder from either the folder form or the file browse'
+FROM ABC Source
+MODIFIED '2024/09/17' '18:01:13'
+[FILES]
+[OTHERS]
+SoundFolders
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    Access:SoundFolders.Open()
+    IF CheckFolderExistence(MyFolderID)
+        SoundFolder:ID = MyFolderID
+        Access:SoundFolders.Fetch(SoundFolder:KeyID)
+        RUN('explorer "' & SoundFolder:Name & '"')
+    END
+    Access:SoundFolders.Close()
+    
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
+[CALLS]
+CheckFolderExistence
+[PROCEDURE]
+NAME CheckFolderExistence
+PROTOTYPE '(STRING MyFolderID),BYTE,PROC'
+PARAMETERS '(STRING MyFolderID)'
+[COMMON]
+FROM ABC Source
+MODIFIED '2024/09/17' '17:32:02'
+[PROMPTS]
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+    Access:SoundFolders.Open()
+    SoundFolder:ID = MyFolderID
+    Access:SoundFolders.Fetch(SoundFolder:KeyID)
+    ReturnValue = EXISTS(SoundFolder:Name)
+    Access:SoundFolders.Close()
+    RETURN ReturnValue
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 50
+PROPERTY:END
+ReturnValue    BYTE
+[END]
+[END]
+[ADDITION]
+NAME ABC cwHHProc
+[INSTANCE]
+INSTANCE 1
+OWNER 2
+[PROMPTS]
+%cwHHFileName DEFAULT  ('')
+%cwHHContextURL DEFAULT  ('')
+%cwHHAltTrapKey DEFAULT  ('')
 [END]
 [MODULE]
 NAME 'SoundBrowserMCI.clw'
