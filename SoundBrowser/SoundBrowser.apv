@@ -37,7 +37,15 @@ WHEN  ('RelationManager:SoundFolders') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 4
+WHEN  ('FileManager:SoundFiles') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('FileManager:SoundFolders') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
+WHEN  ('RelationManager:SoundFiles') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
+WHEN  ('RelationManager:SoundFolders') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
+  'Kill {19}PROCEDURE(),DERIVED')
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('SoundBrowserApp.ico')
@@ -4822,7 +4830,7 @@ NAME UpdateSoundFolder
 DESCRIPTION 'Manage a folder record and populate files from that folder'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/09/17' '18:08:25'
+MODIFIED '2024/09/18' ' 0:09:29'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('ba8d01c6-0d05-4ef6-bb99-81e0e8c33cd7')
@@ -5333,17 +5341,6 @@ PROPERTY:END
 USF.BrowseForFolder()
 [END]
 [END]
-WHEN '?SoundFolder:Name'
-[INSTANCES]
-WHEN 'Accepted'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 7501
-PROPERTY:END
-?ErrorString{PROP:Text} = CHOOSE(CheckFolderExistence(SoundFolder:ID),'','ERROR: Folder not found')
-[END]
-[END]
 WHEN '?OpenFolderButton'
 [INSTANCES]
 WHEN 'Accepted'
@@ -5456,7 +5453,7 @@ INSTANCE 5
 %ViewAction DEPEND %Control DEFAULT TIMES 13
 WHEN  ('?BrowseFolderButton') ('Disable')
 WHEN  ('?Cancel') ('Set Properties')
-WHEN  ('?ErrorString') ('None')
+WHEN  ('?ErrorString') ('Set Properties')
 WHEN  ('?Help') ('None')
 WHEN  ('?OK') ('Hide')
 WHEN  ('?OpenFolderButton') ('Set Properties')
@@ -5468,22 +5465,27 @@ WHEN  ('?SoundFolder:ID:Prompt') ('None')
 WHEN  ('?SoundFolder:Name') ('ReadOnly')
 WHEN  ('?SoundFolder:Name:Prompt') ('None')
 
-%PropertyAssignments DEPEND %Control MULTI LONG TIMES 3
+%PropertyAssignments DEPEND %Control MULTI LONG TIMES 4
 WHEN  ('?Cancel') (1)
+WHEN  ('?ErrorString') (1)
 WHEN  ('?OpenFolderButton') (1)
 WHEN  ('?PopulateButton') (1)
 
-%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 3
+%CtrlProperty DEPEND %PropertyAssignments DEFAULT TIMES 4
 WHEN  ('?Cancel')TIMES 1
+WHEN  (1) ('PROP:Text')
+WHEN  ('?ErrorString')TIMES 1
 WHEN  (1) ('PROP:Text')
 WHEN  ('?OpenFolderButton')TIMES 1
 WHEN  (1) ('PROP:Disable')
 WHEN  ('?PopulateButton')TIMES 1
 WHEN  (1) ('PROP:Disable')
 
-%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 3
+%CtrlValue DEPEND %PropertyAssignments DEFAULT TIMES 4
 WHEN  ('?Cancel')TIMES 1
 WHEN  (1) ('''&Close''')
+WHEN  ('?ErrorString')TIMES 1
+WHEN  (1) ('CHOOSE(CheckFolderExistence(SoundFolder:ID),'''',''ERROR: Folder not found'')')
 WHEN  ('?OpenFolderButton')TIMES 1
 WHEN  (1) ('TRUE - CheckFolderExistence(SoundFolder:ID)')
 WHEN  ('?PopulateButton')TIMES 1
@@ -5665,7 +5667,7 @@ NAME UpdateSoundFiles
 DESCRIPTION 'Manage a SoundFiles record'
 FROM ABC Window
 CATEGORY 'Form'
-MODIFIED '2024/09/16' '19:02:32'
+MODIFIED '2024/09/18' ' 0:15:31'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('e384cbea-33a0-44c1-857c-beee66627c83')
@@ -6145,7 +6147,7 @@ USF.BrowseForFile    PROCEDURE()
 DialogTitle    STRING('Select a sound file')
 Extensions     STRING('WAV files|*.wav|' & | 
                       'AVI files|*.avi|' & | 
-                      'MIDI files|*.mid|' & | 
+                      'MIDI files|*.mid;*.rmi|' & | 
                       'MP3 files|*.mp3|' & | 
                       'WMA files|*.wma|' & | 
                       'All files|*.*')
