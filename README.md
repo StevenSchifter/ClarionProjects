@@ -14,5 +14,5 @@ An assortment of ideas and tests, all in one hand-coded project.<br>
 ## [LegacyPeople](https://github.com/StevenSchifter/ClarionProjects/tree/main/LegacyPeople)<br>
 This is a Legacy Clarion people app converted from Clarion 6.3 to Clarion 11.1.<br>
 
-## [PLAYSND](https://github.com/StevenSchifter/ClarionProjects/tree/main/PLAYSND)<br>
+## [SoundBrowser](https://github.com/StevenSchifter/ClarionProjects/tree/main/SoundBrowser)<br>
 This is a modernized version of the [PLAYSND utility](https://www.mittensoftware.com/DL/PLAYSND.ZIP), originally from [Mitten Software](https://www.mittensoftware.com/Downloads.htm).
