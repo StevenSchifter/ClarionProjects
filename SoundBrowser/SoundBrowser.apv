@@ -2808,7 +2808,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/10/14' '14:17:51'
+MODIFIED '2024/10/14' '16:13:42'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -3344,6 +3344,7 @@ PROPERTY:END
 BSF.SetupWindow    PROCEDURE()
 FolderExists    BYTE
     CODE
+    !QuickWindow{PROP:Timer} = 0
     FolderExists = CheckFolderExistence(SoundFolder:ID)
     ?ErrorString{PROP:Text} = CHOOSE(FolderExists,'','ERROR: Folder not found')
     ?OpenFolderButton{PROP:Disable} = CHOOSE(FolderExists,FALSE,TRUE)
@@ -3370,9 +3371,10 @@ PlaybackControls.PlayMultiple PROCEDURE(BYTE MarkedOnly)
         IF MarkedOnly AND NOT SoundFile:FileMarked
             CYCLE
         END
+        ! TODO: Wait until playback has stopped before iterating the loop, but allow stopping playback.
         SELF.PlayOne()
-        !Wait until playback has stopped before iterating the loop.
-        SLEEP(CurrentSoundLength)
+        SLEEP(CurrentSoundLength) ! waits properly, but cannot stop while playing
+        !QuickWindow{PROP:Timer} = CurrentSoundLength ! does not wait properly
     END
     SELF.PlayingMultiple = FALSE
 [SOURCE]
@@ -3388,6 +3390,7 @@ PlaybackControls.PlayOne    PROCEDURE()
         CurrentSoundLength = GetSoundLength(CurrentSound)
         DISPLAY()
         PlaySound(CurrentSound)
+        ! SELF.PlayThread = START(PlaySound,,CurrentSound)
     END
 [SOURCE]
 PROPERTY:BEGIN
@@ -7352,21 +7355,11 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Plays a sound file'
 FROM ABC Source
-MODIFIED '2024/09/15' '23:09:34'
+MODIFIED '2024/10/14' '16:07:04'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
 [EMBED]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 1300
-PROPERTY:END
-! References:
-! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
-! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
-[END]
 EMBED %ProcessedCode
 [DEFINITION]
 [SOURCE]
@@ -7385,10 +7378,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7407,7 +7400,7 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Gets the length (duration) of a sound'
 FROM ABC Source
-MODIFIED '2024/09/16' ' 0:08:13'
+MODIFIED '2024/10/14' '16:20:58'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -7435,18 +7428,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
-[END]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 50
-PROPERTY:END
-! Reference: https://www.vbforums.com/showthread.php?450236-RESOLVED-How-to-get-Audio-Duration&p=2766002&viewfull=1#post2766002
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7465,7 +7450,7 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Gets the status of a sound file (yet to be used)'
 FROM ABC Source
-MODIFIED '2024/09/16' ' 0:09:19'
+MODIFIED '2024/10/14' '16:20:25'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -7491,19 +7476,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
-[END]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 50
-PROPERTY:END
-! Reference:
-! Null return string fix: https://stackoverflow.com/questions/29480647/mcisendstring-returning-null-string
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7522,7 +7498,7 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Stops playing the current sound file (and breaks the "play marked/all" loop through the database)'
 FROM ABC Source
-MODIFIED '2024/09/15' '22:48:36'
+MODIFIED '2024/10/14' '16:09:03'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -7545,10 +7521,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7567,21 +7543,11 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Opens a sound file'
 FROM ABC Source
-MODIFIED '2024/09/16' '18:12:31'
+MODIFIED '2024/10/14' '16:19:16'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
 [EMBED]
-EMBED %DataSection
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 1300
-PROPERTY:END
-! References:
-! Pausing/stopping music: https://cplusplus.com/forum/beginner/77256/#msg415697
-! mciSendString function: https://learn.microsoft.com/en-us/previous-versions/dd757161(v=vs.85)
-[END]
 EMBED %ProcessedCode
 [DEFINITION]
 [SOURCE]
@@ -7604,10 +7570,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7626,7 +7592,7 @@ PARAMETERS '(STRING MySoundFile)'
 [COMMON]
 DESCRIPTION 'Closes a sound file'
 FROM ABC Source
-MODIFIED '2024/09/15' '22:48:28'
+MODIFIED '2024/10/14' '16:07:23'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
@@ -7649,10 +7615,10 @@ EMBED %LocalDataAfterClasses
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-CommandString    CSTRING(FILE:MaxFilePath + 1)
-ReturnString     CSTRING(33)
-ReturnValue      DWORD
-QuotedFileName   CSTRING(FILE:MaxFilePath + 1)
+QuotedFileName    CSTRING(FILE:MaxFilePath + 1)
+CommandString     CSTRING(FILE:MaxFilePath + 1)
+ReturnString      CSTRING(33)
+ReturnValue       DWORD
 [END]
 [END]
 [ADDITION]
@@ -7672,7 +7638,7 @@ GLOBAL
 [COMMON]
 DESCRIPTION 'Uses mciGetErrorString to translate error codes into readable messages'
 FROM ABC Source
-MODIFIED '2024/09/16' '18:12:21'
+MODIFIED '2024/10/14' '16:21:17'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
