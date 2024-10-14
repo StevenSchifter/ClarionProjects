@@ -2808,7 +2808,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/09/17' '18:18:46'
+MODIFIED '2024/10/14' '14:17:51'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -2821,11 +2821,11 @@ CurrentSound             CSTRING(261)
 !!> GUID('8291b136-56a6-43a8-8bc7-a6a2c44004e8'),PROMPT('Current Sound:'),HEADER('Current Sound'),PICTURE(@s255),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [SCREENCONTROLS]
 ! PROMPT('Current Sound Length:'),USE(?CurrentSoundLength:Prompt)
-! ENTRY(@s32),USE(CurrentSoundLength),LEFT(2)
+! ENTRY(@s16),USE(CurrentSoundLength),LEFT(2)
 [REPORTCONTROLS]
-! STRING(@s32),USE(CurrentSoundLength),LEFT(2)
-CurrentSoundLength       CSTRING(33)
-!!> GUID('61e731b3-5864-4dea-8e79-ca7ceda31377'),PROMPT('Current Sound Length:'),HEADER('Current Sound Length'),PICTURE(@s32),TYPEMODE(INS),JUSTIFY(LEFT,2)
+! STRING(@s16),USE(CurrentSoundLength),LEFT(2)
+CurrentSoundLength       CSTRING(17)
+!!> GUID('61e731b3-5864-4dea-8e79-ca7ceda31377'),PROMPT('Current Sound Length:'),HEADER('Current Sound Length'),PICTURE(@s16),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [FILES]
 [PRIMARY]
 SoundFiles
@@ -2924,8 +2924,8 @@ WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
 WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', |
+  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3328,6 +3328,7 @@ PROPERTY:END
 PlaybackControls    CLASS
 PlayingMultiple         BYTE
 TimeToStop              BYTE
+PlayThread              SIGNED
 PlayMultiple            PROCEDURE(BYTE MarkedOnly)
 PlayOne                 PROCEDURE()
 StopPlaying             PROCEDURE()
@@ -3346,6 +3347,7 @@ FolderExists    BYTE
     FolderExists = CheckFolderExistence(SoundFolder:ID)
     ?ErrorString{PROP:Text} = CHOOSE(FolderExists,'','ERROR: Folder not found')
     ?OpenFolderButton{PROP:Disable} = CHOOSE(FolderExists,FALSE,TRUE)
+    ?PlaybackGroup{PROP:Disable} = CHOOSE(FolderExists AND RECORDS(Queue:Browse:1),FALSE,TRUE)
     QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
     
 [SOURCE]
@@ -3483,30 +3485,9 @@ WHEN 'Accepted'
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
+BSF.SetupWindow()
 ?ErrorString{PROP:Text} = CHOOSE(RUNCODE(),'Folder Open Error: ' & ERROR(),'')
 DISPLAY()
-[END]
-[END]
-[END]
-EMBED %BrowserMethodCodeSection
-[INSTANCES]
-WHEN '1'
-[INSTANCES]
-WHEN 'ResetQueue'
-[INSTANCES]
-WHEN '(BYTE ResetMode)'
-[DEFINITION]
-[SOURCE]
-PROPERTY:BEGIN
-PRIORITY 4500
-PROPERTY:END
-  IF RECORDS(Queue:Browse:1)
-      ENABLE(?PlaybackGroup)
-  ELSE
-      DISABLE(?PlaybackGroup)
-  END
-  
-[END]
 [END]
 [END]
 [END]
@@ -3518,7 +3499,7 @@ WHEN '(),BYTE'
 [DEFINITION]
 [SOURCE]
 PROPERTY:BEGIN
-PRIORITY 8001
+PRIORITY 9580
 PROPERTY:END
 BSF.SetupWindow()
 [END]
@@ -3532,6 +3513,17 @@ PROPERTY:BEGIN
 PRIORITY 4050
 PROPERTY:END
 PlaybackControls.StopPlaying()
+[END]
+[END]
+WHEN 'Reset'
+[INSTANCES]
+WHEN '(BYTE Force=0)'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3500
+PROPERTY:END
+BSF.SetupWindow()
 [END]
 [END]
 [END]
@@ -3627,8 +3619,7 @@ WHEN  ('Locator0') ('')
 WHEN  ('Step0') ('StepStringClass')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)', |
-  'ResetQueue {13}PROCEDURE(BYTE ResetMode),DERIVED')
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
@@ -4817,7 +4808,7 @@ QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI'
               PROMPT('Currently Playing:'),AT(8,156),USE(?CurrentlyPlayingPrompt),TRN,#ORDINAL(18)
               STRING(@s255),AT(71,156),USE(CurrentSound),TRN,#ORDINAL(19)
               PROMPT('Length (ms):'),AT(8,167),USE(?LengthPrompt),TRN,#ORDINAL(20)
-              STRING(@s32),AT(52,167,135),USE(CurrentSoundLength),TRN,#ORDINAL(21)
+              STRING(@s16),AT(52,167),USE(CurrentSoundLength),TRN,#ORDINAL(21)
               STRING(''),AT(133,3,180,10),USE(?ErrorString),FONT(,,COLOR:Maroon,FONT:bold), |
                 CENTER,TRN,#ORDINAL(22)
             END
