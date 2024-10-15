@@ -556,15 +556,10 @@ WHEN  ('SoundBrowserMCI.clw') ('1')
 #model clarion dll
 #pragma link_option(icon=>SoundBrowserApp.ico)
 #pragma debug(vid=>full)
-#pragma define(_ABCDllMode_=>0) -- GENERATED
-#pragma define(_ABCLinkMode_=>1) -- GENERATED
 #compile "SoundBrowserMCI.clw"
 #compile "SoundBrowser.clw" -- GENERATED
 #compile "SoundBrowser001.clw" -- GENERATED
-#compile "SoundBrowser_BC0.CLW" -- GENERATED
-#compile "SOUNDBROWSER_BC.CLW" -- GENERATED
 #pragma link("cwHH%V%.LIB") -- GENERATED
-#pragma link("C%V%tps%X%%L%.lib") -- GENERATED
 #link "SoundBrowser.EXE"
 [PROGRAM]
 [COMMON]
@@ -2800,7 +2795,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/10/15' '13:23:22'
+MODIFIED '2024/10/15' '13:51:21'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -2922,9 +2917,12 @@ WHEN  ('Default') ('')
 WHEN  ('WindowToolbar') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(),BYTE,PROC,DERIVED', 'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', |
-  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(USHORT Number,BYTE Request),BYTE,PROC,DERIVED', |
-  'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'ChangeAction {11}PROCEDURE(),BYTE,DERIVED', |
+  'OnCloseEventCancelled  PROCEDURE(),DERIVED', 'PrimeUpdate {12}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Reset {18}PROCEDURE(BYTE Force=0),DERIVED', 'Run {20}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'SetAlerts {14}PROCEDURE(),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeDisableButton      PROCEDURE(SIGNED Control,BYTE MakeDisable),DERIVED', 'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Update {17}PROCEDURE(),DERIVED')
 
 %ReturnValue FIELD  ()
 %ProcedureOneInstance LONG  (0)
@@ -3325,9 +3323,10 @@ PROPERTY:BEGIN
 PRIORITY 1300
 PROPERTY:END
 PlaybackControls    CLASS
+MarkedOnly              BYTE
 PlayingMultiple         BYTE
 TimeToStop              BYTE
-PlayThread              SIGNED
+AdvanceWhenReady        PROCEDURE()
 CheckStatus             PROCEDURE()
 PlayMultiple            PROCEDURE(BYTE MarkedOnly)
 PlayOne                 PROCEDURE()
@@ -3344,13 +3343,32 @@ PROPERTY:END
 BSF.SetupWindow    PROCEDURE()
 FolderExists    BYTE
     CODE
-    !QuickWindow{PROP:Timer} = 0
     FolderExists = CheckFolderExistence(SoundFolder:ID)
     ?ErrorString{PROP:Text} = CHOOSE(FolderExists,'','ERROR: Folder not found')
     ?OpenFolderButton{PROP:Disable} = CHOOSE(FolderExists,FALSE,TRUE)
     ?PlaybackGroup{PROP:Disable} = CHOOSE(FolderExists AND RECORDS(Queue:Browse:1),FALSE,TRUE)
     QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
     
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+PlaybackControls.AdvanceWhenReady    PROCEDURE()
+    CODE
+    SELF.CheckStatus()
+    IF SELF.PlayingMultiple AND (StatusMessage = 'ready' OR StatusMessage = 'stopped')
+        IF SELF.TimeToStop OR EOF(SoundFiles)
+            SELF.PlayingMultiple = FALSE
+            SELF.TimeToStop      = FALSE
+        ELSE
+            NEXT(SoundFiles)
+            IF SELF.MarkedOnly AND SoundFile:FileMarked
+                SELF.PlayOne()
+            ELSIF NOT SELF.MarkedOnly
+                SELF.PlayOne()
+            END
+        END
+    END
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 3600
@@ -3365,26 +3383,11 @@ PRIORITY 4000
 PROPERTY:END
 PlaybackControls.PlayMultiple PROCEDURE(BYTE MarkedOnly)
     CODE
-    SELF.PlayingMultiple = TRUE
     CLEAR(SoundFiles)
     SoundFile:FolderID = Queue:Browse:1.SoundFile:FolderID
     SET(SoundFiles,SoundFile:KeyFolderFile)
-    LOOP UNTIL EOF(SoundFiles)
-        IF SELF.TimeToStop
-            SELF.PlayingMultiple = FALSE
-            SELF.TimeToStop      = FALSE
-            BREAK
-        END
-        NEXT(SoundFiles)
-        IF MarkedOnly AND NOT SoundFile:FileMarked
-            CYCLE
-        END
-        ! TODO: Wait until playback has stopped before iterating the loop, but allow stopping playback.
-        SELF.PlayOne()
-        SLEEP(CurrentSoundLength) ! waits properly, but cannot stop while playing
-        !QuickWindow{PROP:Timer} = CurrentSoundLength ! does not wait properly
-    END
-    SELF.PlayingMultiple = FALSE
+    SELF.PlayingMultiple = TRUE
+    SELF.MarkedOnly = MarkedOnly
 [SOURCE]
 PROPERTY:BEGIN
 PRIORITY 4000
@@ -3395,10 +3398,9 @@ PlaybackControls.PlayOne    PROCEDURE()
     CloseSound(CurrentSound)
     CurrentSound = Util.TrailingBackslash(SoundFolder:Name) & SoundFile:Name
     IF GoodToGo = OpenSound(CurrentSound)
-        CurrentSoundLength = GetSoundLength(CurrentSound)
+        CurrentSoundLength = GetSoundLength(CurrentSound) & ' ms'
         DISPLAY()
         PlaySound(CurrentSound)
-        ! SELF.PlayThread = START(PlaySound,,CurrentSound)
     END
 [SOURCE]
 PROPERTY:BEGIN
@@ -3546,7 +3548,7 @@ WHEN 'Timer'
 PROPERTY:BEGIN
 PRIORITY 5000
 PROPERTY:END
-PlaybackControls.CheckStatus()
+PlaybackControls.AdvanceWhenReady()
 [END]
 [END]
 [END]
@@ -3640,8 +3642,22 @@ WHEN  ('Default') ('')
 WHEN  ('Locator0') ('')
 WHEN  ('Step0') ('StepStringClass')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'Init {19}PROCEDURE(SIGNED ListBox,*STRING Posit,VIEW V,QUEUE Q,RelationManager RM,WindowManager WM)')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 3
+WHEN  ('Default') ('Q {22}&Queue:Browse:1 {16}!Reference to browse queue', 'AppendOrder {12}PROCEDURE(STRING Order),DERIVED', |
+  'ApplyRange {13}PROCEDURE(),BYTE,PROC,DERIVED', 'ClearFilesRecord       PROCEDURE(),DERIVED', |
+  'GetFreeElementAscending PROCEDURE(),STRING,DERIVED', 'Init {19}PROCEDURE(IListControl IC,VIEW V,BrowseQueue LQ,RelationManager RM,WindowManager WM)', |
+  'InitSort {15}PROCEDURE(BYTE NewOrder),BYTE,DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
+  'Next {19}PROCEDURE(),BYTE,DERIVED', 'Open {19}PROCEDURE(),DERIVED', 'Previous {15}PROCEDURE(),BYTE,DERIVED', |
+  'ReplaceSort {12}PROCEDURE(STRING NewSortString,<<LocatorClass NewLocator>,<<StepClass NewStepClass>),DERIVED', |
+  'ResetSort {14}PROCEDURE(BYTE Force),BYTE,PROC,DERIVED', 'RestoreBuffers {9}PROCEDURE(),DERIVED', |
+  'SetSort {16}PROCEDURE(BYTE NewOrder,BYTE Force),BYTE,PROC,DERIVED', 'SetUseMRP {14}PROCEDURE(BYTE UseMRP=True),DERIVED', |
+  'TakeKey {16}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeLocate {13}PROCEDURE(),DERIVED', |
+  'ValidateRecord {9}PROCEDURE(),BYTE,DERIVED')
+WHEN  ('Locator0') ('Destruct {15}PROCEDURE(),DERIVED', 'GetShadow {14}PROCEDURE(),STRING,DERIVED', |
+  'Init {19}PROCEDURE(SIGNED Control = 0,*? Free,BYTE NoCase = 0),DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,DERIVED', |
+  'UpdateWindow {11}PROCEDURE(),DERIVED')
+WHEN  ('Step0') ('GetPercentile {10}PROCEDURE(? Value),BYTE,DERIVED', 'Init {19}PROCEDURE(BYTE Controls)', |
+  'SetLimitNeeded {9}PROCEDURE(),BYTE,DERIVED')
 
 %SQLViewFields MULTI DEFAULT  ()
 %TableSchematicsDescription DEFAULT  ('')
@@ -4680,7 +4696,9 @@ WHEN  ('Default') ('WindowResizeClass')
 WHEN  ('Default') ('')
 
 %ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
-WHEN  ('Default') ('Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)')
+WHEN  ('Default') ('GetParentControl       PROCEDURE(SIGNED Control),SIGNED,DERIVED', |
+  'Init {19}PROCEDURE(BYTE AppStrategy=AppStrategy:Resize,BYTE SetWindowMinSize=False,BYTE SetWindowMaxSize=False)', |
+  'Resize {17}PROCEDURE(),BYTE,PROC,DERIVED', 'RestoreWindow {10}PROCEDURE(),DERIVED')
 
 %WindowMinHeight DEFAULT  ('')
 %RestrictMaxSize LONG  (0)
@@ -4787,7 +4805,7 @@ StopSound
 [WINDOW]
 QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI',10,COLOR:Black, |
           FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
-          MDI,HLP('~BrowseSoundFiles.htm'),STATUS(-1,80,120,45),SYSTEM,TIMER(100)
+          MDI,HLP('~BrowseSoundFiles.htm'),STATUS(-1,80,120,45),SYSTEM,TIMER(1)
           GROUP('Playback controls'),AT(8,128,306,27),USE(?PlaybackGroup),BOXED,DISABLE,TRN, |
             #ORDINAL(1)
             BUTTON('&Play'),AT(75,138,54,14),USE(?Play),FONT(,,,FONT:bold),LEFT,ICON('WIZDOWN.ICO'), |
