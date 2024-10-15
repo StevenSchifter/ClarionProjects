@@ -37,15 +37,7 @@ WHEN  ('RelationManager:SoundFolders') ('')
 WHEN  ('RelationManager:Sounds') ('')
 WHEN  ('Translator') ('')
 
-%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 4
-WHEN  ('FileManager:SoundFiles') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
-WHEN  ('FileManager:SoundFolders') ('Init {19}PROCEDURE(),DERIVED', 'Kill {19}PROCEDURE(),DERIVED', |
-  'UseFile {16}PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED')
-WHEN  ('RelationManager:SoundFiles') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
-  'Kill {19}PROCEDURE(),DERIVED')
-WHEN  ('RelationManager:SoundFolders') ('Init {19}PROCEDURE', 'DeferedAddRelations    PROCEDURE(),DERIVED', |
-  'Kill {19}PROCEDURE(),DERIVED')
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 0
 
 %ProgramAuthor DEFAULT  ('Steven Schifter')
 %ProgramIcon DEFAULT  ('SoundBrowserApp.ico')
@@ -2808,7 +2800,7 @@ NAME BrowseSoundFilesBySoundFile:KeyFolderFile
 DESCRIPTION 'Browse sound files by folder (and access playback controls)'
 FROM ABC Window
 CATEGORY 'Browse'
-MODIFIED '2024/10/14' '16:13:42'
+MODIFIED '2024/10/15' '13:23:22'
 [DATA]
 CurrentTab               STRING(80)
 !!> GUID('9481aeb5-c834-4baa-88dc-5cbf2cbfb3a1')
@@ -2826,6 +2818,13 @@ CurrentSound             CSTRING(261)
 ! STRING(@s16),USE(CurrentSoundLength),LEFT(2)
 CurrentSoundLength       CSTRING(17)
 !!> GUID('61e731b3-5864-4dea-8e79-ca7ceda31377'),PROMPT('Current Sound Length:'),HEADER('Current Sound Length'),PICTURE(@s16),TYPEMODE(INS),JUSTIFY(LEFT,2)
+[SCREENCONTROLS]
+! PROMPT('Status Message:'),USE(?StatusMessage:Prompt)
+! ENTRY(@s32),USE(StatusMessage),LEFT(2)
+[REPORTCONTROLS]
+! STRING(@s32),USE(StatusMessage),LEFT(2)
+StatusMessage            CSTRING(33)
+!!> GUID('9d395810-eaa1-4558-a5fd-536c140dba32'),PROMPT('Status Message:'),HEADER('Status Message'),PICTURE(@s32),TYPEMODE(INS),JUSTIFY(LEFT,2)
 [FILES]
 [PRIMARY]
 SoundFiles
@@ -3329,6 +3328,7 @@ PlaybackControls    CLASS
 PlayingMultiple         BYTE
 TimeToStop              BYTE
 PlayThread              SIGNED
+CheckStatus             PROCEDURE()
 PlayMultiple            PROCEDURE(BYTE MarkedOnly)
 PlayOne                 PROCEDURE()
 StopPlaying             PROCEDURE()
@@ -3350,6 +3350,14 @@ FolderExists    BYTE
     ?OpenFolderButton{PROP:Disable} = CHOOSE(FolderExists,FALSE,TRUE)
     ?PlaybackGroup{PROP:Disable} = CHOOSE(FolderExists AND RECORDS(Queue:Browse:1),FALSE,TRUE)
     QuickWindow{PROP:Text} = 'Browsing Sound Files in ' & SoundFolder:Name
+    
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+PlaybackControls.CheckStatus    PROCEDURE()
+    CODE
+    StatusMessage = GetSoundStatus(CurrentSound)
     
 [SOURCE]
 PROPERTY:BEGIN
@@ -3528,6 +3536,17 @@ PRIORITY 3500
 PROPERTY:END
 BSF.SetupWindow()
 [END]
+[END]
+[END]
+EMBED %WindowEventHandling
+[INSTANCES]
+WHEN 'Timer'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+PlaybackControls.CheckStatus()
 [END]
 [END]
 [END]
@@ -4768,7 +4787,7 @@ StopSound
 [WINDOW]
 QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI',10,COLOR:Black, |
           FONT:regular,CHARSET:DEFAULT),RESIZE,CENTER,ICON('SoundBrowserApp.ico'),GRAY,IMM, |
-          MDI,HLP('~BrowseSoundFiles.htm'),STATUS(-1,80,120,45),SYSTEM
+          MDI,HLP('~BrowseSoundFiles.htm'),STATUS(-1,80,120,45),SYSTEM,TIMER(100)
           GROUP('Playback controls'),AT(8,128,306,27),USE(?PlaybackGroup),BOXED,DISABLE,TRN, |
             #ORDINAL(1)
             BUTTON('&Play'),AT(75,138,54,14),USE(?Play),FONT(,,,FONT:bold),LEFT,ICON('WIZDOWN.ICO'), |
@@ -4814,6 +4833,8 @@ QuickWindow WINDOW('Browse sound files by folder'),AT(,,446,210),FONT('Segoe UI'
               STRING(@s16),AT(52,167),USE(CurrentSoundLength),TRN,#ORDINAL(21)
               STRING(''),AT(133,3,180,10),USE(?ErrorString),FONT(,,COLOR:Maroon,FONT:bold), |
                 CENTER,TRN,#ORDINAL(22)
+              PROMPT('Status Message:'),AT(127,167),USE(?StatusMessage:Prompt),#ORDINAL(23)
+              STRING(@s32),AT(184,167),USE(StatusMessage),#ORDINAL(24)
             END
           END
         END
@@ -7448,9 +7469,9 @@ NAME GetSoundStatus
 PROTOTYPE '(STRING MySoundFile),STRING'
 PARAMETERS '(STRING MySoundFile)'
 [COMMON]
-DESCRIPTION 'Gets the status of a sound file (yet to be used)'
+DESCRIPTION 'Gets the status of a sound file'
 FROM ABC Source
-MODIFIED '2024/10/14' '16:20:25'
+MODIFIED '2024/10/15' '13:24:34'
 [PROMPTS]
 %GenerateOpenClose LONG  (0)
 %GenerateSaveRestore LONG  (0)
