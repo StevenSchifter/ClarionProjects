@@ -53,6 +53,7 @@ ListWindow WINDOW('Hand Code Tests'),AT(,,162,216),GRAY,SYSTEM,ICON(ICON:Applica
         BUTTON('Play Sound'),AT(4,170,72,18),USE(?PlayButton),ICON(ICON:VCRplay),LEFT
         BUTTON('Test Interfaces'),AT(86,170,72,18),USE(?TestInterfacesButton),LEFT
         BUTTON('Test ShellExecute'),AT(4,194,72,18),USE(?TestRunCmdButton),LEFT
+        BUTTON('UPPER Clipboard'),AT(86,194,72,18),USE(?UpperClipboardButton),LEFT
     END
 ! Code
     CODE
@@ -73,6 +74,10 @@ ListWindow WINDOW('Hand Code Tests'),AT(,,162,216),GRAY,SYSTEM,ICON(ICON:Applica
             SHX:Operation = 'open'
             SHX:File = '"C:\Windows"'
             ShellExecuteA(0,SHX:Operation,SHX:File,SHX:Params,SHX:WorkingDir,1)
+        OF ?UpperClipboardButton
+            !MESSAGE(CLIPBOARD())
+            SETCLIPBOARD(UPPER(CLIPBOARD()))
+            !MESSAGE(CLIPBOARD())
         END
         CASE FIELD()
         OF ?CheckList
