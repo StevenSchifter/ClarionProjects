@@ -17,6 +17,7 @@ OMIT('***')
         END
     END
 
+    INCLUDE('KEYCODES.CLW'),ONCE
     INCLUDE('StringTheory.inc'),ONCE
     INCLUDE('Utilities.inc'),ONCE
 ! Interfaces
@@ -37,6 +38,7 @@ CheckQ       QUEUE,PRE(CQ)
 CkMk             BYTE
 SomeText         STRING(20)
              END
+ListSelection    LONG
 ShellExGrp   GROUP,PRE(SHX)
 Operation        CSTRING(16)
 File             CSTRING(255)
@@ -48,7 +50,7 @@ ListWindow WINDOW('Hand Code Tests'),AT(,,162,216),GRAY,SYSTEM,ICON(ICON:Applica
             FONT('Segoe UI',9)
         STRING('Checkbox Queue'),AT(4,3,154),USE(?CqTitleString),CENTER, |
                 FONT(,,,FONT:bold)
-        LIST,AT(5,15,153,153),USE(?CheckList),VSCROLL,FROM(CheckQ), |
+        LIST,AT(5,15,153,153),USE(?CheckList),VSCROLL,ALRT(MouseLeft2),FROM(CheckQ), |
                 FORMAT('20L(2)|M~Ck~@n1@80L(2)|M~Some Text~@s20@')
         BUTTON('Play Sound'),AT(4,170,72,18),USE(?PlayButton),ICON(ICON:VCRplay),LEFT
         BUTTON('Test Interfaces'),AT(86,170,72,18),USE(?TestInterfacesButton),LEFT
@@ -60,7 +62,7 @@ ListWindow WINDOW('Hand Code Tests'),AT(,,162,216),GRAY,SYSTEM,ICON(ICON:Applica
     TestSound = 'C:\\Windows\\Media\\tada.wav'
     LOOP 300 TIMES
         CLEAR(CheckQ)
-        CQ:SomeText = St.Random(20)
+        CQ:SomeText = St.Random(16,st:Hex)
         ADD(CheckQ)
     END
     OPEN(ListWindow)
@@ -85,6 +87,12 @@ ListWindow WINDOW('Hand Code Tests'),AT(,,162,216),GRAY,SYSTEM,ICON(ICON:Applica
             OF EVENT:MouseDown
                 IF ?CheckList{PROPLIST:MouseDownField} = 1
                     DO ToggleCkMk
+                END
+            OF EVENT:AlertKey
+                IF KEYCODE() = MouseLeft2
+                    ListSelection = CHOICE(?CheckList)  ! Get current selection in list box
+                    GET(CheckQ, ListSelection)          ! Get corresponding data from queue
+                    SETCLIPBOARD(CQ:SomeText)
                 END
             END
         END
